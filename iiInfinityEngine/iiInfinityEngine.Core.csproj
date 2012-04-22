@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{361DBC18-83E6-4707-95BE-F982A1EF0DAC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>iiInfinityEngine.Core</RootNamespace>
+    <AssemblyName>iiInfinityEngine.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ionic.Zlib">
+      <HintPath>bin\Ionic.Zlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackupManager.cs" />
+    <Compile Include="Scripting\BcsCompiler.cs" />
+    <Compile Include="Scripting\BcsDecompiler.cs" />
+    <Compile Include="Binary\AreBinary.cs" />
+    <Compile Include="Binary\BifBinary.cs" />
+    <Compile Include="Binary\CreBinary.cs" />
+    <Compile Include="Binary\Eff1Binary.cs" />
+    <Compile Include="Binary\EffBinary.cs" />
+    <Compile Include="Binary\EmbeddedEffBinary.cs" />
+    <Compile Include="Binary\ItmBinary.cs" />
+    <Compile Include="Binary\KeyBinary.cs" />
+    <Compile Include="Binary\ProBinary.cs" />
+    <Compile Include="Binary\SplBinary.cs" />
+    <Compile Include="Binary\StoBinary.cs" />
+    <Compile Include="Binary\TlkBinary.cs" />
+    <Compile Include="Binary\VvcBinary.cs" />
+    <Compile Include="Binary\WfxBinary.cs" />
+    <Compile Include="Binary\WmapBinary.cs" />
+    <Compile Include="IEFileCopier.cs" />
+    <Compile Include="MosConverter.cs" />
+    <Compile Include="Utility\ObjectCopier.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Files\AreFile.cs" />
+    <Compile Include="Files\BifFile.cs" />
+    <Compile Include="Files\CreFile.cs" />
+    <Compile Include="Files\DimensionalArrayFile.cs" />
+    <Compile Include="Files\Eff1File.cs" />
+    <Compile Include="Files\EffFile.cs" />
+    <Compile Include="Files\IdsFile.cs" />
+    <Compile Include="Files\ItmFile.cs" />
+    <Compile Include="Files\KeyFile.cs" />
+    <Compile Include="Files\ProFile.cs" />
+    <Compile Include="Files\SplFile.cs" />
+    <Compile Include="Files\StoFile.cs" />
+    <Compile Include="Files\TlkFile.cs" />
+    <Compile Include="Files\VvcFile.cs" />
+    <Compile Include="Files\WfxFile.cs" />
+    <Compile Include="Files\WmpFile.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="IEFile.cs" />
+    <Compile Include="Utility\Ini.cs" />
+    <Compile Include="Utility\MD5HashGenerator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Readers\AreFileBinaryReader.cs" />
+    <Compile Include="Readers\BifFileBinaryReader.cs" />
+    <Compile Include="Readers\CreFileBinaryReader.cs" />
+    <Compile Include="Readers\DimensionalArrayFileReader.cs" />
+    <Compile Include="Readers\EffFileBinaryReader.cs" />
+    <Compile Include="Readers\IdsFileReader.cs" />
+    <Compile Include="Readers\Interfaces\IAreFileReader.cs" />
+    <Compile Include="Readers\Interfaces\IBifFileReader.cs" />
+    <Compile Include="Readers\Interfaces\ICreFileReader.cs" />
+    <Compile Include="Readers\Interfaces\IDimensionalArrayFileReader.cs" />
+    <Compile Include="Readers\Interfaces\IEffFileReader.cs" />
+    <Compile Include="Readers\Interfaces\IIdsFileReader.cs" />
+    <Compile Include="Readers\Interfaces\IItmFileReader.cs" />
+    <Compile Include="Readers\Interfaces\IProFileReader.cs" />
+    <Compile Include="Readers\Interfaces\ISplFileReader.cs" />
+    <Compile Include="Readers\Interfaces\IStoFileReader.cs" />
+    <Compile Include="Readers\Interfaces\ITlkFileReader.cs" />
+    <Compile Include="Readers\Interfaces\IVvcFileReader.cs" />
+    <Compile Include="Readers\Interfaces\IKeyFileReader.cs" />
+    <Compile Include="Readers\Interfaces\IWfxFileReader.cs" />
+    <Compile Include="Readers\Interfaces\IWmpFileReader.cs" />
+    <Compile Include="Readers\ItmFileBinaryReader.cs" />
+    <Compile Include="Readers\KeyFileBinaryReader.cs" />
+    <Compile Include="Readers\ProFileBinaryReader.cs" />
+    <Compile Include="Readers\SplFileBinaryReader.cs" />
+    <Compile Include="Readers\StoFileBinaryReader.cs" />
+    <Compile Include="Readers\TlkFileBinaryReader.cs" />
+    <Compile Include="Readers\VvcFileBinaryReader.cs" />
+    <Compile Include="Readers\WfxFileBinaryReader.cs" />
+    <Compile Include="Readers\WmpFileBinaryReader.cs" />
+    <Compile Include="Translator.cs" />
+    <Compile Include="Writers\AreFileBinaryWriter.cs" />
+    <Compile Include="Writers\CreFileBinaryWriter.cs" />
+    <Compile Include="Writers\DimensionalArrayFileWriter.cs" />
+    <Compile Include="Writers\EffFileBinaryWriter.cs" />
+    <Compile Include="Writers\IdsFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\IAreFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\ICreFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\IDimensionalArrayFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\IEffFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\IIEFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\IIdsFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\IItmFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\IProFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\ISplFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\IStoFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\ITlkFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\IVvcFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\IWfxFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\IWmpFileWriter.cs" />
+    <Compile Include="Writers\ItmFileBinaryWriter.cs" />
+    <Compile Include="Writers\ProFileBinaryWriter.cs" />
+    <Compile Include="Writers\SplFileBinaryWriter.cs" />
+    <Compile Include="Writers\StoFileBinaryWriter.cs" />
+    <Compile Include="Writers\TlkFileBinaryWriter.cs" />
+    <Compile Include="Writers\VvcFileBinaryWriter.cs" />
+    <Compile Include="Writers\WfxFileBinaryWriter.cs" />
+    <Compile Include="Writers\WmapFileBinaryWriter.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
