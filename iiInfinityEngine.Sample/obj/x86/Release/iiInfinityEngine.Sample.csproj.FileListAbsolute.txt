@@ -1,7 +1,0 @@
-C:\Users\Marc\Desktop\tst\iiInfinityEngine\iiInfinityEngine.Sample\bin\Release\iiInfinityEngine.Sample.exe
-C:\Users\Marc\Desktop\tst\iiInfinityEngine\iiInfinityEngine.Sample\bin\Release\iiInfinityEngine.Sample.pdb
-C:\Users\Marc\Desktop\tst\iiInfinityEngine\iiInfinityEngine.Sample\bin\Release\iiInfinityEngine.Core.dll
-C:\Users\Marc\Desktop\tst\iiInfinityEngine\iiInfinityEngine.Sample\bin\Release\iiInfinityEngine.Core.pdb
-C:\Users\Marc\Desktop\tst\iiInfinityEngine\iiInfinityEngine.Sample\obj\x86\Release\ResolveAssemblyReference.cache
-C:\Users\Marc\Desktop\tst\iiInfinityEngine\iiInfinityEngine.Sample\obj\x86\Release\iiInfinityEngine.Sample.exe
-C:\Users\Marc\Desktop\tst\iiInfinityEngine\iiInfinityEngine.Sample\obj\x86\Release\iiInfinityEngine.Sample.pdb

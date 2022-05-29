@@ -1,0 +1,8 @@
+D:\source\ie\iiInfinityEngine\iiInfinityEngine\bin\Debug\iiInfinityEngine.Core.dll
+D:\source\ie\iiInfinityEngine\iiInfinityEngine\bin\Debug\iiInfinityEngine.Core.pdb
+D:\source\ie\iiInfinityEngine\iiInfinityEngine\bin\Debug\Ionic.Zlib.dll
+D:\source\ie\iiInfinityEngine\iiInfinityEngine\obj\Debug\iiInfinityEngine.Core.csproj.AssemblyReference.cache
+D:\source\ie\iiInfinityEngine\iiInfinityEngine\obj\Debug\iiInfinityEngine.Core.csproj.CoreCompileInputs.cache
+D:\source\ie\iiInfinityEngine\iiInfinityEngine\obj\Debug\iiInfinityEngine.Core.csproj.CopyComplete
+D:\source\ie\iiInfinityEngine\iiInfinityEngine\obj\Debug\iiInfinityEngine.Core.dll
+D:\source\ie\iiInfinityEngine\iiInfinityEngine\obj\Debug\iiInfinityEngine.Core.pdb

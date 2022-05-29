@@ -408,6 +408,50 @@ namespace iiInfinityEngine.Core
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct array38
+    {
+        public byte byte00;
+        public byte byte01;
+        public byte byte02;
+        public byte byte03;
+        public byte byte04;
+        public byte byte05;
+        public byte byte06;
+        public byte byte07;
+        public byte byte08;
+        public byte byte09;
+        public byte byte10;
+        public byte byte11;
+        public byte byte12;
+        public byte byte13;
+        public byte byte14;
+        public byte byte15;
+        public byte byte16;
+        public byte byte17;
+        public byte byte18;
+        public byte byte19;
+        public byte byte20;
+        public byte byte21;
+        public byte byte22;
+        public byte byte23;
+        public byte byte24;
+        public byte byte25;
+        public byte byte26;
+        public byte byte27;
+        public byte byte28;
+        public byte byte29;
+        public byte byte30;
+        public byte byte31;
+        public byte byte32;
+        public byte byte33;
+        public byte byte34;
+        public byte byte35;
+        public byte byte36;
+        public byte byte37;
+    }
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct array40
     {
         public byte byte00;

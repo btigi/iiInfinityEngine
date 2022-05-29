@@ -12,19 +12,19 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 LastSaved;
         public Int32 AreaFlags;
         public array8 AreaToTheNorth;
-        public Int32 Unknown1;
+        public Int32 AreaToTheNorthFlags;
         public array8 AreaToTheEast;
-        public Int32 Unknown2;
+        public Int32 AreaToTheEastFlags;
         public array8 AreaToTheSouth;
-        public Int32 Unknown3;
+        public Int32 AreaToTheSouthFlags;
         public array8 AreaToTheWest;
-        public Int32 Unknown4;
+        public Int32 AreaToTheWestFlags;
         public ushort AreaTypeFlags;
         public Int16 WeatherProbabilityRain;
         public Int16 WeatherProbabilitySnow;
-        public Int16 WeatherProbabilityFog;// - not implemented 
+        public Int16 WeatherProbabilityFog;
         public Int16 WeatherProbabilityLightning;
-        public Int16 Unknown5;
+        public Int16 OverlayTransparency;
         public Int32 ActorOffset;
         public Int16 ActorCount;
         public Int16 RegionCount;
@@ -43,7 +43,8 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 AmbientOffset;
         public Int32 VariableOffset;
         public Int32 VariableCount;
-        public Int32 Unknown6;
+        public Int16 TiledObjectFlagOffset;
+        public Int16 TiledObjectFlagCount;
         public array8 AreaScript;
         public Int32 ExploredBitmaskSize;
         public Int32 ExploredBitmaskOffset;
@@ -61,7 +62,7 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 ProjectileCount;
         public array8 RestMovieDay;
         public array8 RestMovieNight;
-        public array56 Unknown7;
+        public array56 Unused;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -107,7 +108,7 @@ namespace iiInfinityEngine.Core.Binary
         public Int16 BoundingBoxBottom;
         public Int16 VertexCount;
         public Int32 VertexIndex;
-        public Int32 Unknown1;
+        public Int32 TriggerValue;
         public Int32 Cursor;
         public array8 DestinationArea;
         public array32 DestinationEntrance;
@@ -160,7 +161,19 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 SpawnPointAppearenceSchedule;
         public Int16 ProbabilityDay;
         public Int16 ProbabilityNight;
-        public array56 Unknown;
+        public Int32 SpawnFrequency;
+        public Int32 Countdown;
+        public byte SpawnWeight1;
+        public byte SpawnWeight2;
+        public byte SpawnWeight3;
+        public byte SpawnWeight4;
+        public byte SpawnWeight5;
+        public byte SpawnWeight6;
+        public byte SpawnWeight7;
+        public byte SpawnWeight8;
+        public byte SpawnWeight9;
+        public byte SpawnWeight10;
+        public array38 Unknown;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -197,9 +210,10 @@ namespace iiInfinityEngine.Core.Binary
         public array8 TrapScript;
         public Int32 VertexIndex;
         public Int16 VertexCount;
-        public array34 Unknown1;
+        public Int16 TriggerRange;
+        public array32 Owner;
         public array8 KeyItem;
-        public Int32 Unknown2;
+        public Int32 BreakDifficulty;
         public Int32 LockpickString;
         public array56 Unknown3;
     }
@@ -223,7 +237,8 @@ namespace iiInfinityEngine.Core.Binary
         public Int16 YCoordinate;
         public Int16 Radius;
         public Int16 Height;
-        public array6 Unknown1;
+        public Int32 PitchVariance;
+        public Int16 VolumeVariance;
         public Int16 Volume;
         public array8 Resref1;
         public array8 Resref2;

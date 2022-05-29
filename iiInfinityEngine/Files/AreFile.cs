@@ -41,22 +41,23 @@ namespace iiInfinityEngine.Core.Files
         public Int32 LastSaved;
         public AreaFlags AreaFlags;
         public string AreaToTheNorth;
-        public Int32 Unknown1;
+        public AreaLinkFlags AreaToTheNorthFlags;
         public string AreaToTheEast;
-        public Int32 Unknown2;
+        public AreaLinkFlags AreaToTheEastFlags;
         public string AreaToTheSouth;
-        public Int32 Unknown3;
+        public AreaLinkFlags AreaToTheSouthFlags;
         public string AreaToTheWest;
-        public Int32 Unknown4;
+        public AreaLinkFlags AreaToTheWestFlags;
         public AreaTypeFlags AreaTypeFlags;
         public Int16 WeatherProbabilityRain;
         public Int16 WeatherProbabilitySnow;
         public Int16 WeatherProbabilityFog;// - not implemented 
         public Int16 WeatherProbabilityLightning;
-        public Int16 Unknown5;
+        public Int16 OverlayTransparency;
         public Int32 VertexOffset;
         public Int16 VertexCount;
-        public Int32 Unknown6;
+        public Int16 TiledObjectFlagOffset;
+        public Int16 TiledObjectFlagCount;
         public string AreaScript;
         public Int32 ExploredBitmaskSize;
         public Int32 ExploredBitmaskOffset;
@@ -132,7 +133,7 @@ namespace iiInfinityEngine.Core.Files
         public Int16 BoundingBoxBottom;
         public Int16 VertexCount;
         public Int32 VertexIndex;
-        public Int32 Unknown1;
+        public Int32 TriggerValue;
         public Int32 Cursor;
         public string DestinationArea;
         public string DestinationEntrance;
@@ -215,7 +216,19 @@ namespace iiInfinityEngine.Core.Files
         //bit 0 = 00:30 to 01:29 
         public Int16 ProbabilityDay;
         public Int16 ProbabilityNight;
-        public array56 Unknown;
+        public Int32 SpawnFrequency;
+        public Int32 Countdown;
+        public byte SpawnWeight1;
+        public byte SpawnWeight2;
+        public byte SpawnWeight3;
+        public byte SpawnWeight4;
+        public byte SpawnWeight5;
+        public byte SpawnWeight6;
+        public byte SpawnWeight7;
+        public byte SpawnWeight8;
+        public byte SpawnWeight9;
+        public byte SpawnWeight10;
+        public array38 Unknown;
     }
 
     [Serializable]
@@ -252,9 +265,10 @@ namespace iiInfinityEngine.Core.Files
         public string TrapScript;
         public Int32 VertexIndex;
         public Int16 VertexCount;
-        public array34 Unknown1;
+        public Int16 TriggerRange;
+        public array32 Owner;
         public string KeyItem;
-        public Int32 Unknown2;
+        public Int32 BreakDifficulty;
         public IEString LockpickString;
         public array56 Unknown3;
     }
@@ -278,7 +292,8 @@ namespace iiInfinityEngine.Core.Files
         public Int16 YCoordinate;
         public Int16 Radius;
         public Int16 Height;
-        public array6 Unknown1;
+        public Int32 PitchVariance;
+        public Int16 VolumeVariance;
         public Int16 Volume;
         public string Resref1;
         public string Resref2;
@@ -493,6 +508,43 @@ namespace iiInfinityEngine.Core.Files
         public bool TutorialArea { get; set; }
         public bool DeadMagicZone { get; set; }
         public bool Dream { get; set; }
+        public bool Bit04 { get; set; }
+        public bool Bit05 { get; set; }
+        public bool Bit06 { get; set; }
+        public bool Bit07 { get; set; }
+        public bool Bit08 { get; set; }
+        public bool Bit09 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
+    }
+
+    [Serializable]
+    public struct AreaLinkFlags
+    {
+        public bool PartyRequired { get; set; }
+        public bool PartyEnabled { get; set; }
+        public bool Bit02 { get; set; }
+        public bool Bit03 { get; set; }
         public bool Bit04 { get; set; }
         public bool Bit05 { get; set; }
         public bool Bit06 { get; set; }
