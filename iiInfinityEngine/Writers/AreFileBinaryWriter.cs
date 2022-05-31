@@ -236,10 +236,14 @@ namespace iiInfinityEngine.Core.Writers
             foreach (var variable in areFile.variables)
             {
                 AreVariableBinary variableBinary = new AreVariableBinary();
+
                 variableBinary.Name = new array32(variable.Name);
-                variableBinary.Unknown1 = variable.Unknown1;
-                variableBinary.Unknown2 = variable.Unknown2;
-                variableBinary.Value = variable.Value;
+                variableBinary.Type = variable.Type;
+                variableBinary.ResourceType = variable.ResourceType;
+                variableBinary.ValueDword = variable.ValueDword;
+                variableBinary.ValueInt = variable.ValueInt;
+                variableBinary.ValueDouble = variable.ValueDouble;
+                variableBinary.ScriptName = new array32(variable.ScriptName);
                 variables.Add(variableBinary);
             }
 

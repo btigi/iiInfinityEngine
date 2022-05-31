@@ -750,9 +750,12 @@ namespace iiInfinityEngine.Core.Readers
             {
                 var variable2 = new AreVariable2();
                 variable2.Name = variable.Name.ToString();
-                variable2.Unknown1 = variable.Unknown1;
-                variable2.Unknown2 = variable.Unknown2;
-                variable2.Value = variable.Value;
+                variable2.Type = variable.Type;
+                variable2.ResourceType = variable.ResourceType;
+                variable2.ValueDword = variable.ValueDword;
+                variable2.ValueInt = variable.ValueInt;
+                variable2.ValueDouble = variable.ValueDouble;
+                variable2.ScriptName = variable.ScriptName.ToString();
                 areFile.variables.Add(variable2);
             }
 

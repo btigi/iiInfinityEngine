@@ -263,9 +263,12 @@ namespace iiInfinityEngine.Core.Binary
     struct AreVariableBinary
     {
         public array32 Name;
-        public array8 Unknown1;
-        public Int32 Value;
-        public array40 Unknown2;
+        public Int16 Type;
+        public Int16 ResourceType;
+        public Int32 ValueDword;
+        public Int32 ValueInt;
+        public double ValueDouble;
+        public array32 ScriptName;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]

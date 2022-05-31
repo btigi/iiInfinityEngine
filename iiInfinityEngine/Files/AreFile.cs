@@ -318,9 +318,12 @@ namespace iiInfinityEngine.Core.Files
     public struct AreVariable2
     {
         public string Name;
-        public array8 Unknown1;
-        public Int32 Value;
-        public array40 Unknown2;
+        public Int16 Type;
+        public Int16 ResourceType;
+        public Int32 ValueDword;
+        public Int32 ValueInt;
+        public double ValueDouble;
+        public string ScriptName;
     }
 
     [Serializable]
