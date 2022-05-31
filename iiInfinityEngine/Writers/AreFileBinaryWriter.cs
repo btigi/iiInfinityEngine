@@ -111,12 +111,12 @@ namespace iiInfinityEngine.Core.Writers
                 songBinary.NightAmbientVolume = song.NightAmbientVolume;
                 songBinary.NightSong = song.NightSong;
                 songBinary.Reverb = song.Reverb;
-                songBinary.Unknown1 = song.Unknown1;
-                songBinary.Unknown2 = song.Unknown2;
-                songBinary.Unknown3 = song.Unknown3;
-                songBinary.Unknown4 = song.Unknown4;
-                songBinary.Unknown5 = song.Unknown5;
-                songBinary.Unknown6 = song.Unknown6;
+                songBinary.AltMusic1 = song.AltMusic1;
+                songBinary.AltMusic2 = song.AltMusic2;
+                songBinary.AltMusic3 = song.AltMusic3;
+                songBinary.AltMusic4 = song.AltMusic4;
+                songBinary.AltMusic5 = song.AltMusic5;
+                songBinary.Unknown = song.Unknown;
                 songBinary.WinSong = song.WinSong;
                 songs.Add(songBinary);
             }
@@ -146,9 +146,9 @@ namespace iiInfinityEngine.Core.Writers
                 tiledObjectBinary.Name = new array32(tiledObject.Name);
                 tiledObjectBinary.OpenSearchCount = tiledObject.OpenSearchCount;
                 tiledObjectBinary.OpenSearchOffset = tiledObject.OpenSearchOffset;
-                tiledObjectBinary.Unknown1 = tiledObject.Unknown1;
-                tiledObjectBinary.Unknown2 = tiledObject.Unknown2;
-                tiledObjectBinary.Unknown3 = tiledObject.Unknown3;
+                tiledObjectBinary.Unknown = tiledObject.Unknown;
+                tiledObjectBinary.Flags = tiledObject.Flags;
+                tiledObjectBinary.TileId = tiledObject.TileId;
                 tiledObjects.Add(tiledObjectBinary);
             }
 
@@ -179,9 +179,10 @@ namespace iiInfinityEngine.Core.Writers
                 animationBinary.SkipCycles = animation.SkipCycles;
                 animationBinary.StartFrame = animation.StartFrame;
                 animationBinary.Transparency = animation.Transparency;
-                animationBinary.Unknown = animation.Unknown;
                 animationBinary.XCoordinate = animation.XCoordinate;
                 animationBinary.YCoordinate = animation.YCoordinate;
+                animationBinary.WidthPVRZ = animation.WidthPVRZ;
+                animationBinary.HeightPVRZ = animation.HeightPVRZ;
                 animations.Add(animationBinary);
             }
 

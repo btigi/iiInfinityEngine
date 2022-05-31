@@ -17,8 +17,7 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 StatusFlags; // state.ids
         public Int16 CurrentHP;
         public Int16 MaximumHP;
-        public Int16 Animation;
-        public Int16 Unknown;
+        public Int32 Animation;
         public byte MetalColourIndex;
         public byte MinorColourIndex;
         public byte MajorColourIndex;
@@ -40,7 +39,7 @@ namespace iiInfinityEngine.Core.Binary
         public byte Thac0;
         public byte NumberOfAttacks;
         public byte SaveVsDeath;
-        public byte SaveVsWanrds;
+        public byte SaveVsWands;
         public byte SaveVsPolymorph;
         public byte SaveVsBreath;
         public byte SaveVsSpells;

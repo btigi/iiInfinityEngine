@@ -336,7 +336,8 @@ namespace iiInfinityEngine.Core.Binary
         public byte LoopChance;
         public byte SkipCycles;
         public array8 Palette;
-        public Int32 Unknown; //TODO
+        public Int16 WidthPVRZ;
+        public Int16 HeightPVRZ;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -352,16 +353,16 @@ namespace iiInfinityEngine.Core.Binary
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    struct AreTiledObjectBinary
+    struct AreTiledObjectBinary //TODO:
     {
         public array32 Name;
-        public array32 Unknown1;
-        public Int32 Unknown2;
+        public array8 TileId;
+        public Int32 Flags;
         public Int32 OpenSearchOffset;
-        public Int32 OpenSearchCount;
+        public Int16 OpenSearchCount;
+        public Int16 ClosedSearchCount;
         public Int32 ClosedSearchOffset;
-        public Int32 ClosedSearchCount;
-        public array48 Unknown3;
+        public array48 Unknown;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -388,11 +389,11 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 WinSong;
         public Int32 BattleSong;
         public Int32 LoseSong;
-        public Int32 Unknown1;
-        public Int32 Unknown2;
-        public Int32 Unknown3;
-        public Int32 Unknown4;
-        public Int32 Unknown5;
+        public Int32 AltMusic1;
+        public Int32 AltMusic2;
+        public Int32 AltMusic3;
+        public Int32 AltMusic4;
+        public Int32 AltMusic5;
         public array8 DayAmbient1Wav;
         public array8 DayAmbient2Wav;
         public Int32 DayAmbientVolume;
@@ -400,7 +401,7 @@ namespace iiInfinityEngine.Core.Binary
         public array8 NightAmbient2Wav;
         public Int32 NightAmbientVolume;
         public Int32 Reverb;
-        public array60 Unknown6;
+        public array60 Unknown;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]

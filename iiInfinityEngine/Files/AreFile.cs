@@ -403,7 +403,8 @@ namespace iiInfinityEngine.Core.Files
         public byte LoopChance;
         public byte SkipCycles;
         public string Palette;
-        public Int32 Unknown;
+        public Int16 WidthPVRZ;
+        public Int16 HeightPVRZ;
     }
 
     [Serializable]
@@ -421,13 +422,13 @@ namespace iiInfinityEngine.Core.Files
     public struct AreTiledObject2
     {
         public string Name;
-        public array32 Unknown1;
-        public Int32 Unknown2;
+        public array8 TileId;
+        public Int32 Flags;
         public Int32 OpenSearchOffset;
-        public Int32 OpenSearchCount;
+        public Int16 OpenSearchCount;
+        public Int16 ClosedSearchCount;
         public Int32 ClosedSearchOffset;
-        public Int32 ClosedSearchCount;
-        public array48 Unknown3;
+        public array48 Unknown;
     }
 
     [Serializable]
@@ -454,11 +455,11 @@ namespace iiInfinityEngine.Core.Files
         public Int32 WinSong;
         public Int32 BattleSong;
         public Int32 LoseSong;
-        public Int32 Unknown1;
-        public Int32 Unknown2;
-        public Int32 Unknown3;
-        public Int32 Unknown4;
-        public Int32 Unknown5;
+        public Int32 AltMusic1;
+        public Int32 AltMusic2;
+        public Int32 AltMusic3;
+        public Int32 AltMusic4;
+        public Int32 AltMusic5;
         public string DayAmbient1Wav;
         public string DayAmbient2Wav;
         public Int32 DayAmbientVolume;
@@ -466,7 +467,7 @@ namespace iiInfinityEngine.Core.Files
         public string NightAmbient2Wav;
         public Int32 NightAmbientVolume;
         public Int32 Reverb;
-        public array60 Unknown6;
+        public array60 Unknown;
     }
 
     [Serializable]

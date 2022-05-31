@@ -77,8 +77,7 @@ namespace iiInfinityEngine.Core.Files
         public Int32 StatusFlags; // state.ids
         public Int16 CurrentHP;
         public Int16 MaximumHP;
-        public Int16 Animation;
-        public Int16 Unknown;
+        public Int32 Animation;
         public byte MetalColourIndex;
         public byte MinorColourIndex;
         public byte MajorColourIndex;
@@ -100,7 +99,7 @@ namespace iiInfinityEngine.Core.Files
         public byte Thac0;
         public byte NumberOfAttacks;
         public byte SaveVsDeath;
-        public byte SaveVsWanrds;
+        public byte SaveVsWands;
         public byte SaveVsPolymorph;
         public byte SaveVsBreath;
         public byte SaveVsSpells;
@@ -132,7 +131,7 @@ namespace iiInfinityEngine.Core.Files
         public byte UnusedBlunt;
         public byte UnusedSpiked;
         public byte UnusedAxe;
-        public byte UnusedMissile;
+        public byte UnusedMissile; //
         public Int32 Unknownx1;
         public Int32 Unknownx2;
         public Int32 Unknownx3;

@@ -1326,7 +1326,7 @@ namespace iiInfinityEngine.Core.Writers
             header.SaveVsDeath = creFile.SaveVsDeath;
             header.SaveVsPolymorph = creFile.SaveVsPolymorph;
             header.SaveVsSpells = creFile.SaveVsSpells;
-            header.SaveVsWanrds = creFile.SaveVsWanrds;
+            header.SaveVsWands = creFile.SaveVsWands;
             header.ScriptClass = creFile.ScriptClass;
             header.ScriptDefault = creFile.ScriptDefault;
             header.ScriptGeneral = creFile.ScriptGeneral;
@@ -1445,7 +1445,6 @@ namespace iiInfinityEngine.Core.Writers
             header.Strref100 = Common.WriteString(creFile.Strref100, TlkFile);
             header.Thac0 = creFile.Thac0;
             header.Tracking = creFile.Tracking;
-            header.Unknown = creFile.Unknown;
             header.Unknownx1 = creFile.Unknownx1;
             header.Unknownx2 = creFile.Unknownx2;
             header.Unknownx3 = creFile.Unknownx3;

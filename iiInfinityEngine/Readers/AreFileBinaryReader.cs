@@ -823,9 +823,10 @@ namespace iiInfinityEngine.Core.Readers
                 animation2.SkipCycles = animation.SkipCycles;
                 animation2.StartFrame = animation.StartFrame;
                 animation2.Transparency = animation.Transparency;
-                animation2.Unknown = animation.Unknown;
                 animation2.XCoordinate = animation.XCoordinate;
                 animation2.YCoordinate = animation.YCoordinate;
+                animation2.WidthPVRZ = animation.WidthPVRZ;
+                animation2.HeightPVRZ = animation.HeightPVRZ;
                 areFile.animations.Add(animation2);
             }
 
@@ -849,9 +850,9 @@ namespace iiInfinityEngine.Core.Readers
                 tiledObject2.Name = tiledObject.Name.ToString();
                 tiledObject2.OpenSearchCount = tiledObject.OpenSearchCount;
                 tiledObject2.OpenSearchOffset = tiledObject.OpenSearchOffset;
-                tiledObject2.Unknown1 = tiledObject.Unknown1;
-                tiledObject2.Unknown2 = tiledObject.Unknown2;
-                tiledObject2.Unknown3 = tiledObject.Unknown3;
+                tiledObject2.Unknown = tiledObject.Unknown;
+                tiledObject2.Flags = tiledObject.Flags;
+                tiledObject2.TileId = tiledObject.TileId;
                 areFile.tiledObjects.Add(tiledObject2);
             }
 
@@ -886,12 +887,12 @@ namespace iiInfinityEngine.Core.Readers
                 song2.NightAmbientVolume = song.NightAmbientVolume;
                 song2.NightSong = song.NightSong;
                 song2.NightSong = song.Reverb;
-                song2.Unknown1 = song.Unknown1;
-                song2.Unknown2 = song.Unknown2;
-                song2.Unknown3 = song.Unknown3;
-                song2.Unknown4 = song.Unknown4;
-                song2.Unknown5 = song.Unknown5;
-                song2.Unknown6 = song.Unknown6;
+                song2.AltMusic1 = song.AltMusic1;
+                song2.AltMusic2 = song.AltMusic2;
+                song2.AltMusic3 = song.AltMusic3;
+                song2.AltMusic4 = song.AltMusic4;
+                song2.AltMusic5 = song.AltMusic5;
+                song2.Unknown = song.Unknown;
                 song2.WinSong = song.WinSong;
                 areFile.songs.Add(song2);
             }

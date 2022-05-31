@@ -207,7 +207,7 @@ namespace iiInfinityEngine.Core.Readers
             creFile.SaveVsDeath = header.SaveVsDeath;
             creFile.SaveVsPolymorph = header.SaveVsPolymorph;
             creFile.SaveVsSpells = header.SaveVsSpells;
-            creFile.SaveVsWanrds = header.SaveVsWanrds;
+            creFile.SaveVsWands = header.SaveVsWands;
             creFile.ScriptClass = header.ScriptClass;
             creFile.ScriptDefault = header.ScriptDefault;
             creFile.ScriptGeneral = header.ScriptGeneral;
@@ -329,7 +329,6 @@ namespace iiInfinityEngine.Core.Readers
             creFile.Strref100 = Common.ReadString(header.Strref100, TlkFile);
             creFile.Thac0 = header.Thac0;
             creFile.Tracking = header.Tracking;
-            creFile.Unknown = header.Unknown;
             creFile.Unknownx1 = header.Unknownx1;
             creFile.Unknownx2 = header.Unknownx2;
             creFile.Unknownx3 = header.Unknownx3;
