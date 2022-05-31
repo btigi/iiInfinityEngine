@@ -229,7 +229,8 @@ namespace iiInfinityEngine.Core.Writers
                 doorBinary.TrapRemovalDifficulty = door.TrapRemovalDifficulty;
                 //doorBinary.TravelTriggerName = new array24(door.TravelTriggerName);
                 doorBinary.Unknown = door.Unknown;
-                doorBinary.Unused = door.Unused;
+                doorBinary.Hitpoints = door.Hitpoints;
+                doorBinary.ArmourClass = door.ArmourClass;
                 doors.Add(doorBinary);
             }
 

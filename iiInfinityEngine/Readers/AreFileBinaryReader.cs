@@ -803,7 +803,8 @@ namespace iiInfinityEngine.Core.Readers
                 door2.TrapLaunchYCoordinate = door.TrapRemovalDifficulty;
                 door2.TravelTriggerName = door.TravelTriggerName.ToString();
                 door2.Unknown = door.Unknown;
-                door2.Unused = door.Unused;
+                door2.Hitpoints = door.Hitpoints;
+                door2.ArmourClass = door.ArmourClass;
                 areFile.doors.Add(door2);
             }
 

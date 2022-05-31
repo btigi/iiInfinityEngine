@@ -293,7 +293,8 @@ namespace iiInfinityEngine.Core.Binary
         public Int16 OpenVertexBlockCount;
         public Int16 ClosedVertexBlockCount;
         public Int32 ClosedVertexBlockIndex;
-        public Int32 Unused;
+        public Int16 Hitpoints;
+        public Int16 ArmourClass;
         public array8 DoorOpenSound;
         public array8 DoorCloseSound;
         public Int32 Cursor;
@@ -335,7 +336,7 @@ namespace iiInfinityEngine.Core.Binary
         public byte LoopChance;
         public byte SkipCycles;
         public array8 Palette;
-        public Int32 Unknown;
+        public Int32 Unknown; //TODO
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]

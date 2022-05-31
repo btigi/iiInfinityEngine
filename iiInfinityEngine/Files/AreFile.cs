@@ -360,7 +360,8 @@ namespace iiInfinityEngine.Core.Files
         public Int16 OpenVertexBlockCount;
         public Int16 ClosedVertexBlockCount;
         public Int32 ClosedVertexBlockIndex;
-        public Int32 Unused;
+        public Int16 Hitpoints;
+        public Int16 ArmourClass;
         public string DoorOpenSound;
         public string DoorCloseSound;
         public Int32 Cursor;
