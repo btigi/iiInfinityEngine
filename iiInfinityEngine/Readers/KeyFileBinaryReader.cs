@@ -66,7 +66,7 @@ namespace iiInfinityEngine.Core.Readers
                     resource.NonTileSetIndex = Convert.ToInt16(bifResource.resourceLocator & 0xFFF);
                     resource.TileSetIndex = Convert.ToInt16((bifResource.resourceLocator & 0xFC000) >> 14);
 
-                    Debug.WriteLine(String.Format("{0}{1},{2},{3},{4},{5},{6}", "", resource.ResourceName, resource.ResourceType, bifResource.resourceLocator, resource.BifIndex, Convert.ToInt16(bifResource.resourceLocator & 0xFFF), resource.TileSetIndex));
+                    //Debug.WriteLine(String.Format("{0}{1},{2},{3},{4},{5},{6}", "", resource.ResourceName, resource.ResourceType, bifResource.resourceLocator, resource.BifIndex, Convert.ToInt16(bifResource.resourceLocator & 0xFFF), resource.TileSetIndex));
 
                     keyFile.Resources.Add(resource);
                 }

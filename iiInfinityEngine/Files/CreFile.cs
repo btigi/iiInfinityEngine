@@ -68,224 +68,224 @@ namespace iiInfinityEngine.Core.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
-        public IEString LongName;
-        public IEString ShortName;
+        public IEString LongName { get; set; }
+        public IEString ShortName { get; set; }
         public CreatureFlags Flags;
-        public Int32 XPReward;
-        public Int32 PowerLevel;
-        public Int32 Gold;
-        public Int32 StatusFlags; // state.ids
-        public Int16 CurrentHP;
-        public Int16 MaximumHP;
-        public Int32 Animation;
-        public byte MetalColourIndex;
-        public byte MinorColourIndex;
-        public byte MajorColourIndex;
-        public byte SkinColourIndex;
-        public byte LeatherColourIndex;
-        public byte ArmorColourIndex;
-        public byte HairColourIndex;
-        public byte EffVersion;
-        public array8 SmallPortrait;
-        public array8 LargePortrait;
-        public byte Reputation;
-        public byte HideInShadows;
-        public Int16 ArmorClassNatural;
-        public Int16 ArmorClassEffective;
-        public Int16 CrushingModifuer;
-        public Int16 MissileModifier;
-        public Int16 PiercingModifier;
-        public Int16 SlashingModifier;
-        public byte Thac0;
-        public byte NumberOfAttacks;
-        public byte SaveVsDeath;
-        public byte SaveVsWands;
-        public byte SaveVsPolymorph;
-        public byte SaveVsBreath;
-        public byte SaveVsSpells;
-        public byte FireResistance;
-        public byte ColdResistance;
-        public byte ElectricityResistance;
-        public byte AcidResistance;
-        public byte MagicResistance;
-        public byte MagicFireResistance;
-        public byte MagicColdResistance;
-        public byte SlashingResistance;
-        public byte CrushingResistance;
-        public byte PiercingResistance;
-        public byte MissileResistance;
-        public byte DetectIllusion;
-        public byte SetTraps;
-        public byte Lore;
-        public byte LockPicking;
-        public byte Stealth;
-        public byte FindTraps;
-        public byte PickPockets;
-        public byte Fatigue;
-        public byte Intoxication;
-        public byte Luck;
-        public byte UnusedLargeSwords;
-        public byte UnusedSmallSwords;
-        public byte UnusedBows;
-        public byte UnusedSpears;
-        public byte UnusedBlunt;
-        public byte UnusedSpiked;
-        public byte UnusedAxe;
-        public byte UnusedMissile; //
-        public Int32 Unknownx1;
-        public Int32 Unknownx2;
-        public Int32 Unknownx3;
-        public byte Unknownx4;
-        public byte Tracking;
-        public array32 Unknownx5;
-        public IEString Strref1;
-        public IEString Strref2;
-        public IEString Strref3;
-        public IEString Strref4;
-        public IEString Strref5;
-        public IEString Strref6;
-        public IEString Strref7;
-        public IEString Strref8;
-        public IEString Strref9;
-        public IEString Strref10;
-        public IEString Strref11;
-        public IEString Strref12;
-        public IEString Strref13;
-        public IEString Strref14;
-        public IEString Strref15;
-        public IEString Strref16;
-        public IEString Strref17;
-        public IEString Strref18;
-        public IEString Strref19;
-        public IEString Strref20;
-        public IEString Strref21;
-        public IEString Strref22;
-        public IEString Strref23;
-        public IEString Strref24;
-        public IEString Strref25;
-        public IEString Strref26;
-        public IEString Strref27;
-        public IEString Strref28;
-        public IEString Strref29;
-        public IEString Strref30;
-        public IEString Strref31;
-        public IEString Strref32;
-        public IEString Strref33;
-        public IEString Strref34;
-        public IEString Strref35;
-        public IEString Strref36;
-        public IEString Strref37;
-        public IEString Strref38;
-        public IEString Strref39;
-        public IEString Strref40;
-        public IEString Strref41;
-        public IEString Strref42;
-        public IEString Strref43;
-        public IEString Strref44;
-        public IEString Strref45;
-        public IEString Strref46;
-        public IEString Strref47;
-        public IEString Strref48;
-        public IEString Strref49;
-        public IEString Strref50;
-        public IEString Strref51;
-        public IEString Strref52;
-        public IEString Strref53;
-        public IEString Strref54;
-        public IEString Strref55;
-        public IEString Strref56;
-        public IEString Strref57;
-        public IEString Strref58;
-        public IEString Strref59;
-        public IEString Strref60;
-        public IEString Strref61;
-        public IEString Strref62;
-        public IEString Strref63;
-        public IEString Strref64;
-        public IEString Strref65;
-        public IEString Strref66;
-        public IEString Strref67;
-        public IEString Strref68;
-        public IEString Strref69;
-        public IEString Strref70;
-        public IEString Strref71;
-        public IEString Strref72;
-        public IEString Strref73;
-        public IEString Strref74;
-        public IEString Strref75;
-        public IEString Strref76;
-        public IEString Strref77;
-        public IEString Strref78;
-        public IEString Strref79;
-        public IEString Strref80;
-        public IEString Strref81;
-        public IEString Strref82;
-        public IEString Strref83;
-        public IEString Strref84;
-        public IEString Strref85;
-        public IEString Strref86;
-        public IEString Strref87;
-        public IEString Strref88;
-        public IEString Strref89;
-        public IEString Strref90;
-        public IEString Strref91;
-        public IEString Strref92;
-        public IEString Strref93;
-        public IEString Strref94;
-        public IEString Strref95;
-        public IEString Strref96;
-        public IEString Strref97;
-        public IEString Strref98;
-        public IEString Strref99;
-        public IEString Strref100;
-        public byte Level1;
-        public byte Level2;
-        public byte Level3;
-        public byte Sex;
-        public byte Strength;
-        public byte StrengthBonus;
-        public byte Intelligence;
-        public byte Wisdom;
-        public byte Dexterity;
-        public byte Constitution;
-        public byte Charisma;
-        public byte Morale;
-        public byte MoraleBreak;
-        public byte RacialEnemy;
-        public Int16 MoraleRecoveryTime;
-        public Int32 Kit;
-        public array8 ScriptOverride;
-        public array8 ScriptClass;
-        public array8 ScriptRace;
-        public array8 ScriptGeneral;
-        public array8 ScriptDefault;
-        public byte EnemyAlly;
-        public byte General;
-        public byte Race;
-        public byte Class;
-        public byte Specific;
-        public byte Gender;
-        public byte ObjectIdRef1;
-        public byte ObjectIdRef2;
-        public byte ObjectIdRef3;
-        public byte ObjectIdRef4;
-        public byte ObjectIdRef5;
-        public byte Alignment;
-        public Int16 GlobalActorEnumeration;
-        public Int16 LocalActorEnumeration;
-        public array32 DeathVariable;
-        public Int32 KnownSpellsoffset;
-        public Int32 KnownSpellsCount;
-        public Int32 SpellMemorizationOffset;
-        public Int32 SpellMemorizationCount;
-        public Int32 MemorizedSpellsOffset;
-        public Int32 MemorizedSpellsCount;
-        public Int32 ItemSlotOffset;
-        public Int32 ItemOffset;
-        public Int32 ItemCount;
-        public Int32 EffectOffset;
-        public Int32 EffectCount;
-        public array8 DialogFile;
+        public Int32 XPReward { get; set; }
+        public Int32 PowerLevel { get; set; }
+        public Int32 Gold { get; set; }
+        public Int32 StatusFlags { get; set; } // state.ids
+        public Int16 CurrentHP { get; set; }
+        public Int16 MaximumHP { get; set; }
+        public Int32 Animation { get; set; }
+        public byte MetalColourIndex { get; set; }
+        public byte MinorColourIndex { get; set; }
+        public byte MajorColourIndex { get; set; }
+        public byte SkinColourIndex { get; set; }
+        public byte LeatherColourIndex { get; set; }
+        public byte ArmorColourIndex { get; set; }
+        public byte HairColourIndex { get; set; }
+        public byte EffVersion { get; set; }
+        public array8 SmallPortrait { get; set; }
+        public array8 LargePortrait { get; set; }
+        public byte Reputation { get; set; }
+        public byte HideInShadows { get; set; }
+        public Int16 ArmorClassNatural { get; set; }
+        public Int16 ArmorClassEffective { get; set; }
+        public Int16 CrushingModifuer { get; set; }
+        public Int16 MissileModifier { get; set; }
+        public Int16 PiercingModifier { get; set; }
+        public Int16 SlashingModifier { get; set; }
+        public byte Thac0 { get; set; }
+        public byte NumberOfAttacks { get; set; }
+        public byte SaveVsDeath { get; set; }
+        public byte SaveVsWands { get; set; }
+        public byte SaveVsPolymorph { get; set; }
+        public byte SaveVsBreath { get; set; }
+        public byte SaveVsSpells { get; set; }
+        public byte FireResistance { get; set; }
+        public byte ColdResistance { get; set; }
+        public byte ElectricityResistance { get; set; }
+        public byte AcidResistance { get; set; }
+        public byte MagicResistance { get; set; }
+        public byte MagicFireResistance { get; set; }
+        public byte MagicColdResistance { get; set; }
+        public byte SlashingResistance { get; set; }
+        public byte CrushingResistance { get; set; }
+        public byte PiercingResistance { get; set; }
+        public byte MissileResistance { get; set; }
+        public byte DetectIllusion { get; set; }
+        public byte SetTraps { get; set; }
+        public byte Lore { get; set; }
+        public byte LockPicking { get; set; }
+        public byte Stealth { get; set; }
+        public byte FindTraps { get; set; }
+        public byte PickPockets { get; set; }
+        public byte Fatigue { get; set; }
+        public byte Intoxication { get; set; }
+        public byte Luck { get; set; }
+        public byte UnusedLargeSwords { get; set; }
+        public byte UnusedSmallSwords { get; set; }
+        public byte UnusedBows { get; set; }
+        public byte UnusedSpears { get; set; }
+        public byte UnusedBlunt { get; set; }
+        public byte UnusedSpiked { get; set; }
+        public byte UnusedAxe { get; set; }
+        public byte UnusedMissile { get; set; } //
+        public Int32 Unknownx1 { get; set; }
+        public Int32 Unknownx2 { get; set; }
+        public Int32 Unknownx3 { get; set; }
+        public byte Unknownx4 { get; set; }
+        public byte Tracking { get; set; }
+        public array32 Unknownx5 { get; set; }
+        public IEString Strref1 { get; set; }
+        public IEString Strref2 { get; set; }
+        public IEString Strref3 { get; set; }
+        public IEString Strref4 { get; set; }
+        public IEString Strref5 { get; set; }
+        public IEString Strref6 { get; set; }
+        public IEString Strref7 { get; set; }
+        public IEString Strref8 { get; set; }
+        public IEString Strref9 { get; set; }
+        public IEString Strref10 { get; set; }
+        public IEString Strref11 { get; set; }
+        public IEString Strref12 { get; set; }
+        public IEString Strref13 { get; set; }
+        public IEString Strref14 { get; set; }
+        public IEString Strref15 { get; set; }
+        public IEString Strref16 { get; set; }
+        public IEString Strref17 { get; set; }
+        public IEString Strref18 { get; set; }
+        public IEString Strref19 { get; set; }
+        public IEString Strref20 { get; set; }
+        public IEString Strref21 { get; set; }
+        public IEString Strref22 { get; set; }
+        public IEString Strref23 { get; set; }
+        public IEString Strref24 { get; set; }
+        public IEString Strref25 { get; set; }
+        public IEString Strref26 { get; set; }
+        public IEString Strref27 { get; set; }
+        public IEString Strref28 { get; set; }
+        public IEString Strref29 { get; set; }
+        public IEString Strref30 { get; set; }
+        public IEString Strref31 { get; set; }
+        public IEString Strref32 { get; set; }
+        public IEString Strref33 { get; set; }
+        public IEString Strref34 { get; set; }
+        public IEString Strref35 { get; set; }
+        public IEString Strref36 { get; set; }
+        public IEString Strref37 { get; set; }
+        public IEString Strref38 { get; set; }
+        public IEString Strref39 { get; set; }
+        public IEString Strref40 { get; set; }
+        public IEString Strref41 { get; set; }
+        public IEString Strref42 { get; set; }
+        public IEString Strref43 { get; set; }
+        public IEString Strref44 { get; set; }
+        public IEString Strref45 { get; set; }
+        public IEString Strref46 { get; set; }
+        public IEString Strref47 { get; set; }
+        public IEString Strref48 { get; set; }
+        public IEString Strref49 { get; set; }
+        public IEString Strref50 { get; set; }
+        public IEString Strref51 { get; set; }
+        public IEString Strref52 { get; set; }
+        public IEString Strref53 { get; set; }
+        public IEString Strref54 { get; set; }
+        public IEString Strref55 { get; set; }
+        public IEString Strref56 { get; set; }
+        public IEString Strref57 { get; set; }
+        public IEString Strref58 { get; set; }
+        public IEString Strref59 { get; set; }
+        public IEString Strref60 { get; set; }
+        public IEString Strref61 { get; set; }
+        public IEString Strref62 { get; set; }
+        public IEString Strref63 { get; set; }
+        public IEString Strref64 { get; set; }
+        public IEString Strref65 { get; set; }
+        public IEString Strref66 { get; set; }
+        public IEString Strref67 { get; set; }
+        public IEString Strref68 { get; set; }
+        public IEString Strref69 { get; set; }
+        public IEString Strref70 { get; set; }
+        public IEString Strref71 { get; set; }
+        public IEString Strref72 { get; set; }
+        public IEString Strref73 { get; set; }
+        public IEString Strref74 { get; set; }
+        public IEString Strref75 { get; set; }
+        public IEString Strref76 { get; set; }
+        public IEString Strref77 { get; set; }
+        public IEString Strref78 { get; set; }
+        public IEString Strref79 { get; set; }
+        public IEString Strref80 { get; set; }
+        public IEString Strref81 { get; set; }
+        public IEString Strref82 { get; set; }
+        public IEString Strref83 { get; set; }
+        public IEString Strref84 { get; set; }
+        public IEString Strref85 { get; set; }
+        public IEString Strref86 { get; set; }
+        public IEString Strref87 { get; set; }
+        public IEString Strref88 { get; set; }
+        public IEString Strref89 { get; set; }
+        public IEString Strref90 { get; set; }
+        public IEString Strref91 { get; set; }
+        public IEString Strref92 { get; set; }
+        public IEString Strref93 { get; set; }
+        public IEString Strref94 { get; set; }
+        public IEString Strref95 { get; set; }
+        public IEString Strref96 { get; set; }
+        public IEString Strref97 { get; set; }
+        public IEString Strref98 { get; set; }
+        public IEString Strref99 { get; set; }
+        public IEString Strref100 { get; set; }
+        public byte Level1 { get; set; }
+        public byte Level2 { get; set; }
+        public byte Level3 { get; set; }
+        public byte Sex { get; set; }
+        public byte Strength { get; set; }
+        public byte StrengthBonus { get; set; }
+        public byte Intelligence { get; set; }
+        public byte Wisdom { get; set; }
+        public byte Dexterity { get; set; }
+        public byte Constitution { get; set; }
+        public byte Charisma { get; set; }
+        public byte Morale { get; set; }
+        public byte MoraleBreak { get; set; }
+        public byte RacialEnemy { get; set; }
+        public Int16 MoraleRecoveryTime { get; set; }
+        public Int32 Kit { get; set; }
+        public array8 ScriptOverride { get; set; }
+        public array8 ScriptClass { get; set; }
+        public array8 ScriptRace { get; set; }
+        public array8 ScriptGeneral { get; set; }
+        public array8 ScriptDefault { get; set; }
+        public byte EnemyAlly { get; set; }
+        public byte General { get; set; }
+        public byte Race { get; set; }
+        public byte Class { get; set; }
+        public byte Specific { get; set; }
+        public byte Gender { get; set; }
+        public byte ObjectIdRef1 { get; set; }
+        public byte ObjectIdRef2 { get; set; }
+        public byte ObjectIdRef3 { get; set; }
+        public byte ObjectIdRef4 { get; set; }
+        public byte ObjectIdRef5 { get; set; }
+        public byte Alignment { get; set; }
+        public Int16 GlobalActorEnumeration { get; set; }
+        public Int16 LocalActorEnumeration { get; set; }
+        public array32 DeathVariable { get; set; }
+        public Int32 KnownSpellsoffset { get; set; }
+        public Int32 KnownSpellsCount { get; set; }
+        public Int32 SpellMemorizationOffset { get; set; }
+        public Int32 SpellMemorizationCount { get; set; }
+        public Int32 MemorizedSpellsOffset { get; set; }
+        public Int32 MemorizedSpellsCount { get; set; }
+        public Int32 ItemSlotOffset { get; set; }
+        public Int32 ItemOffset { get; set; }
+        public Int32 ItemCount { get; set; }
+        public Int32 EffectOffset { get; set; }
+        public Int32 EffectCount { get; set; }
+        public array8 DialogFile { get; set; }
     }
 
     [Serializable]
@@ -323,68 +323,68 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct CreItemSlots
     {
-        public CreItem2 Helmet;
-        public CreItem2 Armor;
-        public CreItem2 Shield;
-        public CreItem2 Gloves;
-        public CreItem2 RingLeft;
-        public CreItem2 RingRight;
-        public CreItem2 Amulet;
-        public CreItem2 Belt;
-        public CreItem2 Boots;
-        public CreItem2 Weapon1;
-        public CreItem2 Weapon2;
-        public CreItem2 Weapon3;
-        public CreItem2 Weapon4;
-        public CreItem2 Quiver1;
-        public CreItem2 Quiver2;
-        public CreItem2 Quiver3;
-        public CreItem2 Unknown;
-        public CreItem2 Cloak;
-        public CreItem2 QuickItem1;
-        public CreItem2 QuickItem2;
-        public CreItem2 QuickItem3;
-        public CreItem2 InventoryItem1;
-        public CreItem2 InventoryItem2;
-        public CreItem2 InventoryItem3;
-        public CreItem2 InventoryItem4;
-        public CreItem2 InventoryItem5;
-        public CreItem2 InventoryItem6;
-        public CreItem2 InventoryItem7;
-        public CreItem2 InventoryItem8;
-        public CreItem2 InventoryItem9;
-        public CreItem2 InventoryItem10;
-        public CreItem2 InventoryItem11;
-        public CreItem2 InventoryItem12;
-        public CreItem2 InventoryItem13;
-        public CreItem2 InventoryItem14;
-        public CreItem2 InventoryItem15;
-        public CreItem2 InventoryItem16;
-        public CreItem2 MagicWeapon;
-        public short SelectedWeapon;
-        public short SelectedWeaponAbility;
+        public CreItem2 Helmet { get; set; }
+        public CreItem2 Armor { get; set; }
+        public CreItem2 Shield { get; set; }
+        public CreItem2 Gloves { get; set; }
+        public CreItem2 RingLeft { get; set; }
+        public CreItem2 RingRight { get; set; }
+        public CreItem2 Amulet { get; set; }
+        public CreItem2 Belt { get; set; }
+        public CreItem2 Boots { get; set; }
+        public CreItem2 Weapon1 { get; set; }
+        public CreItem2 Weapon2 { get; set; }
+        public CreItem2 Weapon3 { get; set; }
+        public CreItem2 Weapon4 { get; set; }
+        public CreItem2 Quiver1 { get; set; }
+        public CreItem2 Quiver2 { get; set; }
+        public CreItem2 Quiver3 { get; set; }
+        public CreItem2 Unknown { get; set; }
+        public CreItem2 Cloak { get; set; }
+        public CreItem2 QuickItem1 { get; set; }
+        public CreItem2 QuickItem2 { get; set; }
+        public CreItem2 QuickItem3 { get; set; }
+        public CreItem2 InventoryItem1 { get; set; }
+        public CreItem2 InventoryItem2 { get; set; }
+        public CreItem2 InventoryItem3 { get; set; }
+        public CreItem2 InventoryItem4 { get; set; }
+        public CreItem2 InventoryItem5 { get; set; }
+        public CreItem2 InventoryItem6 { get; set; }
+        public CreItem2 InventoryItem7 { get; set; }
+        public CreItem2 InventoryItem8 { get; set; }
+        public CreItem2 InventoryItem9 { get; set; }
+        public CreItem2 InventoryItem10 { get; set; }
+        public CreItem2 InventoryItem11 { get; set; }
+        public CreItem2 InventoryItem12 { get; set; }
+        public CreItem2 InventoryItem13 { get; set; }
+        public CreItem2 InventoryItem14 { get; set; }
+        public CreItem2 InventoryItem15 { get; set; }
+        public CreItem2 InventoryItem16 { get; set; }
+        public CreItem2 MagicWeapon { get; set; }
+        public short SelectedWeapon { get; set; }
+        public short SelectedWeaponAbility { get; set; }
     }
 
     [Serializable]
     public struct CreKnownSpells
     {
-        public List<CreKnownSpell2> MageLevel1;
-        public List<CreKnownSpell2> MageLevel2;
-        public List<CreKnownSpell2> MageLevel3;
-        public List<CreKnownSpell2> MageLevel4;
-        public List<CreKnownSpell2> MageLevel5;
-        public List<CreKnownSpell2> MageLevel6;
-        public List<CreKnownSpell2> MageLevel7;
-        public List<CreKnownSpell2> MageLevel8;
-        public List<CreKnownSpell2> MageLevel9;
-        public List<CreKnownSpell2> PriestLevel1;
-        public List<CreKnownSpell2> PriestLevel2;
-        public List<CreKnownSpell2> PriestLevel3;
-        public List<CreKnownSpell2> PriestLevel4;
-        public List<CreKnownSpell2> PriestLevel5;
-        public List<CreKnownSpell2> PriestLevel6;
-        public List<CreKnownSpell2> PriestLevel7;
-        public List<CreKnownSpell2> Innate;
+        public List<CreKnownSpell2> MageLevel1 { get; set; }
+        public List<CreKnownSpell2> MageLevel2 { get; set; }
+        public List<CreKnownSpell2> MageLevel3 { get; set; }
+        public List<CreKnownSpell2> MageLevel4 { get; set; }
+        public List<CreKnownSpell2> MageLevel5 { get; set; }
+        public List<CreKnownSpell2> MageLevel6 { get; set; }
+        public List<CreKnownSpell2> MageLevel7 { get; set; }
+        public List<CreKnownSpell2> MageLevel8 { get; set; }
+        public List<CreKnownSpell2> MageLevel9 { get; set; }
+        public List<CreKnownSpell2> PriestLevel1 { get; set; }
+        public List<CreKnownSpell2> PriestLevel2 { get; set; }
+        public List<CreKnownSpell2> PriestLevel3 { get; set; }
+        public List<CreKnownSpell2> PriestLevel4 { get; set; }
+        public List<CreKnownSpell2> PriestLevel5 { get; set; }
+        public List<CreKnownSpell2> PriestLevel6 { get; set; }
+        public List<CreKnownSpell2> PriestLevel7 { get; set; }
+        public List<CreKnownSpell2> Innate { get; set; }
     }
 
     [Serializable]
@@ -396,23 +396,23 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct CreMemorisedSpells
     {
-        public List<CreMemorisedSpell2> MageLevel1;
-        public List<CreMemorisedSpell2> MageLevel2;
-        public List<CreMemorisedSpell2> MageLevel3;
-        public List<CreMemorisedSpell2> MageLevel4;
-        public List<CreMemorisedSpell2> MageLevel5;
-        public List<CreMemorisedSpell2> MageLevel6;
-        public List<CreMemorisedSpell2> MageLevel7;
-        public List<CreMemorisedSpell2> MageLevel8;
-        public List<CreMemorisedSpell2> MageLevel9;
-        public List<CreMemorisedSpell2> PriestLevel1;
-        public List<CreMemorisedSpell2> PriestLevel2;
-        public List<CreMemorisedSpell2> PriestLevel3;
-        public List<CreMemorisedSpell2> PriestLevel4;
-        public List<CreMemorisedSpell2> PriestLevel5;
-        public List<CreMemorisedSpell2> PriestLevel6;
-        public List<CreMemorisedSpell2> PriestLevel7;
-        public List<CreMemorisedSpell2> Innate;
+        public List<CreMemorisedSpell2> MageLevel1 { get; set; }
+        public List<CreMemorisedSpell2> MageLevel2 { get; set; }
+        public List<CreMemorisedSpell2> MageLevel3 { get; set; }
+        public List<CreMemorisedSpell2> MageLevel4 { get; set; }
+        public List<CreMemorisedSpell2> MageLevel5 { get; set; }
+        public List<CreMemorisedSpell2> MageLevel6 { get; set; }
+        public List<CreMemorisedSpell2> MageLevel7 { get; set; }
+        public List<CreMemorisedSpell2> MageLevel8 { get; set; }
+        public List<CreMemorisedSpell2> MageLevel9 { get; set; }
+        public List<CreMemorisedSpell2> PriestLevel1 { get; set; }
+        public List<CreMemorisedSpell2> PriestLevel2 { get; set; }
+        public List<CreMemorisedSpell2> PriestLevel3 { get; set; }
+        public List<CreMemorisedSpell2> PriestLevel4 { get; set; }
+        public List<CreMemorisedSpell2> PriestLevel5 { get; set; }
+        public List<CreMemorisedSpell2> PriestLevel6 { get; set; }
+        public List<CreMemorisedSpell2> PriestLevel7 { get; set; }
+        public List<CreMemorisedSpell2> Innate { get; set; }
     }
 
     [Serializable]

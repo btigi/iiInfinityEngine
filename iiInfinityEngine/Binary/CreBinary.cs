@@ -6,226 +6,226 @@ namespace iiInfinityEngine.Core.Binary
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     struct CreHeaderBinary
     {
-        public array4 ftype;
-        public array4 fversion;
-        public Int32 LongName;
-        public Int32 ShortName;
-        public Int32 Flags;
-        public Int32 XPReward;
-        public Int32 PowerLevel;
-        public Int32 Gold;
-        public Int32 StatusFlags; // state.ids
-        public Int16 CurrentHP;
-        public Int16 MaximumHP;
-        public Int32 Animation;
-        public byte MetalColourIndex;
-        public byte MinorColourIndex;
-        public byte MajorColourIndex;
-        public byte SkinColourIndex;
-        public byte LeatherColourIndex;
-        public byte ArmorColourIndex;
-        public byte HairColourIndex;
-        public byte EffVersion;
-        public array8 SmallPortrait;
-        public array8 LargePortrait;
-        public byte Reputation;
-        public byte HideInShadows;
-        public Int16 ArmorClassNatural;
-        public Int16 ArmorClassEffective;
-        public Int16 CrushingModifuer;
-        public Int16 MissileModifier;
-        public Int16 PiercingModifier;
-        public Int16 SlashingModifier;
-        public byte Thac0;
-        public byte NumberOfAttacks;
-        public byte SaveVsDeath;
-        public byte SaveVsWands;
-        public byte SaveVsPolymorph;
-        public byte SaveVsBreath;
-        public byte SaveVsSpells;
-        public byte FireResistance;
-        public byte ColdResistance;
-        public byte ElectricityResistance;
-        public byte AcidResistance;
-        public byte MagicResistance;
-        public byte MagicFireResistance;
-        public byte MagicColdResistance;
-        public byte SlashingResistance;
-        public byte CrushingResistance;
-        public byte PiercingResistance;
-        public byte MissileResistance;
-        public byte DetectIllusion;
-        public byte SetTraps;
-        public byte Lore;
-        public byte LockPicking;
-        public byte Stealth;
-        public byte FindTraps;
-        public byte PickPockets;
-        public byte Fatigue;
-        public byte Intoxication;
-        public byte Luck;
-        public byte UnusedLargeSwords;
-        public byte UnusedSmallSwords;
-        public byte UnusedBows;
-        public byte UnusedSpears;
-        public byte UnusedBlunt;
-        public byte UnusedSpiked;
-        public byte UnusedAxe;
-        public byte UnusedMissile;       
-        public Int32 Unknownx1;
-        public Int32 Unknownx2;
-        public Int32 Unknownx3;
-        public byte Unknownx4;
-        public byte Tracking;
-        public array32 Unknownx5;
-        public Int32 Strref1;
-        public Int32 Strref2;
-        public Int32 Strref3;
-        public Int32 Strref4;
-        public Int32 Strref5;
-        public Int32 Strref6;
-        public Int32 Strref7;
-        public Int32 Strref8;
-        public Int32 Strref9;
-        public Int32 Strref10;
-        public Int32 Strref11;
-        public Int32 Strref12;
-        public Int32 Strref13;
-        public Int32 Strref14;
-        public Int32 Strref15;
-        public Int32 Strref16;
-        public Int32 Strref17;
-        public Int32 Strref18;
-        public Int32 Strref19;
-        public Int32 Strref20;
-        public Int32 Strref21;
-        public Int32 Strref22;
-        public Int32 Strref23;
-        public Int32 Strref24;
-        public Int32 Strref25;
-        public Int32 Strref26;
-        public Int32 Strref27;
-        public Int32 Strref28;
-        public Int32 Strref29;
-        public Int32 Strref30;
-        public Int32 Strref31;
-        public Int32 Strref32;
-        public Int32 Strref33;
-        public Int32 Strref34;
-        public Int32 Strref35;
-        public Int32 Strref36;
-        public Int32 Strref37;
-        public Int32 Strref38;
-        public Int32 Strref39;
-        public Int32 Strref40;
-        public Int32 Strref41;
-        public Int32 Strref42;
-        public Int32 Strref43;
-        public Int32 Strref44;
-        public Int32 Strref45;
-        public Int32 Strref46;
-        public Int32 Strref47;
-        public Int32 Strref48;
-        public Int32 Strref49;
-        public Int32 Strref50;
-        public Int32 Strref51;
-        public Int32 Strref52;
-        public Int32 Strref53;
-        public Int32 Strref54;
-        public Int32 Strref55;
-        public Int32 Strref56;
-        public Int32 Strref57;
-        public Int32 Strref58;
-        public Int32 Strref59;
-        public Int32 Strref60;
-        public Int32 Strref61;
-        public Int32 Strref62;
-        public Int32 Strref63;
-        public Int32 Strref64;
-        public Int32 Strref65;
-        public Int32 Strref66;
-        public Int32 Strref67;
-        public Int32 Strref68;
-        public Int32 Strref69;
-        public Int32 Strref70;
-        public Int32 Strref71;
-        public Int32 Strref72;
-        public Int32 Strref73;
-        public Int32 Strref74;
-        public Int32 Strref75;
-        public Int32 Strref76;
-        public Int32 Strref77;
-        public Int32 Strref78;
-        public Int32 Strref79;
-        public Int32 Strref80;
-        public Int32 Strref81;
-        public Int32 Strref82;
-        public Int32 Strref83;
-        public Int32 Strref84;
-        public Int32 Strref85;
-        public Int32 Strref86;
-        public Int32 Strref87;
-        public Int32 Strref88;
-        public Int32 Strref89;
-        public Int32 Strref90;
-        public Int32 Strref91;
-        public Int32 Strref92;
-        public Int32 Strref93;
-        public Int32 Strref94;
-        public Int32 Strref95;
-        public Int32 Strref96;
-        public Int32 Strref97;
-        public Int32 Strref98;
-        public Int32 Strref99;
-        public Int32 Strref100;
-        public byte Level1;
-        public byte Level2;
-        public byte Level3;
-        public byte Sex;
-        public byte Strength;
-        public byte StrengthBonus;
-        public byte Intelligence;
-        public byte Wisdom;
-        public byte Dexterity;
-        public byte Constitution;
-        public byte Charisma;
-        public byte Morale;
-        public byte MoraleBreak;
-        public byte RacialEnemy;
-        public Int16 MoraleRecoveryTime;
-        public Int32 Kit;
-        public array8 ScriptOverride;
-        public array8 ScriptClass;
-        public array8 ScriptRace;
-        public array8 ScriptGeneral;
-        public array8 ScriptDefault;
-        public byte EnemyAlly;
-        public byte General;
-        public byte Race;
-        public byte Class;
-        public byte Specific;
-        public byte Gender;
-        public byte ObjectIdRef1;
-        public byte ObjectIdRef2;
-        public byte ObjectIdRef3;
-        public byte ObjectIdRef4;
-        public byte ObjectIdRef5;
-        public byte Alignment;
-        public Int16 GlobalActorEnumeration;
-        public Int16 LocalActorEnumeration;
-        public array32 DeathVariable;
-        public Int32 KnownSpellsoffset;
-        public Int32 KnownSpellsCount;
-        public Int32 SpellMemorizationOffset;
-        public Int32 SpellMemorizationCount;
-        public Int32 MemorizedSpellsOffset;
-        public Int32 MemorizedSpellsCount;
-        public Int32 ItemSlotOffset;
-        public Int32 ItemOffset;
-        public Int32 ItemCount;
-        public Int32 EffectOffset;
-        public Int32 EffectCount;
-        public array8 DialogFile;
+        public array4 ftype { get; set; }
+        public array4 fversion { get; set; }
+        public Int32 LongName { get; set; }
+        public Int32 ShortName { get; set; }
+        public Int32 Flags { get; set; }
+        public Int32 XPReward { get; set; }
+        public Int32 PowerLevel { get; set; }
+        public Int32 Gold { get; set; }
+        public Int32 StatusFlags { get; set; } // state.ids
+        public Int16 CurrentHP { get; set; }
+        public Int16 MaximumHP { get; set; }
+        public Int32 Animation { get; set; }
+        public byte MetalColourIndex { get; set; }
+        public byte MinorColourIndex { get; set; }
+        public byte MajorColourIndex { get; set; }
+        public byte SkinColourIndex { get; set; }
+        public byte LeatherColourIndex { get; set; }
+        public byte ArmorColourIndex { get; set; }
+        public byte HairColourIndex { get; set; }
+        public byte EffVersion { get; set; }
+        public array8 SmallPortrait { get; set; }
+        public array8 LargePortrait { get; set; }
+        public byte Reputation { get; set; }
+        public byte HideInShadows { get; set; }
+        public Int16 ArmorClassNatural { get; set; }
+        public Int16 ArmorClassEffective { get; set; }
+        public Int16 CrushingModifuer { get; set; }
+        public Int16 MissileModifier { get; set; }
+        public Int16 PiercingModifier { get; set; }
+        public Int16 SlashingModifier { get; set; }
+        public byte Thac0 { get; set; }
+        public byte NumberOfAttacks { get; set; }
+        public byte SaveVsDeath { get; set; }
+        public byte SaveVsWands { get; set; }
+        public byte SaveVsPolymorph { get; set; }
+        public byte SaveVsBreath { get; set; }
+        public byte SaveVsSpells { get; set; }
+        public byte FireResistance { get; set; }
+        public byte ColdResistance { get; set; }
+        public byte ElectricityResistance { get; set; }
+        public byte AcidResistance { get; set; }
+        public byte MagicResistance { get; set; }
+        public byte MagicFireResistance { get; set; }
+        public byte MagicColdResistance { get; set; }
+        public byte SlashingResistance { get; set; }
+        public byte CrushingResistance { get; set; }
+        public byte PiercingResistance { get; set; }
+        public byte MissileResistance { get; set; }
+        public byte DetectIllusion { get; set; }
+        public byte SetTraps { get; set; }
+        public byte Lore { get; set; }
+        public byte LockPicking { get; set; }
+        public byte Stealth { get; set; }
+        public byte FindTraps { get; set; }
+        public byte PickPockets { get; set; }
+        public byte Fatigue { get; set; }
+        public byte Intoxication { get; set; }
+        public byte Luck { get; set; }
+        public byte UnusedLargeSwords { get; set; }
+        public byte UnusedSmallSwords { get; set; }
+        public byte UnusedBows { get; set; }
+        public byte UnusedSpears { get; set; }
+        public byte UnusedBlunt { get; set; }
+        public byte UnusedSpiked { get; set; }
+        public byte UnusedAxe { get; set; }
+        public byte UnusedMissile { get; set; }       
+        public Int32 Unknownx1 { get; set; }
+        public Int32 Unknownx2 { get; set; }
+        public Int32 Unknownx3 { get; set; }
+        public byte Unknownx4 { get; set; }
+        public byte Tracking { get; set; }
+        public array32 Unknownx5 { get; set; }
+        public Int32 Strref1 { get; set; }
+        public Int32 Strref2 { get; set; }
+        public Int32 Strref3 { get; set; }
+        public Int32 Strref4 { get; set; }
+        public Int32 Strref5 { get; set; }
+        public Int32 Strref6 { get; set; }
+        public Int32 Strref7 { get; set; }
+        public Int32 Strref8 { get; set; }
+        public Int32 Strref9 { get; set; }
+        public Int32 Strref10 { get; set; }
+        public Int32 Strref11 { get; set; }
+        public Int32 Strref12 { get; set; }
+        public Int32 Strref13 { get; set; }
+        public Int32 Strref14 { get; set; }
+        public Int32 Strref15 { get; set; }
+        public Int32 Strref16 { get; set; }
+        public Int32 Strref17 { get; set; }
+        public Int32 Strref18 { get; set; }
+        public Int32 Strref19 { get; set; }
+        public Int32 Strref20 { get; set; }
+        public Int32 Strref21 { get; set; }
+        public Int32 Strref22 { get; set; }
+        public Int32 Strref23 { get; set; }
+        public Int32 Strref24 { get; set; }
+        public Int32 Strref25 { get; set; }
+        public Int32 Strref26 { get; set; }
+        public Int32 Strref27 { get; set; }
+        public Int32 Strref28 { get; set; }
+        public Int32 Strref29 { get; set; }
+        public Int32 Strref30 { get; set; }
+        public Int32 Strref31 { get; set; }
+        public Int32 Strref32 { get; set; }
+        public Int32 Strref33 { get; set; }
+        public Int32 Strref34 { get; set; }
+        public Int32 Strref35 { get; set; }
+        public Int32 Strref36 { get; set; }
+        public Int32 Strref37 { get; set; }
+        public Int32 Strref38 { get; set; }
+        public Int32 Strref39 { get; set; }
+        public Int32 Strref40 { get; set; }
+        public Int32 Strref41 { get; set; }
+        public Int32 Strref42 { get; set; }
+        public Int32 Strref43 { get; set; }
+        public Int32 Strref44 { get; set; }
+        public Int32 Strref45 { get; set; }
+        public Int32 Strref46 { get; set; }
+        public Int32 Strref47 { get; set; }
+        public Int32 Strref48 { get; set; }
+        public Int32 Strref49 { get; set; }
+        public Int32 Strref50 { get; set; }
+        public Int32 Strref51 { get; set; }
+        public Int32 Strref52 { get; set; }
+        public Int32 Strref53 { get; set; }
+        public Int32 Strref54 { get; set; }
+        public Int32 Strref55 { get; set; }
+        public Int32 Strref56 { get; set; }
+        public Int32 Strref57 { get; set; }
+        public Int32 Strref58 { get; set; }
+        public Int32 Strref59 { get; set; }
+        public Int32 Strref60 { get; set; }
+        public Int32 Strref61 { get; set; }
+        public Int32 Strref62 { get; set; }
+        public Int32 Strref63 { get; set; }
+        public Int32 Strref64 { get; set; }
+        public Int32 Strref65 { get; set; }
+        public Int32 Strref66 { get; set; }
+        public Int32 Strref67 { get; set; }
+        public Int32 Strref68 { get; set; }
+        public Int32 Strref69 { get; set; }
+        public Int32 Strref70 { get; set; }
+        public Int32 Strref71 { get; set; }
+        public Int32 Strref72 { get; set; }
+        public Int32 Strref73 { get; set; }
+        public Int32 Strref74 { get; set; }
+        public Int32 Strref75 { get; set; }
+        public Int32 Strref76 { get; set; }
+        public Int32 Strref77 { get; set; }
+        public Int32 Strref78 { get; set; }
+        public Int32 Strref79 { get; set; }
+        public Int32 Strref80 { get; set; }
+        public Int32 Strref81 { get; set; }
+        public Int32 Strref82 { get; set; }
+        public Int32 Strref83 { get; set; }
+        public Int32 Strref84 { get; set; }
+        public Int32 Strref85 { get; set; }
+        public Int32 Strref86 { get; set; }
+        public Int32 Strref87 { get; set; }
+        public Int32 Strref88 { get; set; }
+        public Int32 Strref89 { get; set; }
+        public Int32 Strref90 { get; set; }
+        public Int32 Strref91 { get; set; }
+        public Int32 Strref92 { get; set; }
+        public Int32 Strref93 { get; set; }
+        public Int32 Strref94 { get; set; }
+        public Int32 Strref95 { get; set; }
+        public Int32 Strref96 { get; set; }
+        public Int32 Strref97 { get; set; }
+        public Int32 Strref98 { get; set; }
+        public Int32 Strref99 { get; set; }
+        public Int32 Strref100 { get; set; }
+        public byte Level1 { get; set; }
+        public byte Level2 { get; set; }
+        public byte Level3 { get; set; }
+        public byte Sex { get; set; }
+        public byte Strength { get; set; }
+        public byte StrengthBonus { get; set; }
+        public byte Intelligence { get; set; }
+        public byte Wisdom { get; set; }
+        public byte Dexterity { get; set; }
+        public byte Constitution { get; set; }
+        public byte Charisma { get; set; }
+        public byte Morale { get; set; }
+        public byte MoraleBreak { get; set; }
+        public byte RacialEnemy { get; set; }
+        public Int16 MoraleRecoveryTime { get; set; }
+        public Int32 Kit { get; set; }
+        public array8 ScriptOverride { get; set; }
+        public array8 ScriptClass { get; set; }
+        public array8 ScriptRace { get; set; }
+        public array8 ScriptGeneral { get; set; }
+        public array8 ScriptDefault { get; set; }
+        public byte EnemyAlly { get; set; }
+        public byte General { get; set; }
+        public byte Race { get; set; }
+        public byte Class { get; set; }
+        public byte Specific { get; set; }
+        public byte Gender { get; set; }
+        public byte ObjectIdRef1 { get; set; }
+        public byte ObjectIdRef2 { get; set; }
+        public byte ObjectIdRef3 { get; set; }
+        public byte ObjectIdRef4 { get; set; }
+        public byte ObjectIdRef5 { get; set; }
+        public byte Alignment { get; set; }
+        public Int16 GlobalActorEnumeration { get; set; }
+        public Int16 LocalActorEnumeration { get; set; }
+        public array32 DeathVariable { get; set; }
+        public Int32 KnownSpellsoffset { get; set; }
+        public Int32 KnownSpellsCount { get; set; }
+        public Int32 SpellMemorizationOffset { get; set; }
+        public Int32 SpellMemorizationCount { get; set; }
+        public Int32 MemorizedSpellsOffset { get; set; }
+        public Int32 MemorizedSpellsCount { get; set; }
+        public Int32 ItemSlotOffset { get; set; }
+        public Int32 ItemOffset { get; set; }
+        public Int32 ItemCount { get; set; }
+        public Int32 EffectOffset { get; set; }
+        public Int32 EffectCount { get; set; }
+        public array8 DialogFile { get; set; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]

@@ -34,7 +34,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ionic.Zlib">
+    <Reference Include="Ionic.Zlib, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Ionic.Zlib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -152,7 +153,6 @@
     <Compile Include="Writers\WfxFileBinaryWriter.cs" />
     <Compile Include="Writers\WmapFileBinaryWriter.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

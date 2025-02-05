@@ -1,153 +1,180 @@
-﻿using System;
+﻿using Ionic.Zlib;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace iiInfinityEngine.Core
 {
-    /// <summary>
-    /// DO NOT USE
-    /// </summary>
-    class MosConverter
-    {/*
-        struct RGBACol
+    public class MosConverter
+    {
+        public class RGBA
         {
-            public char Red;
-            public char Green;
-            public char Blue;
-            public char Alpha; // Unused
+            public byte Red { get; set; }
+            public byte Green { get; set; }
+            public byte Blue { get; set; }
+            public byte Alpha { get; set; }
         }
-        */
-        public void Convert()
-        {/*
-            var blockSize = 64;
-            System.Drawing.Bitmap b = new System.Drawing.Bitmap(@"d:\test.bmp");
-            var columns = Math.Truncate(Math.Ceiling(b.Size.Width / 64d));
-            var rows = Math.Truncate(Math.Ceiling(b.Size.Height / 64d));
-            var paletteCount = rows * columns;
 
-            var TestColour = new RGBACol();
-            int pixelRowsToRead;
-            for (int currentRow = 0; currentRow < rows - 1; currentRow++)
+        public Bitmap Convert(string filename)
+        {
+            using (var s = new MemoryStream())
             {
-                // For the last row, we may not read Header.BlockSize -1 pixelrows, as  we
-                // may not be a full row. We need to read Header.BlockSize or Header.Height mod 64
-                if (currentRow == rows - 1)
+                using (var fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
+                using (var br = new BinaryReader(fs))
                 {
-                    if (rows % blockSize == 0)
+                    var signature = string.Join("", br.ReadChars(4));
+                    var version = string.Join("", br.ReadChars(4));
+
+                    if (version == "V1  " && signature == "MOS ")
                     {
-                        pixelRowsToRead = blockSize - 1;
+                        fs.Position = 0;
+                        fs.CopyTo(s);
                     }
-                    else
+
+                    if (version == "V1  " && signature == "MOSC")
                     {
-                        pixelRowsToRead = (blockSize % 1) - 1;
-                    }
-                }
-                else
-                {
-                    pixelRowsToRead = blockSize - 1;
-                }
+                        var fi = new FileInfo(filename);
 
-                // for each pixel row in this row
-                for (int i = 0; i < pixelRowsToRead; i++)
-                {
+                        var uncompressedDataLength = br.ReadInt32();
+                        var bytes = br.ReadBytes((int)fi.Length - 12);
 
-                    // read the entire row, 1 pixel at a time
-                    // Note that each pixel is R,G,B hence the 3's everywhere
-                    var j = 0;
-                    while (j < (b.Size.Width * 3) - 1)
-                    {
-                        //TestColour.Red = b.GetPixel((3 * b.Size.Width * blockSize * currentRow) + (3 * b.Size.Width * i) + j);
-                        //TestColour.Green = b.GetPixel((3 * b.Size.Width * blockSize * currentRow) + (3 * b.Size.Width * i) + j + 1);
-                        //TestColour.Blue = b.GetPixel((3 * b.Size.Width * blockSize * currentRow) + (3 * b.Size.Width * i) + j + 2);
+                        var x = new MemoryStream(uncompressedDataLength);
+                        x.Write(bytes, 0, bytes.Length);
+                        x.Position = 0;
+                        using (var zs = new ZlibStream(x, CompressionMode.Decompress, true))
+                        {
+                            int bytesLeidos = 0;
+                            byte[] buffer = new byte[1024];
 
-                        // colour, row, 'column'
-                        //if (!Buildpalettes(TestColour, k, j))
-                        //{
-                        //return;
-                        //}
-                        j += 3;
+                            while ((bytesLeidos = zs.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                s.Write(buffer, 0, bytesLeidos);
+                            }
+                        }
                     }
                 }
-            }*/
+
+                s.Position = 0;
+                using (var br = new BinaryReader(s))
+                {
+                    return HandleMos(br);
+                }
+            }
         }
 
-        /*
-        function Buildpalettes(Colour : RGBACol; row : integer; colbase : integer) : boolean;
-        var
-          col          : integer;
-          i            : integer;
-          FoundColour  : boolean;
-          paletteIndex : integer;
-          index        : integer;
-        begin
-          Result := TRUE;
-          index := -1;
-          FoundColour := FALSE;
-          Colour.Alpha := #0;
-          col := (colbase div 3) div Header.BlockSize;
-          paletteIndex := (col) + (row * Header.columns);
+        private Bitmap HandleMos(BinaryReader br)
+        {
+            var signature = string.Join("", br.ReadChars(4));
+            var version = string.Join("", br.ReadChars(4));
 
-          // See if we already have this colour in this blocks palette
-          for i := 0 to 255 do
-          begin
-            if (BlockArray[paletteIndex].palette[i].Red   = Colour.Red) and
-               (BlockArray[paletteIndex].palette[i].Green = Colour.Green) and
-               (BlockArray[paletteIndex].palette[i].Blue  = Colour.Blue) then
-            begin
-              FoundColour := TRUE;
-              index := i;
-              break;
-            end;
-          end;
+            if (version == "V1  " && signature == "MOS ")
+            {
+                var palettes = new List<RGBA[]>();
+                var tileDataOffsets = new List<int>();
+                var blockDatas = new List<byte[]>();
 
-          // If the first colour is black, we find it, but never add it.
-          // This fixed the problem
-          if (BlockArray[paletteIndex].palette[i].Red   = Colour.Red)   and
-             (BlockArray[paletteIndex].palette[i].Green = Colour.Green) and
-             (BlockArray[paletteIndex].palette[i].Blue  = Colour.Blue)  and
-             not (AddedBlack) then
-           begin
-            Inc(BlockArray[(col) + (row * Header.columns)].paletteCount);
-            AddedBlack := TRUE;
-           end;
+                // header
+                var width = br.ReadInt16();
+                var height = br.ReadInt16();
+                var columnCount = br.ReadInt16();
+                var rowCount = br.ReadInt16();
+                var blockSize = br.ReadInt32();
+                var paletteOffset = br.ReadInt32();
 
-          // We don't have this colour in this blocks palette
-          if not (FoundColour) then
-          begin
-            // Add it, if we have room
-            if (BlockArray[paletteIndex].paletteCount < 256) then
-            begin
-              BlockArray[paletteIndex].palette[BlockArray[paletteIndex].paletteCount {+1}].Red := Colour.Red;
-              BlockArray[paletteIndex].palette[BlockArray[paletteIndex].paletteCount {+1}].Green := Colour.Green;
-              BlockArray[paletteIndex].palette[BlockArray[paletteIndex].paletteCount {+1}].Blue := Colour.Blue;
-              BlockArray[paletteIndex].palette[BlockArray[paletteIndex].paletteCount {+1}].Alpha := Colour.Alpha;
-              index := BlockArray[(col) + (row * Header.columns)].paletteCount;
-              Inc(BlockArray[(col) + (row * Header.columns)].paletteCount);
-            end
-            else
-            begin
-              Result := FALSE;
-              if (ErrorShown = 0) then
-              begin
-                MessageDlg('ERROR: Too many unique colours in block (row ' + IntToStr(row) + ', column ' + IntToStr(col) + ')', mtError, [mbOK], 0);
-                ErrorShown := 1;
-              end;
-            end;
-          end;
+                // palettes
+                br.BaseStream.Seek(paletteOffset, SeekOrigin.Begin);
+                for (var i = 0; i < rowCount * columnCount; i++)
+                {
+                    var colourData = new RGBA[256];
+                    for (var j = 0; j < 256; j++)
+                    {
+                        var blue = br.ReadByte();
+                        var green = br.ReadByte();
+                        var red = br.ReadByte();
+                        var alpha = br.ReadByte();
+                        colourData[j] = new RGBA() { Red = red, Green = green, Blue = blue, Alpha = alpha };
+                    }
+                    palettes.Add(colourData);
+                }
 
-          // Now, record the index into the palette, for the image data
-          if (index <> -1) then
-          begin
-            BlockArray[paletteIndex].data[BlockArray[paletteIndex].dataCount] := index;
-            Inc(BlockArray[paletteIndex].dataCount);
-          end
-          else
-          begin
-            if (ErrorShown <> 2) then
-            begin
-              Result := FALSE;
-              MessageDlg('ERROR: Colour could not be found in constructed palette.', mtError, [mbOK], 0);
-              ErrorShown := 2;
-            end;
-          end;
-        end;*/
+                // tile offsets
+                for (var i = 0; i < rowCount * columnCount; i++)
+                {
+                    tileDataOffsets.Add(br.ReadInt32());
+                }
+
+                // tile data
+                for (var row = 0; row < rowCount; row++)
+                {
+                    var pixelRow = blockSize;
+                    // The last row may not be a full BlockSize
+                    if ((row == rowCount - 1) && ((height % blockSize) != 0))
+                    {
+                        pixelRow = height % blockSize;
+                    }
+
+                    for (var column = 0; column < columnCount; column++)
+                    {
+                        // The last column may not be a full BlockSize
+                        var pixelCol = blockSize;
+                        if ((column == columnCount - 1) && ((width % blockSize) != 0))
+                        {
+                            pixelCol = width % blockSize;
+                        }
+
+                        var tileData = br.ReadBytes(pixelRow * pixelCol);
+                        blockDatas.Add(tileData);
+                    }
+                }
+
+                var bytes = new byte[width * height * 4];
+                var byteIndex = 0;
+                for (int row = 0; row < rowCount; row++)
+                {
+                    var pixelRow = blockSize;
+                    // The last row may not be a full BlockSize
+                    if ((row == rowCount - 1) && ((height % blockSize) != 0))
+                    {
+                        pixelRow = height % blockSize;
+                    }
+
+                    for (int k = 0; k < pixelRow; k++)
+                    {
+                        for (int column = 0; column < columnCount; column++)
+                        {
+                            var blockIndex = (columnCount * row) + column;
+                            //// If we have 1 column, we need a special case
+                            //if (row == 0 || columnCount == 1)
+                            //{
+                            //    blockIndex = row + 7;
+                            //}
+
+                            var pixelCol = blockSize;
+                            // The last column may not be a full BlockSize
+                            if ((column == columnCount - 1) && ((width % blockSize) != 0))
+                            {
+                                pixelCol = width % blockSize;
+                            }
+
+                            for (var m = 0; m < pixelCol; m++)
+                            {
+                                bytes[byteIndex] = palettes[blockIndex][blockDatas[blockIndex][(k * pixelCol) + m]].Blue;
+                                bytes[byteIndex + 1] = palettes[blockIndex][blockDatas[blockIndex][(k * pixelCol) + m]].Green;
+                                bytes[byteIndex + 2] = palettes[blockIndex][blockDatas[blockIndex][(k * pixelCol) + m]].Red;
+                                bytes[byteIndex + 3] = 255;
+                                byteIndex += 4;
+                            }
+                        }
+                    }
+                }
+
+                var img = new Bitmap(width, height, width * 4, PixelFormat.Format32bppArgb, System.Runtime.InteropServices.Marshal.UnsafeAddrOfPinnedArrayElement(bytes, 0));
+
+                //img.Save(@"D:\aa.bmp", ImageFormat.Bmp);
+                return img;
+            }
+            return new Bitmap(1, 1);
+        }
     }
 }
