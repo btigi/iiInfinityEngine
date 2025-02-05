@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackupManager.cs" />
+    <Compile Include="TisConverter.cs" />
     <Compile Include="Scripting\BcsCompiler.cs" />
     <Compile Include="Scripting\BcsDecompiler.cs" />
     <Compile Include="Binary\AreBinary.cs" />
