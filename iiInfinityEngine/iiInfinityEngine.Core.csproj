@@ -52,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackupManager.cs" />
+    <Compile Include="Binary\DlgBinary.cs" />
+    <Compile Include="Files\DlgFile.cs" />
+    <Compile Include="Readers\DFileReader.cs" />
     <Compile Include="TisConverter.cs" />
     <Compile Include="Scripting\BcsCompiler.cs" />
     <Compile Include="Scripting\BcsDecompiler.cs" />
@@ -129,11 +132,13 @@
     <Compile Include="Writers\AreFileBinaryWriter.cs" />
     <Compile Include="Writers\CreFileBinaryWriter.cs" />
     <Compile Include="Writers\DimensionalArrayFileWriter.cs" />
+    <Compile Include="Writers\DlgFileWriter.cs" />
     <Compile Include="Writers\EffFileBinaryWriter.cs" />
     <Compile Include="Writers\IdsFileWriter.cs" />
     <Compile Include="Writers\Interfaces\IAreFileWriter.cs" />
     <Compile Include="Writers\Interfaces\ICreFileWriter.cs" />
     <Compile Include="Writers\Interfaces\IDimensionalArrayFileWriter.cs" />
+    <Compile Include="Writers\Interfaces\IDlgFileWriter.cs" />
     <Compile Include="Writers\Interfaces\IEffFileWriter.cs" />
     <Compile Include="Writers\Interfaces\IIEFileWriter.cs" />
     <Compile Include="Writers\Interfaces\IIdsFileWriter.cs" />
