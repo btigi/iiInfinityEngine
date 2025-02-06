@@ -63,6 +63,15 @@ namespace iiInfinityEngine.Core
             return rawdatas;
         }
 
+        public static string TryGetString(char[] chars)
+        {
+            if ((chars.Length > 0) && (chars[0] != '\0'))
+            {
+                return new string(chars);
+            }
+            return String.Empty;
+        }
+
         public static IEString ReadString(Int32 strref, TlkFile tlkFile)
         {
             var stringInfo = new IEString();

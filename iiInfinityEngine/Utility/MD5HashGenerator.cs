@@ -1,79 +1,90 @@
 using System;
-using System.IO;
+using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
 
 public class MD5HashGenerator
 {
-    private static readonly Object locker = new Object();
-
     internal static String GenerateKey(Object sourceObject)
     {
-        String hashString = "";
-
         if (sourceObject == null)
         {
-            throw new ArgumentNullException("sourceObject");
+            throw new ArgumentNullException(nameof(sourceObject));
         }
-        else
+
+        var hashString = ComputeHash(sourceObject);
+        return hashString;
+    }
+
+    private static string ComputeHash(object obj)
+    {
+        var serializedObject = SerializeObject(obj);
+        using (var sha256 = SHA256.Create())
         {
-            try
+            var hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(serializedObject));
+            var sb = new StringBuilder();
+            for (int i = 0; i < hashBytes.Length; i++)
             {
-                hashString = ComputeHash(ObjectToByteArray(sourceObject));
-                return hashString;
+                sb.Append(hashBytes[i].ToString("X2"));
             }
-            catch (AmbiguousMatchException ame)
-            {
-                throw new ApplicationException("Object is not serializable. " + ame.Message);
-            }
+            return sb.ToString();
         }
     }
 
-    private static byte[] ObjectToByteArray(Object objectToSerialize)
+    private static string SerializeObject(object obj)
     {
-        using (MemoryStream fs = new MemoryStream())
+        if (obj == null)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            try
-            {
-                lock (locker)
-                {
-                    formatter.Serialize(fs, objectToSerialize);
-                }
-                return fs.ToArray();
-            }
-            catch (SerializationException se)
-            {
-                Console.WriteLine("An error occured during serialization. " + se.Message);
-                return null;
-            }
+            throw new ArgumentNullException(nameof(obj));
         }
+
+        var sb = new StringBuilder();
+        SerializeObjectRecursive(obj, sb, new HashSet<object>());
+        return sb.ToString();
     }
 
-    private static string ComputeHash(byte[] objectAsBytes)
+    private static void SerializeObjectRecursive(object obj, StringBuilder sb, HashSet<object> visited)
     {
-        using (MD5 md5 = new MD5CryptoServiceProvider())
+        if (obj == null || visited.Contains(obj))
         {
-            try
-            {
-                byte[] result = md5.ComputeHash(objectAsBytes);
-
-                // Build the final string by converting each byte into hex and appending it to a StringBuilder
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < result.Length; i++)
-                {
-                    sb.Append(result[i].ToString("X2"));
-                }
-                return sb.ToString();
-            }
-            catch (ArgumentNullException)
-            {
-                Console.WriteLine("Hash has not been generated.");
-                return null;
-            }
+            return;
         }
+
+        visited.Add(obj);
+
+        var objType = obj.GetType();
+        sb.Append($"<{objType.Name}>");
+
+        foreach (PropertyInfo prop in objType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+        {
+            if (prop.PropertyType.IsInterface)
+                continue;
+
+            var propValue = prop.GetValue(obj);
+            if (propValue == null)
+                continue;
+
+            sb.Append($"<{prop.Name}>");
+            if (prop.PropertyType.IsPrimitive || prop.PropertyType == typeof(string))
+            {
+                sb.Append(propValue);
+            }
+            else if (typeof(IEnumerable).IsAssignableFrom(prop.PropertyType))
+            {
+                foreach (object item in (IEnumerable)propValue)
+                {
+                    SerializeObjectRecursive(item, sb, visited);
+                }
+            }
+            else
+            {
+                SerializeObjectRecursive(propValue, sb, visited);
+            }
+            sb.Append($"</{prop.Name}>");
+        }
+
+        sb.Append($"</{objType.Name}>");
     }
 }
