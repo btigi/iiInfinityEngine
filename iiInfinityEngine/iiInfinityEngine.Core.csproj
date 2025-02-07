@@ -1,204 +1,30 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{361DBC18-83E6-4707-95BE-F982A1EF0DAC}</ProjectGuid>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>iiInfinityEngine.Core</RootNamespace>
-    <AssemblyName>iiInfinityEngine.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyTitle>iiInfinityEngine.Core</AssemblyTitle>
+    <Product>iiInfinityEngine.Core</Product>
+    <Copyright>Copyright ©  2012</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ionic.Zlib, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Ionic.Zlib.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Pipelines, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IO.Pipelines.9.0.1\lib\net462\System.IO.Pipelines.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Text.Encodings.Web, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.9.0.1\lib\net462\System.Text.Encodings.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Ionic.Zip" Version="1.9.1.8" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackupManager.cs" />
-    <Compile Include="Binary\DlgBinary.cs" />
-    <Compile Include="Files\DlgFile.cs" />
-    <Compile Include="Readers\DlgFileReader.cs" />
-    <Compile Include="Readers\Interfaces\IDlgFileReader.cs" />
-    <Compile Include="TisConverter.cs" />
-    <Compile Include="Scripting\BcsCompiler.cs" />
-    <Compile Include="Scripting\BcsDecompiler.cs" />
-    <Compile Include="Binary\AreBinary.cs" />
-    <Compile Include="Binary\BifBinary.cs" />
-    <Compile Include="Binary\CreBinary.cs" />
-    <Compile Include="Binary\Eff1Binary.cs" />
-    <Compile Include="Binary\EffBinary.cs" />
-    <Compile Include="Binary\EmbeddedEffBinary.cs" />
-    <Compile Include="Binary\ItmBinary.cs" />
-    <Compile Include="Binary\KeyBinary.cs" />
-    <Compile Include="Binary\ProBinary.cs" />
-    <Compile Include="Binary\SplBinary.cs" />
-    <Compile Include="Binary\StoBinary.cs" />
-    <Compile Include="Binary\TlkBinary.cs" />
-    <Compile Include="Binary\VvcBinary.cs" />
-    <Compile Include="Binary\WfxBinary.cs" />
-    <Compile Include="Binary\WmapBinary.cs" />
-    <Compile Include="IEFileCopier.cs" />
-    <Compile Include="MosConverter.cs" />
-    <Compile Include="Utility\ObjectCopier.cs" />
-    <Compile Include="Common.cs" />
-    <Compile Include="Files\AreFile.cs" />
-    <Compile Include="Files\BifFile.cs" />
-    <Compile Include="Files\CreFile.cs" />
-    <Compile Include="Files\DimensionalArrayFile.cs" />
-    <Compile Include="Files\Eff1File.cs" />
-    <Compile Include="Files\EffFile.cs" />
-    <Compile Include="Files\IdsFile.cs" />
-    <Compile Include="Files\ItmFile.cs" />
-    <Compile Include="Files\KeyFile.cs" />
-    <Compile Include="Files\ProFile.cs" />
-    <Compile Include="Files\SplFile.cs" />
-    <Compile Include="Files\StoFile.cs" />
-    <Compile Include="Files\TlkFile.cs" />
-    <Compile Include="Files\VvcFile.cs" />
-    <Compile Include="Files\WfxFile.cs" />
-    <Compile Include="Files\WmpFile.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="IEFile.cs" />
-    <Compile Include="Utility\Ini.cs" />
-    <Compile Include="Utility\MD5HashGenerator.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Readers\AreFileBinaryReader.cs" />
-    <Compile Include="Readers\BifFileBinaryReader.cs" />
-    <Compile Include="Readers\CreFileBinaryReader.cs" />
-    <Compile Include="Readers\DimensionalArrayFileReader.cs" />
-    <Compile Include="Readers\EffFileBinaryReader.cs" />
-    <Compile Include="Readers\IdsFileReader.cs" />
-    <Compile Include="Readers\Interfaces\IAreFileReader.cs" />
-    <Compile Include="Readers\Interfaces\IBifFileReader.cs" />
-    <Compile Include="Readers\Interfaces\ICreFileReader.cs" />
-    <Compile Include="Readers\Interfaces\IDimensionalArrayFileReader.cs" />
-    <Compile Include="Readers\Interfaces\IEffFileReader.cs" />
-    <Compile Include="Readers\Interfaces\IIdsFileReader.cs" />
-    <Compile Include="Readers\Interfaces\IItmFileReader.cs" />
-    <Compile Include="Readers\Interfaces\IProFileReader.cs" />
-    <Compile Include="Readers\Interfaces\ISplFileReader.cs" />
-    <Compile Include="Readers\Interfaces\IStoFileReader.cs" />
-    <Compile Include="Readers\Interfaces\ITlkFileReader.cs" />
-    <Compile Include="Readers\Interfaces\IVvcFileReader.cs" />
-    <Compile Include="Readers\Interfaces\IKeyFileReader.cs" />
-    <Compile Include="Readers\Interfaces\IWfxFileReader.cs" />
-    <Compile Include="Readers\Interfaces\IWmpFileReader.cs" />
-    <Compile Include="Readers\ItmFileBinaryReader.cs" />
-    <Compile Include="Readers\KeyFileBinaryReader.cs" />
-    <Compile Include="Readers\ProFileBinaryReader.cs" />
-    <Compile Include="Readers\SplFileBinaryReader.cs" />
-    <Compile Include="Readers\StoFileBinaryReader.cs" />
-    <Compile Include="Readers\TlkFileBinaryReader.cs" />
-    <Compile Include="Readers\VvcFileBinaryReader.cs" />
-    <Compile Include="Readers\WfxFileBinaryReader.cs" />
-    <Compile Include="Readers\WmpFileBinaryReader.cs" />
-    <Compile Include="Translator.cs" />
-    <Compile Include="Writers\AreFileBinaryWriter.cs" />
-    <Compile Include="Writers\CreFileBinaryWriter.cs" />
-    <Compile Include="Writers\DFileWriter.cs" />
-    <Compile Include="Writers\DimensionalArrayFileWriter.cs" />
-    <Compile Include="Writers\DlgFileWriter.cs" />
-    <Compile Include="Writers\EffFileBinaryWriter.cs" />
-    <Compile Include="Writers\IdsFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\IAreFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\ICreFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\IDFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\IDimensionalArrayFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\IDlgFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\IEffFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\IIEFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\IIdsFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\IItmFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\IProFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\ISplFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\IStoFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\ITlkFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\IVvcFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\IWfxFileWriter.cs" />
-    <Compile Include="Writers\Interfaces\IWmpFileWriter.cs" />
-    <Compile Include="Writers\ItmFileBinaryWriter.cs" />
-    <Compile Include="Writers\ProFileBinaryWriter.cs" />
-    <Compile Include="Writers\SplFileBinaryWriter.cs" />
-    <Compile Include="Writers\StoFileBinaryWriter.cs" />
-    <Compile Include="Writers\TlkFileBinaryWriter.cs" />
-    <Compile Include="Writers\VvcFileBinaryWriter.cs" />
-    <Compile Include="Writers\WfxFileBinaryWriter.cs" />
-    <Compile Include="Writers\WmapFileBinaryWriter.cs" />
+    <Compile Remove="Binary\EmbeddedEff.cs" />
+    <Compile Remove="Readers\AreReader.cs" />
+    <Compile Remove="Readers\VvcBinaryReader.cs" />
+    <Compile Remove="Writers\CreBinaryWriter.cs" />
+    <Compile Remove="Writers\EffBinaryWriter.cs" />
+    <Compile Remove="Writers\ItmBinaryWriter.cs" />
+    <Compile Remove="Writers\ProFileBinaryWriterWriter.cs" />
+    <Compile Remove="Writers\ProWriter.cs" />
+    <Compile Remove="Writers\VvcBinaryWriter.cs" />
+    <Compile Remove="Writers\WfxBinaryWriter.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
