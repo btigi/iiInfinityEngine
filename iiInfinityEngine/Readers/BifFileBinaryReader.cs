@@ -50,7 +50,15 @@ namespace iiInfinityEngine.Core.Readers
                         var compressedLength = br.ReadInt32();
                         var bytes = br.ReadBytes(compressedLength);
 
-                        m.Write(Ionic.Zlib.ZlibStream.UncompressBuffer(bytes), 0, decompressedLength);
+                        using (MemoryStream compressedStream = new MemoryStream(bytes))
+                        using (MemoryStream decompressedStream = new MemoryStream())
+                        {
+                            ZLibStream zlibStream = new ZLibStream(compressedStream, CompressionMode.Decompress);
+                            zlibStream.CopyTo(decompressedStream);
+                            var decompressedData = decompressedStream.ToArray();
+                            m.Write(decompressedData, 0, decompressedLength);
+                        }
+
                         size = size + decompressedLength;
                     }
                     /*

@@ -1,4 +1,4 @@
-﻿using Ionic.Zlib;
+﻿using System.IO.Compression;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -39,18 +39,13 @@ namespace iiInfinityEngine.Core
                         var uncompressedDataLength = br.ReadInt32();
                         var bytes = br.ReadBytes((int)fi.Length - 12);
 
-                        var x = new MemoryStream(uncompressedDataLength);
-                        x.Write(bytes, 0, bytes.Length);
-                        x.Position = 0;
-                        using (var zs = new ZlibStream(x, CompressionMode.Decompress, true))
+                        using (MemoryStream compressedStream = new MemoryStream(bytes))
+                        using (MemoryStream decompressedStream = new MemoryStream())
                         {
-                            int bytesLeidos = 0;
-                            byte[] buffer = new byte[1024];
-
-                            while ((bytesLeidos = zs.Read(buffer, 0, buffer.Length)) > 0)
-                            {
-                                s.Write(buffer, 0, bytesLeidos);
-                            }
+                            ZLibStream zlibStream = new ZLibStream(compressedStream, CompressionMode.Decompress);
+                            zlibStream.CopyTo(decompressedStream);
+                            var decompressedData = decompressedStream.ToArray();
+                            s.Write(decompressedData, 0, uncompressedDataLength);
                         }
                     }
                 }
