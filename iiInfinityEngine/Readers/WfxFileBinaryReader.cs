@@ -9,23 +9,19 @@ namespace iiInfinityEngine.Core.Readers
     {
         public WfxFile Read(string filename)
         {
-            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
-            {
-                var f = Read(fs);
-                f.Filename = Path.GetFileName(filename);
-                return f;
-            }
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var f = Read(fs);
+            f.Filename = Path.GetFileName(filename);
+            return f;
         }
 
         public WfxFile Read(Stream s)
         {
-            using (BinaryReader br = new BinaryReader(s))
-            {
-                var wfxFile = ParseFile(br);
-                br.BaseStream.Seek(0, SeekOrigin.Begin);
-                wfxFile.OriginalFile = ParseFile(br);
-                return wfxFile;
-            }
+            using var br = new BinaryReader(s);
+            var wfxFile = ParseFile(br);
+            br.BaseStream.Seek(0, SeekOrigin.Begin);
+            wfxFile.OriginalFile = ParseFile(br);
+            return wfxFile;
         }
 
         private WfxFile ParseFile(BinaryReader br)

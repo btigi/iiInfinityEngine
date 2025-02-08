@@ -22,7 +22,7 @@ namespace iiInfinityEngine.Core.Files
         public WfxFlags Flags;
         public Int32 RandomFrequencyVariation { get; set; }
         public Int32 RandomVolumeVariation { get; set; }
-        public array218 Unused0018 { get; set; }
+        public byte[] Unused0018 { get; set; }
     }
 
     [Serializable]
