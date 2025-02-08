@@ -88,7 +88,7 @@ namespace iiInfinityEngine.Core.Readers
             effFile.Unknownd4_14 = header.Unknownd4_14;
             effFile.Unknownd4_15 = header.Unknownd4_15;
 
-            effFile.Checksum = MD5HashGenerator.GenerateKey(effFile);
+            effFile.Checksum = HashGenerator.GenerateKey(effFile);
             return effFile;
         }
     }

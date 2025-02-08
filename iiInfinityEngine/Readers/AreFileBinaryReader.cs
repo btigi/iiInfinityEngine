@@ -944,7 +944,7 @@ namespace iiInfinityEngine.Core.Readers
                 areFile.vertices.Add(vertex);
             }
 
-            areFile.Checksum = MD5HashGenerator.GenerateKey(areFile);
+            areFile.Checksum = HashGenerator.GenerateKey(areFile);
             return areFile;
         }
     }

@@ -30,7 +30,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var creFile = file as CreFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(creFile) == creFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(creFile) == creFile.Checksum))
                 return false;
 
             List<CreKnownSpellBinary> creKnownSpells = new List<CreKnownSpellBinary>();

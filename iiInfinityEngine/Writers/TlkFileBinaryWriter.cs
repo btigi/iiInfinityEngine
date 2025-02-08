@@ -23,7 +23,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var tlkFile = file as TlkFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(tlkFile) == tlkFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(tlkFile) == tlkFile.Checksum))
                 return false;
 
             List<TlkEntryBinary> stringEntries = new List<TlkEntryBinary>();

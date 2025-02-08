@@ -19,7 +19,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var effFile = file as EffFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(effFile) == effFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(effFile) == effFile.Checksum))
                 return false;
 
             EffHeaderBinary header = new EffHeaderBinary();

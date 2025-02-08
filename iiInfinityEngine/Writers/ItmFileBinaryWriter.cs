@@ -25,7 +25,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var itmFile = file as ItmFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(itmFile) == itmFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(itmFile) == itmFile.Checksum))
                 return false;
 
             List<ItmExtendedHeaderBinary> itmExtendedHeaders = new List<ItmExtendedHeaderBinary>();

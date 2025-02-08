@@ -195,7 +195,7 @@ namespace iiInfinityEngine.Core.Readers
                 splFile.splFeatureBlocks.Add(splFeatureBlock2);
             }
 
-            splFile.Checksum = MD5HashGenerator.GenerateKey(splFile);
+            splFile.Checksum = HashGenerator.GenerateKey(splFile);
             return splFile;
         }
     }

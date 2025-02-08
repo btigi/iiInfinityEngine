@@ -578,7 +578,7 @@ namespace iiInfinityEngine.Core.Readers
             creFile.Items.SelectedWeapon = creItemSlots[38];
             creFile.Items.SelectedWeaponAbility = creItemSlots[39];
 
-            creFile.Checksum = MD5HashGenerator.GenerateKey(creFile);
+            creFile.Checksum = HashGenerator.GenerateKey(creFile);
             return creFile;
         }
     }

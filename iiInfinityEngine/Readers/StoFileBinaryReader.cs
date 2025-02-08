@@ -152,7 +152,7 @@ namespace iiInfinityEngine.Core.Readers
                 stoFile.ItemTypesBoughtByStore.Add((ItemType)buyItem.ItemType);
             }
 
-            stoFile.Checksum = MD5HashGenerator.GenerateKey(stoFile);
+            stoFile.Checksum = HashGenerator.GenerateKey(stoFile);
             return stoFile;
         }
     }

@@ -107,7 +107,7 @@ namespace iiInfinityEngine.Core.Readers
             vvcFile.YPosition = header.YPosition;
             vvcFile.ZPosition = header.ZPosition;
 
-            vvcFile.Checksum = MD5HashGenerator.GenerateKey(vvcFile);
+            vvcFile.Checksum = HashGenerator.GenerateKey(vvcFile);
             return vvcFile;
         }
     }

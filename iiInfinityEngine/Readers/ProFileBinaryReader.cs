@@ -123,7 +123,7 @@ namespace iiInfinityEngine.Core.Readers
                 proFile.ExtendedHeader.Unused2 = extendedHeader.Unused2;
             }
 
-            proFile.Checksum = MD5HashGenerator.GenerateKey(proFile);
+            proFile.Checksum = HashGenerator.GenerateKey(proFile);
             return proFile;
         }
     }

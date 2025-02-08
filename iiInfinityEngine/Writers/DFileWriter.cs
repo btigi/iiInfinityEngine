@@ -16,7 +16,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var dlg = file as DlgFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(dlg) == dlg.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(dlg) == dlg.Checksum))
                 return false;
 
             if (BackupManger != null)

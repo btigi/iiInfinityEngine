@@ -236,7 +236,7 @@ namespace iiInfinityEngine.Core.Readers
                 cummulativeAreaCount++;
             }
 
-            wmpFile.Checksum = MD5HashGenerator.GenerateKey(wmpFile);
+            wmpFile.Checksum = HashGenerator.GenerateKey(wmpFile);
             return wmpFile;
         }
     }

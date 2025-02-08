@@ -19,7 +19,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var proFile = file as ProFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(proFile) == proFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(proFile) == proFile.Checksum))
                 return false;
 
             ProHeaderBinary header = new ProHeaderBinary();

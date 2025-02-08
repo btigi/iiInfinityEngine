@@ -217,7 +217,7 @@ namespace iiInfinityEngine.Core.Readers
                 itmFile.itmFeatureBlocks.Add(itmFeatureBlock2);
             }
 
-            itmFile.Checksum = MD5HashGenerator.GenerateKey(itmFile);
+            itmFile.Checksum = HashGenerator.GenerateKey(itmFile);
             return itmFile;
         }
     }

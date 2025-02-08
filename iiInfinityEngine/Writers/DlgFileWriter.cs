@@ -30,7 +30,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var dlgFile = file as DlgFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(dlgFile) == dlgFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(dlgFile) == dlgFile.Checksum))
                 return false;
 
             List<StateBinary> states = new List<StateBinary>();

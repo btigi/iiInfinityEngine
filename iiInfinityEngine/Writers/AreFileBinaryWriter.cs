@@ -40,7 +40,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var areFile = file as AreFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(areFile) == areFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(areFile) == areFile.Checksum))
                 return false;
 
             List<AreActorBinary> actors = new List<AreActorBinary>();

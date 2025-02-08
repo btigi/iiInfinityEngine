@@ -25,7 +25,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var wmpFile = file as WmpFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(wmpFile) == wmpFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(wmpFile) == wmpFile.Checksum))
                 return false;
 
             List<WmapWorldmapBinary> binaryWorldmaps = new List<WmapWorldmapBinary>();

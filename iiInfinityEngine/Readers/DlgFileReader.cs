@@ -196,7 +196,7 @@ namespace iiInfinityEngine.Core.Readers
                 dlgFile.states.Add(state2);
             }
 
-            dlgFile.Checksum = MD5HashGenerator.GenerateKey(dlgFile);
+            dlgFile.Checksum = HashGenerator.GenerateKey(dlgFile);
             return dlgFile;
         }
    }

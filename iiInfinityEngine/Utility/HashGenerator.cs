@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 
-public class MD5HashGenerator
+public class HashGenerator
 {
     internal static String GenerateKey(Object sourceObject)
     {

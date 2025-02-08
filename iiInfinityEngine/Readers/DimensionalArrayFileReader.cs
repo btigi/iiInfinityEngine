@@ -32,7 +32,7 @@ namespace iiInfinityEngine.Core.Readers
             string str = rdr.ReadToEnd();
             var file = new DimensionalArrayFile();
             file.contents = str;
-            file.Checksum = MD5HashGenerator.GenerateKey(file);
+            file.Checksum = HashGenerator.GenerateKey(file);
             return file;
         }
     }

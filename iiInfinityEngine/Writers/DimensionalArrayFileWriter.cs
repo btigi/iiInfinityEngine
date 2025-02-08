@@ -16,7 +16,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var dimensionalArrayFile = file as DimensionalArrayFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(dimensionalArrayFile) == dimensionalArrayFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(dimensionalArrayFile) == dimensionalArrayFile.Checksum))
                 return false;
 
             if (BackupManger != null)

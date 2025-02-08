@@ -25,7 +25,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var splFile = file as SplFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(splFile) == splFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(splFile) == splFile.Checksum))
                 return false;
 
             List<SplExtendedHeaderBinary> splExtendedHeaders = new List<SplExtendedHeaderBinary>();

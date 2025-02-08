@@ -22,7 +22,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var wfxFile = file as WfxFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(wfxFile) == wfxFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(wfxFile) == wfxFile.Checksum))
                 return false;
 
             WfxHeaderBinary header = new WfxHeaderBinary();

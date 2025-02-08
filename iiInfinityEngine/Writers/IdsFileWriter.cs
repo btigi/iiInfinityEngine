@@ -16,7 +16,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var idsFile = file as IdsFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(idsFile) == idsFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(idsFile) == idsFile.Checksum))
                 return false;
 
             if (BackupManger != null)

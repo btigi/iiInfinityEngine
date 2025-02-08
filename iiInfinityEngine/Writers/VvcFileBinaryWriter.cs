@@ -19,7 +19,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var vvcFile = file as VvcFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(vvcFile) == vvcFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(vvcFile) == vvcFile.Checksum))
                 return false;
 
             VvcHeaderBinary header = new VvcHeaderBinary();

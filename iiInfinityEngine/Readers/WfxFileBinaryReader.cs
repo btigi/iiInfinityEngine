@@ -44,7 +44,7 @@ namespace iiInfinityEngine.Core.Readers
             wfxFile.RandomVolumeVariation = header.RandomVolumeVariation;
             wfxFile.Unused0018 = header.Unused;
 
-            wfxFile.Checksum = MD5HashGenerator.GenerateKey(wfxFile);
+            wfxFile.Checksum = HashGenerator.GenerateKey(wfxFile);
             return wfxFile;
         }
     }

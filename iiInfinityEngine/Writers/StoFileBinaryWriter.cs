@@ -27,7 +27,7 @@ namespace iiInfinityEngine.Core.Writers
 
             var stoFile = file as StoFile;
 
-            if (!(forceSave) && (MD5HashGenerator.GenerateKey(stoFile) == stoFile.Checksum))
+            if (!(forceSave) && (HashGenerator.GenerateKey(stoFile) == stoFile.Checksum))
                 return false;
 
             List<StoSaleItemBinary> stoSaleItems = new List<StoSaleItemBinary>();

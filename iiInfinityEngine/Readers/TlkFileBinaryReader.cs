@@ -67,7 +67,7 @@ namespace iiInfinityEngine.Core.Readers
                 stringIndex++;
             }
 
-            tlk.Checksum = MD5HashGenerator.GenerateKey(tlk);
+            tlk.Checksum = HashGenerator.GenerateKey(tlk);
             return tlk;
         }
     }

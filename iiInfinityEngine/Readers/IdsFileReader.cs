@@ -46,7 +46,7 @@ namespace iiInfinityEngine.Core.Readers
 
                 var file = new IdsFile();
                 file.contents = new string(chArray);
-                file.Checksum = MD5HashGenerator.GenerateKey(file);
+                file.Checksum = HashGenerator.GenerateKey(file);
                 return file;
             }
             else
@@ -56,7 +56,7 @@ namespace iiInfinityEngine.Core.Readers
                 string str = rdr.ReadToEnd();
                 var file = new IdsFile();
                 file.contents = str;
-                file.Checksum = MD5HashGenerator.GenerateKey(file);
+                file.Checksum = HashGenerator.GenerateKey(file);
                 return file;
             }
         }
