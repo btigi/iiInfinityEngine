@@ -64,34 +64,30 @@ namespace iiInfinityEngine.Core
         public void Uninstall()
         {
             var backupLogFileName = Path.Combine(BackupDirectory, BackupFileLogName);
-            using (StreamReader file = new StreamReader(backupLogFileName))
+            using var file = new StreamReader(backupLogFileName);
+            var line = String.Empty;
+            while ((line = file.ReadLine()) != null)
             {
-                string line = String.Empty;
-                while ((line = file.ReadLine()) != null)
-                {
-                    var data = line.Split('|');
-                    var xoperation = Path.GetFileName(data[0]);
-                    var xfile = data[1];
+                var data = line.Split('|');
+                var xoperation = Path.GetFileName(data[0]);
+                var xfile = data[1];
 
-                    if (xoperation == "new")
-                    {
-                        File.Delete(xfile);
-                    }
-                    else
-                    {
-                        File.Copy(Path.Combine(BackupDirectory, Path.GetFileName(xfile)), xfile, true);
-                        File.Delete(xfile);
-                    }
+                if (xoperation == "new")
+                {
+                    File.Delete(xfile);
+                }
+                else
+                {
+                    File.Copy(Path.Combine(BackupDirectory, Path.GetFileName(xfile)), xfile, true);
+                    File.Delete(xfile);
                 }
             }
         }
 
         private void Log(string destination, string operation)
         {
-            using (StreamWriter log = new StreamWriter(Path.Combine(BackupDirectory, BackupFileLogName), true))
-            {
-                log.WriteLine(operation + "|" + destination);
-            }
+            using StreamWriter log = new StreamWriter(Path.Combine(BackupDirectory, BackupFileLogName), true);
+            log.WriteLine(operation + "|" + destination);
         }
     }
 }

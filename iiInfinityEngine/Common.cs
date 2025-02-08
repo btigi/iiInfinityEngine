@@ -45,19 +45,19 @@ namespace iiInfinityEngine.Core
 
         public static Object ReadStruct(BinaryReader br, Type t)
         {
-            byte[] buff = br.ReadBytes(Marshal.SizeOf(t));
-            GCHandle handle = GCHandle.Alloc(buff, GCHandleType.Pinned);
-            Object s = (Object)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), t);
+            var buff = br.ReadBytes(Marshal.SizeOf(t));
+            var handle = GCHandle.Alloc(buff, GCHandleType.Pinned);
+            var s = (Object)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), t);
             handle.Free();
             return s;
         }
 
         public static byte[] WriteStruct(object anything)
         {
-            int rawsize = Marshal.SizeOf(anything);
-            IntPtr buffer = Marshal.AllocHGlobal(rawsize);
+            var rawsize = Marshal.SizeOf(anything);
+            var buffer = Marshal.AllocHGlobal(rawsize);
             Marshal.StructureToPtr(anything, buffer, false);
-            byte[] rawdatas = new byte[rawsize];
+            var rawdatas = new byte[rawsize];
             Marshal.Copy(buffer, rawdatas, 0, rawsize);
             Marshal.FreeHGlobal(buffer);
             return rawdatas;

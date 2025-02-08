@@ -11,7 +11,7 @@ namespace iiInfinityEngine.Core
         const char separator = '~';
 
         /// <summary>
-        /// Retrieve a string from the specified translation file/
+        /// Retrieve a string from the specified translation file
         /// </summary>
         /// <param name="file">The full path and filename of the translation file.</param>
         /// <param name="lookup">The unique identifier of the required string, e.g. @1</param>
@@ -19,7 +19,7 @@ namespace iiInfinityEngine.Core
         /// <remarks>The string must be encased in ~ characters. Other markers are not supported.</remarks>
         public static string Text(string file, string lookup)
         {
-            string line = String.Empty;
+            var line = String.Empty;
             if (File.Exists(file))
             {
                 var text = File.ReadAllText(file);

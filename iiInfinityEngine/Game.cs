@@ -24,17 +24,17 @@ namespace iiInfinityEngine.Core
         private string cd5 = String.Empty;
         private string cd6 = String.Empty;
 
-        public List<AreFile> Areas = new List<AreFile>();
-        public List<CreFile> Creatures = new List<CreFile>();
-        public List<DimensionalArrayFile> DimensionalArrays = new List<DimensionalArrayFile>();
-        public List<EffFile> Effects = new List<EffFile>();
-        public List<IdsFile> Identifiers = new List<IdsFile>();
-        public List<ItmFile> Items = new List<ItmFile>();
-        public List<ProFile> Projectiles = new List<ProFile>();
-        public List<SplFile> Spells = new List<SplFile>();
-        public List<StoFile> Stores = new List<StoFile>();
-        public List<VvcFile> VisualEffects = new List<VvcFile>();
-        public List<WfxFile> Wfxs = new List<WfxFile>();
+        public List<AreFile> Areas = new();
+        public List<CreFile> Creatures = new();
+        public List<DimensionalArrayFile> DimensionalArrays = new();
+        public List<EffFile> Effects = new();
+        public List<IdsFile> Identifiers = new();
+        public List<ItmFile> Items = new();
+        public List<ProFile> Projectiles = new();
+        public List<SplFile> Spells = new();
+        public List<StoFile> Stores = new();
+        public List<VvcFile> VisualEffects = new();
+        public List<WfxFile> Wfxs = new();
 
         public TlkFile Tlk { get; private set; }
 

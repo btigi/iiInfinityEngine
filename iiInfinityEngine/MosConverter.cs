@@ -18,44 +18,38 @@ namespace iiInfinityEngine.Core
 
         public Bitmap Convert(string filename)
         {
-            using (var s = new MemoryStream())
+            using var s = new MemoryStream();
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            using var br = new BinaryReader(fs);
+            var signature = string.Join("", br.ReadChars(4));
+            var version = string.Join("", br.ReadChars(4));
+
+            if (version == "V1  " && signature == "MOS ")
             {
-                using (var fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
-                using (var br = new BinaryReader(fs))
+                fs.Position = 0;
+                fs.CopyTo(s);
+            }
+
+            if (version == "V1  " && signature == "MOSC")
+            {
+                var fi = new FileInfo(filename);
+
+                var uncompressedDataLength = br.ReadInt32();
+                var bytes = br.ReadBytes((int)fi.Length - 12);
+
+                using (MemoryStream compressedStream = new MemoryStream(bytes))
+                using (MemoryStream decompressedStream = new MemoryStream())
                 {
-                    var signature = string.Join("", br.ReadChars(4));
-                    var version = string.Join("", br.ReadChars(4));
-
-                    if (version == "V1  " && signature == "MOS ")
-                    {
-                        fs.Position = 0;
-                        fs.CopyTo(s);
-                    }
-
-                    if (version == "V1  " && signature == "MOSC")
-                    {
-                        var fi = new FileInfo(filename);
-
-                        var uncompressedDataLength = br.ReadInt32();
-                        var bytes = br.ReadBytes((int)fi.Length - 12);
-
-                        using (MemoryStream compressedStream = new MemoryStream(bytes))
-                        using (MemoryStream decompressedStream = new MemoryStream())
-                        {
-                            ZLibStream zlibStream = new ZLibStream(compressedStream, CompressionMode.Decompress);
-                            zlibStream.CopyTo(decompressedStream);
-                            var decompressedData = decompressedStream.ToArray();
-                            s.Write(decompressedData, 0, uncompressedDataLength);
-                        }
-                    }
-                }
-
-                s.Position = 0;
-                using (var br = new BinaryReader(s))
-                {
-                    return HandleMos(br);
+                    var zlibStream = new ZLibStream(compressedStream, CompressionMode.Decompress);
+                    zlibStream.CopyTo(decompressedStream);
+                    var decompressedData = decompressedStream.ToArray();
+                    s.Write(decompressedData, 0, uncompressedDataLength);
                 }
             }
+
+            s.Position = 0;
+            using var uncompressedBr = new BinaryReader(s);
+            return HandleMos(uncompressedBr);
         }
 
         private Bitmap HandleMos(BinaryReader br)
@@ -165,8 +159,6 @@ namespace iiInfinityEngine.Core
                 }
 
                 var img = new Bitmap(width, height, width * 4, PixelFormat.Format32bppArgb, System.Runtime.InteropServices.Marshal.UnsafeAddrOfPinnedArrayElement(bytes, 0));
-
-                //img.Save(@"D:\aa.bmp", ImageFormat.Bmp);
                 return img;
             }
             return new Bitmap(1, 1);

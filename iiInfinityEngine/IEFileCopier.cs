@@ -20,10 +20,7 @@ namespace iiInfinityEngine.Core
         /// <remarks>If the destination file exists it is replaced with the source file (after being backup up by the backup manager, if available)</remarks>
         public void CopyFile(string source, string destination)
         {
-            if (BackupManager != null)
-            {
-                BackupManager.BackupFile(destination);
-            }
+            BackupManager?.BackupFile(destination);
             File.Copy(source, destination, overwrite: true);
         }
     }

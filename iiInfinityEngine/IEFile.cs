@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace iiInfinityEngine.Core
+﻿namespace iiInfinityEngine.Core
 {
     /// <summary>
     /// Defines common properties an IE file must support
