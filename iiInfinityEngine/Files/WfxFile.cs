@@ -33,5 +33,6 @@ namespace iiInfinityEngine.Core.Files
         public bool RandomFrequencyVariationEnabled { get; set; }
         public bool RandomVolumeVariationEnabled { get; set; }
         public bool EnvironmentalAudioEnabled { get; set; }
+        // TODO: other bits
     }
 }

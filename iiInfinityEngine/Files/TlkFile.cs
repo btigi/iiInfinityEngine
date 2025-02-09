@@ -20,7 +20,7 @@ namespace iiInfinityEngine.Core.Files
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
         public Int16 LangugeId;
-        public List<StringEntry> Strings = new List<StringEntry>();
+        public List<StringEntry> Strings = [];
     }
 
     [Serializable]

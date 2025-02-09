@@ -9,57 +9,53 @@ namespace iiInfinityEngine.Core.Readers
     {
         public VvcFile Read(string filename)
         {
-            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
-            {
-                var f = Read(fs);
-                f.Filename = Path.GetFileName(filename);
-                return f;
-            }
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var f = Read(fs);
+            f.Filename = Path.GetFileName(filename);
+            return f;
         }
 
         public VvcFile Read(Stream s)
         {
-            using (BinaryReader br = new BinaryReader(s))
-            {
-                var vvcFile = ParseFile(br);
-                br.BaseStream.Seek(0, SeekOrigin.Begin);
-                vvcFile.OriginalFile = ParseFile(br);
-                return vvcFile;
-            }
+            using var br = new BinaryReader(s);
+            var vvcFile = ParseFile(br);
+            br.BaseStream.Seek(0, SeekOrigin.Begin);
+            vvcFile.OriginalFile = ParseFile(br);
+            return vvcFile;
         }
 
         private VvcFile ParseFile(BinaryReader br)
         {
             var header = (VvcHeaderBinary)Common.ReadStruct(br, typeof(VvcHeaderBinary));
 
-            VvcFile vvcFile = new VvcFile();
+            var vvcFile = new VvcFile();
 
-            vvcFile.AlphaBlendingAnimation = header.AlphaBlendingAnimation.ToString();
-            vvcFile.Animation = header.Animation.ToString();
-            vvcFile.Animation2 = header.Animation2.ToString();
+            vvcFile.AlphaBlendingAnimation = Common.TryGetString(header.AlphaBlendingAnimation);
+            vvcFile.Animation = Common.TryGetString(header.Animation);
+            vvcFile.Animation2 = Common.TryGetString(header.Animation2);
             vvcFile.Bam1Sequence = header.Bam1Sequence;
             vvcFile.Bam2Sequence = header.Bam2Sequence;
             vvcFile.Bam3Sequence = header.Bam3Sequence;
             vvcFile.BaseOrientation = header.BaseOrientation;
-            vvcFile.BitmapPalette = header.BitmapPalette.ToString();
+            vvcFile.BitmapPalette = Common.TryGetString(header.BitmapPalette);
             vvcFile.CentreX = header.CentreX;
             vvcFile.CentreY = header.CentreY;
             vvcFile.ColourFlags.NotLightSource = (header.ColourFlags & Common.Bit0) != 0;
             vvcFile.ColourFlags.LightSource = (header.ColourFlags & Common.Bit1) != 0;
             vvcFile.ColourFlags.InternalBrightness = (header.ColourFlags & Common.Bit2) != 0;
             vvcFile.ColourFlags.Timestopped = (header.ColourFlags & Common.Bit3) != 0;
-            vvcFile.ColourFlags.Unused1 = (header.ColourFlags & Common.Bit4) != 0;
+            vvcFile.ColourFlags.Bit4 = (header.ColourFlags & Common.Bit4) != 0;
             vvcFile.ColourFlags.InternalGamma = (header.ColourFlags & Common.Bit5) != 0;
             vvcFile.ColourFlags.NonReservedPalette = (header.ColourFlags & Common.Bit6) != 0;
             vvcFile.ColourFlags.FullPalette = (header.ColourFlags & Common.Bit7) != 0;
-            vvcFile.ColourFlags.Unused = (header.ColourFlags & Common.Bit8) != 0;
+            vvcFile.ColourFlags.Blend = (header.ColourFlags & Common.Bit8) != 0;
             vvcFile.ColourFlags.Sepia = (header.ColourFlags & Common.Bit9) != 0;
-            vvcFile.ColourFlags.Unused2 = (header.ColourFlags & Common.Bit10) != 0;
-            vvcFile.ColourFlags.Unused3 = (header.ColourFlags & Common.Bit11) != 0;
-            vvcFile.ColourFlags.Unused4 = (header.ColourFlags & Common.Bit12) != 0;
-            vvcFile.ColourFlags.Unused5 = (header.ColourFlags & Common.Bit13) != 0;
-            vvcFile.ColourFlags.Unused6 = (header.ColourFlags & Common.Bit14) != 0;
-            vvcFile.ColourFlags.Unused7 = (header.ColourFlags & Common.Bit15) != 0;
+            vvcFile.ColourFlags.Bit10 = (header.ColourFlags & Common.Bit10) != 0;
+            vvcFile.ColourFlags.Bit11 = (header.ColourFlags & Common.Bit11) != 0;
+            vvcFile.ColourFlags.Bit12 = (header.ColourFlags & Common.Bit12) != 0;
+            vvcFile.ColourFlags.Bit13 = (header.ColourFlags & Common.Bit13) != 0;
+            vvcFile.ColourFlags.Bit14 = (header.ColourFlags & Common.Bit14) != 0;
+            vvcFile.ColourFlags.Bit15 = (header.ColourFlags & Common.Bit15) != 0;
             vvcFile.CurrentAnimationSequence = header.CurrentAnimationSequence;
             vvcFile.DisplayFlags.Transparent = (header.DisplayFlags & Common.Bit0) != 0;
             vvcFile.DisplayFlags.Translucent = (header.DisplayFlags & Common.Bit1) != 0;
@@ -75,11 +71,11 @@ namespace iiInfinityEngine.Core.Readers
             vvcFile.DisplayFlags.PersistThroughTimestop = (header.DisplayFlags & Common.Bit11) != 0;
             vvcFile.DisplayFlags.IgnoreDreamPalette = (header.DisplayFlags & Common.Bit12) != 0;
             vvcFile.DisplayFlags.Blend2D = (header.DisplayFlags & Common.Bit13) != 0;
-            vvcFile.DisplayFlags.Unused1 = (header.DisplayFlags & Common.Bit14) != 0;
-            vvcFile.DisplayFlags.Unused2 = (header.DisplayFlags & Common.Bit15) != 0;
+            vvcFile.DisplayFlags.Bit14 = (header.DisplayFlags & Common.Bit14) != 0;
+            vvcFile.DisplayFlags.Scale = (header.DisplayFlags & Common.Bit15) != 0;
             vvcFile.Duration = header.Duration;
             vvcFile.FrameRate = header.FrameRate;
-            vvcFile.InternalName = header.InternalName.ToString();
+            vvcFile.InternalName = Common.TryGetString(header.InternalName);
             vvcFile.LightingBrightness = header.LightingBrightness;
             vvcFile.OrientationCount = header.OrientationCount;
             vvcFile.PositionFlags.OrbitTarget = (header.PositionFlags & Common.Bit0) != 0;
@@ -100,9 +96,9 @@ namespace iiInfinityEngine.Core.Readers
             vvcFile.Unused009c = header.Unused3;
             vvcFile.UseContinuousSequence = header.UseContinuousSequence;
             vvcFile.UseOrientation = header.UseOrientation;
-            vvcFile.Wav1 = header.Wav1.ToString();
-            vvcFile.Wav2 = header.Wav2.ToString();
-            vvcFile.Wav3 = header.Wav3.ToString();
+            vvcFile.Wav1 = Common.TryGetString(header.Wav1);
+            vvcFile.Wav2 = Common.TryGetString(header.Wav2);
+            vvcFile.Wav3 = Common.TryGetString(header.Wav3);
             vvcFile.XPosition = header.XPosition;
             vvcFile.YPosition = header.YPosition;
             vvcFile.ZPosition = header.ZPosition;

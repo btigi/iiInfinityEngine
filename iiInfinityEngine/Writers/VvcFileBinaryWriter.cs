@@ -4,6 +4,7 @@ using iiInfinityEngine.Core.Files;
 using System;
 using iiInfinityEngine.Core.Writers.Interfaces;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace iiInfinityEngine.Core.Writers
 {
@@ -14,7 +15,7 @@ namespace iiInfinityEngine.Core.Writers
         [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
-            if (!(file is VvcFile))
+            if (file is not VvcFile)
                 throw new ArgumentException("File is not a valid creature file");
 
             var vvcFile = file as VvcFile;
@@ -22,37 +23,37 @@ namespace iiInfinityEngine.Core.Writers
             if (!(forceSave) && (HashGenerator.GenerateKey(vvcFile) == vvcFile.Checksum))
                 return false;
 
-            VvcHeaderBinary header = new VvcHeaderBinary();
+            var header = new VvcHeaderBinary();
 
-            header.ftype = new array4() { character1 = 'V', character2 = 'V', character3 = 'C', character4 = ' ' };
-            header.fversion = new array4() { character1 = 'V', character2 = '1', character3 = '.', character4 = '0' };
+            header.ftype = ['V', 'V', 'C', ' '];
+            header.fversion = ['V', '1', '.', '0'];
 
-            header.AlphaBlendingAnimation = new array8(vvcFile.AlphaBlendingAnimation);
-            header.Animation = new array8(vvcFile.Animation);
-            header.Animation2 = new array8(vvcFile.Animation2);
+            header.AlphaBlendingAnimation = vvcFile.AlphaBlendingAnimation.ToArray();
+            header.Animation = vvcFile.Animation.ToArray();
+            header.Animation2 = vvcFile.Animation2.ToArray();
             header.Bam1Sequence = vvcFile.Bam1Sequence;
             header.Bam2Sequence = vvcFile.Bam2Sequence;
             header.Bam3Sequence = vvcFile.Bam3Sequence;
             header.BaseOrientation = vvcFile.BaseOrientation;
-            header.BitmapPalette = new array8(vvcFile.BitmapPalette);
+            header.BitmapPalette = vvcFile.BitmapPalette.ToArray();
             header.CentreX = vvcFile.CentreX;
             header.CentreY = vvcFile.CentreY;
             header.ColourFlags = vvcFile.ColourFlags.NotLightSource ? Convert.ToUInt16(header.ColourFlags | Common.Bit0) : header.ColourFlags;
             header.ColourFlags = vvcFile.ColourFlags.LightSource ? Convert.ToUInt16(header.ColourFlags | Common.Bit1) : header.ColourFlags;
             header.ColourFlags = vvcFile.ColourFlags.InternalBrightness ? Convert.ToUInt16(header.ColourFlags | Common.Bit2) : header.ColourFlags;
             header.ColourFlags = vvcFile.ColourFlags.Timestopped ? Convert.ToUInt16(header.ColourFlags | Common.Bit3) : header.ColourFlags;
-            header.ColourFlags = vvcFile.ColourFlags.Unused ? Convert.ToUInt16(header.ColourFlags | Common.Bit4) : header.ColourFlags;
+            header.ColourFlags = vvcFile.ColourFlags.Bit4 ? Convert.ToUInt16(header.ColourFlags | Common.Bit4) : header.ColourFlags;
             header.ColourFlags = vvcFile.ColourFlags.InternalGamma ? Convert.ToUInt16(header.ColourFlags | Common.Bit5) : header.ColourFlags;
             header.ColourFlags = vvcFile.ColourFlags.NonReservedPalette ? Convert.ToUInt16(header.ColourFlags | Common.Bit6) : header.ColourFlags;
             header.ColourFlags = vvcFile.ColourFlags.FullPalette ? Convert.ToUInt16(header.ColourFlags | Common.Bit7) : header.ColourFlags;
-            header.ColourFlags = vvcFile.ColourFlags.Unused ? Convert.ToUInt16(header.ColourFlags | Common.Bit8) : header.ColourFlags;
+            header.ColourFlags = vvcFile.ColourFlags.Blend ? Convert.ToUInt16(header.ColourFlags | Common.Bit8) : header.ColourFlags;
             header.ColourFlags = vvcFile.ColourFlags.Sepia ? Convert.ToUInt16(header.ColourFlags | Common.Bit9) : header.ColourFlags;
-            header.ColourFlags = vvcFile.ColourFlags.Unused2 ? Convert.ToUInt16(header.ColourFlags | Common.Bit10) : header.ColourFlags;
-            header.ColourFlags = vvcFile.ColourFlags.Unused3 ? Convert.ToUInt16(header.ColourFlags | Common.Bit11) : header.ColourFlags;
-            header.ColourFlags = vvcFile.ColourFlags.Unused4 ? Convert.ToUInt16(header.ColourFlags | Common.Bit12) : header.ColourFlags;
-            header.ColourFlags = vvcFile.ColourFlags.Unused5 ? Convert.ToUInt16(header.ColourFlags | Common.Bit13) : header.ColourFlags;
-            header.ColourFlags = vvcFile.ColourFlags.Unused6 ? Convert.ToUInt16(header.ColourFlags | Common.Bit14) : header.ColourFlags;
-            header.ColourFlags = vvcFile.ColourFlags.Unused7 ? Convert.ToUInt16(header.ColourFlags | Common.Bit15) : header.ColourFlags;
+            header.ColourFlags = vvcFile.ColourFlags.Bit10 ? Convert.ToUInt16(header.ColourFlags | Common.Bit10) : header.ColourFlags;
+            header.ColourFlags = vvcFile.ColourFlags.Bit11 ? Convert.ToUInt16(header.ColourFlags | Common.Bit11) : header.ColourFlags;
+            header.ColourFlags = vvcFile.ColourFlags.Bit12 ? Convert.ToUInt16(header.ColourFlags | Common.Bit12) : header.ColourFlags;
+            header.ColourFlags = vvcFile.ColourFlags.Bit13 ? Convert.ToUInt16(header.ColourFlags | Common.Bit13) : header.ColourFlags;
+            header.ColourFlags = vvcFile.ColourFlags.Bit14 ? Convert.ToUInt16(header.ColourFlags | Common.Bit14) : header.ColourFlags;
+            header.ColourFlags = vvcFile.ColourFlags.Bit15 ? Convert.ToUInt16(header.ColourFlags | Common.Bit15) : header.ColourFlags;
             header.CurrentAnimationSequence = vvcFile.CurrentAnimationSequence;
             header.DisplayFlags = vvcFile.DisplayFlags.Transparent ? Convert.ToUInt16(header.DisplayFlags | Common.Bit0) : header.DisplayFlags;
             header.DisplayFlags = vvcFile.DisplayFlags.Translucent ? Convert.ToUInt16(header.DisplayFlags | Common.Bit1) : header.DisplayFlags;
@@ -68,11 +69,11 @@ namespace iiInfinityEngine.Core.Writers
             header.DisplayFlags = vvcFile.DisplayFlags.PersistThroughTimestop ? Convert.ToUInt16(header.DisplayFlags | Common.Bit11) : header.DisplayFlags;
             header.DisplayFlags = vvcFile.DisplayFlags.IgnoreDreamPalette ? Convert.ToUInt16(header.DisplayFlags | Common.Bit12) : header.DisplayFlags;
             header.DisplayFlags = vvcFile.DisplayFlags.Blend2D ? Convert.ToUInt16(header.DisplayFlags | Common.Bit13) : header.DisplayFlags;
-            header.DisplayFlags = vvcFile.DisplayFlags.Unused1 ? Convert.ToUInt16(header.DisplayFlags | Common.Bit14) : header.DisplayFlags;
-            header.DisplayFlags = vvcFile.DisplayFlags.Unused2 ? Convert.ToUInt16(header.DisplayFlags | Common.Bit15) : header.DisplayFlags;
+            header.DisplayFlags = vvcFile.DisplayFlags.Bit14 ? Convert.ToUInt16(header.DisplayFlags | Common.Bit14) : header.DisplayFlags;
+            header.DisplayFlags = vvcFile.DisplayFlags.Scale ? Convert.ToUInt16(header.DisplayFlags | Common.Bit15) : header.DisplayFlags;
             header.Duration = vvcFile.Duration;
             header.FrameRate = vvcFile.FrameRate;
-            header.InternalName = new array8(vvcFile.InternalName);
+            header.InternalName = vvcFile.InternalName.ToArray();
             header.LightingBrightness = vvcFile.LightingBrightness;
             header.LightingBrightness = vvcFile.LightingBrightness;
             header.OrientationCount = vvcFile.OrientationCount;
@@ -94,34 +95,25 @@ namespace iiInfinityEngine.Core.Writers
             header.Unused3 = vvcFile.Unused009c;
             header.UseContinuousSequence = vvcFile.UseContinuousSequence;
             header.UseOrientation = vvcFile.UseOrientation;
-            header.Wav1 = new array8(vvcFile.Wav1);
-            header.Wav2 = new array8(vvcFile.Wav2);
-            header.Wav3 = new array8(vvcFile.Wav3);
+            header.Wav1 = vvcFile.Wav1.ToArray();
+            header.Wav2 = vvcFile.Wav2.ToArray();
+            header.Wav3 = vvcFile.Wav3.ToArray();
             header.XPosition = vvcFile.XPosition;
             header.YPosition = vvcFile.YPosition;
             header.ZPosition = vvcFile.ZPosition;
 
-            using (MemoryStream s = new MemoryStream())
-            {
-                using (BinaryWriter bw = new BinaryWriter(s))
-                {
-                    var headerAsBytes = Common.WriteStruct(header);
+            using var s = new MemoryStream();
+            using var bw = new BinaryWriter(s);
+            var headerAsBytes = Common.WriteStruct(header);
 
-                    bw.Write(headerAsBytes);
+            bw.Write(headerAsBytes);
 
-                    if (BackupManger != null)
-                    {
-                        BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-                    }
+            BackupManger?.BackupFile(file, file.Filename, file.FileType, this);
 
-                    using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
-                    {
-                        bw.BaseStream.Position = 0;
-                        bw.BaseStream.CopyTo(fs);
-                        fs.Flush(flushToDisk: true);
-                    }
-                }
-            }
+            using var fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            bw.BaseStream.Position = 0;
+            bw.BaseStream.CopyTo(fs);
+            fs.Flush(flushToDisk: true);
             return true;
         }
     }

@@ -6,8 +6,10 @@ namespace iiInfinityEngine.Core.Binary
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     struct WmapHeaderBinary
     {
-        public array4 ftype;
-        public array4 fversion;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 4)]
+        public char[] ftype;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 4)]
+        public char[] fversion;
         public Int32 WorldmapCount;
         public Int32 WorldmapOffset;
     }
@@ -15,34 +17,42 @@ namespace iiInfinityEngine.Core.Binary
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     struct WmapWorldmapBinary
     {
-        public array8 BackgroundMos;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
+        public char[] BackgroundMos;
         public Int32 Width;
         public Int32 Height;
         public Int32 MapNumber;
-        public Int32 AreaName;
-        public Int32 Unknown1;
-        public Int32 Unknown2;
+        public Int32 AreaName; // strref
+        public Int32 StartCenteredOnX;
+        public Int32 StartCenteredOnY;
         public Int32 AreaCount;
         public Int32 AreaOffset;
         public Int32 AreaLinkOffset;
         public Int32 AreaLinkCount;
-        public array8 MapIconsBam;
-        public array128 Unknown;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
+        public char[] MapIconsBam;
+        public Int32 Flags;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 124)]
+        public byte[] Unused;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     struct WmapAreaBinary
     {
-        public array8 AreaFilename;
-        public array8 ShortName;
-        public array32 LongName;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
+        public char[] AreaFilename;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
+        public char[] ShortName;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 32)]
+        public char[] LongName;
         public Int32 Flags;
         public Int32 SequenceBam;
         public Int32 XCoordinate;
         public Int32 YCoordinate;
-        public Int32 Caption;
-        public Int32 Name;
-        public array8 LoadingMos;
+        public Int32 Caption; // strref
+        public Int32 Name; // strref
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
+        public char[] LoadingMos;
         public Int32 NorthLinkIndex;
         public Int32 NorthLinkCount;
         public Int32 WestLinkIndex;
@@ -51,22 +61,30 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 SouthLinkCount;
         public Int32 EastLinkIndex;
         public Int32 EastLinkCount;
-        public array128 Unknown;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 128)]
+        public byte[] Unused;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     struct WmapAreaLinkBinary
     {
         public Int32 DestintationAreaIndex;
-        public array32 EntryPoint;
-        public Int32 TravelTime;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 32)]
+        public char[] EntryPoint;
+        public Int32 TravelTime; // time / 4
         public Int32 DefaultEntryLocation;
-        public array8 RandomEncounterArea1;
-        public array8 RandomEncounterArea2;
-        public array8 RandomEncounterArea3;
-        public array8 RandomEncounterArea4;
-        public array8 RandomEncounterArea5;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
+        public char[] RandomEncounterArea1;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
+        public char[] RandomEncounterArea2;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
+        public char[] RandomEncounterArea3;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
+        public char[] RandomEncounterArea4;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
+        public char[] RandomEncounterArea5;
         public Int32 RandomEncounterProbability;
-        public array128 Unknown;
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 128)]
+        public byte[] Unused;
     }
 }

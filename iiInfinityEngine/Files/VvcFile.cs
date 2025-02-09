@@ -48,7 +48,7 @@ namespace iiInfinityEngine.Core.Files
         public string AlphaBlendingAnimation;
         public Int32 Bam3Sequence;
         public string Wav3;
-        public array336 Unused009c;
+        public byte[] Unused009c;
     }
 
     [Serializable]
@@ -68,8 +68,8 @@ namespace iiInfinityEngine.Core.Files
         public bool PersistThroughTimestop { get; set; }
         public bool IgnoreDreamPalette { get; set; }
         public bool Blend2D { get; set; }
-        public bool Unused1 { get; set; }
-        public bool Unused2 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Scale { get; set; }
     }
 
     [Serializable]
@@ -79,18 +79,18 @@ namespace iiInfinityEngine.Core.Files
         public bool LightSource { get; set; }
         public bool InternalBrightness { get; set; }
         public bool Timestopped { get; set; }
-        public bool Unused1 { get; set; }
+        public bool Bit4 { get; set; }
         public bool InternalGamma { get; set; }
         public bool NonReservedPalette { get; set; }
         public bool FullPalette { get; set; }
-        public bool Unused { get; set; }
+        public bool Blend { get; set; }
         public bool Sepia { get; set; }
-        public bool Unused2 { get; set; }
-        public bool Unused3 { get; set; }
-        public bool Unused4 { get; set; }
-        public bool Unused5 { get; set; }
-        public bool Unused6 { get; set; }
-        public bool Unused7 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
     }
 
     [Serializable]
@@ -105,7 +105,7 @@ namespace iiInfinityEngine.Core.Files
         public bool NotCoveredByWallgroups { get; set; }
         public bool MidLevelBrighten { get; set; }
         public bool HighLevelBrighten { get; set; }
-        // and the rest
+        // TODO: other bits
     }
 
     [Serializable]
@@ -115,5 +115,6 @@ namespace iiInfinityEngine.Core.Files
         public bool RelativeToTarget { get; set; }
         public bool Unused { get; set; }
         public bool IgnoreOrientation { get; set; }
+        // TODO: other bits
     }
 }
