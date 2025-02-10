@@ -16,7 +16,7 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 DepreciationRate;
         public Int16 StealFailurePercentage;
         public Int16 Capacity;
-        public array8 Unknown;
+        public array8 Unknown24;
         public Int32 PurchaseOffset;
         public Int32 PurchaseCount;
         public Int32 SaleOffset;
@@ -34,11 +34,7 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 RoyalRoomPrice;
         public Int32 CureOffset;
         public Int32 CureCount;
-        public array8 Unknown2;
-        public array8 Unknown3;
-        public array8 Unknown4;
-        public array8 Unknown5;
-        public array4 Unknown6;
+        public array36 Unknown78;
     }
 
     struct StoSaleItemBinary

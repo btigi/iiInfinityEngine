@@ -42,6 +42,34 @@ namespace iiInfinityEngine.Core.Writers
                 saleItemBinary.Flags = saleItem.Flags.Unstealable ? saleItemBinary.Flags | Common.Bit1 : saleItemBinary.Flags;
                 saleItemBinary.Flags = saleItem.Flags.Stolen ? saleItemBinary.Flags | Common.Bit2 : saleItemBinary.Flags;
                 saleItemBinary.Flags = saleItem.Flags.Undroppable ? saleItemBinary.Flags | Common.Bit3 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit4 ? saleItemBinary.Flags | Common.Bit4 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit5 ? saleItemBinary.Flags | Common.Bit5 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit6 ? saleItemBinary.Flags | Common.Bit6 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit7 ? saleItemBinary.Flags | Common.Bit7 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit8 ? saleItemBinary.Flags | Common.Bit8 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit9 ? saleItemBinary.Flags | Common.Bit9 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit10 ? saleItemBinary.Flags | Common.Bit10 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit11 ? saleItemBinary.Flags | Common.Bit11 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit12 ? saleItemBinary.Flags | Common.Bit12 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit13 ? saleItemBinary.Flags | Common.Bit13 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit14 ? saleItemBinary.Flags | Common.Bit14 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit15 ? saleItemBinary.Flags | Common.Bit15 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit16 ? saleItemBinary.Flags | Common.Bit16 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit17 ? saleItemBinary.Flags | Common.Bit17 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit18 ? saleItemBinary.Flags | Common.Bit18 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit19 ? saleItemBinary.Flags | Common.Bit19 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit20 ? saleItemBinary.Flags | Common.Bit20 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit21 ? saleItemBinary.Flags | Common.Bit21 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit22 ? saleItemBinary.Flags | Common.Bit22 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit23 ? saleItemBinary.Flags | Common.Bit23 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit24 ? saleItemBinary.Flags | Common.Bit24 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit25 ? saleItemBinary.Flags | Common.Bit25 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit26 ? saleItemBinary.Flags | Common.Bit26 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit27 ? saleItemBinary.Flags | Common.Bit27 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit28 ? saleItemBinary.Flags | Common.Bit28 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit29 ? saleItemBinary.Flags | Common.Bit29 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit30 ? saleItemBinary.Flags | Common.Bit30 : saleItemBinary.Flags;
+                saleItemBinary.Flags = saleItem.Flags.Bit31 ? saleItemBinary.Flags | Common.Bit31 : saleItemBinary.Flags;
                 saleItemBinary.IsInfinite = saleItem.IsInfinite;
                 saleItemBinary.ItemExpirationTime = saleItem.ItemExpirationTime;
                 saleItemBinary.Quantity1 = saleItem.Quantity1;
@@ -81,13 +109,15 @@ namespace iiInfinityEngine.Core.Writers
             header.Flags = stoFile.Flags.AllowedToDonate ? header.Flags | Common.Bit4 : header.Flags;
             header.Flags = stoFile.Flags.AllowedToPurchaseCure ? header.Flags | Common.Bit5 : header.Flags;
             header.Flags = stoFile.Flags.AllowedToPurchaseDrinks ? header.Flags | Common.Bit6 : header.Flags;
-            header.Flags = stoFile.Flags.FlagUnknown1 ? header.Flags | Common.Bit7 : header.Flags;
-            header.Flags = stoFile.Flags.FlagUnknown2 ? header.Flags | Common.Bit8 : header.Flags;
+            header.Flags = stoFile.Flags.Bit7 ? header.Flags | Common.Bit7 : header.Flags;
+            header.Flags = stoFile.Flags.Bit8 ? header.Flags | Common.Bit8 : header.Flags;
             header.Flags = stoFile.Flags.Quality1 ? header.Flags | Common.Bit9 : header.Flags;
             header.Flags = stoFile.Flags.Quality2 ? header.Flags | Common.Bit10 : header.Flags;
-            header.Flags = stoFile.Flags.FlagUnknown3 ? header.Flags | Common.Bit11 : header.Flags;
+            header.Flags = stoFile.Flags.Bit11 ? header.Flags | Common.Bit11 : header.Flags;
             header.Flags = stoFile.Flags.BuyFencedGoods ? header.Flags | Common.Bit12 : header.Flags;
-
+            header.Flags = stoFile.Flags.ReputationDoesNotAffectPrices ? header.Flags | Common.Bit13 : header.Flags;
+            header.Flags = stoFile.Flags.ToggleItemRecharge ? header.Flags | Common.Bit14 : header.Flags;
+            header.Flags = stoFile.Flags.CanSellCritialItemns ? header.Flags | Common.Bit15 : header.Flags;
             header.ftype = new array4() { character1 = 'S', character2 = 'T', character3 = 'O', character4 = 'R' };
             header.fversion = new array4() { character1 = 'V', character2 = '1', character3 = '.', character4 = '0' };
             header.Name = Common.WriteString(stoFile.Name, TlkFile);
@@ -97,7 +127,7 @@ namespace iiInfinityEngine.Core.Writers
             header.DepreciationRate = stoFile.DepreciationRate;
             header.StealFailurePercentage = stoFile.StealFailurePercentage;
             header.Capacity = stoFile.Capacity;
-            header.Unknown = stoFile.Unknown0024;
+            header.Unknown24 = stoFile.Unknown0024;
             header.PurchaseOffset = HeaderSize;
             header.PurchaseCount = stoBuyItems.Count;
             header.SaleOffset = HeaderSize + (PurchaseSize * stoBuyItems.Count);
@@ -108,21 +138,45 @@ namespace iiInfinityEngine.Core.Writers
             header.DrinksOffset = HeaderSize + (PurchaseSize * stoBuyItems.Count) + (SaleSize * stoSaleItems.Count);
             header.DrinksCount = stoDrinkItems.Count;
             header.RumoursTemple = stoFile.RumoursTemple;
-            header.Rooms = stoFile.PeasantRoom ? header.Rooms | Common.Bit0 : header.Rooms;
-            header.Rooms = stoFile.MerchantRoom ? header.Rooms | Common.Bit1 : header.Rooms;
-            header.Rooms = stoFile.NobleRoom ? header.Rooms | Common.Bit2 : header.Rooms;
-            header.Rooms = stoFile.RoyalRoom ? header.Rooms | Common.Bit3 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Peasant ? header.Rooms | Common.Bit0 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Merchant ? header.Rooms | Common.Bit1 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Noble ? header.Rooms | Common.Bit2 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Royal ? header.Rooms | Common.Bit3 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit4 ? header.Rooms | Common.Bit4 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit5 ? header.Rooms | Common.Bit5 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit6 ? header.Rooms | Common.Bit6 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit7 ? header.Rooms | Common.Bit7 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit8 ? header.Rooms | Common.Bit8 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit9 ? header.Rooms | Common.Bit9 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit10 ? header.Rooms | Common.Bit10 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit11 ? header.Rooms | Common.Bit11 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit12 ? header.Rooms | Common.Bit12 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit13 ? header.Rooms | Common.Bit13 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit14 ? header.Rooms | Common.Bit14 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit15 ? header.Rooms | Common.Bit15 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit16 ? header.Rooms | Common.Bit16 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit17 ? header.Rooms | Common.Bit17 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit18 ? header.Rooms | Common.Bit18 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit19 ? header.Rooms | Common.Bit19 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit20 ? header.Rooms | Common.Bit20 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit21 ? header.Rooms | Common.Bit21 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit22 ? header.Rooms | Common.Bit22 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit23 ? header.Rooms | Common.Bit23 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit24 ? header.Rooms | Common.Bit24 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit25 ? header.Rooms | Common.Bit25 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit26 ? header.Rooms | Common.Bit26 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit27 ? header.Rooms | Common.Bit27 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit28 ? header.Rooms | Common.Bit28 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit29 ? header.Rooms | Common.Bit29 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit30 ? header.Rooms | Common.Bit30 : header.Rooms;
+            header.Rooms = stoFile.Rooms.Bit31 ? header.Rooms | Common.Bit31 : header.Rooms;
             header.PeasantRoomPrice = stoFile.PeasantRoomPrice;
             header.NobleRoomPrice = stoFile.NobleRoomPrice;
             header.MerchantRoomPrice = stoFile.MerchantRoomPrice;
             header.RoyalRoomPrice = stoFile.RoyalRoomPrice;
             header.CureOffset = HeaderSize + (PurchaseSize * stoBuyItems.Count) + (SaleSize * stoSaleItems.Count) + (DrinkSize * stoDrinkItems.Count);
             header.CureCount = stoCures.Count;
-            header.Unknown2 = stoFile.Unknown2;
-            header.Unknown3 = stoFile.Unknown3;
-            header.Unknown4 = stoFile.Unknown4;
-            header.Unknown5 = stoFile.Unknown5;
-            header.Unknown6 = stoFile.Unknown6;
+            header.Unknown78 = stoFile.Unknown78;
 
             using var s = new MemoryStream();
             using var bw = new BinaryWriter(s);
@@ -154,10 +208,7 @@ namespace iiInfinityEngine.Core.Writers
                 bw.Write(stoCureItemAsBytes);
             }
 
-            if (BackupManger != null)
-            {
-                BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-            }
+            BackupManger?.BackupFile(file, file.Filename, file.FileType, this);
 
             using var fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
             bw.BaseStream.Position = 0;

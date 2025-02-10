@@ -6,10 +6,10 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class StoFile : IEFile
     {
-        public List<StoSaleItem2> ItemsSoldByStore = new();
-        public List<StoDrinkItem2> stoDrinkItems = new();
-        public List<StoCure2> stoCures = new();
-        public List<ItemType> ItemTypesBoughtByStore = new();
+        public List<StoSaleItem2> ItemsSoldByStore = [];
+        public List<StoDrinkItem2> stoDrinkItems = [];
+        public List<StoCure2> stoCures = [];
+        public List<ItemType> ItemTypesBoughtByStore = [];
 
         [NonSerialized]
         private string checksum;
@@ -37,19 +37,12 @@ namespace iiInfinityEngine.Core.Files
         public Int32 CostToIdentifyItem;
         public array8 RumoursTavern;
         public array8 RumoursTemple;
-        public bool PeasantRoom;
-        public bool MerchantRoom;
-        public bool NobleRoom;
-        public bool RoyalRoom;
+        public RoomFlags Rooms;
         public Int32 PeasantRoomPrice;
         public Int32 NobleRoomPrice;
         public Int32 MerchantRoomPrice;
         public Int32 RoyalRoomPrice;
-        public array8 Unknown2;
-        public array8 Unknown3;
-        public array8 Unknown4;
-        public array8 Unknown5;
-        public array4 Unknown6;
+        public array36 Unknown78;
     }
 
     [Serializable]
@@ -97,12 +90,52 @@ namespace iiInfinityEngine.Core.Files
         public bool AllowedToDonate { get; set; }
         public bool AllowedToPurchaseCure { get; set; }
         public bool AllowedToPurchaseDrinks { get; set; }
-        public bool FlagUnknown1 { get; set; }
-        public bool FlagUnknown2 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
         public bool Quality1 { get; set; }
         public bool Quality2 { get; set; }
-        public bool FlagUnknown3 { get; set; }
+        public bool Bit11 { get; set; }
         public bool BuyFencedGoods { get; set; }
+        public bool ReputationDoesNotAffectPrices { get; set; }
+        public bool ToggleItemRecharge { get; set; }
+        public bool CanSellCritialItemns { get; set; }
+    }
+
+    [Serializable]
+    public struct RoomFlags
+    {
+        public bool Peasant { get; set; }
+        public bool Merchant { get; set; }
+        public bool Noble { get; set; }
+        public bool Royal { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
     }
 
     [Serializable]
@@ -112,6 +145,34 @@ namespace iiInfinityEngine.Core.Files
         public bool Unstealable { get; set; }
         public bool Stolen { get; set; }
         public bool Undroppable { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
     }
 
     public enum StoreType
