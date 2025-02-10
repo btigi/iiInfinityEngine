@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using iiInfinityEngine.Core.Binary;
+﻿using iiInfinityEngine.Core.Binary;
 using iiInfinityEngine.Core.Files;
 using iiInfinityEngine.Core.Writers.Interfaces;
-using System.Diagnostics.CodeAnalysis;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace iiInfinityEngine.Core.Writers
 {
@@ -19,10 +18,9 @@ namespace iiInfinityEngine.Core.Writers
         public TlkFile TlkFile { get; set; }
         public BackupManager BackupManger { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
-            if (!(file is StoFile))
+            if (file is not StoFile)
                 throw new ArgumentException("File is not a valid creature file");
 
             var stoFile = file as StoFile;
@@ -30,14 +28,14 @@ namespace iiInfinityEngine.Core.Writers
             if (!(forceSave) && (HashGenerator.GenerateKey(stoFile) == stoFile.Checksum))
                 return false;
 
-            List<StoSaleItemBinary> stoSaleItems = new List<StoSaleItemBinary>();
-            List<StoDrinkItemBinary> stoDrinkItems = new List<StoDrinkItemBinary>();
-            List<StoCureBinary> stoCures = new List<StoCureBinary>();
-            List<Int32> stoBuyItems = new List<Int32>();
+            var stoSaleItems = new List<StoSaleItemBinary>();
+            var stoDrinkItems = new List<StoDrinkItemBinary>();
+            var stoCures = new List<StoCureBinary>();
+            var stoBuyItems = new List<Int32>();
 
             foreach (var saleItem in stoFile.ItemsSoldByStore)
             {
-                StoSaleItemBinary saleItemBinary = new StoSaleItemBinary();
+                var saleItemBinary = new StoSaleItemBinary();
                 saleItemBinary.Amount = saleItem.Amount;
                 saleItemBinary.Filename = saleItem.Filename;
                 saleItemBinary.Flags = saleItem.Flags.Identified ? saleItemBinary.Flags | Common.Bit0 : saleItemBinary.Flags;
@@ -54,7 +52,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var drink in stoFile.stoDrinkItems)
             {
-                StoDrinkItemBinary drinkBinary = new StoDrinkItemBinary();
+                var drinkBinary = new StoDrinkItemBinary();
                 drinkBinary.Name = Common.WriteString(drink.Name, TlkFile);
                 drinkBinary.Price = drink.Price;
                 drinkBinary.Rumours = drink.Rumours;
@@ -64,7 +62,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var cure in stoFile.stoCures)
             {
-                StoCureBinary cureBinary = new StoCureBinary();
+                var cureBinary = new StoCureBinary();
                 cureBinary.Filename = cure.Filename;
                 cureBinary.Price = cure.Price;
                 stoCures.Add(cureBinary);
@@ -75,8 +73,7 @@ namespace iiInfinityEngine.Core.Writers
                 stoBuyItems.Add((Int32)buyItem);
             }
 
-            StoHeaderBinary header = new StoHeaderBinary();
-
+            var header = new StoHeaderBinary();
             header.Flags = stoFile.Flags.CanBuyFromPlayer ? header.Flags | Common.Bit0 : header.Flags;
             header.Flags = stoFile.Flags.AllowedToSell ? header.Flags | Common.Bit1 : header.Flags;
             header.Flags = stoFile.Flags.AllowedToIdentify ? header.Flags | Common.Bit2 : header.Flags;
@@ -127,51 +124,45 @@ namespace iiInfinityEngine.Core.Writers
             header.Unknown5 = stoFile.Unknown5;
             header.Unknown6 = stoFile.Unknown6;
 
-            using (MemoryStream s = new MemoryStream())
+            using var s = new MemoryStream();
+            using var bw = new BinaryWriter(s);
+            var headerAsBytes = Common.WriteStruct(header);
+
+            bw.Write(headerAsBytes);
+
+            foreach (var buyItem in stoBuyItems)
             {
-                using (BinaryWriter bw = new BinaryWriter(s))
-                {
-                    var headerAsBytes = Common.WriteStruct(header);
-
-                    bw.Write(headerAsBytes);
-
-                    foreach (var buyItem in stoBuyItems)
-                    {
-                        var stoBuyItemAsBytes = Common.WriteStruct(buyItem);
-                        bw.Write(stoBuyItemAsBytes);
-                    }
-
-                    foreach (var saleItem in stoSaleItems)
-                    {
-                        var stoSaleItemAsBytes = Common.WriteStruct(saleItem);
-                        bw.Write(stoSaleItemAsBytes);
-                    }
-
-                    foreach (var drinkItem in stoDrinkItems)
-                    {
-                        var stoDrinkItemAsBytes = Common.WriteStruct(drinkItem);
-                        bw.Write(stoDrinkItemAsBytes);
-                    }
-
-                    foreach (var cureItem in stoCures)
-                    {
-                        var stoCureItemAsBytes = Common.WriteStruct(cureItem);
-                        bw.Write(stoCureItemAsBytes);
-                    }
-
-                    if (BackupManger != null)
-                    {
-                        BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-                    }
-
-                    using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
-                    {
-                        bw.BaseStream.Position = 0;
-                        bw.BaseStream.CopyTo(fs);
-                        fs.Flush(flushToDisk: true);
-                    }
-                }
+                var stoBuyItemAsBytes = Common.WriteStruct(buyItem);
+                bw.Write(stoBuyItemAsBytes);
             }
+
+            foreach (var saleItem in stoSaleItems)
+            {
+                var stoSaleItemAsBytes = Common.WriteStruct(saleItem);
+                bw.Write(stoSaleItemAsBytes);
+            }
+
+            foreach (var drinkItem in stoDrinkItems)
+            {
+                var stoDrinkItemAsBytes = Common.WriteStruct(drinkItem);
+                bw.Write(stoDrinkItemAsBytes);
+            }
+
+            foreach (var cureItem in stoCures)
+            {
+                var stoCureItemAsBytes = Common.WriteStruct(cureItem);
+                bw.Write(stoCureItemAsBytes);
+            }
+
+            if (BackupManger != null)
+            {
+                BackupManger.BackupFile(file, file.Filename, file.FileType, this);
+            }
+
+            using var fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            bw.BaseStream.Position = 0;
+            bw.BaseStream.CopyTo(fs);
+            fs.Flush(flushToDisk: true);
             return true;
         }
     }

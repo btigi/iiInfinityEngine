@@ -6,10 +6,10 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class StoFile : IEFile
     {
-        public List<StoSaleItem2> ItemsSoldByStore = new List<StoSaleItem2>();
-        public List<StoDrinkItem2> stoDrinkItems = new List<StoDrinkItem2>();
-        public List<StoCure2> stoCures = new List<StoCure2>();
-        public List<ItemType> ItemTypesBoughtByStore = new List<ItemType>();
+        public List<StoSaleItem2> ItemsSoldByStore = new();
+        public List<StoDrinkItem2> stoDrinkItems = new();
+        public List<StoCure2> stoCures = new();
+        public List<ItemType> ItemTypesBoughtByStore = new();
 
         [NonSerialized]
         private string checksum;

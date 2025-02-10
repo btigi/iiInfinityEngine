@@ -25,7 +25,7 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class WmapWorldmap
     {
-        public List<WmapArea> areas = new();
+        public List<WmapArea> areas = [];
 
         public string BackgroundMos;
         public Int32 Width;
@@ -42,8 +42,8 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class WmapArea
     {
-        public List<WmapAreaLink> NorthLinks = new();
-        public List<WmapAreaLink> EastLinks = new();
+        public List<WmapAreaLink> NorthLinks = [];
+        public List<WmapAreaLink> EastLinks = [];
         public List<WmapAreaLink> SouthLinks = [];
         public List<WmapAreaLink> WestLinks = [];
 

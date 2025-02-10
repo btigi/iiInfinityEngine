@@ -15,21 +15,20 @@ namespace iiInfinityEngine.Core.Writers
 
         public BackupManager BackupManger { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
-            if (!(file is TlkFile))
-                throw new ArgumentException("File is not a valid creature file");
+            if (file is not TlkFile)
+                throw new ArgumentException("File is not a valid TLK file");
 
             var tlkFile = file as TlkFile;
 
             if (!(forceSave) && (HashGenerator.GenerateKey(tlkFile) == tlkFile.Checksum))
                 return false;
 
-            List<TlkEntryBinary> stringEntries = new List<TlkEntryBinary>();
-            List<String> strings = new List<String>();
+            var stringEntries = new List<TlkEntryBinary>();
+            var strings = new List<String>();
 
-            TlkHeaderBinary header = new TlkHeaderBinary();
+            var header = new TlkHeaderBinary();
             header.ftype = new array4() { character1 = 'T', character2 = 'L', character3 = 'K', character4 = ' ' };
             header.fversion = new array4() { character1 = 'V', character2 = '1', character3 = ' ', character4 = ' ' };
             header.LanguageId = tlkFile.LangugeId;
@@ -39,7 +38,22 @@ namespace iiInfinityEngine.Core.Writers
             foreach (var stringInfo in tlkFile.Strings)
             {
                 var stringInfoBinary = new TlkEntryBinary();
-                stringInfoBinary.Flags = Convert.ToInt16(stringInfo.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.HasText ? stringInfoBinary.Flags | Common.Bit0 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.HasSound ? stringInfoBinary.Flags | Common.Bit1 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.HasToken ? stringInfoBinary.Flags | Common.Bit2 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit3 ? stringInfoBinary.Flags | Common.Bit3 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit4 ? stringInfoBinary.Flags | Common.Bit4 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit5 ? stringInfoBinary.Flags | Common.Bit5 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit6 ? stringInfoBinary.Flags | Common.Bit6 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit7 ? stringInfoBinary.Flags | Common.Bit7 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit8 ? stringInfoBinary.Flags | Common.Bit8 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit9 ? stringInfoBinary.Flags | Common.Bit9 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit10 ? stringInfoBinary.Flags | Common.Bit10 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit11 ? stringInfoBinary.Flags | Common.Bit11 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit12 ? stringInfoBinary.Flags | Common.Bit12 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit13 ? stringInfoBinary.Flags | Common.Bit13 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit14 ? stringInfoBinary.Flags | Common.Bit14 : stringInfoBinary.Flags);
+                stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit15 ? stringInfoBinary.Flags | Common.Bit15 : stringInfoBinary.Flags);
                 stringInfoBinary.PitchVariance = stringInfo.PitchVariance;
                 stringInfoBinary.Sound = new array8(stringInfo.Sound);
                 stringInfoBinary.StringIndex = strings.Count;
@@ -49,38 +63,32 @@ namespace iiInfinityEngine.Core.Writers
                 strings.Add(stringInfo.Text);
             }
 
-            using (MemoryStream s = new MemoryStream())
+            using MemoryStream s = new MemoryStream();
+            using BinaryWriter bw = new BinaryWriter(s);
+            var headerAsBytes = Common.WriteStruct(header);
+
+            bw.Write(headerAsBytes);
+
+            foreach (var stringEntry in stringEntries)
             {
-                using (BinaryWriter bw = new BinaryWriter(s))
-                {
-                    var headerAsBytes = Common.WriteStruct(header);
-
-                    bw.Write(headerAsBytes);
-
-                    foreach (var stringEntry in stringEntries)
-                    {
-                        var stringEntryAsBytes = Common.WriteStruct(stringEntry);
-                        bw.Write(stringEntryAsBytes);
-                    }
-
-                    foreach (var text in strings)
-                    {
-                        bw.Write(text);
-                    }
-
-                    if (BackupManger != null)
-                    {
-                        BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-                    }
-
-                    using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
-                    {
-                        bw.BaseStream.Position = 0;
-                        bw.BaseStream.CopyTo(fs);
-                        fs.Flush(flushToDisk: true);
-                    }
-                }
+                var stringEntryAsBytes = Common.WriteStruct(stringEntry);
+                bw.Write(stringEntryAsBytes);
             }
+
+            foreach (var text in strings)
+            {
+                bw.Write(text);
+            }
+
+            if (BackupManger != null)
+            {
+                BackupManger.BackupFile(file, file.Filename, file.FileType, this);
+            }
+
+            using FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            bw.BaseStream.Position = 0;
+            bw.BaseStream.CopyTo(fs);
+            fs.Flush(flushToDisk: true);
             return true;
         }
     }

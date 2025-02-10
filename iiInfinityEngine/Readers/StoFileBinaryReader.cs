@@ -12,23 +12,19 @@ namespace iiInfinityEngine.Core.Readers
 
         public StoFile Read(string filename)
         {
-            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
-            {
-                var f = Read(fs);
-                f.Filename = Path.GetFileName(filename);
-                return f;
-            }
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var f = Read(fs);
+            f.Filename = Path.GetFileName(filename);
+            return f;
         }
 
         public StoFile Read(Stream s)
         {
-            using (BinaryReader br = new BinaryReader(s))
-            {
-                var stoFile = ParseFile(br);
-                br.BaseStream.Seek(0, SeekOrigin.Begin);
-                stoFile.OriginalFile = ParseFile(br);
-                return stoFile;
-            }
+            using var br = new BinaryReader(s);
+            var stoFile = ParseFile(br);
+            br.BaseStream.Seek(0, SeekOrigin.Begin);
+            stoFile.OriginalFile = ParseFile(br);
+            return stoFile;
         }
 
         private StoFile ParseFile(BinaryReader br)
@@ -38,10 +34,10 @@ namespace iiInfinityEngine.Core.Readers
             if (header.ftype.ToString() != "STOR")
                 return new StoFile();
 
-            List<StoSaleItemBinary> stoSaleItems = new List<StoSaleItemBinary>();
-            List<StoDrinkItemBinary> stoDrinkItems = new List<StoDrinkItemBinary>();
-            List<StoCureBinary> stoCures = new List<StoCureBinary>();
-            List<StoBuyItemBinary> stoBuyItems = new List<StoBuyItemBinary>();
+            var stoSaleItems = new List<StoSaleItemBinary>();
+            var stoDrinkItems = new List<StoDrinkItemBinary>();
+            var stoCures = new List<StoCureBinary>();
+            var stoBuyItems = new List<StoBuyItemBinary>();
 
             br.BaseStream.Seek(header.SaleOffset, SeekOrigin.Begin);
             for (int i = 0; i < header.SaleCount; i++)
@@ -71,8 +67,7 @@ namespace iiInfinityEngine.Core.Readers
                 stoBuyItems.Add(stoBuyItem);
             }
 
-
-            StoFile stoFile = new StoFile();
+            var stoFile = new StoFile();
             stoFile.Flags.CanBuyFromPlayer = (header.Flags & Common.Bit0) != 0;
             stoFile.Flags.AllowedToSell = (header.Flags & Common.Bit1) != 0;
             stoFile.Flags.AllowedToIdentify = (header.Flags & Common.Bit2) != 0;
@@ -114,7 +109,7 @@ namespace iiInfinityEngine.Core.Readers
 
             foreach (var saleItem in stoSaleItems)
             {
-                StoSaleItem2 saleItem2 = new StoSaleItem2();
+                var saleItem2 = new StoSaleItem2();
                 saleItem2.Amount = saleItem.Amount;
                 saleItem2.Filename = saleItem.Filename;
                 saleItem2.Flags.Identified = (saleItem.Flags & Common.Bit0) != 0;
@@ -131,7 +126,7 @@ namespace iiInfinityEngine.Core.Readers
 
             foreach (var drink in stoDrinkItems)
             {
-                StoDrinkItem2 drink2 = new StoDrinkItem2();
+                var drink2 = new StoDrinkItem2();
                 drink2.Name = Common.ReadString(drink.Name, TlkFile);
                 drink2.Price = drink.Price;
                 drink2.Rumours = drink.Rumours;
@@ -141,7 +136,7 @@ namespace iiInfinityEngine.Core.Readers
 
             foreach (var cure in stoCures)
             {
-                StoCure2 cure2 = new StoCure2();
+                var cure2 = new StoCure2();
                 cure2.Filename = cure.Filename;
                 cure2.Price = cure.Price;
                 stoFile.stoCures.Add(cure2);

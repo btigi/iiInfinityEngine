@@ -1715,12 +1715,24 @@ namespace iiInfinityEngine.Core
         public Int32 Strref { get; set; }
     }
 
-    public enum StringEntryType
+    [Serializable]
+    public struct StringEntryType
     {
-        NoMessageData = 0,
-        Text = 1,
-        Sound = 2,
-        Standard = 3,
-        Tagged = 7
+        public bool HasText { get; set; }
+        public bool HasSound { get; set; }
+        public bool HasToken { get; set; }
+        public bool Bit3 { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
     }
 }
