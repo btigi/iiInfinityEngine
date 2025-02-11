@@ -15,7 +15,7 @@ namespace iiInfinityEngine.Core.Files
         private string filename;
         public string Filename { get { return filename; } set { filename = value; } }
         [NonSerialized]
-        private IEFileType fileType = IEFileType.Wmp;
+        private readonly IEFileType fileType = IEFileType.Wmp;
         public IEFileType FileType { get { return fileType; } }
         [NonSerialized]
         private IEFile originalFile;

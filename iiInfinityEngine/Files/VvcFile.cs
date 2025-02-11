@@ -12,7 +12,7 @@ namespace iiInfinityEngine.Core.Files
         private string filename;
         public string Filename { get { return filename; } set { filename = value; } }
         [NonSerialized]
-        private IEFileType fileType = IEFileType.Vvc;
+        private readonly IEFileType fileType = IEFileType.Vvc;
         public IEFileType FileType { get { return fileType; } }
         [NonSerialized]
         private IEFile originalFile;
