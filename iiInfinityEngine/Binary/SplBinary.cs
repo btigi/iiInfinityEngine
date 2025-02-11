@@ -14,26 +14,31 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 Flags;
         public Int16 SpellType;
         public Int32 ExclusionFlags;
-        public Int16 CastingGraphic;
-        
-        public char Unknown;
-        public Int16 PrimaryType;
+        public Int16 CastingGraphic;        
+        public byte Unused24;
+        public byte PrimaryType;
+        public byte Unused26;
         public byte SecondaryType;
-        public Int32 Unknown1;
-        public Int32 Unknown2;
-        public Int32 Unknown3;
+        public byte Unused28;
+        public byte Unused29;
+        public byte Unused2a;
+        public byte Unused2b;
+        public byte Unused2c;
+        public byte Unused2d;
+        public byte Unused2e;
+        public byte Unused2f;
+        public Int16 Unused30;
+        public Int16 Unused32;
         public Int32 SpellLevel;
-        public Int16 Unknown4;
+        public Int16 Unused38;
         public array8 SpellBookIcon;
-        public Int16 Unknown5;
-        public Int32 Unknown6;
-        public Int32 Unknown7;
-        public Int32 Unknown8;
+        public Int16 Unused42;
+        public array8 Unused44;
+        public Int32 Unused4c;
         public Int32 UnidentifiedDescription;
         public Int32 IdentifiedDescription;
-        public Int32 Unknown9;
-        public Int32 Unknown10;
-        public Int32 Unknown11;
+        public array8 Unused58;
+        public Int32 Unused60;
         public Int32 ExtendedHeaderOffset;
         public Int16 ExtendedHeaderCount;
         public Int32 FeatureBlockOffset;
@@ -44,7 +49,7 @@ namespace iiInfinityEngine.Core.Binary
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     struct SplExtendedHeaderBinary
     {
-        public char SpellForm;
+        public byte SpellForm;
         public char Unknown;
         public char Location;
         public char Unknown2;

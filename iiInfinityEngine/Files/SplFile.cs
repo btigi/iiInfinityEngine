@@ -29,30 +29,36 @@ namespace iiInfinityEngine.Core.Files
         public SpellType SpellType { get; set; }
         public Int32 ExclusionFlags { get; set; }
         public Int16 CastingGraphic { get; set; }
-        public char Unknown { get; set; }
-        public Int16 PrimaryType { get; set; }
+        public byte Unknown24 { get; set; }
+        public byte PrimaryType { get; set; }
+        public byte Unknown26 { get; set; }
         public byte SecondaryType { get; set; }
-        public Int32 Unknown1 { get; set; }
-        public Int32 Unknown2 { get; set; }
-        public Int32 Unknown3 { get; set; }
+        public byte Unused28;
+        public byte Unused29;
+        public byte Unused2a;
+        public byte Unused2b;
+        public byte Unused2c;
+        public byte Unused2d;
+        public byte Unused2e;
+        public byte Unused2f;
+        public Int16 Unused30;
+        public Int16 Unused32;
         public Int32 SpellLevel { get; set; }
-        public Int16 Unknown4 { get; set; }
+        public Int16 Unused38 { get; set; }
         public array8 SpellBookIcon { get; set; }
-        public Int16 Unknown5 { get; set; }
-        public Int32 Unknown6 { get; set; }
-        public Int32 Unknown7 { get; set; }
-        public Int32 Unknown8 { get; set; }
+        public Int16 Unused42 { get; set; }
+        public array8 Unused44 { get; set; }        
+        public Int32 Unused4c { get; set; }
         public IEString UnidentifiedDescription { get; set; }
         public IEString IdentifiedDescription { get; set; }
-        public Int32 Unknown9 { get; set; }
-        public Int32 Unknown10 { get; set; }
-        public Int32 Unknown11 { get; set; }
+        public array8 Unused58;
+        public Int32 Unused60;
     }
 
     [Serializable]
     public class SplExtendedHeader2
     {
-        public char SpellForm { get; set; }
+        public byte SpellForm { get; set; }
         public char Unknown { get; set; }
         public char Location { get; set; }
         public char Unknown2 { get; set; }
@@ -116,41 +122,38 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct SpellFlags
     {
-        public bool Byte1Bit0 { get; set; }
-        public bool Byte1Bit1 { get; set; }
-        public bool Byte1Bit2 { get; set; }
-        public bool Byte1Bit3 { get; set; }
-        public bool Byte1Bit4 { get; set; }
-        public bool Byte1Bit5 { get; set; }
-        public bool Byte1Bit6 { get; set; }
-        public bool Byte1Bit7 { get; set; }
-
-        public bool Byte2Bit0 { get; set; }
-        public bool Byte2Bit1 { get; set; }
-        public bool Byte2Bit2 { get; set; } // hostile
-        public bool Byte2Bit3 { get; set; } // no LOS required
-        public bool Byte2Bit4 { get; set; }
-        public bool Byte2Bit5 { get; set; } // outdoors only
-        public bool Byte2Bit6 { get; set; } // non-magical
-        public bool Byte2Bit7 { get; set; } // trigger/contingency
-
-        public bool Byte3Bit0 { get; set; } // not in combat
-        public bool Byte3Bit1 { get; set; }
-        public bool Byte3Bit2 { get; set; }
-        public bool Byte3Bit3 { get; set; }
-        public bool Byte3Bit4 { get; set; }
-        public bool Byte3Bit5 { get; set; }
-        public bool Byte3Bit6 { get; set; }
-        public bool Byte3Bit7 { get; set; }
-
-        public bool Byte4Bit0 { get; set; }
-        public bool Byte4Bit1 { get; set; }
-        public bool Byte4Bit2 { get; set; }
-        public bool Byte4Bit3 { get; set; }
-        public bool Byte4Bit4 { get; set; }
-        public bool Byte4Bit5 { get; set; }
-        public bool Byte4Bit6 { get; set; }
-        public bool Byte4Bit7 { get; set; }
+        public bool Bit0 { get; set; }
+        public bool Bit1 { get; set; }
+        public bool Bit2 { get; set; }
+        public bool Bit3 { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool BreaksSanctuaryInvisibility { get; set; }
+        public bool Hostile { get; set; }
+        public bool NoLOSRequired { get; set; }
+        public bool AllowSpotting { get; set; }
+        public bool OutdoorsOnly { get; set; }
+        public bool IgnoreWildSurgeDeadMagic { get; set; }
+        public bool IgnoreWildSurge { get; set; }
+        public bool NonCombatAbility { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool CanTargetInvisible { get; set; }
+        public bool CastableWhenSilenced { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
     }
 
     [Serializable]
