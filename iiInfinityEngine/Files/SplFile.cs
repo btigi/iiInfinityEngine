@@ -6,8 +6,8 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class SplFile : IEFile
     {
-        public List<SplExtendedHeader2> splExtendedHeader = new List<SplExtendedHeader2>();
-        public List<SplFeatureBlock2> splFeatureBlocks = new List<SplFeatureBlock2>();
+        public List<SplExtendedHeader2> splExtendedHeader = [];
+        public List<SplFeatureBlock2> splFeatureBlocks = [];
 
         [NonSerialized]
         private string checksum;

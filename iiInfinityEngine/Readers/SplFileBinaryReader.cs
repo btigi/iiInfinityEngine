@@ -12,23 +12,19 @@ namespace iiInfinityEngine.Core.Readers
 
         public SplFile Read(string filename)
         {
-            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
-            {
-                var f = Read(fs);
-                f.Filename = Path.GetFileName(filename);
-                return f;
-            }
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var f = Read(fs);
+            f.Filename = Path.GetFileName(filename);
+            return f;
         }
 
         public SplFile Read(Stream s)
         {
-            using (BinaryReader br = new BinaryReader(s))
-            {
-                var splFile = ParseFile(br);
-                br.BaseStream.Seek(0, SeekOrigin.Begin);
-                splFile.OriginalFile = ParseFile(br);
-                return splFile;
-            }
+            using var br = new BinaryReader(s);
+            var splFile = ParseFile(br);
+            br.BaseStream.Seek(0, SeekOrigin.Begin);
+            splFile.OriginalFile = ParseFile(br);
+            return splFile;
         }
 
         private SplFile ParseFile(BinaryReader br)
@@ -38,8 +34,8 @@ namespace iiInfinityEngine.Core.Readers
             if (header.ftype.ToString() != "SPL ")
                 return new SplFile();
 
-            List<SplExtendedHeaderBinary> splExtendedHeaders = new List<SplExtendedHeaderBinary>();
-            List<SplFeatureBlockBinary> splFeatureBlocks = new List<SplFeatureBlockBinary>();
+            var splExtendedHeaders = new List<SplExtendedHeaderBinary>();
+            var splFeatureBlocks = new List<SplFeatureBlockBinary>();
 
             br.BaseStream.Seek(header.ExtendedHeaderOffset, SeekOrigin.Begin);
             for (int i = 0; i < header.ExtendedHeaderCount; i++)
@@ -55,7 +51,7 @@ namespace iiInfinityEngine.Core.Readers
                 splFeatureBlocks.Add(splFeatureBlock);
             }
 
-            SplFile splFile = new SplFile();
+            var splFile = new SplFile();
             //splFile.ftype 
             //splFile.fversion 
             splFile.UnidentifiedName = Common.ReadString(header.UnidentifiedName, TlkFile);
@@ -97,7 +93,7 @@ namespace iiInfinityEngine.Core.Readers
 
             splFile.SpellType = (SpellType)header.SpellType;
             splFile.ExclusionFlags = header.ExclusionFlags;
-            splFile.CastingGraphic = header.CastinGraphic;
+            splFile.CastingGraphic = header.CastingGraphic;
             splFile.Unknown = header.Unknown;
             splFile.PrimaryType = header.PrimaryType;
             splFile.SecondaryType = header.SecondaryType;
@@ -121,7 +117,7 @@ namespace iiInfinityEngine.Core.Readers
 
             foreach (var extendedHeader in splExtendedHeaders)
             {
-                SplExtendedHeader2 extendedHeader2 = new SplExtendedHeader2();
+                var extendedHeader2 = new SplExtendedHeader2();
                 extendedHeader2.ChargeDepletionBehaviour = extendedHeader.ChargeDepletionBehaviour;
                 extendedHeader2.Charges = extendedHeader.Charges;
                 extendedHeader2.CastingTime = extendedHeader.CastingTime;
@@ -147,7 +143,7 @@ namespace iiInfinityEngine.Core.Readers
                 {
                     var featureBlock = (SplFeatureBlockBinary)Common.ReadStruct(br, typeof(SplFeatureBlockBinary));
 
-                    SplFeatureBlock2 splFeatureBlock2 = new SplFeatureBlock2();
+                    var splFeatureBlock2 = new SplFeatureBlock2();
                     splFeatureBlock2.DiceSides = featureBlock.DiceSides;
                     splFeatureBlock2.DiceThrown = featureBlock.DiceThrown;
                     splFeatureBlock2.Duration = featureBlock.Duration;
@@ -174,7 +170,7 @@ namespace iiInfinityEngine.Core.Readers
 
             foreach (var featureBlock in splFeatureBlocks)
             {
-                SplFeatureBlock2 splFeatureBlock2 = new SplFeatureBlock2();
+                var splFeatureBlock2 = new SplFeatureBlock2();
                 splFeatureBlock2.DiceSides = featureBlock.DiceSides;
                 splFeatureBlock2.DiceThrown = featureBlock.DiceThrown;
                 splFeatureBlock2.Duration = featureBlock.Duration;

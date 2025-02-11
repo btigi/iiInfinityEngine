@@ -17,10 +17,9 @@ namespace iiInfinityEngine.Core.Writers
         public TlkFile TlkFile { get; set; }
         public BackupManager BackupManger { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
-            if (!(file is SplFile))
+            if (file is not SplFile)
                 throw new ArgumentException("File is not a valid creature file");
 
             var splFile = file as SplFile;
@@ -28,12 +27,12 @@ namespace iiInfinityEngine.Core.Writers
             if (!(forceSave) && (HashGenerator.GenerateKey(splFile) == splFile.Checksum))
                 return false;
 
-            List<SplExtendedHeaderBinary> splExtendedHeaders = new List<SplExtendedHeaderBinary>();
-            List<SplFeatureBlockBinary> splFeatureBlocks = new List<SplFeatureBlockBinary>();
+            var splExtendedHeaders = new List<SplExtendedHeaderBinary>();
+            var splFeatureBlocks = new List<SplFeatureBlockBinary>();
 
             foreach (var featureBlock in splFile.splFeatureBlocks)
             {
-                SplFeatureBlockBinary featureBlockBinary = new SplFeatureBlockBinary();
+                var featureBlockBinary = new SplFeatureBlockBinary();
                 featureBlockBinary.DiceSides = featureBlock.DiceSides;
                 featureBlockBinary.DiceThrown = featureBlock.DiceThrown;
                 featureBlockBinary.Duration = featureBlock.Duration;
@@ -55,7 +54,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var extendedHeader in splFile.splExtendedHeader)
             {
-                SplExtendedHeaderBinary extendedHeaderBinary = new SplExtendedHeaderBinary();
+                var extendedHeaderBinary = new SplExtendedHeaderBinary();
                 extendedHeaderBinary.CastingTime = extendedHeader.CastingTime;
                 extendedHeaderBinary.ChargeDepletionBehaviour = extendedHeader.ChargeDepletionBehaviour;
                 extendedHeaderBinary.Charges = extendedHeader.Charges;
@@ -77,7 +76,7 @@ namespace iiInfinityEngine.Core.Writers
 
                 foreach (var featureBlock in extendedHeader.splFeatureBlocks)
                 {
-                    SplFeatureBlockBinary featureBlockBinary = new SplFeatureBlockBinary();
+                    var featureBlockBinary = new SplFeatureBlockBinary();
                     featureBlockBinary.DiceSides = featureBlock.DiceSides;
                     featureBlockBinary.DiceThrown = featureBlock.DiceThrown;
                     featureBlockBinary.Duration = featureBlock.Duration;
@@ -100,7 +99,7 @@ namespace iiInfinityEngine.Core.Writers
                 splExtendedHeaders.Add(extendedHeaderBinary);
             }
 
-            SplHeaderBinary header = new SplHeaderBinary();
+            var header = new SplHeaderBinary();
 
             header.Flags = splFile.Flags.Byte1Bit0 ? header.Flags | 1 : header.Flags;
             header.Flags = splFile.Flags.Byte1Bit1 ? header.Flags | 2 : header.Flags;
@@ -140,7 +139,7 @@ namespace iiInfinityEngine.Core.Writers
 
             header.ftype = new array4() { character1 = 'S', character2 = 'P', character3 = 'L', character4 = ' ' };
             header.fversion = new array4() { character1 = 'V', character2 = '1', character3 = ' ', character4 = ' ' };
-            header.CastinGraphic = splFile.CastingGraphic;
+            header.CastingGraphic = splFile.CastingGraphic;
             header.CompletionSound = splFile.CompletionSound;
             header.ExclusionFlags = splFile.ExclusionFlags;
 
@@ -170,39 +169,30 @@ namespace iiInfinityEngine.Core.Writers
             header.Unknown10 = splFile.Unknown10;
             header.Unknown11 = splFile.Unknown11;
 
-            using (MemoryStream s = new MemoryStream())
+            using var s = new MemoryStream();
+            using var bw = new BinaryWriter(s);
+            var headerAsBytes = Common.WriteStruct(header);
+
+            bw.Write(headerAsBytes);
+
+            foreach (var extendedHeader in splExtendedHeaders)
             {
-                using (BinaryWriter bw = new BinaryWriter(s))
-                {
-                    var headerAsBytes = Common.WriteStruct(header);
-
-                    bw.Write(headerAsBytes);
-
-                    foreach (var extendedHeader in splExtendedHeaders)
-                    {
-                        var extendedHeaderAsBytes = Common.WriteStruct(extendedHeader);
-                        bw.Write(extendedHeaderAsBytes);
-                    }
-
-                    foreach (var featureBlock in splFeatureBlocks)
-                    {
-                        var featureBlockAsBytes = Common.WriteStruct(featureBlock);
-                        bw.Write(featureBlockAsBytes);
-                    }
-
-                    if (BackupManger != null)
-                    {
-                        BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-                    }
-
-                    using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
-                    {
-                        bw.BaseStream.Position = 0;
-                        bw.BaseStream.CopyTo(fs);
-                        fs.Flush(flushToDisk: true);
-                    }
-                }
+                var extendedHeaderAsBytes = Common.WriteStruct(extendedHeader);
+                bw.Write(extendedHeaderAsBytes);
             }
+
+            foreach (var featureBlock in splFeatureBlocks)
+            {
+                var featureBlockAsBytes = Common.WriteStruct(featureBlock);
+                bw.Write(featureBlockAsBytes);
+            }
+
+            BackupManger?.BackupFile(file, file.Filename, file.FileType, this);
+
+            using var fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            bw.BaseStream.Position = 0;
+            bw.BaseStream.CopyTo(fs);
+            fs.Flush(flushToDisk: true);
             return true;
         }
     }

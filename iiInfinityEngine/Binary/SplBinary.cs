@@ -14,7 +14,8 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 Flags;
         public Int16 SpellType;
         public Int32 ExclusionFlags;
-        public Int16 CastinGraphic;
+        public Int16 CastingGraphic;
+        
         public char Unknown;
         public Int16 PrimaryType;
         public byte SecondaryType;
