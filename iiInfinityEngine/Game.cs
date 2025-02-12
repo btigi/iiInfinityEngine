@@ -142,7 +142,8 @@ namespace iiInfinityEngine.Core
                     using (var bifFileStream = new FileStream(bifName, FileMode.Open, FileAccess.Read))
                     {
                         bbr.TlkFile = Tlk;
-                        var bifFile = bbr.Read(bifFileStream, resources.Where(a => a.BifIndex == bifIndex).ToList(), fileTypes);
+                        //var bifFile = bbr.Read(bifFileStream, resources.Where(a => a.BifIndex == bifIndex).ToList(), fileTypes);
+                        var bifFile = bbr.Read(bifFileStream, resources, fileTypes);
                         Areas.AddRange(bifFile.areas);
                         Creatures.AddRange(bifFile.creatures);
                         Dialogs.AddRange(bifFile.dialogs);
@@ -167,6 +168,7 @@ namespace iiInfinityEngine.Core
             var dimensionalArrayReader = new DimensionalArrayFileReader();
             var areReader = new AreFileBinaryReader();
             var creReader = new CreFileBinaryReader();
+            var dlgReader = new DlgFileBinaryReader();
             var effReader = new EffFileBinaryReader();
             var idsReader = new IdsFileReader();
             var itmReader = new ItmFileBinaryReader();
@@ -191,6 +193,10 @@ namespace iiInfinityEngine.Core
                     case ".cre":
                         var creature = creReader.Read(file);
                         creature.Filename = file;
+                        break;
+                    case ".dlg":
+                        var dialog = dlgReader.Read(file);
+                        dialog.Filename = file;
                         break;
                     case ".eff":
                         var effect = effReader.Read(file);
@@ -287,6 +293,9 @@ namespace iiInfinityEngine.Core
                     break;
                 case IEFileType.Cre:
                     writer = new CreFileBinaryWriter();
+                    break;
+                case IEFileType.Dlg:
+                    writer = new DlgFileBinaryWriter();
                     break;
                 case IEFileType.DimensionalArray:
                     writer = new DimensionalArrayFileWriter();
