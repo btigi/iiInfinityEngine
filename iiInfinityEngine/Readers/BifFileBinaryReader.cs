@@ -16,6 +16,7 @@ namespace iiInfinityEngine.Core.Readers
         List<BifTilesetEntryBinary> tileStructs = new List<BifTilesetEntryBinary>();
         List<SplFile> spells = new List<SplFile>();
         List<StoFile> stores = new List<StoFile>();
+        List<DlgFile> dialogs = new List<DlgFile>();
         List<ItmFile> items = new List<ItmFile>();
         List<WfxFile> wfxs = new List<WfxFile>();
         List<EffFile> effs = new List<EffFile>();
@@ -185,6 +186,21 @@ namespace iiInfinityEngine.Core.Readers
                                     catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
                                     break;
 
+                                case IEFileType.Dlg:
+                                    try
+                                    {
+                                        DlgFileBinaryReader dlg = new DlgFileBinaryReader();
+                                        var dialog = (DlgFile)dlg.Read(ms);
+                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                        if (resource != null)
+                                        {
+                                            dialog.Filename = resource.ResourceName + "." + resource.ResourceType;
+                                        }
+                                        dialogs.Add(dialog);
+                                    }
+                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                    break;
+
                                 case IEFileType.Eff:
                                     try
                                     {
@@ -302,6 +318,7 @@ namespace iiInfinityEngine.Core.Readers
                 bifFile.effects = effs;
                 bifFile.wfx = wfxs;
                 bifFile.stores = stores;
+                bifFile.dialogs = dialogs;
                 bifFile.creatures = creatures;
                 bifFile.projectiles = projectiles;
                 bifFile.identifiers = identifiers;

@@ -27,6 +27,7 @@ namespace iiInfinityEngine.Core
         public List<AreFile> Areas = new();
         public List<CreFile> Creatures = new();
         public List<DimensionalArrayFile> DimensionalArrays = new();
+        public List<DlgFile> Dialogs = new();
         public List<EffFile> Effects = new();
         public List<IdsFile> Identifiers = new();
         public List<ItmFile> Items = new();
@@ -144,6 +145,7 @@ namespace iiInfinityEngine.Core
                         var bifFile = bbr.Read(bifFileStream, resources.Where(a => a.BifIndex == bifIndex).ToList(), fileTypes);
                         Areas.AddRange(bifFile.areas);
                         Creatures.AddRange(bifFile.creatures);
+                        Dialogs.AddRange(bifFile.dialogs);
                         DimensionalArrays.AddRange(bifFile.dimensionalArrays);
                         Effects.AddRange(bifFile.effects);
                         Identifiers.AddRange(bifFile.identifiers);

@@ -13,6 +13,7 @@ namespace iiInfinityEngine.Core.Files
         public List<ItmFile> items = new List<ItmFile>();
         public List<SplFile> spells = new List<SplFile>();
         public List<StoFile> stores = new List<StoFile>();
+        public List<DlgFile> dialogs = new List<DlgFile>();
         public List<CreFile> creatures = new List<CreFile>();
         public List<ProFile> projectiles = new List<ProFile>();
         public List<IdsFile> identifiers = new List<IdsFile>();

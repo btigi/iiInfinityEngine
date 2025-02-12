@@ -6,7 +6,7 @@ using iiInfinityEngine.Core.Files;
 
 namespace iiInfinityEngine.Core.Readers
 {
-    public class DlgFileReader: IDlgFileReader
+    public class DlgFileBinaryReader : IDlgFileReader
     {
         public TlkFile TlkFile { get; set; }
         public DlgFile DlgFile { get; set; }
