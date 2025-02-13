@@ -24,18 +24,18 @@ namespace iiInfinityEngine.Core
         private string cd5 = String.Empty;
         private string cd6 = String.Empty;
 
-        public List<AreFile> Areas = new();
-        public List<CreFile> Creatures = new();
-        public List<DimensionalArrayFile> DimensionalArrays = new();
-        public List<DlgFile> Dialogs = new();
-        public List<EffFile> Effects = new();
-        public List<IdsFile> Identifiers = new();
-        public List<ItmFile> Items = new();
-        public List<ProFile> Projectiles = new();
-        public List<SplFile> Spells = new();
-        public List<StoFile> Stores = new();
-        public List<VvcFile> VisualEffects = new();
-        public List<WfxFile> Wfxs = new();
+        public List<AreFile> Areas = [];
+        public List<CreFile> Creatures = [];
+        public List<DimensionalArrayFile> DimensionalArrays = [];
+        public List<DlgFile> Dialogs = [];
+        public List<EffFile> Effects = [];
+        public List<IdsFile> Identifiers = [];
+        public List<ItmFile> Items = [];
+        public List<ProFile> Projectiles = [];
+        public List<SplFile> Spells = [];
+        public List<StoFile> Stores = [];
+        public List<VvcFile> VisualEffects = [];
+        public List<WfxFile> Wfxs = [];
 
         public TlkFile Tlk { get; private set; }
 
@@ -139,24 +139,22 @@ namespace iiInfinityEngine.Core
                 if (File.Exists(bifName))
                 {
                     var bbr = new BifFileBinaryReader();
-                    using (var bifFileStream = new FileStream(bifName, FileMode.Open, FileAccess.Read))
-                    {
-                        bbr.TlkFile = Tlk;
-                        //var bifFile = bbr.Read(bifFileStream, resources.Where(a => a.BifIndex == bifIndex).ToList(), fileTypes);
-                        var bifFile = bbr.Read(bifFileStream, resources, fileTypes);
-                        Areas.AddRange(bifFile.areas);
-                        Creatures.AddRange(bifFile.creatures);
-                        Dialogs.AddRange(bifFile.dialogs);
-                        DimensionalArrays.AddRange(bifFile.dimensionalArrays);
-                        Effects.AddRange(bifFile.effects);
-                        Identifiers.AddRange(bifFile.identifiers);
-                        Items.AddRange(bifFile.items);
-                        Projectiles.AddRange(bifFile.projectiles);
-                        Spells.AddRange(bifFile.spells);
-                        Stores.AddRange(bifFile.stores);
-                        VisualEffects.AddRange(bifFile.vvcs);
-                        Wfxs.AddRange(bifFile.wfx);
-                    }
+                    using var bifFileStream = new FileStream(bifName, FileMode.Open, FileAccess.Read);
+                    bbr.TlkFile = Tlk;
+                    //var bifFile = bbr.Read(bifFileStream, resources.Where(a => a.BifIndex == bifIndex).ToList(), fileTypes);
+                    var bifFile = bbr.Read(bifFileStream, resources, fileTypes);
+                    Areas.AddRange(bifFile.areas);
+                    Creatures.AddRange(bifFile.creatures);
+                    Dialogs.AddRange(bifFile.dialogs);
+                    DimensionalArrays.AddRange(bifFile.dimensionalArrays);
+                    Effects.AddRange(bifFile.effects);
+                    Identifiers.AddRange(bifFile.identifiers);
+                    Items.AddRange(bifFile.items);
+                    Projectiles.AddRange(bifFile.projectiles);
+                    Spells.AddRange(bifFile.spells);
+                    Stores.AddRange(bifFile.stores);
+                    VisualEffects.AddRange(bifFile.vvcs);
+                    Wfxs.AddRange(bifFile.wfx);
                 }
                 bifIndex++;
             }

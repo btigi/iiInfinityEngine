@@ -37,14 +37,12 @@ namespace iiInfinityEngine.Core
                 var uncompressedDataLength = br.ReadInt32();
                 var bytes = br.ReadBytes((int)fi.Length - 12);
 
-                using (MemoryStream compressedStream = new MemoryStream(bytes))
-                using (MemoryStream decompressedStream = new MemoryStream())
-                {
-                    var zlibStream = new ZLibStream(compressedStream, CompressionMode.Decompress);
-                    zlibStream.CopyTo(decompressedStream);
-                    var decompressedData = decompressedStream.ToArray();
-                    s.Write(decompressedData, 0, uncompressedDataLength);
-                }
+                using var compressedStream = new MemoryStream(bytes);
+                using var decompressedStream = new MemoryStream();
+                var zlibStream = new ZLibStream(compressedStream, CompressionMode.Decompress);
+                zlibStream.CopyTo(decompressedStream);
+                var decompressedData = decompressedStream.ToArray();
+                s.Write(decompressedData, 0, uncompressedDataLength);
             }
 
             s.Position = 0;
