@@ -6,8 +6,8 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class SplFile : IEFile
     {
-        public List<SplExtendedHeader2> splExtendedHeader = [];
-        public List<SplFeatureBlock2> splFeatureBlocks = [];
+        public List<SplExtendedHeader> splExtendedHeader = [];
+        public List<SplFeatureBlock> splFeatureBlocks = [];
 
         [NonSerialized]
         private string checksum;
@@ -47,7 +47,7 @@ namespace iiInfinityEngine.Core.Files
         public Int16 Unused38 { get; set; }
         public array8 SpellBookIcon { get; set; }
         public Int16 Unused42 { get; set; }
-        public array8 Unused44 { get; set; }        
+        public array8 Unused44 { get; set; }
         public Int32 Unused4c { get; set; }
         public IEString UnidentifiedDescription { get; set; }
         public IEString IdentifiedDescription { get; set; }
@@ -56,29 +56,62 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public class SplExtendedHeader2
+    public class SplExtendedHeader
     {
-        public byte SpellForm { get; set; }
-        public char Unknown { get; set; }
-        public char Location { get; set; }
-        public char Unknown2 { get; set; }
+        public SpellForm SpellForm { get; set; }
+        public char Unused1 { get; set; }
+        public SpellLocation Location { get; set; }
         public array8 MemorisedIcon { get; set; }
-        public char TargetType { get; set; }
-        public char TargetCount { get; set; }
+        public SpellTarget TargetType { get; set; }
+        public byte TargetCount { get; set; }
         public Int16 Range { get; set; }
         public Int16 LevelRequired { get; set; }
-        public Int32 CastingTime { get; set; }
-        public Int16 DiceSides { get; set; }
-        public Int16 DiceThrown { get; set; } // Unused
-        public Int16 Enchantment { get; set; } // Unused
-        public Int16 DamageType { get; set; } // Unused
+        public Int16 CastingTime { get; set; }
+        public Int16 TimesPerDay { get; set; }
+        public Int16 Unused16 { get; set; }
+        public Int16 Unused18 { get; set; }
+        public Int16 Unused1a { get; set; }
+        public Int16 Unused1c { get; set; }
         public Int16 FeatureBlockCount { get; set; }
         public Int16 FeatureBlockOffset { get; set; }
-        public Int16 Charges { get; set; } // Unused
-        public Int16 ChargeDepletionBehaviour { get; set; } // Unused
+        public Int16 Unused22 { get; set; }
+        public Int16 Unused24 { get; set; }
         public Int16 ProjectileAnimation { get; set; }
 
-        public List<SplFeatureBlock2> splFeatureBlocks = new List<SplFeatureBlock2>();
+        public List<SplFeatureBlock> splFeatureBlocks = new List<SplFeatureBlock>();
+    }
+
+    [Serializable]
+    public enum SpellForm : byte
+    {
+        None = 0,
+        Melee,
+        Ranged,
+        Magical,
+        Launcher
+    }
+
+    [Serializable]
+    public enum SpellLocation : Int16
+    {
+        None = 0,
+        Weapon,
+        Spell,
+        Item,
+        Innate
+    }
+
+    [Serializable]
+    public enum SpellTarget : byte
+    {
+        None = 0,
+        LivingActor,
+        Inventory,
+        DeadActor,
+        Range,
+        Caster,
+        Crash,
+        CasterSpecial
     }
 
     [Serializable]
@@ -99,10 +132,10 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public class SplFeatureBlock2
+    public class SplFeatureBlock
     {
         public Int16 Opcode;
-        public byte TargetType;
+        public SpellAbilityTarget TargetType;
         public byte Power;
         public Int32 Parameter1;
         public Int32 Parameter2;
@@ -114,9 +147,61 @@ namespace iiInfinityEngine.Core.Files
         public array8 Resource;
         public Int32 DiceThrown;
         public Int32 DiceSides;
-        public Int32 SavingThrowType;
+        public SpellSavingThrowType SavingThrowType;
         public Int32 SavingThrowBonus;
-        public Int32 Unknown;
+        public Int32 Unused2c;
+    }
+
+    [Serializable]
+    public enum SpellAbilityTarget : byte
+    {
+        None = 0,
+        Self,
+        Projectile,
+        Party,
+        Everyone,
+        EveryoneExceptParty,
+        CasterGroup,
+        TargetGroup,
+        EveryoneExceptSelf,
+        OriginalCater
+    }
+
+    [Serializable]
+    public struct SpellSavingThrowType
+    {
+        public bool Spells { get; set; }
+        public bool Breath { get; set; }
+        public bool ParalyzePoisonDeath { get; set; }
+        public bool Wands { get; set; }
+        public bool PetrifyPolymorph { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool IgnorePrimaryTarget { get; set; }
+        public bool IgnoreSecondaryTarget { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool BypassMirrorImage { get; set; }
+        public bool IgnoreDifficulty { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
     }
 
     [Serializable]

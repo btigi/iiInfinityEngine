@@ -50,23 +50,23 @@ namespace iiInfinityEngine.Core.Binary
     struct SplExtendedHeaderBinary
     {
         public byte SpellForm;
-        public char Unknown;
-        public char Location;
-        public char Unknown2;
+        public char Unused1;
+        public Int16 Location;
         public array8 MemorisedIcon;
-        public char TargetType;
-        public char TargetCount;
+        public byte TargetType;
+        public byte TargetCount;
         public Int16 Range;
         public Int16 LevelRequired;
-        public Int32 CastingTime;
-        public Int16 DiceSides;
-        public Int16 DiceThrown; // Unused
-        public Int16 Enchantment; // Unused
-        public Int16 DamageType; // Unused
+        public Int16 CastingTime;
+        public Int16 TimesPerDay;
+        public Int16 Unused16;
+        public Int16 Unused18;
+        public Int16 Unused1a;
+        public Int16 Unused1c;
         public Int16 FeatureBlockCount;
         public Int16 FeatureBlockOffset;
-        public Int16 Charges; // Unused
-        public Int16 ChargeDepletionBehaviour; // Unused
+        public Int16 Unused22;
+        public Int16 Unused24;
         public Int16 ProjectileAnimation;
     }
 
@@ -88,6 +88,6 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 DiceSides;
         public Int32 SavingThrowType;
         public Int32 SavingThrowBonus;
-        public Int32 Unknown;
+        public Int32 Unused2c;
     }
 }

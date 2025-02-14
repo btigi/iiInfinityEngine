@@ -57,7 +57,6 @@ namespace iiInfinityEngine.Core.Readers
             splFile.UnidentifiedName = Common.ReadString(header.UnidentifiedName, TlkFile);
             splFile.IdentifiedName = Common.ReadString(header.IdentifiedName, TlkFile);
             splFile.CompletionSound = header.CompletionSound;
-
             splFile.Flags.Bit0 = (header.Flags & Common.Bit0) != 0;
             splFile.Flags.Bit1 = (header.Flags & Common.Bit1) != 0;
             splFile.Flags.Bit2 = (header.Flags & Common.Bit2) != 0;
@@ -90,7 +89,6 @@ namespace iiInfinityEngine.Core.Readers
             splFile.Flags.Bit29 = (header.Flags & Common.Bit29) != 0;
             splFile.Flags.Bit30 = (header.Flags & Common.Bit30) != 0;
             splFile.Flags.Bit31 = (header.Flags & Common.Bit31) != 0;
-
             splFile.SpellType = (SpellType)header.SpellType;
             splFile.ExclusionFlags = header.ExclusionFlags;
             splFile.CastingGraphic = header.CastingGraphic;
@@ -123,33 +121,33 @@ namespace iiInfinityEngine.Core.Readers
 
             foreach (var extendedHeader in splExtendedHeaders)
             {
-                var extendedHeader2 = new SplExtendedHeader2();
-                extendedHeader2.ChargeDepletionBehaviour = extendedHeader.ChargeDepletionBehaviour;
-                extendedHeader2.Charges = extendedHeader.Charges;
+                var extendedHeader2 = new SplExtendedHeader();
                 extendedHeader2.CastingTime = extendedHeader.CastingTime;
-                extendedHeader2.DamageType = extendedHeader.DamageType;
-                extendedHeader2.DiceSides = extendedHeader.DiceSides;
-                extendedHeader2.DiceThrown = extendedHeader.DiceThrown;
-                extendedHeader2.Enchantment = extendedHeader.Enchantment;
                 extendedHeader2.FeatureBlockCount = extendedHeader.FeatureBlockCount;
                 extendedHeader2.FeatureBlockOffset = extendedHeader.FeatureBlockOffset;
                 extendedHeader2.LevelRequired = extendedHeader.LevelRequired;
-                extendedHeader2.Location = extendedHeader.Location;
+                extendedHeader2.Location = (SpellLocation)extendedHeader.Location;
                 extendedHeader2.MemorisedIcon = extendedHeader.MemorisedIcon;
                 extendedHeader2.ProjectileAnimation = extendedHeader.ProjectileAnimation;
                 extendedHeader2.Range = extendedHeader.Range;
-                extendedHeader2.SpellForm = extendedHeader.SpellForm;
+                extendedHeader2.SpellForm = (SpellForm)extendedHeader.SpellForm;
                 extendedHeader2.TargetCount = extendedHeader.TargetCount;
-                extendedHeader2.TargetType = extendedHeader.TargetType;
-                extendedHeader2.Unknown = extendedHeader.Unknown;
-                extendedHeader2.Unknown2 = extendedHeader.Unknown2;
+                extendedHeader2.TargetType = (SpellTarget)extendedHeader.TargetType;
+                extendedHeader2.TimesPerDay = extendedHeader.TimesPerDay;
+                extendedHeader2.Unused1 = extendedHeader.Unused1;
+                extendedHeader2.Unused16 = extendedHeader.Unused16;
+                extendedHeader2.Unused18 = extendedHeader.Unused18;
+                extendedHeader2.Unused1a = extendedHeader.Unused1a;
+                extendedHeader2.Unused1c = extendedHeader.Unused1c;
+                extendedHeader2.Unused22 = extendedHeader.Unused22;
+                extendedHeader2.Unused24 = extendedHeader.Unused24;
 
                 br.BaseStream.Seek(header.FeatureBlockOffset + (header.FeatureBlockCastingCount * 48) + (totalFeatureBlockCount * 48), SeekOrigin.Begin);
                 for (int i = 0; i < extendedHeader.FeatureBlockCount; i++)
                 {
                     var featureBlock = (SplFeatureBlockBinary)Common.ReadStruct(br, typeof(SplFeatureBlockBinary));
 
-                    var splFeatureBlock2 = new SplFeatureBlock2();
+                    var splFeatureBlock2 = new SplFeatureBlock();
                     splFeatureBlock2.DiceSides = featureBlock.DiceSides;
                     splFeatureBlock2.DiceThrown = featureBlock.DiceThrown;
                     splFeatureBlock2.Duration = featureBlock.Duration;
@@ -162,10 +160,41 @@ namespace iiInfinityEngine.Core.Readers
                     splFeatureBlock2.Resistance = featureBlock.Resistance;
                     splFeatureBlock2.Resource = featureBlock.Resource;
                     splFeatureBlock2.SavingThrowBonus = featureBlock.SavingThrowBonus;
-                    splFeatureBlock2.SavingThrowType = featureBlock.SavingThrowType;
-                    splFeatureBlock2.TargetType = featureBlock.TargetType;
+                    splFeatureBlock2.SavingThrowType.Spells = (featureBlock.SavingThrowType & Common.Bit0) != 0;
+                    splFeatureBlock2.SavingThrowType.Breath = (featureBlock.SavingThrowType & Common.Bit1) != 0;
+                    splFeatureBlock2.SavingThrowType.ParalyzePoisonDeath = (featureBlock.SavingThrowType & Common.Bit2) != 0;
+                    splFeatureBlock2.SavingThrowType.Wands = (featureBlock.SavingThrowType & Common.Bit3) != 0;
+                    splFeatureBlock2.SavingThrowType.PetrifyPolymorph = (featureBlock.SavingThrowType & Common.Bit4) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit5 = (featureBlock.SavingThrowType & Common.Bit5) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit6 = (featureBlock.SavingThrowType & Common.Bit6) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit7 = (featureBlock.SavingThrowType & Common.Bit7) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit8 = (featureBlock.SavingThrowType & Common.Bit8) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit9 = (featureBlock.SavingThrowType & Common.Bit9) != 0;
+                    splFeatureBlock2.SavingThrowType.IgnorePrimaryTarget = (featureBlock.SavingThrowType & Common.Bit10) != 0;
+                    splFeatureBlock2.SavingThrowType.IgnoreSecondaryTarget = (featureBlock.SavingThrowType & Common.Bit11) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit12 = (featureBlock.SavingThrowType & Common.Bit12) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit13 = (featureBlock.SavingThrowType & Common.Bit13) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit14 = (featureBlock.SavingThrowType & Common.Bit14) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit15 = (featureBlock.SavingThrowType & Common.Bit15) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit16 = (featureBlock.SavingThrowType & Common.Bit16) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit17 = (featureBlock.SavingThrowType & Common.Bit17) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit18 = (featureBlock.SavingThrowType & Common.Bit18) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit19 = (featureBlock.SavingThrowType & Common.Bit19) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit20 = (featureBlock.SavingThrowType & Common.Bit20) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit21 = (featureBlock.SavingThrowType & Common.Bit21) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit22 = (featureBlock.SavingThrowType & Common.Bit22) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit23 = (featureBlock.SavingThrowType & Common.Bit23) != 0;
+                    splFeatureBlock2.SavingThrowType.BypassMirrorImage = (featureBlock.SavingThrowType & Common.Bit24) != 0;
+                    splFeatureBlock2.SavingThrowType.IgnoreDifficulty = (featureBlock.SavingThrowType & Common.Bit25) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit26 = (featureBlock.SavingThrowType & Common.Bit26) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit27 = (featureBlock.SavingThrowType & Common.Bit27) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit28 = (featureBlock.SavingThrowType & Common.Bit28) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit29 = (featureBlock.SavingThrowType & Common.Bit29) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit30 = (featureBlock.SavingThrowType & Common.Bit30) != 0;
+                    splFeatureBlock2.SavingThrowType.Bit31 = (featureBlock.SavingThrowType & Common.Bit31) != 0;
+                    splFeatureBlock2.TargetType = (SpellAbilityTarget)featureBlock.TargetType;
                     splFeatureBlock2.TimingMode = (TimingMode)featureBlock.TimingMode;
-                    splFeatureBlock2.Unknown = featureBlock.Unknown;
+                    splFeatureBlock2.Unused2c = featureBlock.Unused2c;
 
                     extendedHeader2.splFeatureBlocks.Add(splFeatureBlock2);
                     totalFeatureBlockCount++;
@@ -176,7 +205,7 @@ namespace iiInfinityEngine.Core.Readers
 
             foreach (var featureBlock in splFeatureBlocks)
             {
-                var splFeatureBlock2 = new SplFeatureBlock2();
+                var splFeatureBlock2 = new SplFeatureBlock();
                 splFeatureBlock2.DiceSides = featureBlock.DiceSides;
                 splFeatureBlock2.DiceThrown = featureBlock.DiceThrown;
                 splFeatureBlock2.Duration = featureBlock.Duration;
@@ -189,10 +218,41 @@ namespace iiInfinityEngine.Core.Readers
                 splFeatureBlock2.Resistance = featureBlock.Resistance;
                 splFeatureBlock2.Resource = featureBlock.Resource;
                 splFeatureBlock2.SavingThrowBonus = featureBlock.SavingThrowBonus;
-                splFeatureBlock2.SavingThrowType = featureBlock.SavingThrowType;
-                splFeatureBlock2.TargetType = featureBlock.TargetType;
+                splFeatureBlock2.SavingThrowType.Spells = (featureBlock.SavingThrowType & Common.Bit0) != 0;
+                splFeatureBlock2.SavingThrowType.Breath = (featureBlock.SavingThrowType & Common.Bit1) != 0;
+                splFeatureBlock2.SavingThrowType.ParalyzePoisonDeath = (featureBlock.SavingThrowType & Common.Bit2) != 0;
+                splFeatureBlock2.SavingThrowType.Wands = (featureBlock.SavingThrowType & Common.Bit3) != 0;
+                splFeatureBlock2.SavingThrowType.PetrifyPolymorph = (featureBlock.SavingThrowType & Common.Bit4) != 0;
+                splFeatureBlock2.SavingThrowType.Bit5 = (featureBlock.SavingThrowType & Common.Bit5) != 0;
+                splFeatureBlock2.SavingThrowType.Bit6 = (featureBlock.SavingThrowType & Common.Bit6) != 0;
+                splFeatureBlock2.SavingThrowType.Bit7 = (featureBlock.SavingThrowType & Common.Bit7) != 0;
+                splFeatureBlock2.SavingThrowType.Bit8 = (featureBlock.SavingThrowType & Common.Bit8) != 0;
+                splFeatureBlock2.SavingThrowType.Bit9 = (featureBlock.SavingThrowType & Common.Bit9) != 0;
+                splFeatureBlock2.SavingThrowType.IgnorePrimaryTarget = (featureBlock.SavingThrowType & Common.Bit10) != 0;
+                splFeatureBlock2.SavingThrowType.IgnoreSecondaryTarget = (featureBlock.SavingThrowType & Common.Bit11) != 0;
+                splFeatureBlock2.SavingThrowType.Bit12 = (featureBlock.SavingThrowType & Common.Bit12) != 0;
+                splFeatureBlock2.SavingThrowType.Bit13 = (featureBlock.SavingThrowType & Common.Bit13) != 0;
+                splFeatureBlock2.SavingThrowType.Bit14 = (featureBlock.SavingThrowType & Common.Bit14) != 0;
+                splFeatureBlock2.SavingThrowType.Bit15 = (featureBlock.SavingThrowType & Common.Bit15) != 0;
+                splFeatureBlock2.SavingThrowType.Bit16 = (featureBlock.SavingThrowType & Common.Bit16) != 0;
+                splFeatureBlock2.SavingThrowType.Bit17 = (featureBlock.SavingThrowType & Common.Bit17) != 0;
+                splFeatureBlock2.SavingThrowType.Bit18 = (featureBlock.SavingThrowType & Common.Bit18) != 0;
+                splFeatureBlock2.SavingThrowType.Bit19 = (featureBlock.SavingThrowType & Common.Bit19) != 0;
+                splFeatureBlock2.SavingThrowType.Bit20 = (featureBlock.SavingThrowType & Common.Bit20) != 0;
+                splFeatureBlock2.SavingThrowType.Bit21 = (featureBlock.SavingThrowType & Common.Bit21) != 0;
+                splFeatureBlock2.SavingThrowType.Bit22 = (featureBlock.SavingThrowType & Common.Bit22) != 0;
+                splFeatureBlock2.SavingThrowType.Bit23 = (featureBlock.SavingThrowType & Common.Bit23) != 0;
+                splFeatureBlock2.SavingThrowType.BypassMirrorImage = (featureBlock.SavingThrowType & Common.Bit24) != 0;
+                splFeatureBlock2.SavingThrowType.IgnoreDifficulty = (featureBlock.SavingThrowType & Common.Bit25) != 0;
+                splFeatureBlock2.SavingThrowType.Bit26 = (featureBlock.SavingThrowType & Common.Bit26) != 0;
+                splFeatureBlock2.SavingThrowType.Bit27 = (featureBlock.SavingThrowType & Common.Bit27) != 0;
+                splFeatureBlock2.SavingThrowType.Bit28 = (featureBlock.SavingThrowType & Common.Bit28) != 0;
+                splFeatureBlock2.SavingThrowType.Bit29 = (featureBlock.SavingThrowType & Common.Bit29) != 0;
+                splFeatureBlock2.SavingThrowType.Bit30 = (featureBlock.SavingThrowType & Common.Bit30) != 0;
+                splFeatureBlock2.SavingThrowType.Bit31 = (featureBlock.SavingThrowType & Common.Bit31) != 0;
+                splFeatureBlock2.TargetType = (SpellAbilityTarget)featureBlock.TargetType;
                 splFeatureBlock2.TimingMode = (TimingMode)featureBlock.TimingMode;
-                splFeatureBlock2.Unknown = featureBlock.Unknown;
+                splFeatureBlock2.Unused2c = featureBlock.Unused2c;
 
                 splFile.splFeatureBlocks.Add(splFeatureBlock2);
             }
