@@ -11,9 +11,9 @@ namespace iiInfinityEngine.Core.Binary
         public Int16 ProjectileType;
         public Int16 ProjectileSpeed;
         public Int32 SparkingFlags;
-        public array8 TravelWav;
-        public array8 ArrivalWav;
-        public array8 TravelBAM;
+        public array8 FireWav;
+        public array8 ImpactWav;
+        public array8 SourceAnimationBam;
         public Int16 SparkColour;
         public array214 Unused;
         public Int32 ProjectileFlags;
@@ -55,18 +55,19 @@ namespace iiInfinityEngine.Core.Binary
     struct ProExtendedHeaderBinary
     {
         public Int32 AreaProjectileFlags;
+        public Int16 RayCount;
         public Int16 TriggerRadius;// (divide by approx 8.5 to receive radius in feet)
         public Int16 AreaOfEffect;// (divide by approx 8.5 to receive radius in feet)
-        public array8 TriggerSound;
+        public array8 ExplosionSound;
         public Int16 ExplosionDelay;
         public Int16 FragmentAnimation;// (animate.ids)
         public Int16 SecondaryProjectile;// (projectl.ids-1)
         public byte TriggerCount;// (used if bits 8 and 9 at 0x200 are not set)
-        public byte ExplosionAnimation;// (fireball.ids)
+        public byte ExplosionEffect;// (fireball.ids)
         public byte ExplosionColour;
-        public byte Unused;
+        public byte Unused219;
         public Int16 ExplosionProjectile;// (projectl.ids), played on affected creatures
-        public array8 ExplosionAnimationAnimation; // (VVC)
+        public array8 ExplosionAnimation; // (VVC)
         public Int16 ConeWidth;// (1 to 359)
         public array218 Unused2;
     }
