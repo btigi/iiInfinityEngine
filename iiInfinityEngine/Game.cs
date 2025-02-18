@@ -36,6 +36,7 @@ namespace iiInfinityEngine.Core
         public List<StoFile> Stores = [];
         public List<VvcFile> VisualEffects = [];
         public List<WfxFile> Wfxs = [];
+        public List<TisFile> Tilesets = [];
 
         public TlkFile Tlk { get; private set; }
 
@@ -123,7 +124,8 @@ namespace iiInfinityEngine.Core
                                                      IEFileType.Are,
                                                      IEFileType.Wmp,
                                                      IEFileType.Vvc,
-                                                     IEFileType.Wfx};
+                                                     IEFileType.Wfx,
+                                                     IEFileType.Tis };
 
             LoadResourcesFromBifs(gameDirectory, key.BifFiles, key.Resources, fileTypes);
             LoadOverride(gameDirectory);
@@ -155,6 +157,7 @@ namespace iiInfinityEngine.Core
                     Stores.AddRange(bifFile.stores);
                     VisualEffects.AddRange(bifFile.vvcs);
                     Wfxs.AddRange(bifFile.wfx);
+                    Tilesets.AddRange(bifFile.tilesets);
                 }
                 bifIndex++;
             }
@@ -175,6 +178,7 @@ namespace iiInfinityEngine.Core
             var stoReader = new StoFileBinaryReader();
             var vvcReader = new VvcFileBinaryReader();
             var wfxReader = new WfxFileBinaryReader();
+            var tisReader = new TisFileBinaryReader();
             foreach (var file in Directory.GetFiles(Path.Combine(directory, "override")))
             {
                 string extension = Path.GetExtension(file.ToLower());
@@ -227,6 +231,10 @@ namespace iiInfinityEngine.Core
                     case ".wfx":
                         var wavEffect = wfxReader.Read(file);
                         wavEffect.Filename = file;
+                        break;
+                    case ".tis":
+                        var tileset = tisReader.Read(file);
+                        tileset.Filename = file;
                         break;
                 }
             }

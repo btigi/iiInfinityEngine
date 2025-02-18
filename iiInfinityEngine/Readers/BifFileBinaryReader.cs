@@ -27,6 +27,7 @@ namespace iiInfinityEngine.Core.Readers
         List<AreFile> areas = new List<AreFile>();
         List<WmpFile> worldmaps = new List<WmpFile>();
         List<VvcFile> vvcs = new List<VvcFile>();
+        List<TisFile> tilesets = new List<TisFile>();
 
         public TlkFile TlkFile { get; set; }
 
@@ -312,6 +313,34 @@ namespace iiInfinityEngine.Core.Readers
                     ix++;
                 }
 
+                foreach (var ts in tileStructs)
+                {
+                    br.BaseStream.Seek(ts.resourceOffset, SeekOrigin.Begin);
+                    var file = br.ReadBytes(ts.tileSize);
+                    using (MemoryStream ms = new MemoryStream(file))
+                    {
+                        KeyBifResource2 resource;
+                        switch ((IEFileType)ts.resourceType)
+                        {
+                            case IEFileType.Tis:
+                                try
+                                {
+                                    TisFileBinaryReader tis = new TisFileBinaryReader();
+                                    var tisfile = (TisFile)tis.Read(ms);
+                                    resource = resources.Where(a => a.TileSetIndex == (ts.resourceLocator & ~0xFFF)).SingleOrDefault();
+                                    if (resource != null)
+                                    {
+                                        tisfile.Filename = resource.ResourceName + "." + resource.ResourceType;
+                                    }
+                                    tilesets.Add(tisfile);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
+                        }
+                    }
+                }
+
+
                 BifFile bifFile = new BifFile();
                 bifFile.items = items;
                 bifFile.spells = spells;
@@ -326,6 +355,7 @@ namespace iiInfinityEngine.Core.Readers
                 bifFile.areas = areas;
                 bifFile.worldmaps = worldmaps;
                 bifFile.vvcs = vvcs;
+                bifFile.tilesets = tilesets;
                 return bifFile;
             }
             finally

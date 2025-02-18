@@ -24,8 +24,28 @@ namespace iiInfinityEngine.Core.Files
         public array8 FireWav;
         public array8 ImpactWav;
         public array8 SourceAnimationBam;
-        public SparkColour SparkColour;        
-        public array214 Unused; //TODO:PRO
+        public SparkColour SparkColour;
+        public Int16 ProjectileWidth;
+        public ExtendedFlags ExtendedFlags;
+        public Int32 DisplayedMessage;
+        public Int32 PulseColour;
+        public Int16 ColourSpeed;
+        public Int16 ScreenShakeAmount;
+        public Int16 CreatureValue1;
+        public Int16 CreatureType1;
+        public Int16 CreatureValue2;
+        public Int16 CreatureType2;
+        public array8 DefaultSpell;
+        public array8 SuccessSpell;
+        public Int16 AngleIncreaseMinimum;
+        public Int16 AngleIncreaseMaximum;
+        public Int16 CurveMinimum;
+        public Int16 CurveMaximum;
+        public Int16 Thac0Bonus;
+        public Int16 Thac0BonusNonActor;
+        public Int16 RadiusMinumum;
+        public Int16 RadiusMaximum;
+        public array156 Unused64;
         public ProjectileFlags ProjectileFlags;
         public array8 ProjectileAnimation;
         public array8 ShadowAnimation;
@@ -58,7 +78,8 @@ namespace iiInfinityEngine.Core.Files
         public Int16 TrailingBAMSequence1;
         public Int16 TrailingBAMSequence2;
         public Int16 TrailingBAMSequence3;
-        public array172 Unused2; //TODO:PRO
+        public PuffFlags PuffFlags;
+        public array168 Unused158;
 
         public ProExtendedHeader ExtendedHeader;
 
@@ -86,6 +107,7 @@ namespace iiInfinityEngine.Core.Files
         public Int16 ExplosionProjectile { get; set; }// (projectl.ids), played on affected creatures
         public array8 ExplosionAnimation { get; set; } // (VVC)
         public Int16 ConeWidth { get; set; }// (1 to 359)
+        
         public array218 Unused2; //TODO:PRO
     }
 
@@ -153,6 +175,43 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
+    public struct ExtendedFlags
+    {
+        public bool BounceFromWalls { get; set; }
+        public bool PassTarget { get; set; }
+        public bool DrawCenterVvcOnce { get; set; }
+        public bool HitImmediately { get; set; }
+        public bool FaceTarget { get; set; }
+        public bool CurvedTarget { get; set; }
+        public bool StartRandomFrame { get; set; }
+        public bool Pillar { get; set; }
+        public bool SemiTransparentTrailPuffVef { get; set; }
+        public bool TintedTrailPuffVef { get; set; }
+        public bool MultipleProjectiles { get; set; }
+        public bool DefaultSpellOnMissed { get; set; }
+        public bool FallingPath { get; set; }
+        public bool Comet { get; set; }
+        public bool LinedUpAreaOfEffect { get; set; }
+        public bool RectangularAreaOfEffect { get; set; }
+        public bool DrawBehindTarget { get; set; }
+        public bool CastingGlowEffect { get; set; }
+        public bool TravelDoor { get; set; }
+        public bool StopFadeAfterHit { get; set; }
+        public bool DisplayMessage { get; set; }
+        public bool RandomPath { get; set; }
+        public bool StartRandomSequence { get; set; }
+        public bool ColourPulseOnHit { get; set; }
+        public bool TouchProjectile { get; set; }
+        public bool NegateFirstCreatureTarget { get; set; }
+        public bool NegateSecondCreatureTarget { get; set; }
+        public bool UseEitherIds { get; set; }
+        public bool DelayedPayload { get; set; }
+        public bool LimitedPathCount { get; set; }
+        public bool IwdStyleCheck { get; set; }
+        public bool CasterAffected { get; set; }
+    }
+
+    [Serializable]
     public struct ProjectileFlags
     {
         public bool EnableBAMColouring { get; set; }//(palette at 0x11c)
@@ -188,6 +247,43 @@ namespace iiInfinityEngine.Core.Files
         public bool Bit30 { get; set; }
         public bool Bit31 { get; set; }
     }
+
+    [Serializable]
+    public struct PuffFlags
+    {
+        public bool PuffAtTarget { get; set; }
+        public bool PuffAtSource { get; set; }
+        public bool Bit2 { get; set; }
+        public bool Bit3 { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
+    }    
 
     [Serializable]
     public enum FaceTargetGranularity

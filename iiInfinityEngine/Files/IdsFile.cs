@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace iiInfinityEngine.Core.Files
@@ -32,7 +29,7 @@ namespace iiInfinityEngine.Core.Files
 
         public bool AppendUnless(string line)
         {
-            Regex r = new Regex(@"\s"); // Remove whitespace
+            var r = new Regex(@"\s"); // Remove whitespace
             var tempFile = r.Replace(contents, String.Empty).ToLower();
             var tempLine = r.Replace(line, String.Empty).ToLower();
 

@@ -15,7 +15,27 @@ namespace iiInfinityEngine.Core.Binary
         public array8 ImpactWav;
         public array8 SourceAnimationBam;
         public Int16 SparkColour;
-        public array214 Unused;
+        public Int16 ProjectileWidth;
+        public Int32 ExtendedFlags;
+        public Int32 DisplayedMessage;
+        public Int32 PulseColour;
+        public Int16 ColourSpeed;
+        public Int16 ScreenShakeAmount;
+        public Int16 CreatureValue1;
+        public Int16 CreatureType1;
+        public Int16 CreatureValue2;
+        public Int16 CreatureType2;
+        public array8 DefaultSpell;
+        public array8 SuccessSpell;
+        public Int16 AngleIncreaseMinimum;
+        public Int16 AngleIncreaseMaximum;
+        public Int16 CurveMinimum;
+        public Int16 CurveMaximum;
+        public Int16 Thac0Bonus;
+        public Int16 Thac0BonusNonActor;
+        public Int16 RadiusMinumum;
+        public Int16 RadiusMaximum;
+        public array156 Unused64;
         public Int32 ProjectileFlags;
         public array8 ProjectileAnimation;
         public array8 ShadowAnimation;
@@ -48,7 +68,8 @@ namespace iiInfinityEngine.Core.Binary
         public Int16 TrailingBAMSequence1;
         public Int16 TrailingBAMSequence2;
         public Int16 TrailingBAMSequence3;
-        public array172 Unused2;
+        public Int32 PuffFlags;
+        public array168 Unused158;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
