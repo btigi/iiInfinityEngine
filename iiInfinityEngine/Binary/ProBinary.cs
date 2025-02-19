@@ -90,6 +90,15 @@ namespace iiInfinityEngine.Core.Binary
         public Int16 ExplosionProjectile;// (projectl.ids), played on affected creatures
         public array8 ExplosionAnimation; // (VVC)
         public Int16 ConeWidth;// (1 to 359)
-        public array218 Unused2;
+        public Int16 RotateRaysClockwise;
+        public array8 SpreadAnimation;
+        public array8 RingAnimation;
+        public array8 AreaSound;
+        public Int32 EnhancedExtendedFlags;
+        public Int16 DiceThrown;
+        public Int16 DiceSize;
+        public Int16 AnimationGranularity;
+        public Int16 AnimationGranularityDivider;
+        public array180 Unused24c;
     }
 }

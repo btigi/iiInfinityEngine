@@ -1521,7 +1521,7 @@ namespace iiInfinityEngine.Core
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct array218
+    public struct array180
     {
         public byte byte000;
         public byte byte001;
@@ -1703,44 +1703,6 @@ namespace iiInfinityEngine.Core
         public byte byte177;
         public byte byte178;
         public byte byte179;
-        public byte byte180;
-        public byte byte181;
-        public byte byte182;
-        public byte byte183;
-        public byte byte184;
-        public byte byte185;
-        public byte byte186;
-        public byte byte187;
-        public byte byte188;
-        public byte byte189;
-        public byte byte190;
-        public byte byte191;
-        public byte byte192;
-        public byte byte193;
-        public byte byte194;
-        public byte byte195;
-        public byte byte196;
-        public byte byte197;
-        public byte byte198;
-        public byte byte199;
-        public byte byte200;
-        public byte byte201;
-        public byte byte202;
-        public byte byte203;
-        public byte byte204;
-        public byte byte205;
-        public byte byte206;
-        public byte byte207;
-        public byte byte208;
-        public byte byte209;
-        public byte byte210;
-        public byte byte211;
-        public byte byte212;
-        public byte byte213;
-        public byte byte214;
-        public byte byte215;
-        public byte byte216;
-        public byte byte217;
     }
 
     public enum ItemType

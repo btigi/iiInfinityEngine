@@ -107,8 +107,16 @@ namespace iiInfinityEngine.Core.Files
         public Int16 ExplosionProjectile { get; set; }// (projectl.ids), played on affected creatures
         public array8 ExplosionAnimation { get; set; } // (VVC)
         public Int16 ConeWidth { get; set; }// (1 to 359)
-        
-        public array218 Unused2; //TODO:PRO
+        public Int16 RotateRaysClockwise { get; set; }
+        public array8 SpreadAnimation { get; set; }
+        public array8 RingAnimation { get; set; }
+        public array8 AreaSound { get; set; }
+        public EnhancedExtendedFlags EnhancedExtendedFlags { get; set; }
+        public Int16 DiceThrown { get; set; }
+        public Int16 DiceSize { get; set; }
+        public Int16 AnimationGranularity { get; set; }
+        public Int16 AnimationGranularityDivider { get; set; }
+        public array180 Unused24c;
     }
 
     [Serializable]
@@ -211,6 +219,43 @@ namespace iiInfinityEngine.Core.Files
         public bool CasterAffected { get; set; }
     }
 
+    [Serializable]
+    public class EnhancedExtendedFlags
+    {
+        public bool PalettedRing { get; set; }
+        public bool RandomSpeed { get; set; }
+        public bool StartScattered { get; set; }
+        public bool PalettedCenter { get; set; }
+        public bool RepeatScattering { get; set; }
+        public bool PalettedAnimation { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool OrientedFireballPuffs { get; set; }
+        public bool UseHitDiceLookup { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool BlendAreaRingAnimation { get; set; }
+        public bool GlowAreaRingAnimation { get; set; }
+        public bool HitPointLimit { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
+    }
+    
     [Serializable]
     public struct ProjectileFlags
     {
