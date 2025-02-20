@@ -21,7 +21,7 @@ namespace iiInfinityEngine.Core.Writers
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
             if (file is not StoFile)
-                throw new ArgumentException("File is not a valid creature file");
+                throw new ArgumentException("File is not a valid sto file");
 
             var stoFile = file as StoFile;
 

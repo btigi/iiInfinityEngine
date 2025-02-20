@@ -3,7 +3,6 @@ using iiInfinityEngine.Core.Binary;
 using iiInfinityEngine.Core.Files;
 using System;
 using iiInfinityEngine.Core.Writers.Interfaces;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace iiInfinityEngine.Core.Writers
@@ -12,11 +11,10 @@ namespace iiInfinityEngine.Core.Writers
     {
         public BackupManager BackupManger { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
             if (file is not VvcFile)
-                throw new ArgumentException("File is not a valid creature file");
+                throw new ArgumentException("File is not a valid vvc file");
 
             var vvcFile = file as VvcFile;
 

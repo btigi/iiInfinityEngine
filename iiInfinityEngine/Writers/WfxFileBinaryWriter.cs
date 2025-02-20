@@ -13,7 +13,7 @@ namespace iiInfinityEngine.Core.Writers
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
             if (file is not WfxFile)
-                throw new ArgumentException("File is not a valid creature file");
+                throw new ArgumentException("File is not a valid wfx file");
 
             var wfxFile = file as WfxFile;
 

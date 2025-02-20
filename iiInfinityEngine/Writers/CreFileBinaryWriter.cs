@@ -26,7 +26,7 @@ namespace iiInfinityEngine.Core.Writers
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
             if (!(file is CreFile))
-                throw new ArgumentException("File is not a valid creature file");
+                throw new ArgumentException("File is not a valid cre file");
 
             var creFile = file as CreFile;
 

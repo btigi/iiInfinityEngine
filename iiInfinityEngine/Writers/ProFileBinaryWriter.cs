@@ -1,9 +1,8 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using iiInfinityEngine.Core.Binary;
+﻿using iiInfinityEngine.Core.Binary;
 using iiInfinityEngine.Core.Files;
 using iiInfinityEngine.Core.Writers.Interfaces;
+using System;
+using System.IO;
 
 namespace iiInfinityEngine.Core.Writers
 {
@@ -11,11 +10,10 @@ namespace iiInfinityEngine.Core.Writers
     {
         public BackupManager BackupManger { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
             if (!(file is ProFile))
-                throw new ArgumentException("File is not a valid creature file");
+                throw new ArgumentException("File is not a valid pro file");
 
             var proFile = file as ProFile;
 

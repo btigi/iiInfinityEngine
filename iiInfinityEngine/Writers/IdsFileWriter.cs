@@ -11,18 +11,15 @@ namespace iiInfinityEngine.Core.Writers
 
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
-            if (!(file is IdsFile))
-                throw new ArgumentException("File is not a valid eff file");
+            if (file is not IdsFile)
+                throw new ArgumentException("File is not a valid ids file");
 
             var idsFile = file as IdsFile;
 
             if (!(forceSave) && (HashGenerator.GenerateKey(idsFile) == idsFile.Checksum))
                 return false;
 
-            if (BackupManger != null)
-            {
-                BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-            }
+            BackupManger?.BackupFile(file, file.Filename, file.FileType, this);
 
             File.WriteAllText(filename, idsFile.contents);
             return true;

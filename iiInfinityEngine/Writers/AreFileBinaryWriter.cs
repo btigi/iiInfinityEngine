@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using iiInfinityEngine.Core.Binary;
 using iiInfinityEngine.Core.Files;
 using System.IO;
@@ -36,7 +34,7 @@ namespace iiInfinityEngine.Core.Writers
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
             if (!(file is AreFile))
-                throw new ArgumentException("File is not a valid area file");
+                throw new ArgumentException("File is not a valid are file");
 
             var areFile = file as AreFile;
 

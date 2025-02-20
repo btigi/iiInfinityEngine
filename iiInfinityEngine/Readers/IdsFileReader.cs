@@ -8,23 +8,19 @@ namespace iiInfinityEngine.Core.Readers
     {
         public IdsFile Read(string filename)
         {
-            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
-            {
-                var f = Read(fs);
-                f.Filename = Path.GetFileName(filename);
-                return f;
-            }
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var f = Read(fs);
+            f.Filename = Path.GetFileName(filename);
+            return f;
         }
 
         public IdsFile Read(Stream s)
         {
-            using (StreamReader rdr = new StreamReader(s))
-            {
-                var file = Parse(rdr);
-                s.Seek(0, SeekOrigin.Begin);
-                file.OriginalFile = Parse(rdr);
-                return file;
-            }
+            using var rdr = new StreamReader(s);
+            var file = Parse(rdr);
+            s.Seek(0, SeekOrigin.Begin);
+            file.OriginalFile = Parse(rdr);
+            return file;
         }
 
         private IdsFile Parse(StreamReader rdr)
@@ -38,7 +34,7 @@ namespace iiInfinityEngine.Core.Readers
 
                 const int FileMarkerPrefixLength = 2; // 0xff 0xff
 
-                char[] chArray = new char[rdr.BaseStream.Length - FileMarkerPrefixLength];
+                var chArray = new char[rdr.BaseStream.Length - FileMarkerPrefixLength];
                 for (int i = 0; i < rdr.BaseStream.Length - FileMarkerPrefixLength; i++)
                 {
                     chArray[i] = (char)(rdr.BaseStream.ReadByte() ^ xorKey[i % 64]);
@@ -53,7 +49,7 @@ namespace iiInfinityEngine.Core.Readers
             {
                 rdr.BaseStream.Position = 0;
 
-                string str = rdr.ReadToEnd();
+                var str = rdr.ReadToEnd();
                 var file = new IdsFile();
                 file.contents = str;
                 file.Checksum = HashGenerator.GenerateKey(file);

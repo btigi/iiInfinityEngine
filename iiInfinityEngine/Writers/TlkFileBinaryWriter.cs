@@ -18,7 +18,7 @@ namespace iiInfinityEngine.Core.Writers
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
             if (file is not TlkFile)
-                throw new ArgumentException("File is not a valid TLK file");
+                throw new ArgumentException("File is not a valid tlk file");
 
             var tlkFile = file as TlkFile;
 
