@@ -6,8 +6,8 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class ItmFile : IEFile
     {
-        public List<ItmExtendedHeader2> itmExtendedHeader = new List<ItmExtendedHeader2>();
-        public List<ItmFeatureBlock2> itmFeatureBlocks = new List<ItmFeatureBlock2>();
+        public List<ItmExtendedHeader2> itmExtendedHeader = [];
+        public List<ItmFeatureBlock2> itmFeatureBlocks = [];
 
         [NonSerialized]
         private string checksum;
@@ -24,39 +24,36 @@ namespace iiInfinityEngine.Core.Files
 
         public IEString UnidentifiedName;
         public IEString IdentifiedName;
-        public string ReplacementItem;
+        public array8 ReplacementItem;
         public ItmFlags Flags;
         public ItemType ItemType;
-        public char Usability1;
-        public char Usability2;
-        public char Usability3;
-        public char Usability4;
-        public string Animation;
-        public char MinimumLevel;
-        public char Unknown;
-        public char MinimumStrength;
-        public char Unknown2;
-        public char MinimumStrengthBonus;
-        public char KitUsability1;
-        public char MinimumIntelligence;
-        public char KitUsability2;
-        public char MinimumDexterity;
-        public char KitUsability3;
-        public char MinimumWisdom;
-        public char KitUsability4;
-        public char MinimumConstitution;
-        public char Proficiency;
-        public char MinimumCharisma;
-        public char Unknown3;
+        public Usability1 Usability1;
+        public Usability2 Usability2;
+        public Usability3 Usability3;
+        public Usability4 Usability4;
+        public array2 Animation;
+        public Int16 MinimumLevel;
+        public Int16 MinimumStrength;
+        public byte MinimumStrengthBonus;
+        public KitUsability1 KitUsability1;
+        public byte MinimumIntelligence;
+        public KitUsability2 KitUsability2;
+        public byte MinimumDexterity;
+        public KitUsability3 KitUsability3;
+        public byte MinimumWisdom;
+        public KitUsability4 KitUsability4;
+        public byte MinimumConstitution;
+        public byte Proficiency; //TODO:itm
+        public Int16 MinimumCharisma;
         public Int32 Price;
         public Int16 StackAmount;
-        public string InventoryIcon;
+        public array8 InventoryIcon;
         public Int16 LoreToIdentify;
-        public string GroundIcon;
+        public array8 GroundIcon;
         public Int32 Weight;
         public IEString UnidentifiedDescription;
         public IEString IdentifiedDescription;
-        public string DescriptionIcon;
+        public array8 DescriptionIcon;
         public Int32 Enchantment;
         public Int32 ExtendedHeaderOffset;
         public Int16 ExtendedHeaderCount;
@@ -68,15 +65,15 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class ItmExtendedHeader2
     {
-        public char AttackType { get; set; }
-        public char IdentificationRequirement { get; set; }
-        public char Location { get; set; }
-        public char AlternaticeDiceSides { get; set; }
+        public AttackType AttackType { get; set; }
+        public byte IdentificationRequirement { get; set; } //TODO:itm
+        public byte Location { get; set; } //TODO:itm
+        public byte AlternaticeDiceSides { get; set; }
         public array8 UseIcon { get; set; }
-        public char TargetType { get; set; }
-        public char TargetCount { get; set; }
+        public char TargetType { get; set; } //TODO:itm
+        public byte TargetCount { get; set; }
         public Int16 Range { get; set; }
-        public byte ProjectileType { get; set; }
+        public LauncherType LauncherType { get; set; }
         public byte AlternaticeDiceThrown { get; set; }
         public byte Speed { get; set; }
         public byte AlternaticeDamageBonus { get; set; }
@@ -86,20 +83,19 @@ namespace iiInfinityEngine.Core.Files
         public byte DiceThrown { get; set; }
         public byte SecondaryType { get; set; }
         public Int16 DamageBonus { get; set; }
-        public Int16 DamageType { get; set; }
+        public Int16 DamageType { get; set; } //TODO:itm
         public Int16 FeatureBlockCount { get; set; }
         public Int16 FeatureBlockOffset { get; set; }
         public Int16 Charges { get; set; }
-        public Int16 ChargeDepletionBehaviour { get; set; }
-        public Int16 Flags { get; set; }
-        public Int16 Unknown { get; set; }
+        public Int16 ChargeDepletionBehaviour { get; set; }//TODO;itm
+        public Int32 Flags { get; set; }//TODO;itm
         public Int16 ProjectileAnimation { get; set; }
         public Int16 MeleeAnimation1 { get; set; }
         public Int16 MeleeAnimation2 { get; set; }
         public Int16 MeleeAnimation3 { get; set; }
-        public Int16 IsBowArrow { get; set; }
-        public Int16 IsCrossbowBolt { get; set; }
-        public Int16 IsMiscProjectile { get; set; }
+        public Int16 IsBowArrow { get; set; }//TODO;itm
+        public Int16 IsCrossbowBolt { get; set; }//TODO;itm
+        public Int16 IsMiscProjectile { get; set; }//TODO;itm
 
         public List<ItmFeatureBlock2> itmFeatureBlocks = new List<ItmFeatureBlock2>();
     }
@@ -108,21 +104,125 @@ namespace iiInfinityEngine.Core.Files
     public class ItmFeatureBlock2
     {
         public Int16 Opcode { get; set; }
-        public byte TargetType { get; set; }
+        public byte TargetType { get; set; }//TODO;itm
         public byte Power { get; set; }
         public Int32 Parameter1 { get; set; }
         public Int32 Parameter2 { get; set; }
-        public byte TimingMode { get; set; }
-        public byte Resistance { get; set; }
+        public byte TimingMode { get; set; }//TODO;itm
+        public byte Resistance { get; set; }//TODO;itm
         public Int32 Duration { get; set; }
         public byte Probability1 { get; set; }
         public byte Probability2 { get; set; }
         public array8 Resource { get; set; }
         public Int32 DiceThrown { get; set; }
         public Int32 DiceSides { get; set; }
-        public Int32 SavingThrowType { get; set; }
+        public Int32 SavingThrowType { get; set; }//TODO;itm
         public Int32 SavingThrowBonus { get; set; }
-        public Int32 Unknown { get; set; }
+        public Int32 Unknown { get; set; }//TODO;itm
+    }
+
+    [Serializable]
+    public class Usability1
+    {
+        public bool Chaotic_ { get; set; }
+        public bool _Evil { get; set; }
+        public bool _Good { get; set; }
+        public bool _Neutral { get; set; }
+        public bool Lawful_ { get; set; }
+        public bool Neutral_ { get; set; }
+        public bool Bard { get; set; }
+        public bool Cleric { get; set; }
+    }
+
+    [Serializable]
+    public class Usability2
+    {
+        public bool ClericMage { get; set; }
+        public bool ClericThief { get; set; }
+        public bool ClericRanger { get; set; }
+        public bool Fighter { get; set; }
+        public bool FighterDruid { get; set; }
+        public bool FighterMage { get; set; }
+        public bool FighterCleric { get; set; }
+        public bool FighterMageCleric { get; set; }
+    }
+
+    [Serializable]
+    public class Usability3
+    {
+        public bool FighterMageThief { get; set; }
+        public bool FighterThief { get; set; }
+        public bool Mage { get; set; }
+        public bool MageThief { get; set; }
+        public bool Paladin { get; set; }
+        public bool Ranger { get; set; }
+        public bool Thief { get; set; }
+        public bool Elf { get; set; }
+    }
+
+    [Serializable]
+    public class Usability4
+    {
+        public bool Dwarf { get; set; }
+        public bool HalfElf { get; set; }
+        public bool Halfling { get; set; }
+        public bool Human { get; set; }
+        public bool Gnome { get; set; }
+        public bool Monk { get; set; }
+        public bool Druid { get; set; }
+        public bool HalfOrc { get; set; }
+    }
+
+    [Serializable]
+    public class KitUsability1
+    {
+        public bool ClericOfTalos { get; set; }
+        public bool ClericOfHelm { get; set; }
+        public bool ClericOfLathander { get; set; }
+        public bool TotemicDruid { get; set; }
+        public bool ShapeshifterDruid { get; set; }
+        public bool AvengerDruid { get; set; }
+        public bool Barbarian { get; set; }
+        public bool Wildmage { get; set; }
+    }
+
+    [Serializable]
+    public class KitUsability2
+    {
+        public bool StalkerRanger { get; set; }
+        public bool BeastermasterRanger { get; set; }
+        public bool AssassinThief { get; set; }
+        public bool BountyHunterThief { get; set; }
+        public bool SwashbucklerThief { get; set; }
+        public bool BladeBard { get; set; }
+        public bool JesterBard { get; set; }
+        public bool SkaldBard { get; set; }
+    }
+
+    [Serializable]
+    public class KitUsability3
+    {
+        public bool Diviner { get; set; }
+        public bool Enchanter { get; set; }
+        public bool Illusionist { get; set; }
+        public bool Invoker { get; set; }
+        public bool Necromancer { get; set; }
+        public bool Transmuter { get; set; }
+        public bool All { get; set; }
+        public bool Ferlain { get; set; }
+    }
+
+    [Serializable]
+    public class KitUsability4
+    {
+        public bool BeserkerFighter { get; set; }
+        public bool WizardslayerFighter { get; set; }
+        public bool KensaiFighter { get; set; }
+        public bool CavalierPaladin { get; set; }
+        public bool InquisiterPaladin { get; set; }
+        public bool UndeadHunterPaladin { get; set; }
+        public bool Abjurer { get; set; }
+        public bool Conjurer { get; set; }
     }
 
     [Serializable]
@@ -161,4 +261,23 @@ namespace iiInfinityEngine.Core.Files
         public bool Unknown30 { get; set; }
         public bool Unknown31 { get; set; }
     }
+
+    public enum AttackType : byte
+    {
+        None = 0,
+        Melee,
+        Ranged,
+        Magical,
+        Launcher
+    }
+
+    public enum LauncherType : byte
+    {
+        None = 0,
+        Bow,
+        Crossbow,
+        Sling,
+        Spear = 40,
+        ThrowingAxe = 100
+    }    
 }
