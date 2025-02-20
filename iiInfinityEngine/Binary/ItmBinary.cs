@@ -56,7 +56,7 @@ namespace iiInfinityEngine.Core.Binary
         public byte Location;
         public byte AlternaticeDiceSides;
         public array8 UseIcon;
-        public char TargetType;
+        public byte TargetType;
         public byte TargetCount;
         public Int16 Range;
         public byte LauncherType;

@@ -67,10 +67,10 @@ namespace iiInfinityEngine.Core.Files
     {
         public AttackType AttackType { get; set; }
         public byte IdentificationRequirement { get; set; } //TODO:itm
-        public byte Location { get; set; } //TODO:itm
+        public Location Location { get; set; }
         public byte AlternaticeDiceSides { get; set; }
         public array8 UseIcon { get; set; }
-        public char TargetType { get; set; } //TODO:itm
+        public TargetType TargetType { get; set; }
         public byte TargetCount { get; set; }
         public Int16 Range { get; set; }
         public LauncherType LauncherType { get; set; }
@@ -87,15 +87,15 @@ namespace iiInfinityEngine.Core.Files
         public Int16 FeatureBlockCount { get; set; }
         public Int16 FeatureBlockOffset { get; set; }
         public Int16 Charges { get; set; }
-        public Int16 ChargeDepletionBehaviour { get; set; }//TODO;itm
-        public Int32 Flags { get; set; }//TODO;itm
+        public Int16 ChargeDepletionBehaviour { get; set; }//TODO:itm
+        public Int32 Flags { get; set; }//TODO:itm
         public Int16 ProjectileAnimation { get; set; }
         public Int16 MeleeAnimation1 { get; set; }
         public Int16 MeleeAnimation2 { get; set; }
         public Int16 MeleeAnimation3 { get; set; }
-        public Int16 IsBowArrow { get; set; }//TODO;itm
-        public Int16 IsCrossbowBolt { get; set; }//TODO;itm
-        public Int16 IsMiscProjectile { get; set; }//TODO;itm
+        public Int16 IsBowArrow { get; set; }//TODO:itm
+        public Int16 IsCrossbowBolt { get; set; }//TODO:itm
+        public Int16 IsMiscProjectile { get; set; }//TODO:itm
 
         public List<ItmFeatureBlock2> itmFeatureBlocks = new List<ItmFeatureBlock2>();
     }
@@ -104,25 +104,25 @@ namespace iiInfinityEngine.Core.Files
     public class ItmFeatureBlock2
     {
         public Int16 Opcode { get; set; }
-        public byte TargetType { get; set; }//TODO;itm
+        public byte TargetType { get; set; }//TODO:itm
         public byte Power { get; set; }
         public Int32 Parameter1 { get; set; }
         public Int32 Parameter2 { get; set; }
-        public byte TimingMode { get; set; }//TODO;itm
-        public byte Resistance { get; set; }//TODO;itm
+        public byte TimingMode { get; set; }//TODO:itm
+        public byte Resistance { get; set; }//TODO:itm
         public Int32 Duration { get; set; }
         public byte Probability1 { get; set; }
         public byte Probability2 { get; set; }
         public array8 Resource { get; set; }
         public Int32 DiceThrown { get; set; }
         public Int32 DiceSides { get; set; }
-        public Int32 SavingThrowType { get; set; }//TODO;itm
+        public Int32 SavingThrowType { get; set; }//TODO:itm
         public Int32 SavingThrowBonus { get; set; }
-        public Int32 Unknown { get; set; }//TODO;itm
+        public Int32 Unknown { get; set; }//TODO:itm
     }
 
     [Serializable]
-    public class Usability1
+    public struct Usability1
     {
         public bool Chaotic_ { get; set; }
         public bool _Evil { get; set; }
@@ -135,7 +135,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public class Usability2
+    public struct Usability2
     {
         public bool ClericMage { get; set; }
         public bool ClericThief { get; set; }
@@ -148,7 +148,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public class Usability3
+    public struct Usability3
     {
         public bool FighterMageThief { get; set; }
         public bool FighterThief { get; set; }
@@ -161,7 +161,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public class Usability4
+    public struct Usability4
     {
         public bool Dwarf { get; set; }
         public bool HalfElf { get; set; }
@@ -174,7 +174,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public class KitUsability1
+    public struct KitUsability1
     {
         public bool ClericOfTalos { get; set; }
         public bool ClericOfHelm { get; set; }
@@ -187,7 +187,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public class KitUsability2
+    public struct KitUsability2
     {
         public bool StalkerRanger { get; set; }
         public bool BeastermasterRanger { get; set; }
@@ -200,7 +200,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public class KitUsability3
+    public struct KitUsability3
     {
         public bool Diviner { get; set; }
         public bool Enchanter { get; set; }
@@ -213,7 +213,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public class KitUsability4
+    public struct KitUsability4
     {
         public bool BeserkerFighter { get; set; }
         public bool WizardslayerFighter { get; set; }
@@ -271,6 +271,27 @@ namespace iiInfinityEngine.Core.Files
         Launcher
     }
 
+    public enum Location : byte
+    {
+        None = 0,
+        Weapon,
+        Spell,
+        Item,
+        Innate
+    }
+
+    public enum TargetType : byte
+    {
+        None = 0,
+        LivingActor,
+        Inventory,
+        DeadActor,
+        Range,
+        Caster,
+        Crash,
+        CasterEE
+    }
+
     public enum LauncherType : byte
     {
         None = 0,
@@ -279,5 +300,5 @@ namespace iiInfinityEngine.Core.Files
         Sling,
         Spear = 40,
         ThrowingAxe = 100
-    }    
+    }
 }

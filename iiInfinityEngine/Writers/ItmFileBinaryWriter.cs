@@ -4,7 +4,6 @@ using System.IO;
 using iiInfinityEngine.Core.Binary;
 using iiInfinityEngine.Core.Files;
 using iiInfinityEngine.Core.Writers.Interfaces;
-using System.Diagnostics.CodeAnalysis;
 
 namespace iiInfinityEngine.Core.Writers
 {
@@ -17,10 +16,9 @@ namespace iiInfinityEngine.Core.Writers
         public TlkFile TlkFile { get; set; }
         public BackupManager BackupManger { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
-            if (!(file is ItmFile))
+            if (file is not ItmFile)
                 throw new ArgumentException("File is not a valid creature file");
 
             var itmFile = file as ItmFile;
@@ -28,12 +26,12 @@ namespace iiInfinityEngine.Core.Writers
             if (!(forceSave) && (HashGenerator.GenerateKey(itmFile) == itmFile.Checksum))
                 return false;
 
-            List<ItmExtendedHeaderBinary> itmExtendedHeaders = new List<ItmExtendedHeaderBinary>();
-            List<ItmFeatureBlockBinary> itmFeatureBlocks = new List<ItmFeatureBlockBinary>();
+            var itmExtendedHeaders = new List<ItmExtendedHeaderBinary>();
+            var itmFeatureBlocks = new List<ItmFeatureBlockBinary>();
 
             foreach (var featureBlock in itmFile.itmFeatureBlocks)
             {
-                ItmFeatureBlockBinary featureBlockBinary = new ItmFeatureBlockBinary();
+                var featureBlockBinary = new ItmFeatureBlockBinary();
                 featureBlockBinary.DiceSides = featureBlock.DiceSides;
                 featureBlockBinary.DiceThrown = featureBlock.DiceThrown;
                 featureBlockBinary.Duration = featureBlock.Duration;
@@ -55,7 +53,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var extendedHeader in itmFile.itmExtendedHeader)
             {
-                ItmExtendedHeaderBinary extendedHeaderBinary = new ItmExtendedHeaderBinary();
+                var extendedHeaderBinary = new ItmExtendedHeaderBinary();
                 extendedHeaderBinary.AlternaticeDamageBonus = extendedHeader.AlternaticeDamageBonus;
                 extendedHeaderBinary.AlternaticeDiceSides = extendedHeader.AlternaticeDiceSides;
                 extendedHeaderBinary.AlternaticeDiceThrown = extendedHeader.AlternaticeDiceThrown;
@@ -71,7 +69,7 @@ namespace iiInfinityEngine.Core.Writers
                 extendedHeaderBinary.IsBowArrow = extendedHeader.IsBowArrow;
                 extendedHeaderBinary.IsCrossbowBolt = extendedHeader.IsCrossbowBolt;
                 extendedHeaderBinary.IsMiscProjectile = extendedHeader.IsMiscProjectile;
-                extendedHeaderBinary.Location = extendedHeader.Location;
+                extendedHeaderBinary.Location = (byte)extendedHeader.Location;
                 extendedHeaderBinary.MeleeAnimation1 = extendedHeader.MeleeAnimation1;
                 extendedHeaderBinary.MeleeAnimation2 = extendedHeader.MeleeAnimation2;
                 extendedHeaderBinary.MeleeAnimation3 = extendedHeader.MeleeAnimation3;
@@ -82,7 +80,7 @@ namespace iiInfinityEngine.Core.Writers
                 extendedHeaderBinary.SecondaryType = extendedHeader.SecondaryType;
                 extendedHeaderBinary.Speed = extendedHeader.Speed;
                 extendedHeaderBinary.TargetCount = extendedHeader.TargetCount;
-                extendedHeaderBinary.TargetType = extendedHeader.TargetType;
+                extendedHeaderBinary.TargetType = (byte)extendedHeader.TargetType;
                 extendedHeaderBinary.Thac0Bonus = extendedHeader.Thac0Bonus;
                 extendedHeaderBinary.UseIcon = extendedHeader.UseIcon;
                 extendedHeaderBinary.FeatureBlockCount = extendedHeader.FeatureBlockCount;
@@ -90,7 +88,7 @@ namespace iiInfinityEngine.Core.Writers
 
                 foreach (var featureBlock in extendedHeader.itmFeatureBlocks)
                 {
-                    ItmFeatureBlockBinary featureBlockBinary = new ItmFeatureBlockBinary();
+                    var featureBlockBinary = new ItmFeatureBlockBinary();
                     featureBlockBinary.DiceSides = featureBlock.DiceSides;
                     featureBlockBinary.DiceThrown = featureBlock.DiceThrown;
                     featureBlockBinary.Duration = featureBlock.Duration;
@@ -113,7 +111,7 @@ namespace iiInfinityEngine.Core.Writers
                 itmExtendedHeaders.Add(extendedHeaderBinary);
             }
 
-            ItmHeaderBinary header = new ItmHeaderBinary();
+            var header = new ItmHeaderBinary();
 
             header.Flags = itmFile.Flags.CriticalItem ? header.Flags | Common.Bit0 : header.Flags;
             header.Flags = itmFile.Flags.TwoHanded ? header.Flags | Common.Bit1 : header.Flags;
@@ -247,39 +245,30 @@ namespace iiInfinityEngine.Core.Writers
             header.Usability4 = (byte)(itmFile.Usability4.HalfOrc ? header.Usability4 | Common.Bit7 : header.Usability4);
             header.Weight = itmFile.Weight;
 
-            using (MemoryStream s = new MemoryStream())
+            using var s = new MemoryStream();
+            using var bw = new BinaryWriter(s);
+            var headerAsBytes = Common.WriteStruct(header);
+
+            bw.Write(headerAsBytes);
+
+            foreach (var extendedHeader in itmExtendedHeaders)
             {
-                using (BinaryWriter bw = new BinaryWriter(s))
-                {
-                    var headerAsBytes = Common.WriteStruct(header);
-
-                    bw.Write(headerAsBytes);
-
-                    foreach (var extendedHeader in itmExtendedHeaders)
-                    {
-                        var extendedHeaderAsBytes = Common.WriteStruct(extendedHeader);
-                        bw.Write(extendedHeaderAsBytes);
-                    }
-
-                    foreach (var featureBlock in itmFeatureBlocks)
-                    {
-                        var featureBlockAsBytes = Common.WriteStruct(featureBlock);
-                        bw.Write(featureBlockAsBytes);
-                    }
-
-                    if (BackupManger != null)
-                    {
-                        BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-                    }
-
-                    using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
-                    {
-                        bw.BaseStream.Position = 0;
-                        bw.BaseStream.CopyTo(fs);
-                        fs.Flush(flushToDisk: true);
-                    }
-                }
+                var extendedHeaderAsBytes = Common.WriteStruct(extendedHeader);
+                bw.Write(extendedHeaderAsBytes);
             }
+
+            foreach (var featureBlock in itmFeatureBlocks)
+            {
+                var featureBlockAsBytes = Common.WriteStruct(featureBlock);
+                bw.Write(featureBlockAsBytes);
+            }
+
+            BackupManger?.BackupFile(file, file.Filename, file.FileType, this);
+
+            using var fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            bw.BaseStream.Position = 0;
+            bw.BaseStream.CopyTo(fs);
+            fs.Flush(flushToDisk: true);
             return true;
         }
     }

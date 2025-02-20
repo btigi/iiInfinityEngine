@@ -2,7 +2,6 @@
 using System.IO;
 using iiInfinityEngine.Core.Binary;
 using iiInfinityEngine.Core.Files;
-using System;
 
 namespace iiInfinityEngine.Core.Readers
 {
@@ -12,23 +11,19 @@ namespace iiInfinityEngine.Core.Readers
 
         public ItmFile Read(string filename)
         {
-            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
-            {
-                var f = Read(fs);
-                f.Filename = Path.GetFileName(filename);
-                return f;
-            }
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var f = Read(fs);
+            f.Filename = Path.GetFileName(filename);
+            return f;
         }
 
         public ItmFile Read(Stream s)
         {
-            using (BinaryReader br = new BinaryReader(s))
-            {
-                var itmFile = ParseFile(br);
-                br.BaseStream.Seek(0, SeekOrigin.Begin);
-                itmFile.OriginalFile = ParseFile(br);
-                return itmFile;
-            }
+            using var br = new BinaryReader(s);
+            var itmFile = ParseFile(br);
+            br.BaseStream.Seek(0, SeekOrigin.Begin);
+            itmFile.OriginalFile = ParseFile(br);
+            return itmFile;
         }
 
         private ItmFile ParseFile(BinaryReader br)
@@ -38,8 +33,8 @@ namespace iiInfinityEngine.Core.Readers
             if (header.ftype.ToString() != "ITM ")
                 return new ItmFile();
 
-            List<ItmExtendedHeaderBinary> itmExtendedHeaders = new List<ItmExtendedHeaderBinary>();
-            List<ItmFeatureBlockBinary> itmFeatureBlocks = new List<ItmFeatureBlockBinary>();
+            var itmExtendedHeaders = new List<ItmExtendedHeaderBinary>();
+            var itmFeatureBlocks = new List<ItmFeatureBlockBinary>();
 
             br.BaseStream.Seek(header.ExtendedHeaderOffset, SeekOrigin.Begin);
             for (int i = 0; i < header.ExtendedHeaderCount; i++)
@@ -55,7 +50,7 @@ namespace iiInfinityEngine.Core.Readers
                 itmFeatureBlocks.Add(itmFeatureBlock);
             }
 
-            ItmFile itmFile = new ItmFile();
+            var itmFile = new ItmFile();
             itmFile.UnidentifiedName = Common.ReadString(header.UnidentifiedName, TlkFile);
             itmFile.IdentifiedName = Common.ReadString(header.IdentifiedName, TlkFile);
             itmFile.ReplacementItem = header.ReplacementItem;
@@ -184,7 +179,7 @@ namespace iiInfinityEngine.Core.Readers
 
             foreach (var extendedHeader in itmExtendedHeaders)
             {
-                ItmExtendedHeader2 extendedHeader2 = new ItmExtendedHeader2();
+                var extendedHeader2 = new ItmExtendedHeader2();
                 extendedHeader2.AlternaticeDamageBonus = extendedHeader.AlternaticeDamageBonus;
                 extendedHeader2.AlternaticeDiceSides = extendedHeader.AlternaticeDiceSides;
                 extendedHeader2.AlternaticeDiceThrown = extendedHeader.AlternaticeDiceThrown;
@@ -195,14 +190,14 @@ namespace iiInfinityEngine.Core.Readers
                 extendedHeader2.DamageType = extendedHeader.DamageType;
                 extendedHeader2.DiceSides = extendedHeader.DiceSides;
                 extendedHeader2.DiceThrown = extendedHeader.DiceThrown;
-                extendedHeader2.FeatureBlockCount = extendedHeader.FeatureBlockCount; //xxx
-                extendedHeader2.FeatureBlockOffset = extendedHeader.FeatureBlockOffset; //xxx
+                extendedHeader2.FeatureBlockCount = extendedHeader.FeatureBlockCount;
+                extendedHeader2.FeatureBlockOffset = extendedHeader.FeatureBlockOffset;
                 extendedHeader2.Flags = extendedHeader.Flags;
                 extendedHeader2.IdentificationRequirement = extendedHeader.IdentificationRequirement;
                 extendedHeader2.IsBowArrow = extendedHeader.IsBowArrow;
                 extendedHeader2.IsCrossbowBolt = extendedHeader.IsCrossbowBolt;
                 extendedHeader2.IsMiscProjectile = extendedHeader.IsMiscProjectile;
-                extendedHeader2.Location = extendedHeader.Location;
+                extendedHeader2.Location = (Location)extendedHeader.Location;
                 extendedHeader2.MeleeAnimation1 = extendedHeader.MeleeAnimation1;
                 extendedHeader2.MeleeAnimation2 = extendedHeader.MeleeAnimation2;
                 extendedHeader2.MeleeAnimation3 = extendedHeader.MeleeAnimation3;
@@ -213,7 +208,7 @@ namespace iiInfinityEngine.Core.Readers
                 extendedHeader2.SecondaryType = extendedHeader.SecondaryType;
                 extendedHeader2.Speed = extendedHeader.Speed;
                 extendedHeader2.TargetCount = extendedHeader.TargetCount;
-                extendedHeader2.TargetType = extendedHeader.TargetType;
+                extendedHeader2.TargetType = (TargetType)extendedHeader.TargetType;
                 extendedHeader2.Thac0Bonus = extendedHeader.Thac0Bonus;
                 extendedHeader2.UseIcon = extendedHeader.UseIcon;
 
@@ -222,7 +217,7 @@ namespace iiInfinityEngine.Core.Readers
                 {
                     var itmFeatureBlock = (ItmFeatureBlockBinary)Common.ReadStruct(br, typeof(ItmFeatureBlockBinary));
 
-                    ItmFeatureBlock2 itmFeatureBlock2 = new ItmFeatureBlock2();
+                    var itmFeatureBlock2 = new ItmFeatureBlock2();
                     itmFeatureBlock2.DiceSides = itmFeatureBlock.DiceSides;
                     itmFeatureBlock2.DiceThrown = itmFeatureBlock.DiceThrown;
                     itmFeatureBlock2.Duration = itmFeatureBlock.Duration;
@@ -248,7 +243,7 @@ namespace iiInfinityEngine.Core.Readers
 
             foreach (var featureBlock in itmFeatureBlocks)
             {
-                ItmFeatureBlock2 itmFeatureBlock2 = new ItmFeatureBlock2();
+                var itmFeatureBlock2 = new ItmFeatureBlock2();
                 itmFeatureBlock2.DiceSides = featureBlock.DiceSides;
                 itmFeatureBlock2.DiceThrown = featureBlock.DiceThrown;
                 itmFeatureBlock2.Duration = featureBlock.Duration;
