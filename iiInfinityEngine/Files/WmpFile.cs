@@ -32,16 +32,16 @@ namespace iiInfinityEngine.Core.Files
             Flags = new WmapWorldmapFlags();
         }
 
-        public string BackgroundMos { get; set; }
+        public array8 BackgroundMos { get; set; }
         public Int32 Width { get; set; }
         public Int32 Height { get; set; }
         public Int32 MapNumber { get; set; }
         public IEString AreaName { get; set; }
         public Int32 StartCenteredOnX { get; set; }
         public Int32 StartCenteredOnY { get; set; }
-        public string MapIconsBam { get; set; }
+        public array8 MapIconsBam { get; set; }
         public WmapWorldmapFlags Flags { get; set; }
-        public byte[] Unused { get; set; }
+        public byte[] Unused { get; set; } //TODO:wmp this is 124 bytes
     }
 
     [Serializable]
@@ -57,8 +57,8 @@ namespace iiInfinityEngine.Core.Files
             Flags = new WmpAreaFlags();
         }
 
-        public string AreaFilename { get; set; }
-        public string ShortName { get; set; }
+        public array8 AreaFilename { get; set; }
+        public array8 ShortName { get; set; }
         public string LongName { get; set; }
         public WmpAreaFlags Flags { get; set; }
         public Int32 SequenceBam { get; set; }

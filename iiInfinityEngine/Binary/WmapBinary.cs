@@ -17,8 +17,7 @@ namespace iiInfinityEngine.Core.Binary
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     struct WmapWorldmapBinary
     {
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
-        public char[] BackgroundMos;
+        public array8 BackgroundMos;
         public Int32 Width;
         public Int32 Height;
         public Int32 MapNumber;
@@ -29,8 +28,7 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 AreaOffset;
         public Int32 AreaLinkOffset;
         public Int32 AreaLinkCount;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
-        public char[] MapIconsBam;
+        public array8 MapIconsBam;
         public Int32 Flags;
         [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 124)]
         public byte[] Unused;
@@ -39,10 +37,8 @@ namespace iiInfinityEngine.Core.Binary
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     struct WmapAreaBinary
     {
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
-        public char[] AreaFilename;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
-        public char[] ShortName;
+        public array8 AreaFilename;
+        public array8 ShortName;
         [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 32)]
         public char[] LongName;
         public Int32 Flags;

@@ -7,12 +7,12 @@ namespace iiInfinityEngine.Core.Binary
     struct Eff1BinaryBinary
     {
         public Int16 Opcode;
-        public byte TargetType;
+        public EffTargetType TargetType;
         public byte Power;
         public Int32 Parameter1;
         public Int32 Parameter2;
         public byte TimingMode;
-        public byte DispelResistance;
+        public byte Resistance;
         public Int32 Duration;
         public byte Probability1;
         public byte Probability2;

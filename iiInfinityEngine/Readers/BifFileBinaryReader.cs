@@ -12,28 +12,28 @@ namespace iiInfinityEngine.Core.Readers
     public class BifFileBinaryReader : IBifFileReader
     {
         //Note: BIFF files do not support 'original file'
-        List<BifFileEntryBinary> fileStructs = new List<BifFileEntryBinary>();
-        List<BifTilesetEntryBinary> tileStructs = new List<BifTilesetEntryBinary>();
-        List<SplFile> spells = new List<SplFile>();
-        List<StoFile> stores = new List<StoFile>();
-        List<DlgFile> dialogs = new List<DlgFile>();
-        List<ItmFile> items = new List<ItmFile>();
-        List<WfxFile> wfxs = new List<WfxFile>();
-        List<EffFile> effs = new List<EffFile>();
-        List<CreFile> creatures = new List<CreFile>();
-        List<ProFile> projectiles = new List<ProFile>();
-        List<IdsFile> identifiers = new List<IdsFile>();
-        List<DimensionalArrayFile> dimensionalArrays = new List<DimensionalArrayFile>();
-        List<AreFile> areas = new List<AreFile>();
-        List<WmpFile> worldmaps = new List<WmpFile>();
-        List<VvcFile> vvcs = new List<VvcFile>();
-        List<TisFile> tilesets = new List<TisFile>();
+        List<BifFileEntryBinary> fileStructs = [];
+        List<BifTilesetEntryBinary> tileStructs = [];
+        List<SplFile> spells = [];
+        List<StoFile> stores = [];
+        List<DlgFile> dialogs = [];
+        List<ItmFile> items = [];
+        List<WfxFile> wfxs = [];
+        List<EffFile> effs = [];
+        List<CreFile> creatures = [];
+        List<ProFile> projectiles = [];
+        List<IdsFile> identifiers = [];
+        List<DimensionalArrayFile> dimensionalArrays = [];
+        List<AreFile> areas = [];
+        List<WmpFile> worldmaps = [];
+        List<VvcFile> vvcs = [];
+        List<TisFile> tilesets = [];
 
         public TlkFile TlkFile { get; set; }
 
         public BifFile Read(Stream s, List<KeyBifResource2> resources, List<IEFileType> fileTypes)
         {
-            BinaryReader br = new BinaryReader(s);
+            var br = new BinaryReader(s);
             try
             {
                 var header = (BifHeaderBinary)Common.ReadStruct(br, typeof(BifHeaderBinary));
@@ -106,208 +106,206 @@ namespace iiInfinityEngine.Core.Readers
                     {
                         br.BaseStream.Seek(f.resourceOffset, SeekOrigin.Begin);
                         var file = br.ReadBytes(f.resourceSize);
-                        using (MemoryStream ms = new MemoryStream(file))
+                        using var ms = new MemoryStream(file);
+                        KeyBifResource2 resource;
+                        switch ((IEFileType)f.resourceType)
                         {
-                            KeyBifResource2 resource;
-                            switch ((IEFileType)f.resourceType)
-                            {
-                                case IEFileType.Are:
-                                    try
+                            case IEFileType.Are:
+                                try
+                                {
+                                    var are = new AreFileBinaryReader();
+                                    var area = (AreFile)are.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
                                     {
-                                        AreFileBinaryReader are = new AreFileBinaryReader();
-                                        var area = (AreFile)are.Read(ms);
-                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                                        if (resource != null)
-                                        {
-                                            area.Filename = resource.ResourceName + "." + resource.ResourceType;
-                                        }
-                                        areas.Add(area);
+                                        area.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
-                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                    break;
+                                    areas.Add(area);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
 
-                                case IEFileType.Pro:
-                                    try
+                            case IEFileType.Pro:
+                                try
+                                {
+                                    var pro = new ProFileBinaryReader();
+                                    var projectile = (ProFile)pro.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
                                     {
-                                        ProFileBinaryReader pro = new ProFileBinaryReader();
-                                        var projectile = (ProFile)pro.Read(ms);
-                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                                        if (resource != null)
-                                        {
-                                            projectile.Filename = resource.ResourceName + "." + resource.ResourceType;
-                                        }
-                                        projectiles.Add(projectile);
+                                        projectile.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
-                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                    break;
+                                    projectiles.Add(projectile);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
 
-                                case IEFileType.Ids:
-                                    try
+                            case IEFileType.Ids:
+                                try
+                                {
+                                    var ids = new IdsFileReader();
+                                    var identifier = (IdsFile)ids.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
                                     {
-                                        IdsFileReader ids = new IdsFileReader();
-                                        var identifier = (IdsFile)ids.Read(ms);
-                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                                        if (resource != null)
-                                        {
-                                            identifier.Filename = resource.ResourceName + "." + resource.ResourceType;
-                                        }
-                                        identifiers.Add(identifier);
+                                        identifier.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
-                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                    break;
+                                    identifiers.Add(identifier);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
 
-                                case IEFileType.DimensionalArray:
-                                    try
+                            case IEFileType.DimensionalArray:
+                                try
+                                {
+                                    var twoDeeAy = new DimensionalArrayFileReader();
+                                    var dimensionalArray = (DimensionalArrayFile)twoDeeAy.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
                                     {
-                                        DimensionalArrayFileReader twoDeeAy = new DimensionalArrayFileReader();
-                                        var dimensionalArray = (DimensionalArrayFile)twoDeeAy.Read(ms);
-                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                                        if (resource != null)
-                                        {
-                                            // We special case this filename, as we can't set the FileType identifier to start with a number
-                                            dimensionalArray.Filename = resource.ResourceName + ".2da";
-                                        }
-                                        dimensionalArrays.Add(dimensionalArray);
+                                        // We special case this filename, as we can't set the FileType identifier to start with a number
+                                        dimensionalArray.Filename = resource.ResourceName + ".2da";
                                     }
-                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                    break;
+                                    dimensionalArrays.Add(dimensionalArray);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
 
-                                case IEFileType.Cre:
-                                    try
+                            case IEFileType.Cre:
+                                try
+                                {
+                                    var cre = new CreFileBinaryReader();
+                                    var creature = (CreFile)cre.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
                                     {
-                                        CreFileBinaryReader cre = new CreFileBinaryReader();
-                                        var creature = (CreFile)cre.Read(ms);
-                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                                        if (resource != null)
-                                        {
-                                            creature.Filename = resource.ResourceName + "." + resource.ResourceType;
-                                        }
-                                        creatures.Add(creature);
+                                        creature.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
-                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                    break;
+                                    creatures.Add(creature);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
 
-                                case IEFileType.Dlg:
-                                    try
+                            case IEFileType.Dlg:
+                                try
+                                {
+                                    var dlg = new DlgFileBinaryReader();
+                                    var dialog = (DlgFile)dlg.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
                                     {
-                                        DlgFileBinaryReader dlg = new DlgFileBinaryReader();
-                                        var dialog = (DlgFile)dlg.Read(ms);
-                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                                        if (resource != null)
-                                        {
-                                            dialog.Filename = resource.ResourceName + "." + resource.ResourceType;
-                                        }
-                                        dialogs.Add(dialog);
+                                        dialog.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
-                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                    break;
+                                    dialogs.Add(dialog);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
 
-                                case IEFileType.Eff:
-                                    try
+                            case IEFileType.Eff:
+                                try
+                                {
+                                    var eff = new EffFileBinaryReader();
+                                    var effect = (EffFile)eff.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
                                     {
-                                        EffFileBinaryReader eff = new EffFileBinaryReader();
-                                        var effect = (EffFile)eff.Read(ms);
-                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                                        if (resource != null)
-                                        {
-                                            effect.Filename = resource.ResourceName + "." + resource.ResourceType;
-                                        }
-                                        effs.Add(effect);
+                                        effect.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
-                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                    break;
+                                    effs.Add(effect);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
 
-                                case IEFileType.Itm:
-                                    try
+                            case IEFileType.Itm:
+                                try
+                                {
+                                    var itm = new ItmFileBinaryReader();
+                                    itm.TlkFile = TlkFile;
+                                    var item = (ItmFile)itm.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
                                     {
-                                        ItmFileBinaryReader itm = new ItmFileBinaryReader();
-                                        itm.TlkFile = TlkFile;
-                                        var item = (ItmFile)itm.Read(ms);
-                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                                        if (resource != null)
-                                        {
-                                            item.Filename = resource.ResourceName + "." + resource.ResourceType;
-                                        }
-                                        items.Add(item);
+                                        item.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
-                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                    break;
+                                    items.Add(item);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
 
-                                case IEFileType.Spl:
-                                    try
+                            case IEFileType.Spl:
+                                try
+                                {
+                                    var spl = new SplFileBinaryReader();
+                                    var spell = (SplFile)spl.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
                                     {
-                                        SplFileBinaryReader spl = new SplFileBinaryReader();
-                                        var spell = (SplFile)spl.Read(ms);
-                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                                        if (resource != null)
-                                        {
-                                            spell.Filename = resource.ResourceName + "." + resource.ResourceType;
-                                        }
-                                        spells.Add(spell);
+                                        spell.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
-                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                    break;
+                                    spells.Add(spell);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
 
-                                case IEFileType.Sto:
-                                    try
+                            case IEFileType.Sto:
+                                try
+                                {
+                                    var sto = new StoFileBinaryReader();
+                                    var store = (StoFile)sto.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
                                     {
-                                        StoFileBinaryReader sto = new StoFileBinaryReader();
-                                        var store = (StoFile)sto.Read(ms);
-                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                                        if (resource != null)
-                                        {
-                                            store.Filename = resource.ResourceName + "." + resource.ResourceType;
-                                        }
-                                        stores.Add(store);
+                                        store.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
-                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                    break;
+                                    stores.Add(store);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
 
-                                case IEFileType.Vvc:
-                                    try
+                            case IEFileType.Vvc:
+                                try
+                                {
+                                    var vvc = new VvcFileBinaryReader();
+                                    var vvcFile = (VvcFile)vvc.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
                                     {
-                                        VvcFileBinaryReader vvc = new VvcFileBinaryReader();
-                                        var vvcFile = (VvcFile)vvc.Read(ms);
-                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                                        if (resource != null)
-                                        {
-                                            vvcFile.Filename = resource.ResourceName + "." + resource.ResourceType;
-                                        }
-                                        vvcs.Add(vvcFile);
+                                        vvcFile.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
-                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                    break;
+                                    vvcs.Add(vvcFile);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
 
-                                case IEFileType.Wfx:
-                                    try
+                            case IEFileType.Wfx:
+                                try
+                                {
+                                    var wfx = new WfxFileBinaryReader();
+                                    var wfxfile = (WfxFile)wfx.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
                                     {
-                                        WfxFileBinaryReader wfx = new WfxFileBinaryReader();
-                                        var wfxfile = (WfxFile)wfx.Read(ms);
-                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                                        if (resource != null)
-                                        {
-                                            wfxfile.Filename = resource.ResourceName + "." + resource.ResourceType;
-                                        }
-                                        wfxs.Add(wfxfile);
+                                        wfxfile.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
-                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                    break;
+                                    wfxs.Add(wfxfile);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
 
-                                case IEFileType.Wmp:
-                                    try
+                            case IEFileType.Wmp:
+                                try
+                                {
+                                    var wmp = new WmpFileBinaryReader();
+                                    var worldmap = (WmpFile)wmp.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
                                     {
-                                        WmpFileBinaryReader wmp = new WmpFileBinaryReader();
-                                        var worldmap = (WmpFile)wmp.Read(ms);
-                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                                        if (resource != null)
-                                        {
-                                            worldmap.Filename = resource.ResourceName + "." + resource.ResourceType;
-                                        }
-                                        worldmaps.Add(worldmap);
+                                        worldmap.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
-                                    catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                    break;
-                            }
+                                    worldmaps.Add(worldmap);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
                         }
                     }
                     ix++;
@@ -317,31 +315,28 @@ namespace iiInfinityEngine.Core.Readers
                 {
                     br.BaseStream.Seek(ts.resourceOffset, SeekOrigin.Begin);
                     var file = br.ReadBytes(ts.tileSize);
-                    using (MemoryStream ms = new MemoryStream(file))
+                    using var ms = new MemoryStream(file);
+                    KeyBifResource2 resource;
+                    switch ((IEFileType)ts.resourceType)
                     {
-                        KeyBifResource2 resource;
-                        switch ((IEFileType)ts.resourceType)
-                        {
-                            case IEFileType.Tis:
-                                try
+                        case IEFileType.Tis:
+                            try
+                            {
+                                var tis = new TisFileBinaryReader();
+                                var tisfile = (TisFile)tis.Read(ms);
+                                resource = resources.Where(a => a.TileSetIndex == (ts.resourceLocator & ~0xFFF)).SingleOrDefault();
+                                if (resource != null)
                                 {
-                                    TisFileBinaryReader tis = new TisFileBinaryReader();
-                                    var tisfile = (TisFile)tis.Read(ms);
-                                    resource = resources.Where(a => a.TileSetIndex == (ts.resourceLocator & ~0xFFF)).SingleOrDefault();
-                                    if (resource != null)
-                                    {
-                                        tisfile.Filename = resource.ResourceName + "." + resource.ResourceType;
-                                    }
-                                    tilesets.Add(tisfile);
+                                    tisfile.Filename = resource.ResourceName + "." + resource.ResourceType;
                                 }
-                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                                break;
-                        }
+                                tilesets.Add(tisfile);
+                            }
+                            catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                            break;
                     }
                 }
 
-
-                BifFile bifFile = new BifFile();
+                var bifFile = new BifFile();
                 bifFile.items = items;
                 bifFile.spells = spells;
                 bifFile.effects = effs;

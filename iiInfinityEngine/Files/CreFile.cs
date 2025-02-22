@@ -1,8 +1,6 @@
-﻿using System;
+﻿using iiInfinityEngine.Core.Binary;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using iiInfinityEngine.Core.Binary;
 
 namespace iiInfinityEngine.Core.Files
 {
@@ -12,45 +10,45 @@ namespace iiInfinityEngine.Core.Files
     {
         public CreFile()
         {
-            MemorisedSpells.MageLevel1 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.MageLevel2 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.MageLevel3 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.MageLevel4 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.MageLevel5 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.MageLevel6 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.MageLevel7 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.MageLevel8 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.MageLevel9 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.PriestLevel1 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.PriestLevel2 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.PriestLevel3 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.PriestLevel4 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.PriestLevel5 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.PriestLevel6 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.PriestLevel7 = new List<CreMemorisedSpell2>();
-            MemorisedSpells.Innate = new List<CreMemorisedSpell2>();
+            MemorisedSpells.MageLevel1 = [];
+            MemorisedSpells.MageLevel2 = [];
+            MemorisedSpells.MageLevel3 = [];
+            MemorisedSpells.MageLevel4 = [];
+            MemorisedSpells.MageLevel5 = [];
+            MemorisedSpells.MageLevel6 = [];
+            MemorisedSpells.MageLevel7 = [];
+            MemorisedSpells.MageLevel8 = [];
+            MemorisedSpells.MageLevel9 = [];
+            MemorisedSpells.PriestLevel1 = [];
+            MemorisedSpells.PriestLevel2 = [];
+            MemorisedSpells.PriestLevel3 = [];
+            MemorisedSpells.PriestLevel4 = []   ;
+            MemorisedSpells.PriestLevel5 = [];
+            MemorisedSpells.PriestLevel6 = [];
+            MemorisedSpells.PriestLevel7 = [];
+            MemorisedSpells.Innate = [];
 
-            KnownSpells.MageLevel1 = new List<CreKnownSpell2>();
-            KnownSpells.MageLevel2 = new List<CreKnownSpell2>();
-            KnownSpells.MageLevel3 = new List<CreKnownSpell2>();
-            KnownSpells.MageLevel4 = new List<CreKnownSpell2>();
-            KnownSpells.MageLevel5 = new List<CreKnownSpell2>();
-            KnownSpells.MageLevel6 = new List<CreKnownSpell2>();
-            KnownSpells.MageLevel7 = new List<CreKnownSpell2>();
-            KnownSpells.MageLevel8 = new List<CreKnownSpell2>();
-            KnownSpells.MageLevel9 = new List<CreKnownSpell2>();
-            KnownSpells.PriestLevel1 = new List<CreKnownSpell2>();
-            KnownSpells.PriestLevel2 = new List<CreKnownSpell2>();
-            KnownSpells.PriestLevel3 = new List<CreKnownSpell2>();
-            KnownSpells.PriestLevel4 = new List<CreKnownSpell2>();
-            KnownSpells.PriestLevel5 = new List<CreKnownSpell2>();
-            KnownSpells.PriestLevel6 = new List<CreKnownSpell2>();
-            KnownSpells.PriestLevel7 = new List<CreKnownSpell2>();
-            KnownSpells.Innate = new List<CreKnownSpell2>();
+            KnownSpells.MageLevel1 = [];
+            KnownSpells.MageLevel2 = [];
+            KnownSpells.MageLevel3 = [];
+            KnownSpells.MageLevel4 = [];
+            KnownSpells.MageLevel5 = [];
+            KnownSpells.MageLevel6 = [];
+            KnownSpells.MageLevel7 = [];
+            KnownSpells.MageLevel8 = [];
+            KnownSpells.MageLevel9 = [];
+            KnownSpells.PriestLevel1 = [];
+            KnownSpells.PriestLevel2 = [];
+            KnownSpells.PriestLevel3 = [];
+            KnownSpells.PriestLevel4 = [];
+            KnownSpells.PriestLevel5 = [];
+            KnownSpells.PriestLevel6 = [];
+            KnownSpells.PriestLevel7 = [];
+            KnownSpells.Innate = [];
         }
 
-        public List<Eff1File> Effects1 = new List<Eff1File>();
-        public List<EmbeddedEffBinary> Effects2 = new List<EmbeddedEffBinary>(); // TODO: this should not be a binary?
+        public List<Eff1File> Effects1 = [];
+        public List<EmbeddedEffBinary> Effects2 = []; // TODO: this should not be a binary?
         public CreItemSlots Items;
         public CreMemorisedSpells MemorisedSpells;
         public CreKnownSpells KnownSpells;

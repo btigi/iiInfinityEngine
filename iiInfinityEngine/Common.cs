@@ -1947,4 +1947,18 @@ namespace iiInfinityEngine.Core
         public bool Bit6 { get; set; }
         public bool Bit7 { get; set; }
     }
+
+    public enum EffTargetType
+    {
+        None = 0,
+        Self,
+        ProjectileTarget,
+        Party,
+        Everyone,
+        EveryoneExceptParty,
+        CasterGroup,
+        TargetGroup,
+        EveryoneExceptSelf,
+        OriginalCaster
+    }
 }

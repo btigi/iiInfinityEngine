@@ -10,6 +10,7 @@ namespace iiInfinityEngine.Core.Binary
         public char[] ftype;
         [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 4)]
         public char[] fversion;
+
         public Int32 StateCount;
         public Int32 StateOffset;
         public Int32 TransitionCount;

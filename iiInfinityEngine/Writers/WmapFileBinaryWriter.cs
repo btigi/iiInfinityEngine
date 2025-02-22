@@ -35,9 +35,9 @@ namespace iiInfinityEngine.Core.Writers
             {
                 var worldmapBinary = new WmapWorldmapBinary();
                 worldmapBinary.AreaName = Common.WriteString(worldmap.AreaName, TlkFile);
-                worldmapBinary.BackgroundMos = worldmap.BackgroundMos.ToArray();
+                worldmapBinary.BackgroundMos = worldmap.BackgroundMos;
                 worldmapBinary.Height = worldmap.Height;
-                worldmapBinary.MapIconsBam = worldmap.MapIconsBam.ToArray();
+                worldmapBinary.MapIconsBam = worldmap.MapIconsBam;
                 worldmapBinary.MapNumber = worldmap.MapNumber;
                 worldmapBinary.Unused = worldmap.Unused;
                 worldmapBinary.StartCenteredOnX = worldmap.StartCenteredOnX;
@@ -81,7 +81,7 @@ namespace iiInfinityEngine.Core.Writers
                 foreach (var area in worldmap.areas)
                 {
                     var binaryArea = new WmapAreaBinary();
-                    binaryArea.AreaFilename = area.AreaFilename.ToArray();
+                    binaryArea.AreaFilename = area.AreaFilename;
                     binaryArea.Caption = Common.WriteString(area.Caption, TlkFile);
                     binaryArea.Flags = area.Flags.AreaVisible ? binaryArea.Flags | Common.Bit0 : binaryArea.Flags;
                     binaryArea.Flags = area.Flags.AreaVisibleFromAdjacent ? binaryArea.Flags | Common.Bit1 : binaryArea.Flags;
@@ -119,7 +119,7 @@ namespace iiInfinityEngine.Core.Writers
                     binaryArea.LongName = area.LongName.ToArray();
                     binaryArea.Name = Common.WriteString(area.Name, TlkFile);
                     binaryArea.SequenceBam = area.SequenceBam;
-                    binaryArea.ShortName = area.ShortName.ToArray();
+                    binaryArea.ShortName = area.ShortName;
                     binaryArea.Unused = area.Unused;
                     binaryArea.XCoordinate = area.XCoordinate;
                     binaryArea.YCoordinate = area.YCoordinate;

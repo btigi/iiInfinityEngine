@@ -13,23 +13,19 @@ namespace iiInfinityEngine.Core.Readers
 
         public DlgFile Read(string filename)
         {
-            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
-            {
-                var f = Read(fs);
-                f.Filename = Path.GetFileName(filename);
-                return f;
-            }
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var f = Read(fs);
+            f.Filename = Path.GetFileName(filename);
+            return f;
         }
 
         public DlgFile Read(Stream s)
         {
-            using (BinaryReader br = new BinaryReader(s))
-            {
-                var dlgFile = ParseFile(br);
-                br.BaseStream.Seek(0, SeekOrigin.Begin);
-                dlgFile.OriginalFile = ParseFile(br);
-                return dlgFile;
-            }
+            using var br = new BinaryReader(s);
+            var dlgFile = ParseFile(br);
+            br.BaseStream.Seek(0, SeekOrigin.Begin);
+            dlgFile.OriginalFile = ParseFile(br);
+            return dlgFile;
         }
 
         private DlgFile ParseFile(BinaryReader br)
@@ -39,11 +35,11 @@ namespace iiInfinityEngine.Core.Readers
             if (Common.TryGetString(header.ftype) != "DLG ")
                 return new DlgFile();
 
-            List<StateBinary> states = new List<StateBinary>();
-            List<TransitionBinary> transitions = new List<TransitionBinary>();
-            List<StateTriggerBinary> stateTriggers = new List<StateTriggerBinary>();
-            List<TransitionTriggerBinary> transitionTriggers = new List<TransitionTriggerBinary>();
-            List<ActionTableBinary> actions = new List<ActionTableBinary>();
+            List<StateBinary> states = [];
+            List<TransitionBinary> transitions = [];
+            List<StateTriggerBinary> stateTriggers = [];
+            List<TransitionTriggerBinary> transitionTriggers = [];
+            List<ActionTableBinary> actions = [];
 
             br.BaseStream.Seek(header.StateOffset, SeekOrigin.Begin);
             for (int i = 0; i < header.StateCount; i++)
@@ -80,7 +76,7 @@ namespace iiInfinityEngine.Core.Readers
                 actions.Add(action);
             }
 
-            DlgFile dlgFile = new DlgFile();
+            var dlgFile = new DlgFile();
             dlgFile.Flags.Enemy = (header.Flags & Common.Bit0) != 0;
             dlgFile.Flags.EscapeArea = (header.Flags & Common.Bit1) != 0;
             dlgFile.Flags.Nothing = (header.Flags & Common.Bit2) != 0;
@@ -115,13 +111,13 @@ namespace iiInfinityEngine.Core.Readers
             dlgFile.Flags.Bit31 = (header.Flags & Common.Bit31) != 0;
 
 
-            UTF8Encoding enc = new UTF8Encoding();
+            var enc = new UTF8Encoding();
 
             var numberOfStatesWithTriggers = 0;
             var StateNumber = 0;
             foreach (var state in states)
             {
-                State2 state2 = new State2();
+                var state2 = new State2();
                 state2.ResponseText = Common.ReadString(state.ResponseText, TlkFile);
                 state2.StateNumber = StateNumber;
                 StateNumber++;
@@ -170,10 +166,12 @@ namespace iiInfinityEngine.Core.Readers
                         transition2.JournalText = Common.ReadString(transitions[state.TransitionIndex + i].JournalText, TlkFile);
                     }
 
-                    transition2.Unknown = (transitions[state.TransitionIndex + i].Flags & Common.Bit5) != 0;
+                    transition2.Interrupt = (transitions[state.TransitionIndex + i].Flags & Common.Bit5) != 0;
                     transition2.AddQuestJournalEntry = (transitions[state.TransitionIndex + i].Flags & Common.Bit6) != 0;
                     transition2.RemoveQuestJournalEntry = (transitions[state.TransitionIndex + i].Flags & Common.Bit7) != 0;
                     transition2.AddQuestCompleteJournalEntry = (transitions[state.TransitionIndex + i].Flags & Common.Bit8) != 0;
+                    transition2.ImmediateActionExecution = (transitions[state.TransitionIndex + i].Flags & Common.Bit9) != 0;
+                    transition2.ClearActions = (transitions[state.TransitionIndex + i].Flags & Common.Bit10) != 0;
 
                     state2.transitions.Add(transition2);
                 }

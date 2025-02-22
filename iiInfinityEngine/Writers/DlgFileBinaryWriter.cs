@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Text;
-using iiInfinityEngine.Core.Binary;
+﻿using iiInfinityEngine.Core.Binary;
 using iiInfinityEngine.Core.Files;
 using iiInfinityEngine.Core.Writers.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace iiInfinityEngine.Core.Writers
 {
@@ -22,10 +21,9 @@ namespace iiInfinityEngine.Core.Writers
         public TlkFile TlkFile { get; set; }
         public BackupManager BackupManger { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
-            if (!(file is DlgFile))
+            if (file is not DlgFile)
                 throw new ArgumentException("File is not a valid dlg file");
 
             var dlgFile = file as DlgFile;
@@ -33,17 +31,17 @@ namespace iiInfinityEngine.Core.Writers
             if (!(forceSave) && (HashGenerator.GenerateKey(dlgFile) == dlgFile.Checksum))
                 return false;
 
-            List<StateBinary> states = new List<StateBinary>();
-            List<TransitionBinary> transitions = new List<TransitionBinary>();
-            List<StateTriggerBinary> stateTriggers = new List<StateTriggerBinary>();
-            List<TransitionTriggerBinary> transitionTriggers = new List<TransitionTriggerBinary>();
-            List<ActionTableBinary> actions = new List<ActionTableBinary>();
-            List<string> stateTriggerText = new List<string>();
-            List<int> stateTriggerTextAssociatedData = new List<int>();
-            List<string> transitionTriggerText = new List<string>();
-            List<int> transitionTriggerTextAssociatedData = new List<int>();
-            List<string> actionText = new List<string>();
-            List<int> actionTextAssociatedData = new List<int>();
+            List<StateBinary> states = [];
+            List<TransitionBinary> transitions = [];
+            List<StateTriggerBinary> stateTriggers = [];
+            List<TransitionTriggerBinary> transitionTriggers = [];
+            List<ActionTableBinary> actions = [];
+            List<string> stateTriggerText = [];
+            List<int> stateTriggerTextAssociatedData = [];
+            List<string> transitionTriggerText = [];
+            List<int> transitionTriggerTextAssociatedData = [];
+            List<string> actionText = [];
+            List<int> actionTextAssociatedData = [];
 
             //TODO: Resolve symbolic links
 
@@ -76,14 +74,14 @@ namespace iiInfinityEngine.Core.Writers
                         }
                         transitionTriggerTextAssociatedData.Add(offset);
 
-                        TransitionTriggerBinary transitionTrigger = new TransitionTriggerBinary();
+                        var transitionTrigger = new TransitionTriggerBinary();
                         transitionTrigger.TransitionTriggerStringLength = transition.Trigger.Length;
                         transitionTrigger.TransitionTriggerStringOffset = 0;
                         transitionTriggers.Add(transitionTrigger);
                         transitionTriggerText.Add(transition.Trigger);
                     }
 
-                    TransitionBinary transitionBinary = new TransitionBinary();
+                    var transitionBinary = new TransitionBinary();
                     transitionBinary.ActionIndex = transition.HasAction ? actions.Count - 1 : -1;
                     transitionBinary.Dialog = transition.Dialog.ToArray();
                     transitionBinary.Flags = transition.HasText ? transitionBinary.Flags | Common.Bit0 : transitionBinary.Flags;
@@ -91,7 +89,7 @@ namespace iiInfinityEngine.Core.Writers
                     transitionBinary.Flags = transition.HasAction ? transitionBinary.Flags | Common.Bit2 : transitionBinary.Flags;
                     transitionBinary.Flags = transition.TerminateDialog ? transitionBinary.Flags | Common.Bit3 : transitionBinary.Flags;
                     transitionBinary.Flags = transition.HasJouranl ? transitionBinary.Flags | Common.Bit4 : transitionBinary.Flags;
-                    transitionBinary.Flags = transition.Unknown ? transitionBinary.Flags | Common.Bit5 : transitionBinary.Flags;
+                    transitionBinary.Flags = transition.Interrupt ? transitionBinary.Flags | Common.Bit5 : transitionBinary.Flags;
                     transitionBinary.Flags = transition.RemoveQuestJournalEntry ? transitionBinary.Flags | Common.Bit6 : transitionBinary.Flags;
                     transitionBinary.Flags = transition.AddQuestCompleteJournalEntry ? transitionBinary.Flags | Common.Bit7 : transitionBinary.Flags;
                     //TODO: bits 8 through 31
@@ -111,14 +109,14 @@ namespace iiInfinityEngine.Core.Writers
                     }
                     stateTriggerTextAssociatedData.Add(offset);
 
-                    StateTriggerBinary stateTrigger = new StateTriggerBinary();
+                    var stateTrigger = new StateTriggerBinary();
                     stateTrigger.StateTriggerStringLength = state.Trigger.Length;
                     stateTrigger.StateTriggerStringOffset = 0;
                     stateTriggers.Add(stateTrigger);
                     stateTriggerText.Add(state.Trigger);
                 }
 
-                StateBinary stateBinary = new StateBinary();
+                var stateBinary = new StateBinary();
                 stateBinary.ResponseText = Common.WriteString(state.ResponseText, TlkFile);
                 stateBinary.TransitionCount = state.transitions.Count;
                 stateBinary.TransitionIndex = state.transitions.Count > 0 ? transitions.Count - state.transitions.Count : -1;
@@ -126,7 +124,7 @@ namespace iiInfinityEngine.Core.Writers
                 states.Add(stateBinary);
             }
 
-            DlgHeaderBinary header = new DlgHeaderBinary();
+            var header = new DlgHeaderBinary();
             header.Flags = dlgFile.Flags.Enemy ? header.Flags | Common.Bit0 : header.Flags;
             header.Flags = dlgFile.Flags.EscapeArea ? header.Flags | Common.Bit1 : header.Flags;
             header.Flags = dlgFile.Flags.Nothing ? header.Flags | Common.Bit2 : header.Flags;
@@ -160,8 +158,8 @@ namespace iiInfinityEngine.Core.Writers
             header.Flags = dlgFile.Flags.Bit30 ? header.Flags | Common.Bit30 : header.Flags;
             header.Flags = dlgFile.Flags.Bit31 ? header.Flags | Common.Bit31 : header.Flags;
 
-            header.ftype = new char[4] { 'D', 'L', 'G', ' ' };
-            header.fversion = new char[4] { 'V', '1', '.', '0' };
+            header.ftype = ['D', 'L', 'G', ' '];
+            header.fversion = ['V', '1', '.', '0'];
             header.StateCount = states.Count;
             header.StateOffset = HeaderSize;
             header.TransitionCount = transitions.Count;
@@ -173,79 +171,73 @@ namespace iiInfinityEngine.Core.Writers
             header.ActionTableOffset = HeaderSize + (states.Count * StateSize) + (transitions.Count * TransitionSize) + (stateTriggers.Count * StateTriggerSize) + (transitionTriggers.Count * TransitionTriggerSize);
             header.ActionTableCount = actions.Count;
 
-            using (MemoryStream s = new MemoryStream())
+            using var s = new MemoryStream();
+            using var bw = new BinaryWriter(s);
+            var headerAsBytes = Common.WriteStruct(header);
+
+            bw.Write(headerAsBytes);
+
+            foreach (var state in states)
             {
-                using (BinaryWriter bw = new BinaryWriter(s))
-                {
-                    var headerAsBytes = Common.WriteStruct(header);
-
-                    bw.Write(headerAsBytes);
-
-                    foreach (var state in states)
-                    {
-                        var stateAsBytes = Common.WriteStruct(state);
-                        bw.Write(stateAsBytes);
-                    }
-
-                    foreach (var transition in transitions)
-                    {
-                        var transitionAsBytes = Common.WriteStruct(transition);
-                        bw.Write(transitionAsBytes);
-                    }
-
-                    for (int i = 0; i < stateTriggers.Count; i++)
-                    {                     
-                        var stateTrigger = stateTriggers[i];
-                        stateTrigger.StateTriggerStringOffset = header.ActionTableOffset + (actions.Count * ActionSize) + stateTriggerTextAssociatedData[i];
-                        var statetriggerAsBytes = Common.WriteStruct(stateTrigger);
-                        bw.Write(statetriggerAsBytes);
-                    }
-
-                    for (int i = 0; i < transitionTriggers.Count; i++)
-                    {
-                        var transitionTrigger = transitionTriggers[i];
-                        transitionTrigger.TransitionTriggerStringOffset = header.ActionTableOffset + (actions.Count * ActionSize) + (stateTriggers.Count * StateTriggerSize) + transitionTriggerTextAssociatedData[i];
-                        var transitionTriggerAsBytes = Common.WriteStruct(transitionTrigger);
-                        bw.Write(transitionTriggerAsBytes);
-                    }
-
-                    for (int i = 0; i < actions.Count; i++)
-                    {
-                        var action = actions[i];
-                        action.ActionTableStringOffset = header.ActionTableOffset + (actions.Count * ActionSize) + (stateTriggers.Count * StateTriggerSize) + (transitionTriggers.Count * TransitionTriggerSize) + actionTextAssociatedData[i];
-                        var actionAsBytes = Common.WriteStruct(action);
-                        bw.Write(actionAsBytes);
-                    }
-
-                    UTF8Encoding encoding = new UTF8Encoding();
-                    foreach (var str in stateTriggerText)
-                    {
-                        bw.Write(encoding.GetBytes(str));
-                    }
-
-                    foreach (var str in transitionTriggerText)
-                    {
-                        bw.Write(encoding.GetBytes(str));
-                    }
-
-                    foreach (var str in actionText)
-                    {
-                        bw.Write(encoding.GetBytes(str));
-                    }
-
-                    if (BackupManger != null)
-                    {
-                        BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-                    }
-
-                    using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
-                    {
-                        bw.BaseStream.Position = 0;
-                        bw.BaseStream.CopyTo(fs);
-                        fs.Flush(flushToDisk: true);
-                    }
-                }
+                var stateAsBytes = Common.WriteStruct(state);
+                bw.Write(stateAsBytes);
             }
+
+            foreach (var transition in transitions)
+            {
+                var transitionAsBytes = Common.WriteStruct(transition);
+                bw.Write(transitionAsBytes);
+            }
+
+            for (int i = 0; i < stateTriggers.Count; i++)
+            {
+                var stateTrigger = stateTriggers[i];
+                stateTrigger.StateTriggerStringOffset = header.ActionTableOffset + (actions.Count * ActionSize) + stateTriggerTextAssociatedData[i];
+                var statetriggerAsBytes = Common.WriteStruct(stateTrigger);
+                bw.Write(statetriggerAsBytes);
+            }
+
+            for (int i = 0; i < transitionTriggers.Count; i++)
+            {
+                var transitionTrigger = transitionTriggers[i];
+                transitionTrigger.TransitionTriggerStringOffset = header.ActionTableOffset + (actions.Count * ActionSize) + (stateTriggers.Count * StateTriggerSize) + transitionTriggerTextAssociatedData[i];
+                var transitionTriggerAsBytes = Common.WriteStruct(transitionTrigger);
+                bw.Write(transitionTriggerAsBytes);
+            }
+
+            for (int i = 0; i < actions.Count; i++)
+            {
+                var action = actions[i];
+                action.ActionTableStringOffset = header.ActionTableOffset + (actions.Count * ActionSize) + (stateTriggers.Count * StateTriggerSize) + (transitionTriggers.Count * TransitionTriggerSize) + actionTextAssociatedData[i];
+                var actionAsBytes = Common.WriteStruct(action);
+                bw.Write(actionAsBytes);
+            }
+
+            var encoding = new UTF8Encoding();
+            foreach (var str in stateTriggerText)
+            {
+                bw.Write(encoding.GetBytes(str));
+            }
+
+            foreach (var str in transitionTriggerText)
+            {
+                bw.Write(encoding.GetBytes(str));
+            }
+
+            foreach (var str in actionText)
+            {
+                bw.Write(encoding.GetBytes(str));
+            }
+
+            if (BackupManger != null)
+            {
+                BackupManger.BackupFile(file, file.Filename, file.FileType, this);
+            }
+
+            using var fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            bw.BaseStream.Position = 0;
+            bw.BaseStream.CopyTo(fs);
+            fs.Flush(flushToDisk: true);
             return true;
         }
     }

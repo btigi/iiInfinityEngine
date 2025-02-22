@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using iiInfinityEngine.Core.Binary;
+﻿using iiInfinityEngine.Core.Binary;
 using iiInfinityEngine.Core.Files;
 using iiInfinityEngine.Core.Writers.Interfaces;
-using System.Diagnostics.CodeAnalysis;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace iiInfinityEngine.Core.Writers
 {
@@ -22,10 +21,9 @@ namespace iiInfinityEngine.Core.Writers
         public TlkFile TlkFile { get; set; }
         public BackupManager BackupManger { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
-            if (!(file is CreFile))
+            if (file is not CreFile)
                 throw new ArgumentException("File is not a valid cre file");
 
             var creFile = file as CreFile;
@@ -33,20 +31,20 @@ namespace iiInfinityEngine.Core.Writers
             if (!(forceSave) && (HashGenerator.GenerateKey(creFile) == creFile.Checksum))
                 return false;
 
-            List<CreKnownSpellBinary> creKnownSpells = new List<CreKnownSpellBinary>();
-            List<CreSpellMemorisationInfoBinary> creSpellMemorisationInfo = new List<CreSpellMemorisationInfoBinary>();
-            List<CreMemorisedSpellBinary> creMemorisedSpells = new List<CreMemorisedSpellBinary>();
-            List<Eff1BinaryBinary> creEffects1 = new List<Eff1BinaryBinary>();
-            List<EmbeddedEffBinary> creEffects2 = new List<EmbeddedEffBinary>();
-            List<CreItemBinary> creItems = new List<CreItemBinary>();
-            List<short> creItemSlots = new List<short>();
+            List<CreKnownSpellBinary> creKnownSpells = [];
+            List<CreSpellMemorisationInfoBinary> creSpellMemorisationInfo = [];
+            List<CreMemorisedSpellBinary> creMemorisedSpells = [];
+            List<Eff1BinaryBinary> creEffects1 = [];
+            List<EmbeddedEffBinary> creEffects2 = [];
+            List<CreItemBinary> creItems = [];
+            List<short> creItemSlots = [];
 
             foreach (var featureBlock in creFile.Effects1)
             {
-                Eff1BinaryBinary featureBlockBinary = new Eff1BinaryBinary();
+                var featureBlockBinary = new Eff1BinaryBinary();
                 featureBlockBinary.DiceSides = featureBlock.DiceSides;
                 featureBlockBinary.DiceThrown = featureBlock.DiceThrown;
-                featureBlockBinary.DispelResistance = featureBlock.DispelResistance;
+                featureBlockBinary.Resistance = featureBlock.Resistance;
                 featureBlockBinary.Duration = featureBlock.Duration;
                 featureBlockBinary.Opcode = featureBlock.Opcode;
                 featureBlockBinary.Parameter1 = featureBlock.Parameter1;
@@ -54,18 +52,18 @@ namespace iiInfinityEngine.Core.Writers
                 featureBlockBinary.Power = featureBlock.Power;
                 featureBlockBinary.Probability1 = featureBlock.Probability1;
                 featureBlockBinary.Probability2 = featureBlock.Probability2;
-                featureBlockBinary.Resource = new array8(featureBlock.resource);
+                featureBlockBinary.Resource = featureBlock.Resource;
                 featureBlockBinary.SavingThrowBonus = featureBlock.SavingThrowBonus;
                 featureBlockBinary.SavingThrowType = featureBlock.SavingThrowType;
                 featureBlockBinary.TargetType = featureBlock.TargetType;
-                featureBlockBinary.TimingMode = featureBlock.TimingMode;
+                featureBlockBinary.TimingMode = (byte)featureBlock.TimingMode;
                 featureBlockBinary.Unknown = featureBlock.Unknown;
                 creEffects1.Add(featureBlockBinary);
             }
 
             foreach (var featureBlock in creFile.Effects2)
             {
-                EmbeddedEffBinary featureBlockBinary = new EmbeddedEffBinary();
+                var featureBlockBinary = new EmbeddedEffBinary();
                 featureBlockBinary.CasterLevel = featureBlock.CasterLevel;
                 featureBlockBinary.CasterXCoordinate = featureBlock.CasterXCoordinate;
                 featureBlockBinary.CasterYCoordinate = featureBlock.CasterYCoordinate;
@@ -1221,7 +1219,7 @@ namespace iiInfinityEngine.Core.Writers
                 creKnownSpells.Add(knownSpellBinary);
             }
 
-            CreHeaderBinary header = new CreHeaderBinary();
+            var header = new CreHeaderBinary();
 
             header.Flags = creFile.Flags.ShowLongname ? header.Flags | Common.Bit0 : header.Flags;
             header.Flags = creFile.Flags.NoCorpse ? header.Flags | Common.Bit1 : header.Flags;
@@ -1243,7 +1241,7 @@ namespace iiInfinityEngine.Core.Writers
 
             header.Flags = creFile.Flags.RestoreItem ? header.Flags | Common.Bit16 : header.Flags;
             header.Flags = creFile.Flags.ClearRestoreItem ? header.Flags | Common.Bit17 : header.Flags;
-            // unknown...?
+            // TODO:cre
             header.Flags = creFile.Flags.RandomWalkEa ? header.Flags | Common.Bit24 : header.Flags;
             header.Flags = creFile.Flags.RandomWalkGender ? header.Flags | Common.Bit25 : header.Flags;
             header.Flags = creFile.Flags.RandomWalkRace ? header.Flags | Common.Bit26 : header.Flags;
@@ -1492,74 +1490,65 @@ namespace iiInfinityEngine.Core.Writers
 
             header.ItemSlotOffset = HeaderSize + (totalEffectBlockSize) + (creKnownSpells.Count * KnownSpellSize) + (creMemorisedSpells.Count * memorisedspellSize) + (creSpellMemorisationInfo.Count * memorisedspellinfoSize) + (creItems.Count * ItemSize);
 
-            using (MemoryStream s = new MemoryStream())
+            using var s = new MemoryStream();
+            using var bw = new BinaryWriter(s);
+            var headerAsBytes = Common.WriteStruct(header);
+
+            bw.Write(headerAsBytes);
+
+            foreach (var spell in creKnownSpells)
             {
-                using (BinaryWriter bw = new BinaryWriter(s))
+                var spellAsBytes = Common.WriteStruct(spell);
+                bw.Write(spellAsBytes);
+            }
+
+            foreach (var spell in creSpellMemorisationInfo)
+            {
+                var spellAsBytes = Common.WriteStruct(spell);
+                bw.Write(spellAsBytes);
+            }
+
+
+            foreach (var spell in creMemorisedSpells)
+            {
+                var spellAsBytes = Common.WriteStruct(spell);
+                bw.Write(spellAsBytes);
+            }
+
+            if (creFile.EffVersion == 0)
+            {
+                foreach (var effect in creEffects1)
                 {
-                    var headerAsBytes = Common.WriteStruct(header);
-
-                    bw.Write(headerAsBytes);
-
-                    foreach (var spell in creKnownSpells)
-                    {
-                        var spellAsBytes = Common.WriteStruct(spell);
-                        bw.Write(spellAsBytes);
-                    }
-
-                    foreach (var spell in creSpellMemorisationInfo)
-                    {
-                        var spellAsBytes = Common.WriteStruct(spell);
-                        bw.Write(spellAsBytes);
-                    }
-
-
-                    foreach (var spell in creMemorisedSpells)
-                    {
-                        var spellAsBytes = Common.WriteStruct(spell);
-                        bw.Write(spellAsBytes);
-                    }
-
-                    if (creFile.EffVersion == 0)
-                    {
-                        foreach (var effect in creEffects1)
-                        {
-                            var effectAsBytes = Common.WriteStruct(effect);
-                            bw.Write(effectAsBytes);
-                        }
-                    }
-                    if (creFile.EffVersion == 1)
-                    {
-                        foreach (var effect in creEffects2)
-                        {
-                            var effectAsBytes = Common.WriteStruct(effect);
-                            bw.Write(effectAsBytes);
-                        }
-                    }
-
-                    foreach (var item in creItems)
-                    {
-                        var itemAsBytes = Common.WriteStruct(item);
-                        bw.Write(itemAsBytes);
-                    }
-
-                    foreach (var itemSlot in creItemSlots)
-                    {
-                        bw.Write(itemSlot);
-                    }
-
-                    if (BackupManger != null)
-                    {
-                        BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-                    }
-
-                    using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
-                    {
-                        bw.BaseStream.Position = 0;
-                        bw.BaseStream.CopyTo(fs);
-                        fs.Flush(flushToDisk: true);
-                    }
+                    var effectAsBytes = Common.WriteStruct(effect);
+                    bw.Write(effectAsBytes);
                 }
             }
+            if (creFile.EffVersion == 1)
+            {
+                foreach (var effect in creEffects2)
+                {
+                    var effectAsBytes = Common.WriteStruct(effect);
+                    bw.Write(effectAsBytes);
+                }
+            }
+
+            foreach (var item in creItems)
+            {
+                var itemAsBytes = Common.WriteStruct(item);
+                bw.Write(itemAsBytes);
+            }
+
+            foreach (var itemSlot in creItemSlots)
+            {
+                bw.Write(itemSlot);
+            }
+
+            BackupManger?.BackupFile(file, file.Filename, file.FileType, this);
+
+            using var fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            bw.BaseStream.Position = 0;
+            bw.BaseStream.CopyTo(fs);
+            fs.Flush(flushToDisk: true);
             return true;
         }
     }

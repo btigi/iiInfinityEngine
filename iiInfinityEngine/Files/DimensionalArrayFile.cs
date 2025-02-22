@@ -18,6 +18,6 @@ namespace iiInfinityEngine.Core.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
-        public string contents;
+        public string Contents;
     }
 }

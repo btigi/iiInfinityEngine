@@ -6,23 +6,23 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class AreFile : IEFile
     {
-        public List<AreActor2> actors = new List<AreActor2>();
-        public List<AreRegion2> regions = new List<AreRegion2>();
-        public List<AreSpawnPoint2> spawns = new List<AreSpawnPoint2>();
-        public List<AreEntrance2> entrances = new List<AreEntrance2>();
-        public List<AreContainer2> containers = new List<AreContainer2>();
-        public List<AreItem2> items = new List<AreItem2>();
-        public List<AreAmbient2> ambients = new List<AreAmbient2>();
-        public List<AreVariable2> variables = new List<AreVariable2>();
-        public List<AreDoor2> doors = new List<AreDoor2>();
-        public List<AreAnimation2> animations = new List<AreAnimation2>();
-        public List<AreNote2> notes = new List<AreNote2>();
-        public List<AreTiledObject2> tiledObjects = new List<AreTiledObject2>();
-        public List<AreProjectile2> projectiles = new List<AreProjectile2>();
-        public List<AreSong2> songs = new List<AreSong2>();
-        public List<AreInterruption2> interruptions = new List<AreInterruption2>();
-        public List<bool> exploration = new List<bool>();
-        public List<Int32> vertices = new List<Int32>();
+        public List<AreActor2> actors = [];
+        public List<AreRegion2> regions = [];
+        public List<AreSpawnPoint2> spawns = [];
+        public List<AreEntrance2> entrances = [];
+        public List<AreContainer2> containers = [];
+        public List<AreItem2> items = [];
+        public List<AreAmbient2> ambients = [];
+        public List<AreVariable2> variables = [];
+        public List<AreDoor2> doors = [];
+        public List<AreAnimation2> animations = [];
+        public List<AreNote2> notes = [];
+        public List<AreTiledObject2> tiledObjects = [];
+        public List<AreProjectile2> projectiles = [];
+        public List<AreSong2> songs = [];
+        public List<AreInterruption2> interruptions = [];
+        public List<bool> exploration = [];
+        public List<Int32> vertices = [];
 
         [NonSerialized]
         private string checksum;

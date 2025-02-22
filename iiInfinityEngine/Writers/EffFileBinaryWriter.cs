@@ -20,7 +20,7 @@ namespace iiInfinityEngine.Core.Writers
             if (!(forceSave) && (HashGenerator.GenerateKey(effFile) == effFile.Checksum))
                 return false;
 
-            EffHeaderBinary header = new EffHeaderBinary();
+            var header = new EffHeaderBinary();
 
             header.ftype = new array4() { character1 = 'E', character2 = 'F', character3 = 'F', character4 = ' ' };
             header.fversion = new array4() { character1 = 'V', character2 = '2', character3 = '.', character4 = '0' };

@@ -30,10 +30,9 @@ namespace iiInfinityEngine.Core.Writers
         public TlkFile TlkFile { get; set; }
         public BackupManager BackupManger { get; set; }
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
-            if (!(file is AreFile))
+            if (file is not AreFile)
                 throw new ArgumentException("File is not a valid are file");
 
             var areFile = file as AreFile;
@@ -41,27 +40,27 @@ namespace iiInfinityEngine.Core.Writers
             if (!(forceSave) && (HashGenerator.GenerateKey(areFile) == areFile.Checksum))
                 return false;
 
-            List<AreActorBinary> actors = new List<AreActorBinary>();
-            List<AreRegionBinary> regions = new List<AreRegionBinary>();
-            List<AreSpawnPointBinary> spawns = new List<AreSpawnPointBinary>();
-            List<AreEntranceBinary> entrances = new List<AreEntranceBinary>();
-            List<AreContainerBinary> containers = new List<AreContainerBinary>();
-            List<AreItemBinary> items = new List<AreItemBinary>();
-            List<AreAmbientBinary> ambients = new List<AreAmbientBinary>();
-            List<AreVariableBinary> variables = new List<AreVariableBinary>();
-            List<AreDoorBinary> doors = new List<AreDoorBinary>();
-            List<AreAnimationBinary> animations = new List<AreAnimationBinary>();
-            List<AreNoteBinary> notes = new List<AreNoteBinary>();
-            List<AreTiledObjectBinary> tiledObjects = new List<AreTiledObjectBinary>();
-            List<AreProjectileBinary> projectiles = new List<AreProjectileBinary>();
-            List<AreSongBinary> songs = new List<AreSongBinary>();
-            List<AreInterruptionBinary> interruptions = new List<AreInterruptionBinary>();
+            List<AreActorBinary> actors = [];
+            List<AreRegionBinary> regions = [];
+            List<AreSpawnPointBinary> spawns = [];
+            List<AreEntranceBinary> entrances = [];
+            List<AreContainerBinary> containers = [];
+            List<AreItemBinary> items = [];
+            List<AreAmbientBinary> ambients = [];
+            List<AreVariableBinary> variables = [];
+            List<AreDoorBinary> doors = [];
+            List<AreAnimationBinary> animations = [];
+            List<AreNoteBinary> notes = [];
+            List<AreTiledObjectBinary> tiledObjects = [];
+            List<AreProjectileBinary> projectiles = [];
+            List<AreSongBinary> songs = [];
+            List<AreInterruptionBinary> interruptions = [];
             List<byte> areaExplorations = new List<byte>();
-            List<Int32> vertices = new List<Int32>();
+            List<Int32> vertices = [];
 
             foreach (var interruption in areFile.interruptions)
             {
-                AreInterruptionBinary interruptionBinary = new AreInterruptionBinary();
+                var interruptionBinary = new AreInterruptionBinary();
                 interruptionBinary.CreatureCount = interruption.CreatureCount;
                 interruptionBinary.DayProbability = interruption.DayProbability;
                 interruptionBinary.Difficulty = interruption.Difficulty;
@@ -97,7 +96,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var song in areFile.songs)
             {
-                AreSongBinary songBinary = new AreSongBinary();
+                var songBinary = new AreSongBinary();
                 songBinary.BattleSong = song.BattleSong;
                 songBinary.DayAmbient1Wav = new array8(song.DayAmbient1Wav);
                 songBinary.DayAmbient2Wav = new array8(song.DayAmbient2Wav);
@@ -121,7 +120,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var projectile in areFile.projectiles)
             {
-                AreProjectileBinary projectileBinary = new AreProjectileBinary();
+                var projectileBinary = new AreProjectileBinary();
                 projectileBinary.EATarget = projectile.EATarget;
                 projectileBinary.EffectOffset = projectile.EffectOffset;
                 projectileBinary.EffectSize = projectile.EffectSize;
@@ -138,7 +137,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var tiledObject in areFile.tiledObjects)
             {
-                AreTiledObjectBinary tiledObjectBinary = new AreTiledObjectBinary();
+                var tiledObjectBinary = new AreTiledObjectBinary();
                 tiledObjectBinary.ClosedSearchCount = tiledObject.ClosedSearchCount;
                 tiledObjectBinary.ClosedSearchOffset = tiledObject.ClosedSearchOffset;
                 tiledObjectBinary.Name = new array32(tiledObject.Name);
@@ -152,7 +151,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var note in areFile.notes)
             {
-                AreNoteBinary noteBinary = new AreNoteBinary();
+                var noteBinary = new AreNoteBinary();
                 noteBinary.Colour = note.Colour;
                 noteBinary.Location = note.Location;
                 //noteBinary.NoteCountPlus = note.NoteCountPlus;
@@ -164,7 +163,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var animation in areFile.animations)
             {
-                AreAnimationBinary animationBinary = new AreAnimationBinary();
+                var animationBinary = new AreAnimationBinary();
                 animationBinary.AnimationAppearenceSchedule = animation.AnimationAppearenceSchedule;
                 animationBinary.BamAnimation = new array8(animation.BamAnimation);
                 animationBinary.BamFrame = animation.BamFrame;
@@ -186,7 +185,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var door in areFile.doors)
             {
-                AreDoorBinary doorBinary = new AreDoorBinary();
+                var doorBinary = new AreDoorBinary();
                 doorBinary.ClosedBoundingBoxBottom = door.ClosedBoundingBoxBottom;
                 doorBinary.ClosedBoundingBoxLeft = door.ClosedBoundingBoxLeft;
                 doorBinary.ClosedBoundingBoxRight = door.ClosedBoundingBoxRight;
@@ -235,8 +234,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var variable in areFile.variables)
             {
-                AreVariableBinary variableBinary = new AreVariableBinary();
-
+                var variableBinary = new AreVariableBinary();
                 variableBinary.Name = new array32(variable.Name);
                 variableBinary.Type = variable.Type;
                 variableBinary.ResourceType = variable.ResourceType;
@@ -249,7 +247,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var ambient in areFile.ambients)
             {
-                AreAmbientBinary ambientBinary = new AreAmbientBinary();
+                var ambientBinary = new AreAmbientBinary();
                 ambientBinary.AmbientAppearenceSchedule = ambient.AmbientAppearenceSchedule;
                 ambientBinary.Flags = ambient.Flags;
                 ambientBinary.FrequencyBase = ambient.FrequencyBase;
@@ -280,7 +278,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var container in areFile.containers)
             {
-                AreContainerBinary containerBinary = new AreContainerBinary();
+                var containerBinary = new AreContainerBinary();
                 containerBinary.BoundingBoxBottom = container.BoundingBoxBottom;
                 containerBinary.BoundingBoxLeft = container.BoundingBoxLeft;
                 containerBinary.BoundingBoxRight = container.BoundingBoxRight;
@@ -324,7 +322,7 @@ namespace iiInfinityEngine.Core.Writers
 
                 for (int j = 0; j < container.items.Count; j++)
                 {
-                    AreItemBinary itemBinary = new AreItemBinary();
+                    var itemBinary = new AreItemBinary();
                     itemBinary.Charges1 = container.items[j].Charges1;
                     itemBinary.Charges2 = container.items[j].Charges2;
                     itemBinary.Charges3 = container.items[j].Charges3;
@@ -387,7 +385,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var entrance in areFile.entrances)
             {
-                AreEntranceBinary entranceBinary = new AreEntranceBinary();
+                var entranceBinary = new AreEntranceBinary();
                 entranceBinary.Name = new array32(entrance.Name);
                 entranceBinary.Orientation = entrance.Orientation;
                 entranceBinary.Unknown = entrance.Unknown;
@@ -398,7 +396,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var spawn in areFile.spawns)
             {
-                AreSpawnPointBinary spawnBinary = new AreSpawnPointBinary();
+                var spawnBinary = new AreSpawnPointBinary();
                 spawnBinary.ActorRemovalTime = spawn.ActorRemovalTime;
                 spawnBinary.BaseCreatureNumberToSpawn = spawn.BaseCreatureNumberToSpawn;
                 spawnBinary.CreatureSpawnCount = spawn.CreatureSpawnCount;
@@ -443,7 +441,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var region in areFile.regions)
             {
-                AreRegionBinary regionBinary = new AreRegionBinary();
+                var regionBinary = new AreRegionBinary();
                 regionBinary.AlternativeUsePointXCoordinate = region.AlternativeUsePointXCoordinate;
                 regionBinary.AlternativeUsePointYCoordinate = region.AlternativeUsePointYCoordinate;
                 regionBinary.BoundingBoxBottom = region.BoundingBoxBottom;
@@ -511,7 +509,7 @@ namespace iiInfinityEngine.Core.Writers
 
             foreach (var actor in areFile.actors)
             {
-                AreActorBinary actorBinary = new AreActorBinary();
+                var actorBinary = new AreActorBinary();
                 actorBinary.ActorAnimation = actor.ActorAnimation;
                 actorBinary.ActorAppearenceSchedule = actor.ActorAppearenceSchedule;
                 actorBinary.Flags = actor.ActorFlags.CreAttached ? actorBinary.Flags | Common.Bit0 : actorBinary.Flags;
@@ -632,7 +630,7 @@ namespace iiInfinityEngine.Core.Writers
                 vertices.Add(vertex);
             }
 
-            AreHeaderBinary header = new AreHeaderBinary();
+            var header = new AreHeaderBinary();
             header.AreaFlags = areFile.AreaFlags.SaveAllowed ? header.AreaFlags | Common.Bit0 : header.AreaFlags;
             header.AreaFlags = areFile.AreaFlags.TutorialArea ? header.AreaFlags | Common.Bit1 : header.AreaFlags;
             header.AreaFlags = areFile.AreaFlags.DeadMagicZone ? header.AreaFlags | Common.Bit2 : header.AreaFlags;
@@ -828,7 +826,7 @@ namespace iiInfinityEngine.Core.Writers
             header.RestMovieNight = new array8(areFile.RestMovieNight);
             header.OverlayTransparency = areFile.OverlayTransparency;
             header.TiledObjectFlagOffset = areFile.TiledObjectFlagOffset;
-            header.TiledObjectFlagCount= areFile.TiledObjectFlagCount;
+            header.TiledObjectFlagCount = areFile.TiledObjectFlagCount;
             header.WeatherProbabilityFog = areFile.WeatherProbabilityFog;
             header.WeatherProbabilityLightning = areFile.WeatherProbabilityLightning;
             header.WeatherProbabilityRain = areFile.WeatherProbabilityRain;
@@ -867,129 +865,120 @@ namespace iiInfinityEngine.Core.Writers
             header.ProjectileCount = Convert.ToInt16(projectiles.Count);
             header.ProjectileOffset = HeaderSize + (ActorSize * actors.Count) + (RegionSize * regions.Count) + (Spawnsize * spawns.Count) + (EntranceSize * entrances.Count) + (ContainerSize * containers.Count) + (ItemSize * items.Count) + (AmbientSize * ambients.Count) + (VariableSize * variables.Count) + (DoorSize * doors.Count) + (4 * vertices.Count) + (AnimationSize * animations.Count) + (areaExplorations.Count) + (NoteSize * notes.Count) + (TiledObjectSize * tiledObjects.Count);
 
-            using (MemoryStream s = new MemoryStream())
+            using var s = new MemoryStream();
+            using var bw = new BinaryWriter(s);
+            var headerAsBytes = Common.WriteStruct(header);
+
+            bw.Write(headerAsBytes);
+
+            foreach (var actor in actors)
             {
-                using (BinaryWriter bw = new BinaryWriter(s))
-                {
-                    var headerAsBytes = Common.WriteStruct(header);
-
-                    bw.Write(headerAsBytes);
-
-                    foreach (var actor in actors)
-                    {
-                        var actorAsBytes = Common.WriteStruct(actor);
-                        bw.Write(actorAsBytes);
-                    }
-
-                    foreach (var region in regions)
-                    {
-                        var regionAsBytes = Common.WriteStruct(region);
-                        bw.Write(regionAsBytes);
-                    }
-
-                    foreach (var spawn in spawns)
-                    {
-                        var spawnAsBytes = Common.WriteStruct(spawn);
-                        bw.Write(spawnAsBytes);
-                    }
-
-                    foreach (var entrance in entrances)
-                    {
-                        var entranceAsBytes = Common.WriteStruct(entrance);
-                        bw.Write(entranceAsBytes);
-                    }
-
-                    foreach (var container in containers)
-                    {
-                        var containerAsBytes = Common.WriteStruct(container);
-                        bw.Write(containerAsBytes);
-                    }
-
-                    foreach (var item in items)
-                    {
-                        var itemAsBytes = Common.WriteStruct(item);
-                        bw.Write(itemAsBytes);
-                    }
-
-                    foreach (var ambient in ambients)
-                    {
-                        var ambientAsBytes = Common.WriteStruct(ambient);
-                        bw.Write(ambientAsBytes);
-                    }
-
-                    foreach (var variable in variables)
-                    {
-                        var variableAsBytes = Common.WriteStruct(variable);
-                        bw.Write(variableAsBytes);
-                    }
-
-                    foreach (var exploration in areaExplorations)
-                    {
-                        var explorationAsBytes = Common.WriteStruct(exploration);
-                        bw.Write(explorationAsBytes);
-                    }
-
-                    foreach (var door in doors)
-                    {
-                        var doorAsBytes = Common.WriteStruct(door);
-                        bw.Write(doorAsBytes);
-                    }
-
-                    foreach (var tiledObject in tiledObjects)
-                    {
-                        var tiledObjectAsBytes = Common.WriteStruct(tiledObject);
-                        bw.Write(tiledObjectAsBytes);
-                    }
-
-                    foreach (var vertex in vertices)
-                    {
-                        var vertexAsBytes = Common.WriteStruct(vertex);
-                        bw.Write(vertexAsBytes);
-                    }
-
-                    foreach (var animation in animations)
-                    {
-                        var animationAsBytes = Common.WriteStruct(animation);
-                        bw.Write(animationAsBytes);
-                    }
-
-                    foreach (var song in songs)
-                    {
-                        var songAsBytes = Common.WriteStruct(song);
-                        bw.Write(songAsBytes);
-                    }
-
-                    foreach (var interruption in interruptions)
-                    {
-                        var interruptionAsBytes = Common.WriteStruct(interruption);
-                        bw.Write(interruptionAsBytes);
-                    }
-
-                    foreach (var note in notes)
-                    {
-                        var noteAsBytes = Common.WriteStruct(note);
-                        bw.Write(noteAsBytes);
-                    }
-
-                    foreach (var projectile in projectiles)
-                    {
-                        var projectileAsBytes = Common.WriteStruct(projectile);
-                        bw.Write(projectileAsBytes);
-                    }
-
-                    if (BackupManger != null)
-                    {
-                        BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-                    }
-
-                    using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
-                    {
-                        bw.BaseStream.Position = 0;
-                        bw.BaseStream.CopyTo(fs);
-                        fs.Flush(flushToDisk: true);
-                    }
-                }
+                var actorAsBytes = Common.WriteStruct(actor);
+                bw.Write(actorAsBytes);
             }
+
+            foreach (var region in regions)
+            {
+                var regionAsBytes = Common.WriteStruct(region);
+                bw.Write(regionAsBytes);
+            }
+
+            foreach (var spawn in spawns)
+            {
+                var spawnAsBytes = Common.WriteStruct(spawn);
+                bw.Write(spawnAsBytes);
+            }
+
+            foreach (var entrance in entrances)
+            {
+                var entranceAsBytes = Common.WriteStruct(entrance);
+                bw.Write(entranceAsBytes);
+            }
+
+            foreach (var container in containers)
+            {
+                var containerAsBytes = Common.WriteStruct(container);
+                bw.Write(containerAsBytes);
+            }
+
+            foreach (var item in items)
+            {
+                var itemAsBytes = Common.WriteStruct(item);
+                bw.Write(itemAsBytes);
+            }
+
+            foreach (var ambient in ambients)
+            {
+                var ambientAsBytes = Common.WriteStruct(ambient);
+                bw.Write(ambientAsBytes);
+            }
+
+            foreach (var variable in variables)
+            {
+                var variableAsBytes = Common.WriteStruct(variable);
+                bw.Write(variableAsBytes);
+            }
+
+            foreach (var exploration in areaExplorations)
+            {
+                var explorationAsBytes = Common.WriteStruct(exploration);
+                bw.Write(explorationAsBytes);
+            }
+
+            foreach (var door in doors)
+            {
+                var doorAsBytes = Common.WriteStruct(door);
+                bw.Write(doorAsBytes);
+            }
+
+            foreach (var tiledObject in tiledObjects)
+            {
+                var tiledObjectAsBytes = Common.WriteStruct(tiledObject);
+                bw.Write(tiledObjectAsBytes);
+            }
+
+            foreach (var vertex in vertices)
+            {
+                var vertexAsBytes = Common.WriteStruct(vertex);
+                bw.Write(vertexAsBytes);
+            }
+
+            foreach (var animation in animations)
+            {
+                var animationAsBytes = Common.WriteStruct(animation);
+                bw.Write(animationAsBytes);
+            }
+
+            foreach (var song in songs)
+            {
+                var songAsBytes = Common.WriteStruct(song);
+                bw.Write(songAsBytes);
+            }
+
+            foreach (var interruption in interruptions)
+            {
+                var interruptionAsBytes = Common.WriteStruct(interruption);
+                bw.Write(interruptionAsBytes);
+            }
+
+            foreach (var note in notes)
+            {
+                var noteAsBytes = Common.WriteStruct(note);
+                bw.Write(noteAsBytes);
+            }
+
+            foreach (var projectile in projectiles)
+            {
+                var projectileAsBytes = Common.WriteStruct(projectile);
+                bw.Write(projectileAsBytes);
+            }
+
+            BackupManger?.BackupFile(file, file.Filename, file.FileType, this);
+
+            using var fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            bw.BaseStream.Position = 0;
+            bw.BaseStream.CopyTo(fs);
+            fs.Flush(flushToDisk: true);
             return true;
         }
     }

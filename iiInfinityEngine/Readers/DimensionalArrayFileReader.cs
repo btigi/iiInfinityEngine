@@ -8,30 +8,26 @@ namespace iiInfinityEngine.Core.Readers
     {
         public DimensionalArrayFile Read(string filename)
         {
-            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
-            {
-                var f = Read(fs);
-                f.Filename = Path.GetFileName(filename);
-                return f;
-            }
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var f = Read(fs);
+            f.Filename = Path.GetFileName(filename);
+            return f;
         }
 
         public DimensionalArrayFile Read(Stream s)
         {
-            using (StreamReader rdr = new StreamReader(s))
-            {
-                var file = Parse(rdr);
-                rdr.BaseStream.Seek(0, SeekOrigin.Begin);
-                file.OriginalFile = Parse(rdr);
-                return file;
-            }
+            using var rdr = new StreamReader(s);
+            var file = Parse(rdr);
+            rdr.BaseStream.Seek(0, SeekOrigin.Begin);
+            file.OriginalFile = Parse(rdr);
+            return file;
         }
 
         private DimensionalArrayFile Parse(StreamReader rdr)
         {
-            string str = rdr.ReadToEnd();
+            var str = rdr.ReadToEnd();
             var file = new DimensionalArrayFile();
-            file.contents = str;
+            file.Contents = str;
             file.Checksum = HashGenerator.GenerateKey(file);
             return file;
         }

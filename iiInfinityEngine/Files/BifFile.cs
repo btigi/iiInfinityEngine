@@ -5,27 +5,24 @@ namespace iiInfinityEngine.Core.Files
 {
     public class BifFile : IEFile
     {
-        public List<BifFileEntry2> Resources = new List<BifFileEntry2>();
-        public List<BifTilesetEntry2> Tilesets = new List<BifTilesetEntry2>();
+        public List<BifFileEntry2> Resources = [];
+        public List<BifTilesetEntry2> Tilesets = [];
 
-        public List<WfxFile> wfx = new List<WfxFile>();
-        public List<EffFile> effects = new List<EffFile>();
-        public List<ItmFile> items = new List<ItmFile>();
-        public List<SplFile> spells = new List<SplFile>();
-        public List<StoFile> stores = new List<StoFile>();
-        public List<DlgFile> dialogs = new List<DlgFile>();
-        public List<CreFile> creatures = new List<CreFile>();
-        public List<ProFile> projectiles = new List<ProFile>();
-        public List<IdsFile> identifiers = new List<IdsFile>();
-        public List<DimensionalArrayFile> dimensionalArrays = new List<DimensionalArrayFile>();
-        public List<AreFile> areas = new List<AreFile>();
-        public List<WmpFile> worldmaps = new List<WmpFile>();
-        public List<VvcFile> vvcs = new List<VvcFile>();
-        public List<TisFile> tilesets = new List<TisFile>();
+        public List<WfxFile> wfx = [];
+        public List<EffFile> effects = [];
+        public List<ItmFile> items = [];
+        public List<SplFile> spells = [];
+        public List<StoFile> stores = [];
+        public List<DlgFile> dialogs = [];
+        public List<CreFile> creatures = [];
+        public List<ProFile> projectiles = [];
+        public List<IdsFile> identifiers = [];
+        public List<DimensionalArrayFile> dimensionalArrays = [];
+        public List<AreFile> areas = [];
+        public List<WmpFile> worldmaps = [];
+        public List<VvcFile> vvcs = [];
+        public List<TisFile> tilesets = [];
 
-        public Int32 FileCount;
-        public Int32 TilesetCount;
-        public Int32 FileOffset;
         [NonSerialized]
         private string checksum;
         public string Checksum { get { return checksum; } set { checksum = value; } }
@@ -38,24 +35,28 @@ namespace iiInfinityEngine.Core.Files
         [NonSerialized]
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
+
+        public Int32 FileCount { get; set; }
+        public Int32 TilesetCount { get; set; }
+        public Int32 FileOffset { get; set; }
     }
-    
+
     public struct BifFileEntry2
     {
-        public Int32 resourceLocator;
-        public Int32 resourceOffset;
-        public Int32 resourceSize;
-        public Int16 resourceType;
-        public Int16 Unknown;
+        public Int32 ResourceLocator { get; set; }
+        public Int32 ResourceOffset { get; set; }
+        public Int32 ResourceSize { get; set; }
+        public Int16 ResourceType { get; set; }
+        public Int16 Unknown { get; set; }
     }
 
     public struct BifTilesetEntry2
     {
-        public Int32 resourceLocator;
-        public Int32 resourceOffset;
-        public Int32 tileCount;
-        public Int32 tileSize;
-        public Int16 resourceType;
-        public Int16 Unknown;
+        public Int32 ResourceLocator { get; set; }
+        public Int32 ResourceOffset { get; set; }
+        public Int32 TileCount { get; set; }
+        public Int32 TileSize { get; set; }
+        public Int16 ResourceType { get; set; }
+        public Int16 Unknown { get; set; }
     }
 }

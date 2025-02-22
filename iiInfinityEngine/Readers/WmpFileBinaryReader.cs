@@ -119,7 +119,7 @@ namespace iiInfinityEngine.Core.Readers
                 for (int i = 0; i < worldmap.AreaCount; i++)
                 {
                     var area2 = new WmapArea();
-                    area2.AreaFilename = Common.TryGetString(binaryAreas[cummulativeAreaCount + i].AreaFilename);
+                    area2.AreaFilename = binaryAreas[cummulativeAreaCount + i].AreaFilename;
                     area2.Caption = Common.ReadString(binaryAreas[cummulativeAreaCount + i].Caption, TlkFile);
                     area2.Flags.AreaVisible = (binaryAreas[cummulativeAreaCount + i].Flags & Common.Bit0) != 0;
                     area2.Flags.AreaVisibleFromAdjacent = (binaryAreas[cummulativeAreaCount + i].Flags & Common.Bit1) != 0;
@@ -158,7 +158,7 @@ namespace iiInfinityEngine.Core.Readers
                     area2.LongName = Common.TryGetString(binaryAreas[cummulativeAreaCount + i].LongName);
                     area2.Name = Common.ReadString(binaryAreas[cummulativeAreaCount + i].Name, TlkFile);
                     area2.SequenceBam = binaryAreas[cummulativeAreaCount + i].SequenceBam;
-                    area2.ShortName = Common.TryGetString(binaryAreas[cummulativeAreaCount + i].ShortName);
+                    area2.ShortName = binaryAreas[cummulativeAreaCount + i].ShortName;
                     area2.Unused = binaryAreas[cummulativeAreaCount + i].Unused;
                     area2.XCoordinate = binaryAreas[cummulativeAreaCount + i].XCoordinate;
                     area2.YCoordinate = binaryAreas[cummulativeAreaCount + i].YCoordinate;
@@ -250,9 +250,9 @@ namespace iiInfinityEngine.Core.Readers
                 var worldmap2 = new WmapWorldmap();
                 worldmap2.AreaName = Common.ReadString(worldmap.AreaName, TlkFile);
                 worldmap2.areas = areas2;
-                worldmap2.BackgroundMos = Common.TryGetString(worldmap.BackgroundMos);
+                worldmap2.BackgroundMos = worldmap.BackgroundMos;
                 worldmap2.Height = worldmap.Height;
-                worldmap2.MapIconsBam = Common.TryGetString(worldmap.MapIconsBam);
+                worldmap2.MapIconsBam = worldmap.MapIconsBam;
                 worldmap2.MapNumber = worldmap.MapNumber;
                 worldmap2.Unused = worldmap.Unused;
                 worldmap2.StartCenteredOnX = worldmap.StartCenteredOnX;

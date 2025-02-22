@@ -21,43 +21,51 @@ namespace iiInfinityEngine.Core.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
-        public HeaderFlags Flags;
+        public DlgFile()
+        {
+            Flags = new HeaderFlags();
+        }
+
+        public HeaderFlags Flags { get; set; }
     }
 
     [Serializable]
     public class State2
     {
-        public Int32 Weight;
-        public Int32 StateNumber;
-        public string Trigger;
-        public IEString ResponseText;
-        public string SymbolicName;
+        public Int32 Weight { get; set; }
+        public Int32 StateNumber { get; set; }
+        public string Trigger { get; set; }
+        public IEString ResponseText { get; set; }
+        public string SymbolicName { get; set; }
         public List<Transition2> transitions = [];
     }
 
     [Serializable]
     public class Transition2
     {
-        public string Trigger;
-        public IEString TransitionText;
-        public IEString JournalText;
-        public string Dialog;
-        public Int32 NextState;
-        public string NextStateSymbolicName;
-        public string Action;
-        public bool HasText { get; set; }
+        public string Trigger { get; set; }
+        public IEString TransitionText { get; set; }
+        public IEString JournalText { get; set; }
+        public string Dialog { get; set; }
+        public Int32 NextState { get; set; }
+        public string NextStateSymbolicName { get; set; }
+        public string Action { get; set; }
+
+        public bool HasText { get; set; } //TODO:dlg
         public bool HasTrigger { get; set; }
         public bool HasAction { get; set; }
         public bool TerminateDialog { get; set; }
         public bool HasJouranl { get; set; }
-        public bool Unknown { get; set; }
+        public bool Interrupt { get; set; }
         public bool AddQuestJournalEntry { get; set; }
         public bool RemoveQuestJournalEntry { get; set; }
         public bool AddQuestCompleteJournalEntry { get; set; }
+        public bool ImmediateActionExecution { get; set; }
+        public bool ClearActions { get; set; }
     }
 
     [Serializable]
-    public struct HeaderFlags
+    public class HeaderFlags
     {
         public bool Enemy { get; set; }
         public bool EscapeArea { get; set; }

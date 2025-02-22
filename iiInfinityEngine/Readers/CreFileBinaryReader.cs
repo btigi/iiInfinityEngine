@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Runtime.InteropServices;
+﻿using iiInfinityEngine.Core.Binary;
 using iiInfinityEngine.Core.Files;
-using iiInfinityEngine.Core.Binary;
+using System.Collections.Generic;
+using System.IO;
 
 namespace iiInfinityEngine.Core.Readers
 {
@@ -15,23 +11,19 @@ namespace iiInfinityEngine.Core.Readers
 
         public CreFile Read(string filename)
         {
-            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
-            {
-                var f = Read(fs);
-                f.Filename = Path.GetFileName(filename);
-                return f;
-            }
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var f = Read(fs);
+            f.Filename = Path.GetFileName(filename);
+            return f;
         }
 
         public CreFile Read(Stream s)
         {
-            using (BinaryReader br = new BinaryReader(s))
-            {
-                var creFile = ParseFile(br);
-                br.BaseStream.Seek(0, SeekOrigin.Begin);
-                creFile.OriginalFile = ParseFile(br);
-                return creFile;
-            }
+            using var br = new BinaryReader(s);
+            var creFile = ParseFile(br);
+            br.BaseStream.Seek(0, SeekOrigin.Begin);
+            creFile.OriginalFile = ParseFile(br);
+            return creFile;
         }
 
         private CreFile ParseFile(BinaryReader br)
@@ -41,13 +33,13 @@ namespace iiInfinityEngine.Core.Readers
             if (header.ftype.ToString() != "CRE ")
                 return new CreFile();
 
-            List<CreKnownSpellBinary> creKnownSpells = new List<CreKnownSpellBinary>();
-            List<CreSpellMemorisationInfoBinary> creSpellMemorisations = new List<CreSpellMemorisationInfoBinary>();
-            List<CreMemorisedSpellBinary> creMemorisedSpells = new List<CreMemorisedSpellBinary>();
-            List<Eff1BinaryBinary> creEffects1 = new List<Eff1BinaryBinary>();
+            List<CreKnownSpellBinary> creKnownSpells = [];
+            List<CreSpellMemorisationInfoBinary> creSpellMemorisations = [];
+            List<CreMemorisedSpellBinary> creMemorisedSpells = [];
+            List<Eff1BinaryBinary> creEffects1 = [];
             List<EmbeddedEffBinary> creEffects2 = new List<EmbeddedEffBinary>();
-            List<CreItemBinary> creItems = new List<CreItemBinary>();
-            List<short> creItemSlots = new List<short>();
+            List<CreItemBinary> creItems = [];
+            List<short> creItemSlots = [];
 
             br.BaseStream.Seek(header.KnownSpellsoffset, SeekOrigin.Begin);
             for (int i = 0; i < header.KnownSpellsCount; i++)
@@ -347,10 +339,10 @@ namespace iiInfinityEngine.Core.Readers
 
             foreach (var creEffect in creEffects1)
             {
-                Eff1File creEffect2 = new Eff1File();
+                var creEffect2 = new Eff1File();
                 creEffect2.DiceSides = creEffect.DiceSides;
                 creEffect2.DiceThrown = creEffect.DiceThrown;
-                creEffect2.DispelResistance = creEffect.DispelResistance;
+                creEffect2.Resistance = creEffect.Resistance;
                 creEffect2.Duration = creEffect.Duration;
                 creEffect2.Opcode = creEffect.Opcode;
                 creEffect2.Parameter1 = creEffect.Parameter1;
@@ -358,18 +350,18 @@ namespace iiInfinityEngine.Core.Readers
                 creEffect2.Power = creEffect.Power;
                 creEffect2.Probability1 = creEffect.Probability1;
                 creEffect2.Probability2 = creEffect.Probability2;
-                creEffect2.resource = creEffect.Resource.ToString();
+                creEffect2.Resource = creEffect.Resource;
                 creEffect2.SavingThrowBonus = creEffect.SavingThrowBonus;
                 creEffect2.SavingThrowType = creEffect.SavingThrowType;
                 creEffect2.TargetType = creEffect.TargetType;
-                creEffect2.TimingMode = creEffect.TimingMode;
+                creEffect2.TimingMode = (OpcodeTargetType)creEffect.TimingMode;
                 creEffect2.Unknown = creEffect.Unknown;
                 creFile.Effects1.Add(creEffect2);
             }
 
             foreach (var creEffect in creEffects2)
             {
-                EmbeddedEffBinary creEffect2 = new EmbeddedEffBinary();
+                var creEffect2 = new EmbeddedEffBinary();
                 creEffect2.CasterLevel = creEffect.CasterLevel;
                 creEffect2.CasterXCoordinate = creEffect.CasterXCoordinate;
                 creEffect2.CasterYCoordinate = creEffect.CasterYCoordinate;
@@ -433,8 +425,8 @@ namespace iiInfinityEngine.Core.Readers
                 for (int i = 0; i < info.SpellCount; i++)
                 {
                     //Note: This means we cannot set NumberOfSpellSlots (after effects)
-                    CreMemorisedSpellBinary memorisedSpell = creMemorisedSpells[info.SpellOffset + i];
-                    CreMemorisedSpell2 memorisedSpell2 = new CreMemorisedSpell2();
+                    var memorisedSpell = creMemorisedSpells[info.SpellOffset + i];
+                    var memorisedSpell2 = new CreMemorisedSpell2();
                     memorisedSpell2.Filename = memorisedSpell.Filename.ToString();
                     memorisedSpell2.IsMemorised = memorisedSpell.Memorised != 0;
 
@@ -481,7 +473,7 @@ namespace iiInfinityEngine.Core.Readers
 
             foreach (var knownSpell in creKnownSpells)
             {
-                CreKnownSpell2 knownSpell2 = new CreKnownSpell2();
+                var knownSpell2 = new CreKnownSpell2();
                 knownSpell2.Filename = knownSpell.Filename.ToString();
                 if (knownSpell.SpellLevel == 0 && knownSpell.SpellType == 0)
                     creFile.KnownSpells.PriestLevel1.Add(knownSpell2);
@@ -525,7 +517,7 @@ namespace iiInfinityEngine.Core.Readers
             var interimItems = new List<CreItem2>();
             foreach (var creItem in creItems)
             {
-                CreItem2 creItem2 = new CreItem2();
+                var creItem2 = new CreItem2();
 
                 creItem2.Charges1 = creItem.Charges1;
                 creItem2.Charges2 = creItem.Charges2;

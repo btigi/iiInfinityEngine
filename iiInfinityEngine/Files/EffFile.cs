@@ -80,20 +80,6 @@ namespace iiInfinityEngine.Core.Files
         public Int32 Unknownd10c { get; set; }
     }
 
-    public enum EffTargetType
-    {
-        None = 0,
-        Self,
-        ProjectileTarget,
-        Party,
-        Everyone,
-        EveryoneExceptParty,
-        CasterGroup,
-        TargetGroup,
-        EveryoneExceptSelf,
-        OriginalCaster
-    }
-
     public enum EffTimingMode : Int16
     {
         InstantLimited,

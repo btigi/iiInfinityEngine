@@ -11,7 +11,7 @@ namespace iiInfinityEngine.Core.Writers
 
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
-            if (!(file is DimensionalArrayFile))
+            if (file is not DimensionalArrayFile)
                 throw new ArgumentException("File is not a valid 2da file");
 
             var dimensionalArrayFile = file as DimensionalArrayFile;
@@ -19,12 +19,9 @@ namespace iiInfinityEngine.Core.Writers
             if (!(forceSave) && (HashGenerator.GenerateKey(dimensionalArrayFile) == dimensionalArrayFile.Checksum))
                 return false;
 
-            if (BackupManger != null)
-            {
-                BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-            }
+            BackupManger?.BackupFile(file, file.Filename, file.FileType, this);
 
-            File.WriteAllText(filename, dimensionalArrayFile.contents);
+            File.WriteAllText(filename, dimensionalArrayFile.Contents);
             return true;
         }
     }
