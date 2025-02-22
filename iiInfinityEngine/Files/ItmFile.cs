@@ -483,18 +483,5 @@ namespace iiInfinityEngine.Core.Files
         public bool Bit5 { get; set; }
         public bool Bit6 { get; set; }
         public bool Bit7 { get; set; }
-    }
-
-    [Serializable]
-    public class Resistance
-    {
-        public bool DispellableAffectedByMagicResistance { get; set; }
-        public bool IgnoreMagicResistance { get; set; }
-        public bool Bit2 { get; set; }
-        public bool Bit3 { get; set; }
-        public bool Bit4 { get; set; }
-        public bool Bit5 { get; set; }
-        public bool Bit6 { get; set; }
-        public bool Bit7 { get; set; }
-    }    
+    } 
 }

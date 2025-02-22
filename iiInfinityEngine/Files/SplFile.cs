@@ -142,6 +142,7 @@ namespace iiInfinityEngine.Core.Files
         public SplFeatureBlock()
         {
             SavingThrowType = new SpellSavingThrowType();
+            Resistance = new Resistance();
         }
 
         public Int16 Opcode { get; set; }
@@ -150,7 +151,7 @@ namespace iiInfinityEngine.Core.Files
         public Int32 Parameter1 { get; set; }
         public Int32 Parameter2 { get; set; }
         public TimingMode TimingMode { get; set; }
-        public byte Resistance { get; set; }
+        public Resistance Resistance { get; set; }
         public Int32 Duration { get; set; }
         public byte Probability1 { get; set; }
         public byte Probability2 { get; set; }
@@ -206,43 +207,6 @@ namespace iiInfinityEngine.Core.Files
         public bool Bit23 { get; set; }
         public bool BypassMirrorImage { get; set; }
         public bool IgnoreDifficulty { get; set; }
-        public bool Bit26 { get; set; }
-        public bool Bit27 { get; set; }
-        public bool Bit28 { get; set; }
-        public bool Bit29 { get; set; }
-        public bool Bit30 { get; set; }
-        public bool Bit31 { get; set; }
-    }
-
-    [Serializable]
-    public class SpellFlags
-    {
-        public bool Bit0 { get; set; }
-        public bool Bit1 { get; set; }
-        public bool Bit2 { get; set; }
-        public bool Bit3 { get; set; }
-        public bool Bit4 { get; set; }
-        public bool Bit5 { get; set; }
-        public bool Bit6 { get; set; }
-        public bool Bit7 { get; set; }
-        public bool Bit8 { get; set; }
-        public bool BreaksSanctuaryInvisibility { get; set; }
-        public bool Hostile { get; set; }
-        public bool NoLOSRequired { get; set; }
-        public bool AllowSpotting { get; set; }
-        public bool OutdoorsOnly { get; set; }
-        public bool IgnoreWildSurgeDeadMagic { get; set; }
-        public bool IgnoreWildSurge { get; set; }
-        public bool NonCombatAbility { get; set; }
-        public bool Bit17 { get; set; }
-        public bool Bit18 { get; set; }
-        public bool Bit19 { get; set; }
-        public bool Bit20 { get; set; }
-        public bool Bit21 { get; set; }
-        public bool Bit22 { get; set; }
-        public bool Bit23 { get; set; }
-        public bool CanTargetInvisible { get; set; }
-        public bool CastableWhenSilenced { get; set; }
         public bool Bit26 { get; set; }
         public bool Bit27 { get; set; }
         public bool Bit28 { get; set; }
