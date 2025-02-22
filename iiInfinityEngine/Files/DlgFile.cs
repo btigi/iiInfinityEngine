@@ -6,7 +6,7 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class DlgFile : IEFile
     {
-        public List<State2> states = new List<State2>();
+        public List<State2> states = [];
 
         [NonSerialized]
         private string checksum;
@@ -32,7 +32,7 @@ namespace iiInfinityEngine.Core.Files
         public string Trigger;
         public IEString ResponseText;
         public string SymbolicName;
-        public List<Transition2> transitions = new List<Transition2>();
+        public List<Transition2> transitions = [];
     }
 
     [Serializable]

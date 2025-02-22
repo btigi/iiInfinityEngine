@@ -22,10 +22,15 @@ namespace iiInfinityEngine.Core.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
+        public SplFile()
+        {
+            Flags = new SpellFlags();
+        }
+
         public IEString UnidentifiedName { get; set; }
         public IEString IdentifiedName { get; set; }
         public array8 CompletionSound { get; set; }
-        public SpellFlags Flags;
+        public SpellFlags Flags { get; set; }
         public SpellType SpellType { get; set; }
         public Int32 ExclusionFlags { get; set; }
         public Int16 CastingGraphic { get; set; }
@@ -33,16 +38,16 @@ namespace iiInfinityEngine.Core.Files
         public byte PrimaryType { get; set; }
         public byte Unknown26 { get; set; }
         public byte SecondaryType { get; set; }
-        public byte Unused28;
-        public byte Unused29;
-        public byte Unused2a;
-        public byte Unused2b;
-        public byte Unused2c;
-        public byte Unused2d;
-        public byte Unused2e;
-        public byte Unused2f;
-        public Int16 Unused30;
-        public Int16 Unused32;
+        public byte Unused28 { get; set; }
+        public byte Unused29 { get; set; }
+        public byte Unused2a { get; set; }
+        public byte Unused2b { get; set; }
+        public byte Unused2c { get; set; }
+        public byte Unused2d { get; set; }
+        public byte Unused2e { get; set; }
+        public byte Unused2f { get; set; }
+        public Int16 Unused30 { get; set; }
+        public Int16 Unused32 { get; set; }
         public Int32 SpellLevel { get; set; }
         public Int16 Unused38 { get; set; }
         public array8 SpellBookIcon { get; set; }
@@ -51,8 +56,8 @@ namespace iiInfinityEngine.Core.Files
         public Int32 Unused4c { get; set; }
         public IEString UnidentifiedDescription { get; set; }
         public IEString IdentifiedDescription { get; set; }
-        public array8 Unused58;
-        public Int32 Unused60;
+        public array8 Unused58 { get; set; }
+        public Int32 Unused60 { get; set; }
     }
 
     [Serializable]
@@ -78,7 +83,7 @@ namespace iiInfinityEngine.Core.Files
         public Int16 Unused24 { get; set; }
         public Int16 ProjectileAnimation { get; set; }
 
-        public List<SplFeatureBlock> splFeatureBlocks = new List<SplFeatureBlock>();
+        public List<SplFeatureBlock> splFeatureBlocks = [];
     }
 
     [Serializable]
@@ -134,22 +139,27 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class SplFeatureBlock
     {
-        public Int16 Opcode;
-        public SpellAbilityTarget TargetType;
-        public byte Power;
-        public Int32 Parameter1;
-        public Int32 Parameter2;
-        public TimingMode TimingMode;
-        public byte Resistance;
-        public Int32 Duration;
-        public byte Probability1;
-        public byte Probability2;
-        public array8 Resource;
-        public Int32 DiceThrown;
-        public Int32 DiceSides;
-        public SpellSavingThrowType SavingThrowType;
-        public Int32 SavingThrowBonus;
-        public Int32 Unused2c;
+        public SplFeatureBlock()
+        {
+            SavingThrowType = new SpellSavingThrowType();
+        }
+
+        public Int16 Opcode { get; set; }
+        public SpellAbilityTarget TargetType { get; set; }
+        public byte Power { get; set; }
+        public Int32 Parameter1 { get; set; }
+        public Int32 Parameter2 { get; set; }
+        public TimingMode TimingMode { get; set; }
+        public byte Resistance { get; set; }
+        public Int32 Duration { get; set; }
+        public byte Probability1 { get; set; }
+        public byte Probability2 { get; set; }
+        public array8 Resource { get; set; }
+        public Int32 DiceThrown { get; set; }
+        public Int32 DiceSides { get; set; }
+        public SpellSavingThrowType SavingThrowType { get; set; }
+        public Int32 SavingThrowBonus { get; set; }
+        public Int32 Unused2c { get; set; }
     }
 
     [Serializable]
@@ -168,7 +178,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct SpellSavingThrowType
+    public class SpellSavingThrowType
     {
         public bool Spells { get; set; }
         public bool Breath { get; set; }
@@ -205,7 +215,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct SpellFlags
+    public class SpellFlags
     {
         public bool Bit0 { get; set; }
         public bool Bit1 { get; set; }

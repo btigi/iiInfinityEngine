@@ -18,8 +18,8 @@ namespace iiInfinityEngine.Core.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
-        public Int32 TileCount;
-        public Int32 TileLength;
-        public Int32 TileDimension;
+        public Int32 TileCount { get; set; }
+        public Int32 TileLength { get; set; }
+        public Int32 TileDimension { get; set; }
     }
 }

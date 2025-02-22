@@ -26,11 +26,16 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class StringEntry
     {
-        public string Text;
-        public StringEntryType Flags;
-        public string Sound;
-        public Int32 VolumeVariance;
-        public Int32 PitchVariance;
-        public Int32 Strref;
+        public StringEntry()
+        {
+            Flags = new StringEntryType();
+        }
+
+        public string Text { get; set; }
+        public StringEntryType Flags { get; set; }
+        public string Sound { get; set; }
+        public Int32 VolumeVariance { get; set; }
+        public Int32 PitchVariance { get; set; }
+        public Int32 Strref { get; set; }
     }
 }

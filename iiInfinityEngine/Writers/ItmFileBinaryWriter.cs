@@ -89,7 +89,7 @@ namespace iiInfinityEngine.Core.Writers
                 itmFeatureBlocks.Add(featureBlockBinary);
             }
 
-            foreach (var extendedHeader in itmFile.itmExtendedHeader)
+            foreach (var extendedHeader in itmFile.itmExtendedHeaders)
             {
                 var extendedHeaderBinary = new ItmExtendedHeaderBinary();
                 extendedHeaderBinary.AlternaticeDamageBonus = extendedHeader.AlternaticeDamageBonus;

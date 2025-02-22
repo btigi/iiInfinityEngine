@@ -18,41 +18,49 @@ namespace iiInfinityEngine.Core.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
-        public string Animation;
-        public string Animation2;
-        public DisplayFlags DisplayFlags;
-        public ColourFlags ColourFlags;
-        public Int32 Unused001c;
-        public SequenceFlags SequenceFlags;
-        public Int32 Unused0024;
-        public Int32 XPosition;
-        public Int32 YPosition;
-        public Int32 UseOrientation;
-        public Int32 FrameRate;
-        public Int32 OrientationCount;
-        public Int32 BaseOrientation;
-        public PositionFlags PositionFlags;
-        public string BitmapPalette;
-        public Int32 ZPosition;
-        public Int32 CentreX;
-        public Int32 CentreY;
-        public Int32 LightingBrightness;
-        public Int32 Duration;
-        public string InternalName;
-        public Int32 Bam1Sequence;
-        public Int32 Bam2Sequence;
-        public Int32 CurrentAnimationSequence;
-        public Int32 UseContinuousSequence;
-        public string Wav1;
-        public string Wav2;
-        public string AlphaBlendingAnimation;
-        public Int32 Bam3Sequence;
-        public string Wav3;
-        public byte[] Unused009c;
+        public VvcFile()
+        {
+            DisplayFlags = new DisplayFlags();
+            ColourFlags = new ColourFlags();
+            SequenceFlags = new SequenceFlags();
+            PositionFlags = new PositionFlags();
+        }
+
+        public string Animation { get; set; }
+        public string Animation2 { get; set; }
+        public DisplayFlags DisplayFlags { get; set; }
+        public ColourFlags ColourFlags { get; set; }
+        public Int32 Unused001c { get; set; }
+        public SequenceFlags SequenceFlags { get; set; }
+        public Int32 Unused0024 { get; set; }
+        public Int32 XPosition { get; set; }
+        public Int32 YPosition { get; set; }
+        public Int32 UseOrientation { get; set; }
+        public Int32 FrameRate { get; set; }
+        public Int32 OrientationCount { get; set; }
+        public Int32 BaseOrientation { get; set; }
+        public PositionFlags PositionFlags { get; set; }
+        public string BitmapPalette { get; set; }
+        public Int32 ZPosition { get; set; }
+        public Int32 CentreX { get; set; }
+        public Int32 CentreY { get; set; }
+        public Int32 LightingBrightness { get; set; }
+        public Int32 Duration { get; set; }
+        public string InternalName { get; set; }
+        public Int32 Bam1Sequence { get; set; }
+        public Int32 Bam2Sequence { get; set; }
+        public Int32 CurrentAnimationSequence { get; set; }
+        public Int32 UseContinuousSequence { get; set; }
+        public string Wav1 { get; set; }
+        public string Wav2 { get; set; }
+        public string AlphaBlendingAnimation { get; set; }
+        public Int32 Bam3Sequence { get; set; }
+        public string Wav3 { get; set; }
+        public byte[] Unused009c { get; set; }
     }
 
     [Serializable]
-    public struct DisplayFlags
+    public class DisplayFlags
     {
         public bool Transparent { get; set; }
         public bool Translucent { get; set; }
@@ -73,7 +81,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct ColourFlags
+    public class ColourFlags
     {
         public bool NotLightSource { get; set; }
         public bool LightSource { get; set; }
@@ -94,7 +102,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct SequenceFlags
+    public class SequenceFlags
     {
         public bool Looping { get; set; }
         public bool SpecialLighting { get; set; }
@@ -131,7 +139,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct PositionFlags
+    public class PositionFlags
     {
         public bool OrbitTarget { get; set; }
         public bool RelativeToTarget { get; set; }

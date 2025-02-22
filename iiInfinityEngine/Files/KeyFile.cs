@@ -112,15 +112,15 @@ namespace iiInfinityEngine.Core.Files
 
     public class KeyBifEntry2
     {
-        public Int32 length;
-        public string filename;
-        public bool IsOnCD1;
-        public bool IsOnCD2;
-        public bool IsOnCD3;
-        public bool IsOnCD4;
-        public bool IsOnCD5;
-        public bool IsOnCD6;
-        public bool IsInCacheDirectory;
-        public bool IsInDataDirectory;
+        public Int32 Length { get; set; }
+        public string Filename { get; set; }
+        public bool IsOnCD1 { get; set; }
+        public bool IsOnCD2 { get; set; }
+        public bool IsOnCD3 { get; set; }
+        public bool IsOnCD4 { get; set; }
+        public bool IsOnCD5 { get; set; }
+        public bool IsOnCD6 { get; set; }
+        public bool IsInCacheDirectory { get; set; }
+        public bool IsInDataDirectory { get; set; }
     }
 }

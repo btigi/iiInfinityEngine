@@ -18,59 +18,99 @@ namespace iiInfinityEngine.Core.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
-        public Int32 Opcode;
-        public Int32 TargetType;
-        public Int32 Power;
-        public Int32 Parameter1;
-        public Int32 Parameter2;
-        public Int16 TimingMode;
-        public Int16 Unknown;
-        public Int32 Duration;
-        public Int16 Probability1;
-        public Int16 Probability2;
-        public array8 Resource;
-        public Int32 DiceThrown;
-        public Int32 DiceSides;
-        public Int32 SavingThrowType;
-        public Int32 SavingThrowBonus;
-        public Int32 SetLocalVariableIfNonExistant;
-        public Int32 PrimaryType;
-        public Int32 Unknown2;
-        public Int32 LowestAffectedLevelFromParent;
-        public Int32 HighestAffectedLevelFromParent;
-        public Int32 Resistance;
-        public Int32 Parameter3;
-        public Int32 Parameter4;
-        public array8 Resource2;
-        public array8 Resource3; // VVC aka Parameter 5
-        public Int32 Unknown3;
-        public Int32 Unknown4;
-        public Int32 CasterXCoordinate;
-        public Int32 CasterYCoordinate;
-        public Int32 TargetXCoordinate;
-        public Int32 TargetYCoordinate;
-        public Int32 ResourceTypeFromParent;
-        public array8 ParentResource;
-        public Int32 Projectile;
-        public Int32 ParentResourceSlot;
-        public array32 Variable;
-        public Int32 CasterLevel;
-        public Int32 Unknown5;
-        public Int32 SecondaryType;
-        public Int32 Unknownd4_1;
-        public Int32 Unknownd4_2;
-        public Int32 Unknownd4_3;
-        public Int32 Unknownd4_4;
-        public Int32 Unknownd4_5;
-        public Int32 Unknownd4_6;
-        public Int32 Unknownd4_7;
-        public Int32 Unknownd4_8;
-        public Int32 Unknownd4_9;
-        public Int32 Unknownd4_10;
-        public Int32 Unknownd4_11;
-        public Int32 Unknownd4_12;
-        public Int32 Unknownd4_13;
-        public Int32 Unknownd4_14;
-        public Int32 Unknownd4_15;
+        public Int32 Opcode { get; set; }
+        public EffTargetType TargetType { get; set; }
+        public Int32 Power { get; set; }
+        public Int32 Parameter1 { get; set; }
+        public Int32 Parameter2 { get; set; }
+        public EffTimingMode TimingMode { get; set; }
+        public Int16 Unknown26 { get; set; }
+        public Int32 Duration { get; set; }
+        public Int16 Probability1 { get; set; }
+        public Int16 Probability2 { get; set; }
+        public array8 Resource { get; set; }
+        public Int32 DiceThrown { get; set; }
+        public Int32 DiceSides { get; set; }
+        public SavingThrowType SavingThrowType { get; set; }
+        public Int32 SavingThrowBonus { get; set; }
+        public Int32 Special { get; set; }
+        public Int32 PrimaryType { get; set; }
+        public Int32 Unknown50 { get; set; }
+        public Int32 LowestAffectedLevelFromParent { get; set; }
+        public Int32 HighestAffectedLevelFromParent { get; set; }
+        public Int32 Resistance { get; set; } //TODO:eff
+        public Int32 Parameter3 { get; set; }
+        public Int32 Parameter4 { get; set; }
+        public Int32 Parameter5 { get; set; }
+        public Int32 TimeApplied { get; set; }
+        public array8 Resource2 { get; set; }
+        public array8 Resource3 { get; set; }
+        public Int32 CasterXCoordinate { get; set; }
+        public Int32 CasterYCoordinate { get; set; }
+        public Int32 TargetXCoordinate { get; set; }
+        public Int32 TargetYCoordinate { get; set; }
+        public ResourceTypeFromParent ResourceTypeFromParent { get; set; }
+        public array8 ParentResource { get; set; } //TODO:eff - must be ALL CAPS
+        
+        public Int32 FlagsFromParent { get; set; } //TODO:eff -> make a class with 32 bits, and add this field to the binary, reader and writer
+
+
+        public Int32 Projectile { get; set; }
+        public Int32 ParentResourceSlot { get; set; }
+        public array32 Variable { get; set; }
+        public Int32 CasterLevel { get; set; }
+        public Int32 Unknown5 { get; set; } //TODO:eff first apply
+        public Int32 SecondaryType { get; set; }
+        public Int32 Unknownd4_1 { get; set; } //TODO:eff name after hex offset
+        public Int32 Unknownd4_2 { get; set; }
+        public Int32 Unknownd4_3 { get; set; }
+        public Int32 Unknownd4_4 { get; set; }
+        public Int32 Unknownd4_5 { get; set; }
+        public Int32 Unknownd4_6 { get; set; }
+        public Int32 Unknownd4_7 { get; set; }
+        public Int32 Unknownd4_8 { get; set; }
+        public Int32 Unknownd4_9 { get; set; }
+        public Int32 Unknownd4_10 { get; set; }
+        public Int32 Unknownd4_11 { get; set; }
+        public Int32 Unknownd4_12 { get; set; }
+        public Int32 Unknownd4_13 { get; set; }
+        public Int32 Unknownd4_14 { get; set; }
+        public Int32 Unknownd4_15 { get; set; }
     }
+
+    public enum EffTargetType
+    {
+        None = 0,
+        Self,
+        ProjectileTarget,
+        Party,
+        Everyone,
+        EveryoneExceptParty,
+        CasterGroup,
+        TargetGroup,
+        EveryoneExceptSelf,
+        OriginalCaster
+    }
+
+    public enum EffTimingMode : Int16
+    {
+        InstantLimited,
+        InstantPermanent,
+        InstantWhileEquipped,
+        DelayLimited,
+        DelayPermanent,
+        DelayWhileEquipped,
+        LimitedAfterDuration,
+        PermanentAfterDuration,
+        EquippedAfterDuration,
+        InstantPermanentAfterDeath,
+        Instant_Limited
+    }
+
+    public enum ResourceTypeFromParent
+    {
+        None,
+        Spell,
+        Item
+    }    
 }

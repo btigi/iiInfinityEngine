@@ -43,8 +43,8 @@ namespace iiInfinityEngine.Core.Readers
                     br.BaseStream.Seek(bifEntry.filenameOffset, SeekOrigin.Begin);
 
                     KeyBifEntry2 entry = new KeyBifEntry2();
-                    entry.filename = new string(br.ReadChars(bifEntry.filenameLength)).Replace("\0", "");
-                    entry.length = bifEntry.length;
+                    entry.Filename = new string(br.ReadChars(bifEntry.filenameLength)).Replace("\0", "");
+                    entry.Length = bifEntry.length;
                     entry.IsInCacheDirectory = Convert.ToBoolean((bifEntry.fileLocation & 1) != 0);
                     entry.IsInDataDirectory = Convert.ToBoolean((bifEntry.fileLocation & 2) != 0);
                     entry.IsOnCD1 = Convert.ToBoolean((bifEntry.fileLocation & 4) != 0);

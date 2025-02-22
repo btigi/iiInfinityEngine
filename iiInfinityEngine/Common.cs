@@ -1827,6 +1827,11 @@ namespace iiInfinityEngine.Core
     [Serializable]
     public struct IEString
     {
+        public IEString()
+        {
+            Flags = new StringEntryType();
+        }
+
         public string Text { get; set; }
         public StringEntryType Flags { get; set; }
         public string Sound { get; set; }
@@ -1836,7 +1841,7 @@ namespace iiInfinityEngine.Core
     }
 
     [Serializable]
-    public struct StringEntryType
+    public class StringEntryType
     {
         public bool HasText { get; set; }
         public bool HasSound { get; set; }
@@ -1854,5 +1859,42 @@ namespace iiInfinityEngine.Core
         public bool Bit13 { get; set; }
         public bool Bit14 { get; set; }
         public bool Bit15 { get; set; }
+    }
+
+    [Serializable]
+    public class SavingThrowType
+    {
+        public bool Spells { get; set; }
+        public bool Breath { get; set; }
+        public bool ParalyzePoisonDeath { get; set; }
+        public bool Wands { get; set; }
+        public bool PetrifyPolymorph { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool IgnorePrimaryTarget { get; set; }
+        public bool IgnoreSecondaryTarget { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool BypassMirrorImage { get; set; }
+        public bool IgnoreDifficulty { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
     }
 }

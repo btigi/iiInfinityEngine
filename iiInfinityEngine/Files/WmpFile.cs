@@ -27,16 +27,21 @@ namespace iiInfinityEngine.Core.Files
     {
         public List<WmapArea> areas = [];
 
-        public string BackgroundMos;
-        public Int32 Width;
-        public Int32 Height;
-        public Int32 MapNumber;
-        public IEString AreaName;
-        public Int32 StartCenteredOnX;
-        public Int32 StartCenteredOnY;
-        public string MapIconsBam;
-        public WmapWorldmapFlags Flags;
-        public byte[] Unused;
+        public WmapWorldmap()
+        {
+            Flags = new WmapWorldmapFlags();
+        }
+
+        public string BackgroundMos { get; set; }
+        public Int32 Width { get; set; }
+        public Int32 Height { get; set; }
+        public Int32 MapNumber { get; set; }
+        public IEString AreaName { get; set; }
+        public Int32 StartCenteredOnX { get; set; }
+        public Int32 StartCenteredOnY { get; set; }
+        public string MapIconsBam { get; set; }
+        public WmapWorldmapFlags Flags { get; set; }
+        public byte[] Unused { get; set; }
     }
 
     [Serializable]
@@ -47,143 +52,153 @@ namespace iiInfinityEngine.Core.Files
         public List<WmapAreaLink> SouthLinks = [];
         public List<WmapAreaLink> WestLinks = [];
 
-        public string AreaFilename;
-        public string ShortName;
-        public string LongName;
-        public WmpAreaFlags Flags;
-        public Int32 SequenceBam;
-        public Int32 XCoordinate;
-        public Int32 YCoordinate;
-        public IEString Caption;
-        public IEString Name;
-        public string LoadingMos;
-        public byte[] Unused;
+        public WmapArea()
+        {
+            Flags = new WmpAreaFlags();
+        }
+
+        public string AreaFilename { get; set; }
+        public string ShortName { get; set; }
+        public string LongName { get; set; }
+        public WmpAreaFlags Flags { get; set; }
+        public Int32 SequenceBam { get; set; }
+        public Int32 XCoordinate { get; set; }
+        public Int32 YCoordinate { get; set; }
+        public IEString Caption { get; set; }
+        public IEString Name { get; set; }
+        public string LoadingMos { get; set; }
+        public byte[] Unused { get; set; }
     }
 
     [Serializable]
-    public struct WmapAreaLink
+    public class WmapAreaLink
     {
-        public Int32 DestintationAreaIndex;
-        public string EntryPoint;
-        public Int32 TravelTime;
-        public WmapAreaLinkFlags DefaultEntryLocation;
-        public string RandomEncounterArea1;
-        public string RandomEncounterArea2;
-        public string RandomEncounterArea3;
-        public string RandomEncounterArea4;
-        public string RandomEncounterArea5;
-        public Int32 RandomEncounterProbability;
-        public byte[] Unused;
+        public WmapAreaLink()
+        {
+            DefaultEntryLocation = new WmapAreaLinkFlags();
+        }
+
+        public Int32 DestintationAreaIndex { get; set; }
+        public string EntryPoint { get; set; }
+        public Int32 TravelTime { get; set; }
+        public WmapAreaLinkFlags DefaultEntryLocation { get; set; }
+        public string RandomEncounterArea1 { get; set; }
+        public string RandomEncounterArea2 { get; set; }
+        public string RandomEncounterArea3 { get; set; }
+        public string RandomEncounterArea4 { get; set; }
+        public string RandomEncounterArea5 { get; set; }
+        public Int32 RandomEncounterProbability { get; set; }
+        public byte[] Unused { get; set; }
     }
 
     [Serializable]
-    public struct WmapWorldmapFlags
+    public class WmapWorldmapFlags
     {
-        public bool ColouredIcons;
-        public bool IgnorePalette;
-        public bool Bit2;
-        public bool Bit3;
-        public bool Bit4;
-        public bool Bit5;
-        public bool Bit6;
-        public bool Bit7;
-        public bool Bit8;
-        public bool Bit9;
-        public bool Bit10;
-        public bool Bit11;
-        public bool Bit12;
-        public bool Bit13;
-        public bool Bit14;
-        public bool Bit15;
-        public bool Bit16;
-        public bool Bit17;
-        public bool Bit18;
-        public bool Bit19;
-        public bool Bit20;
-        public bool Bit21;
-        public bool Bit22;
-        public bool Bit23;
-        public bool Bit24;
-        public bool Bit25;
-        public bool Bit26;
-        public bool Bit27;
-        public bool Bit28;
-        public bool Bit29;
-        public bool Bit30;
-        public bool Bit31;
+        public bool ColouredIcons { get; set; }
+        public bool IgnorePalette { get; set; }
+        public bool Bit2 { get; set; }
+        public bool Bit3 { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
     }
 
     [Serializable]
-    public struct WmpAreaFlags
+    public class WmpAreaFlags
     {
-        public bool AreaVisible;
-        public bool AreaVisibleFromAdjacent;
-        public bool Reachable;
-        public bool AlreadyVisited;
-        public bool Bit4;
-        public bool Bit5;
-        public bool Bit6;
-        public bool Bit7;
-        public bool Bit8;
-        public bool Bit9;
-        public bool Bit10;
-        public bool Bit11;
-        public bool Bit12;
-        public bool Bit13;
-        public bool Bit14;
-        public bool Bit15;
-        public bool Bit16;
-        public bool Bit17;
-        public bool Bit18;
-        public bool Bit19;
-        public bool Bit20;
-        public bool Bit21;
-        public bool Bit22;
-        public bool Bit23;
-        public bool Bit24;
-        public bool Bit25;
-        public bool Bit26;
-        public bool Bit27;
-        public bool Bit28;
-        public bool Bit29;
-        public bool Bit30;
-        public bool Bit31;
+        public bool AreaVisible { get; set; }
+        public bool AreaVisibleFromAdjacent { get; set; }
+        public bool Reachable { get; set; }
+        public bool AlreadyVisited { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
     }
 
     [Serializable]
-    public struct WmapAreaLinkFlags
+    public class WmapAreaLinkFlags
     {
-        public bool MoveToNorthernSide;
-        public bool MoveToEasternSide;
-        public bool MoveToSouthernSide;
-        public bool MoveToWesternSide;
-        public bool Bit4;
-        public bool Bit5;
-        public bool Bit6;
-        public bool Bit7;
-        public bool Bit8;
-        public bool Bit9;
-        public bool Bit10;
-        public bool Bit11;
-        public bool Bit12;
-        public bool Bit13;
-        public bool Bit14;
-        public bool Bit15;
-        public bool Bit16;
-        public bool Bit17;
-        public bool Bit18;
-        public bool Bit19;
-        public bool Bit20;
-        public bool Bit21;
-        public bool Bit22;
-        public bool Bit23;
-        public bool Bit24;
-        public bool Bit25;
-        public bool Bit26;
-        public bool Bit27;
-        public bool Bit28;
-        public bool Bit29;
-        public bool Bit30;
-        public bool Bit31;
+        public bool MoveToNorthernSide { get; set; }
+        public bool MoveToEasternSide { get; set; }
+        public bool MoveToSouthernSide { get; set; }
+        public bool MoveToWesternSide { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
     }
 }

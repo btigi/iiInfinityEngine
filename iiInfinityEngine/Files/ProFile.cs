@@ -18,81 +18,91 @@ namespace iiInfinityEngine.Core.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
-        public ProjectileType ProjectileType;
-        public Int16 ProjectileSpeed;
-        public SparkingFlags SparkingFlags;
-        public array8 FireWav;
-        public array8 ImpactWav;
-        public array8 SourceAnimationBam;
-        public SparkColour SparkColour;
-        public Int16 ProjectileWidth;
-        public ExtendedFlags ExtendedFlags;
-        public Int32 DisplayedMessage;
-        public Int32 PulseColour;
-        public Int16 ColourSpeed;
-        public Int16 ScreenShakeAmount;
-        public Int16 CreatureValue1;
-        public Int16 CreatureType1;
-        public Int16 CreatureValue2;
-        public Int16 CreatureType2;
-        public array8 DefaultSpell;
-        public array8 SuccessSpell;
-        public Int16 AngleIncreaseMinimum;
-        public Int16 AngleIncreaseMaximum;
-        public Int16 CurveMinimum;
-        public Int16 CurveMaximum;
-        public Int16 Thac0Bonus;
-        public Int16 Thac0BonusNonActor;
-        public Int16 RadiusMinumum;
-        public Int16 RadiusMaximum;
-        public array156 Unused64;
-        public ProjectileFlags ProjectileFlags;
-        public array8 ProjectileAnimation;
-        public array8 ShadowAnimation;
-        public byte ProjectileNumberBAMSequence;
-        public byte ShadowNumberBAMSequence;
-        public Int16 LightSpotIntensity;
-        public Int16 LightSpotWidth;
-        public Int16 LightSpotHeight;
-        public array8 Palette;
-        public byte ProjectileColour1;
-        public byte ProjectileColour2;
-        public byte ProjectileColour3;
-        public byte ProjectileColour4;
-        public byte ProjectileColour5;
-        public byte ProjectileColour6;
-        public byte ProjectileColour7;
-        public byte SmokePuffPeriod;
-        public byte SmokeColour1;
-        public byte SmokeColour2;
-        public byte SmokeColour3;
-        public byte SmokeColour4;
-        public byte SmokeColour5;
-        public byte SmokeColour6;
-        public byte SmokeColour7;
-        public FaceTargetGranularity FaceTargetGranularity;
-        public Int16 ProjectileSmokeAnimation;// (animate.ids) 
-        public array8 TrailingAnimation1;
-        public array8 TrailingAnimation2;
-        public array8 TrailingAnimation3;
-        public Int16 TrailingBAMSequence1;
-        public Int16 TrailingBAMSequence2;
-        public Int16 TrailingBAMSequence3;
-        public PuffFlags PuffFlags;
-        public array168 Unused158;
-
-        public ProExtendedHeader ExtendedHeader;
-
         public ProFile()
         {
+            PuffFlags = new PuffFlags();
+            SparkingFlags = new SparkingFlags();
+            ExtendedFlags = new ExtendedFlags();
             ExtendedHeader = new ProExtendedHeader();
+            ProjectileFlags = new ProjectileFlags();
         }
+
+        public ProjectileType ProjectileType { get; set; }
+        public Int16 ProjectileSpeed { get; set; }
+        public SparkingFlags SparkingFlags { get; set; }
+        public array8 FireWav { get; set; }
+        public array8 ImpactWav { get; set; }
+        public array8 SourceAnimationBam { get; set; }
+        public SparkColour SparkColour { get; set; }
+        public Int16 ProjectileWidth { get; set; }
+        public ExtendedFlags ExtendedFlags { get; set; }
+        public Int32 DisplayedMessage { get; set; }
+        public Int32 PulseColour { get; set; }
+        public Int16 ColourSpeed { get; set; }
+        public Int16 ScreenShakeAmount { get; set; }
+        public Int16 CreatureValue1 { get; set; }
+        public Int16 CreatureType1 { get; set; }
+        public Int16 CreatureValue2 { get; set; }
+        public Int16 CreatureType2 { get; set; }
+        public array8 DefaultSpell { get; set; }
+        public array8 SuccessSpell { get; set; }
+        public Int16 AngleIncreaseMinimum { get; set; }
+        public Int16 AngleIncreaseMaximum { get; set; }
+        public Int16 CurveMinimum { get; set; }
+        public Int16 CurveMaximum { get; set; }
+        public Int16 Thac0Bonus { get; set; }
+        public Int16 Thac0BonusNonActor { get; set; }
+        public Int16 RadiusMinumum { get; set; }
+        public Int16 RadiusMaximum { get; set; }
+        public array156 Unused64 { get; set; }
+        public ProjectileFlags ProjectileFlags { get; set; }
+        public array8 ProjectileAnimation { get; set; }
+        public array8 ShadowAnimation { get; set; }
+        public byte ProjectileNumberBAMSequence { get; set; }
+        public byte ShadowNumberBAMSequence { get; set; }
+        public Int16 LightSpotIntensity { get; set; }
+        public Int16 LightSpotWidth { get; set; }
+        public Int16 LightSpotHeight { get; set; }
+        public array8 Palette { get; set; }
+        public byte ProjectileColour1 { get; set; }
+        public byte ProjectileColour2 { get; set; }
+        public byte ProjectileColour3 { get; set; }
+        public byte ProjectileColour4 { get; set; }
+        public byte ProjectileColour5 { get; set; }
+        public byte ProjectileColour6 { get; set; }
+        public byte ProjectileColour7 { get; set; }
+        public byte SmokePuffPeriod { get; set; }
+        public byte SmokeColour1 { get; set; }
+        public byte SmokeColour2 { get; set; }
+        public byte SmokeColour3 { get; set; }
+        public byte SmokeColour4 { get; set; }
+        public byte SmokeColour5 { get; set; }
+        public byte SmokeColour6 { get; set; }
+        public byte SmokeColour7 { get; set; }
+        public FaceTargetGranularity FaceTargetGranularity;
+        public Int16 ProjectileSmokeAnimation { get; set; }// (animate.ids) 
+        public array8 TrailingAnimation1 { get; set; }
+        public array8 TrailingAnimation2 { get; set; }
+        public array8 TrailingAnimation3 { get; set; }
+        public Int16 TrailingBAMSequence1 { get; set; }
+        public Int16 TrailingBAMSequence2 { get; set; }
+        public Int16 TrailingBAMSequence3 { get; set; }
+        public PuffFlags PuffFlags { get; set; }
+        public array168 Unused158 { get; set; }
+
+        public ProExtendedHeader ExtendedHeader { get; set; }
     }
 
     [Serializable]
     public class ProExtendedHeader
     {
-        public AreaProjectileFlags AreaProjectileFlags;
+        public ProExtendedHeader()
+        {
+            AreaProjectileFlags= new AreaProjectileFlags();
+            EnhancedExtendedFlags = new EnhancedExtendedFlags();
+        }
+
+        public AreaProjectileFlags AreaProjectileFlags { get; set; }
         public Int16 RayCount { get; set; }
         public Int16 TriggerRadius { get; set; }// (divide by approx 8.5 to receive radius in feet)
         public Int16 AreaOfEffect { get; set; }// (divide by approx 8.5 to receive radius in feet)
@@ -116,7 +126,7 @@ namespace iiInfinityEngine.Core.Files
         public Int16 DiceSize { get; set; }
         public Int16 AnimationGranularity { get; set; }
         public Int16 AnimationGranularityDivider { get; set; }
-        public array180 Unused24c;
+        public array180 Unused24c { get; set; }
     }
 
     [Serializable]
@@ -129,7 +139,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct SparkingFlags
+    public class SparkingFlags
     {
         public bool ShowSparkle { get; set; }
         public bool UseZCoordinate { get; set; }
@@ -183,7 +193,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct ExtendedFlags
+    public class ExtendedFlags
     {
         public bool BounceFromWalls { get; set; }
         public bool PassTarget { get; set; }
@@ -257,7 +267,7 @@ namespace iiInfinityEngine.Core.Files
     }
     
     [Serializable]
-    public struct ProjectileFlags
+    public class ProjectileFlags
     {
         public bool EnableBAMColouring { get; set; }//(palette at 0x11c)
         public bool EnableSmoke { get; set; }
@@ -294,7 +304,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct PuffFlags
+    public class PuffFlags
     {
         public bool PuffAtTarget { get; set; }
         public bool PuffAtSource { get; set; }
@@ -341,7 +351,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreaProjectileFlags
+    public class AreaProjectileFlags
     {
         public bool TrapVisible { get; set; }
         public bool TriggeredByInanimateObjects { get; set; }

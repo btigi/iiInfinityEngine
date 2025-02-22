@@ -24,64 +24,75 @@ namespace iiInfinityEngine.Core.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
-        public StoreType StoreType;
-        public IEString Name;
-        public StoreFlags Flags;
-        public Int32 SellMarkup;
-        public Int32 BuyMarkup;
-        public Int32 DepreciationRate;
-        public Int16 StealFailurePercentage;
-        public Int16 Capacity;
-        public array8 Unknown0024;
-        public Int32 Lore;
-        public Int32 CostToIdentifyItem;
-        public array8 RumoursTavern;
-        public array8 RumoursTemple;
-        public RoomFlags Rooms;
-        public Int32 PeasantRoomPrice;
-        public Int32 NobleRoomPrice;
-        public Int32 MerchantRoomPrice;
-        public Int32 RoyalRoomPrice;
-        public array36 Unknown78;
+        public StoFile()
+        {
+            Flags = new StoreFlags();
+            Rooms = new RoomFlags();
+        }
+
+        public StoreType StoreType { get; set; }
+        public IEString Name { get; set; }
+        public StoreFlags Flags { get; set; }
+        public Int32 SellMarkup { get; set; }
+        public Int32 BuyMarkup { get; set; }
+        public Int32 DepreciationRate { get; set; }
+        public Int16 StealFailurePercentage { get; set; }
+        public Int16 Capacity { get; set; }
+        public array8 Unknown0024 { get; set; }
+        public Int32 Lore { get; set; }
+        public Int32 CostToIdentifyItem { get; set; }
+        public array8 RumoursTavern { get; set; }
+        public array8 RumoursTemple { get; set; }
+        public RoomFlags Rooms { get; set; }
+        public Int32 PeasantRoomPrice { get; set; }
+        public Int32 NobleRoomPrice { get; set; }
+        public Int32 MerchantRoomPrice { get; set; }
+        public Int32 RoyalRoomPrice { get; set; }
+        public array36 Unknown78 { get; set; }
     }
 
     [Serializable]
     public class StoSaleItem2
     {
-        public array8 Filename;
-        public Int16 ItemExpirationTime;
-        public Int16 Quantity1;
-        public Int16 Quantity2;
-        public Int16 Quantity3;
-        public SaleItemFlags Flags;
-        public Int32 Amount;
-        public Int32 IsInfinite;
+        public StoSaleItem2()
+        {
+            Flags = new SaleItemFlags();
+        }
+
+        public array8 Filename { get; set; }
+        public Int16 ItemExpirationTime { get; set; }
+        public Int16 Quantity1 { get; set; }
+        public Int16 Quantity2 { get; set; }
+        public Int16 Quantity3 { get; set; }
+        public SaleItemFlags Flags { get; set; }
+        public Int32 Amount { get; set; }
+        public Int32 IsInfinite { get; set; }
     }
 
     [Serializable]
     public class StoDrinkItem2
     {
-        public array8 Rumours;
-        public IEString Name;
-        public Int32 Price;
-        public Int32 Strength;
+        public array8 Rumours { get; set; }
+        public IEString Name { get; set; }
+        public Int32 Price { get; set; }
+        public Int32 Strength { get; set; }
     }
 
     [Serializable]
     public class StoCure2
     {
-        public array8 Filename;
-        public Int32 Price;
+        public array8 Filename { get; set; }
+        public Int32 Price { get; set; }
     }
 
     [Serializable]
     public class StoBuyItem2
     {
-        public Int32 ItemType;
+        public Int32 ItemType { get; set; }
     }
 
     [Serializable]
-    public struct StoreFlags
+    public class StoreFlags
     {
         public bool CanBuyFromPlayer { get; set; }
         public bool AllowedToSell { get; set; }
@@ -102,7 +113,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct RoomFlags
+    public class RoomFlags
     {
         public bool Peasant { get; set; }
         public bool Merchant { get; set; }
@@ -139,7 +150,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct SaleItemFlags
+    public class SaleItemFlags
     {
         public bool Identified { get; set; }
         public bool Unstealable { get; set; }

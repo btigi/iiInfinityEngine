@@ -16,7 +16,7 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 Parameter1;
         public Int32 Parameter2;
         public Int16 TimingMode;
-        public Int16 Unknown;
+        public Int16 Unknown26;
         public Int32 Duration;
         public Int16 Probability1;
         public Int16 Probability2;
@@ -25,18 +25,18 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 DiceSides;
         public Int32 SavingThrowType;
         public Int32 SavingThrowBonus;
-        public Int32 SetLocalVariableIfNonExistant;
+        public Int32 Special;
         public Int32 PrimaryType;
-        public Int32 Unknown2;
+        public Int32 Unknown50;
         public Int32 LowestAffectedLevelFromParent;
         public Int32 HighestAffectedLevelFromParent;
         public Int32 Resistance;
         public Int32 Parameter3;
         public Int32 Parameter4;
+        public Int32 Parameter5;
+        public Int32 TimeApplied;
         public array8 Resource2;
-        public array8 Resource3; // VVC aka Parameter 5
-        public Int32 Unknown3;
-        public Int32 Unknown4;
+        public array8 Resource3;
         public Int32 CasterXCoordinate;
         public Int32 CasterYCoordinate;
         public Int32 TargetXCoordinate;

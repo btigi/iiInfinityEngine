@@ -314,7 +314,7 @@ namespace iiInfinityEngine.Core.Readers
                     extendedHeader2.itmFeatureBlocks.Add(itmFeatureBlock2);
                 }
 
-                itmFile.itmExtendedHeader.Add(extendedHeader2);
+                itmFile.itmExtendedHeaders.Add(extendedHeader2);
             }
 
             foreach (var featureBlock in itmFeatureBlocks)

@@ -137,7 +137,7 @@ namespace iiInfinityEngine.Core
             foreach (var bif in files)
             {
                 var cdDir = GetDirectoryLocation(bif);
-                var bifName = Path.Combine(directory, cdDir, bif.filename);
+                var bifName = Path.Combine(directory, cdDir, bif.Filename);
                 if (File.Exists(bifName))
                 {
                     var bbr = new BifFileBinaryReader();

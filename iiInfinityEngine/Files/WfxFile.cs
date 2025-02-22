@@ -18,15 +18,20 @@ namespace iiInfinityEngine.Core.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
+        public WfxFile()
+        {
+            Flags = new WfxFlags();
+        }
+
         public Int32 SrCurveRadius { get; set; }
-        public WfxFlags Flags;
+        public WfxFlags Flags { get; set; }
         public Int32 RandomFrequencyVariation { get; set; }
         public Int32 RandomVolumeVariation { get; set; }
         public byte[] Unused0018 { get; set; }
     }
 
     [Serializable]
-    public struct WfxFlags
+    public class WfxFlags
     {
         public bool CutsceneVolumeEnabled { get; set; }
         public bool CustomSRCurveRadiusEnabled { get; set; }

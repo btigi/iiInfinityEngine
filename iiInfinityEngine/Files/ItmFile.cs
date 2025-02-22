@@ -6,7 +6,7 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class ItmFile : IEFile
     {
-        public List<ItmExtendedHeader2> itmExtendedHeader = [];
+        public List<ItmExtendedHeader2> itmExtendedHeaders = [];
         public List<ItmFeatureBlock2> itmFeatureBlocks = [];
 
         [NonSerialized]
@@ -22,49 +22,68 @@ namespace iiInfinityEngine.Core.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
-        public IEString UnidentifiedName;
-        public IEString IdentifiedName;
-        public array8 ReplacementItem;
-        public ItmFlags Flags;
-        public ItemType ItemType;
-        public Usability1 Usability1;
-        public Usability2 Usability2;
-        public Usability3 Usability3;
-        public Usability4 Usability4;
-        public array2 Animation;
-        public Int16 MinimumLevel;
-        public Int16 MinimumStrength;
-        public byte MinimumStrengthBonus;
-        public KitUsability1 KitUsability1;
-        public byte MinimumIntelligence;
-        public KitUsability2 KitUsability2;
-        public byte MinimumDexterity;
-        public KitUsability3 KitUsability3;
-        public byte MinimumWisdom;
-        public KitUsability4 KitUsability4;
-        public byte MinimumConstitution;
-        public Proficiency Proficiency;
-        public Int16 MinimumCharisma;
-        public Int32 Price;
-        public Int16 StackAmount;
-        public array8 InventoryIcon;
-        public Int16 LoreToIdentify;
-        public array8 GroundIcon;
-        public Int32 Weight;
-        public IEString UnidentifiedDescription;
-        public IEString IdentifiedDescription;
-        public array8 DescriptionIcon;
-        public Int32 Enchantment;
-        public Int32 ExtendedHeaderOffset;
-        public Int16 ExtendedHeaderCount;
-        public Int32 FeatureBlockOffset;
-        public Int16 FeatureBlockEquippingIndex;
-        public Int16 FeatureBlockEquippingCount;
+        public ItmFile()
+        {
+            Flags = new ItmFlags();
+            Usability1 = new Usability1();
+            Usability2 = new Usability2();
+            Usability3 = new Usability3();
+            Usability4 = new Usability4();
+            KitUsability1 = new KitUsability1();
+            KitUsability2 = new KitUsability2();
+            KitUsability3 = new KitUsability3();
+            KitUsability4 = new KitUsability4();
+        }
+
+        public IEString UnidentifiedName { get; set; }
+        public IEString IdentifiedName { get; set; }
+        public array8 ReplacementItem { get; set; }
+        public ItmFlags Flags { get; set; }
+        public ItemType ItemType { get; set; }
+        public Usability1 Usability1 { get; set; }
+        public Usability2 Usability2 { get; set; }
+        public Usability3 Usability3 { get; set; }
+        public Usability4 Usability4 { get; set; }
+        public array2 Animation { get; set; }
+        public Int16 MinimumLevel { get; set; }
+        public Int16 MinimumStrength { get; set; }
+        public byte MinimumStrengthBonus { get; set; }
+        public KitUsability1 KitUsability1 { get; set; }
+        public byte MinimumIntelligence { get; set; }
+        public KitUsability2 KitUsability2 { get; set; }
+        public byte MinimumDexterity { get; set; }
+        public KitUsability3 KitUsability3 { get; set; }
+        public byte MinimumWisdom { get; set; }
+        public KitUsability4 KitUsability4 { get; set; }
+        public byte MinimumConstitution { get; set; }
+        public Proficiency Proficiency { get; set; }
+        public Int16 MinimumCharisma { get; set; }
+        public Int32 Price { get; set; }
+        public Int16 StackAmount { get; set; }
+        public array8 InventoryIcon { get; set; }
+        public Int16 LoreToIdentify { get; set; }
+        public array8 GroundIcon { get; set; }
+        public Int32 Weight { get; set; }
+        public IEString UnidentifiedDescription { get; set; }
+        public IEString IdentifiedDescription { get; set; }
+        public array8 DescriptionIcon { get; set; }
+        public Int32 Enchantment { get; set; }
+        public Int32 ExtendedHeaderOffset { get; set; }
+        public Int16 ExtendedHeaderCount { get; set; }
+        public Int32 FeatureBlockOffset { get; set; }
+        public Int16 FeatureBlockEquippingIndex { get; set; }
+        public Int16 FeatureBlockEquippingCount { get; set; }
     }
 
     [Serializable]
     public class ItmExtendedHeader2
     {
+        public ItmExtendedHeader2()
+        {
+            IdentificationRequirement = new IdentificationRequirement();
+            Flags = new Flags();
+        }            
+
         public AttackType AttackType { get; set; }
         public IdentificationRequirement IdentificationRequirement;
         public Location Location { get; set; }
@@ -103,6 +122,12 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class ItmFeatureBlock2
     {
+        public ItmFeatureBlock2()
+        {
+            SavingThrowType = new SavingThrowType();
+            Resistance = new Resistance();
+        }
+
         public Int16 Opcode { get; set; }
         public OpcodeTargetType TargetType { get; set; }
         public byte Power { get; set; }
@@ -122,7 +147,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct Usability1
+    public class Usability1
     {
         public bool Chaotic_ { get; set; }
         public bool _Evil { get; set; }
@@ -135,7 +160,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct Usability2
+    public class Usability2
     {
         public bool ClericMage { get; set; }
         public bool ClericThief { get; set; }
@@ -148,7 +173,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct Usability3
+    public class Usability3
     {
         public bool FighterMageThief { get; set; }
         public bool FighterThief { get; set; }
@@ -161,7 +186,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct Usability4
+    public class Usability4
     {
         public bool Dwarf { get; set; }
         public bool HalfElf { get; set; }
@@ -174,7 +199,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct KitUsability1
+    public class KitUsability1
     {
         public bool ClericOfTalos { get; set; }
         public bool ClericOfHelm { get; set; }
@@ -187,7 +212,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct KitUsability2
+    public class KitUsability2
     {
         public bool StalkerRanger { get; set; }
         public bool BeastermasterRanger { get; set; }
@@ -200,7 +225,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct KitUsability3
+    public class KitUsability3
     {
         public bool Diviner { get; set; }
         public bool Enchanter { get; set; }
@@ -213,7 +238,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct KitUsability4
+    public class KitUsability4
     {
         public bool BeserkerFighter { get; set; }
         public bool WizardslayerFighter { get; set; }
@@ -226,7 +251,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct ItmFlags
+    public class ItmFlags
     {
         public bool CriticalItem { get; set; }
         public bool TwoHanded { get; set; }
@@ -329,43 +354,6 @@ namespace iiInfinityEngine.Core.Files
         EquippedAfterDuration,
         InstantPermanentAfterDeath,
         Instant_Limited
-    }
-
-    [Serializable]
-    public class SavingThrowType
-    {
-        public bool Spells { get; set; }
-        public bool Breath { get; set; }
-        public bool ParalyzePoisonDeath { get; set; }
-        public bool Wands { get; set; }
-        public bool PetrifyPolymorph { get; set; }
-        public bool Bit5 { get; set; }
-        public bool Bit6 { get; set; }
-        public bool Bit7 { get; set; }
-        public bool Bit8 { get; set; }
-        public bool Bit9 { get; set; }
-        public bool IgnorePrimaryTarget { get; set; }
-        public bool IgnoreSecondaryTarget { get; set; }
-        public bool Bit12 { get; set; }
-        public bool Bit13 { get; set; }
-        public bool Bit14 { get; set; }
-        public bool Bit15 { get; set; }
-        public bool Bit16 { get; set; }
-        public bool Bit17 { get; set; }
-        public bool Bit18 { get; set; }
-        public bool Bit19 { get; set; }
-        public bool Bit20 { get; set; }
-        public bool Bit21 { get; set; }
-        public bool Bit22 { get; set; }
-        public bool Bit23 { get; set; }
-        public bool BypassMirrorImage { get; set; }
-        public bool IgnoreDifficulty { get; set; }
-        public bool Bit26 { get; set; }
-        public bool Bit27 { get; set; }
-        public bool Bit28 { get; set; }
-        public bool Bit29 { get; set; }
-        public bool Bit30 { get; set; }
-        public bool Bit31 { get; set; }
     }
 
     public enum ChargeDepletionBehaviour : Int16
@@ -485,7 +473,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct IdentificationRequirement
+    public class IdentificationRequirement
     {
         public bool IdRequired { get; set; }
         public bool NonIdRequired { get; set; }
