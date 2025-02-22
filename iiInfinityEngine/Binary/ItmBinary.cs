@@ -102,6 +102,6 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 DiceSides;
         public Int32 SavingThrowType;
         public Int32 SavingThrowBonus;
-        public Int32 Unknown;
+        public Int32 Special;
     }
 }

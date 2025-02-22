@@ -43,7 +43,7 @@ namespace iiInfinityEngine.Core.Files
         public byte MinimumWisdom;
         public KitUsability4 KitUsability4;
         public byte MinimumConstitution;
-        public byte Proficiency; //TODO:itm
+        public Proficiency Proficiency;
         public Int16 MinimumCharisma;
         public Int32 Price;
         public Int16 StackAmount;
@@ -66,7 +66,7 @@ namespace iiInfinityEngine.Core.Files
     public class ItmExtendedHeader2
     {
         public AttackType AttackType { get; set; }
-        public byte IdentificationRequirement { get; set; } //TODO:itm
+        public IdentificationRequirement IdentificationRequirement;
         public Location Location { get; set; }
         public byte AlternaticeDiceSides { get; set; }
         public array8 UseIcon { get; set; }
@@ -83,42 +83,42 @@ namespace iiInfinityEngine.Core.Files
         public byte DiceThrown { get; set; }
         public byte SecondaryType { get; set; }
         public Int16 DamageBonus { get; set; }
-        public Int16 DamageType { get; set; } //TODO:itm
+        public DamageType DamageType { get; set; }
         public Int16 FeatureBlockCount { get; set; }
         public Int16 FeatureBlockOffset { get; set; }
         public Int16 Charges { get; set; }
-        public Int16 ChargeDepletionBehaviour { get; set; }//TODO:itm
-        public Int32 Flags { get; set; }//TODO:itm
+        public ChargeDepletionBehaviour ChargeDepletionBehaviour { get; set; }
+        public Flags Flags { get; set; }
         public Int16 ProjectileAnimation { get; set; }
         public Int16 MeleeAnimation1 { get; set; }
         public Int16 MeleeAnimation2 { get; set; }
         public Int16 MeleeAnimation3 { get; set; }
-        public Int16 IsBowArrow { get; set; }//TODO:itm
-        public Int16 IsCrossbowBolt { get; set; }//TODO:itm
-        public Int16 IsMiscProjectile { get; set; }//TODO:itm
+        public ProjectileQualifier IsBowArrow { get; set; }
+        public ProjectileQualifier IsCrossbowBolt { get; set; }
+        public ProjectileQualifier IsMiscProjectile { get; set; }
 
-        public List<ItmFeatureBlock2> itmFeatureBlocks = new List<ItmFeatureBlock2>();
+        public List<ItmFeatureBlock2> itmFeatureBlocks = [];
     }
 
     [Serializable]
     public class ItmFeatureBlock2
     {
         public Int16 Opcode { get; set; }
-        public byte TargetType { get; set; }//TODO:itm
+        public OpcodeTargetType TargetType { get; set; }
         public byte Power { get; set; }
         public Int32 Parameter1 { get; set; }
         public Int32 Parameter2 { get; set; }
-        public byte TimingMode { get; set; }//TODO:itm
-        public byte Resistance { get; set; }//TODO:itm
+        public OpcodeTimingMode TimingMode { get; set; }
+        public Resistance Resistance { get; set; }
         public Int32 Duration { get; set; }
         public byte Probability1 { get; set; }
         public byte Probability2 { get; set; }
         public array8 Resource { get; set; }
         public Int32 DiceThrown { get; set; }
         public Int32 DiceSides { get; set; }
-        public Int32 SavingThrowType { get; set; }//TODO:itm
+        public SavingThrowType SavingThrowType { get; set; }
         public Int32 SavingThrowBonus { get; set; }
-        public Int32 Unknown { get; set; }//TODO:itm
+        public Int32 Special { get; set; }
     }
 
     [Serializable]
@@ -233,33 +233,33 @@ namespace iiInfinityEngine.Core.Files
         public bool Movable { get; set; }
         public bool Displayable { get; set; }
         public bool Cursed { get; set; }
-        public bool Unknown5 { get; set; }
+        public bool Bit5 { get; set; }
         public bool Magical { get; set; }
         public bool Bow { get; set; }
         public bool Silver { get; set; }
         public bool ColdIron { get; set; }
         public bool Stolen { get; set; }
         public bool Conversable { get; set; }
-        public bool Unknown12 { get; set; }
-        public bool Unknown13 { get; set; }
-        public bool Unknown14 { get; set; }
-        public bool Unknown15 { get; set; }
-        public bool Unknown16 { get; set; }
-        public bool Unknown17 { get; set; }
-        public bool Unknown18 { get; set; }
-        public bool Unknown19 { get; set; }
-        public bool Unknown20 { get; set; }
-        public bool Unknown21 { get; set; }
-        public bool Unknown22 { get; set; }
-        public bool Unknown23 { get; set; }
-        public bool Unknown24 { get; set; }
-        public bool Unknown25 { get; set; }
-        public bool Unknown26 { get; set; }
-        public bool Unknown27 { get; set; }
-        public bool Unknown28 { get; set; }
-        public bool Unknown29 { get; set; }
-        public bool Unknown30 { get; set; }
-        public bool Unknown31 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
     }
 
     public enum AttackType : byte
@@ -301,4 +301,212 @@ namespace iiInfinityEngine.Core.Files
         Spear = 40,
         ThrowingAxe = 100
     }
+
+    public enum OpcodeTargetType : byte
+    {
+        None = 0,
+        Self,
+        ProjectileTarget,
+        Party,
+        Everyone,
+        EveryoneExceptParty,
+        CasterGroup,
+        TargetGroup,
+        EveryoneExceptSelf,
+        OriginalCaster
+    }
+
+    public enum OpcodeTimingMode : byte
+    {
+        InstantLimited,
+        InstantPermanent,
+        InstantWhileEquipped,
+        DelayLimited,
+        DelayPermanent,
+        DelayWhileEquipped,
+        LimitedAfterDuration,
+        PermanentAfterDuration,
+        EquippedAfterDuration,
+        InstantPermanentAfterDeath,
+        Instant_Limited
+    }
+
+    [Serializable]
+    public class SavingThrowType
+    {
+        public bool Spells { get; set; }
+        public bool Breath { get; set; }
+        public bool ParalyzePoisonDeath { get; set; }
+        public bool Wands { get; set; }
+        public bool PetrifyPolymorph { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool IgnorePrimaryTarget { get; set; }
+        public bool IgnoreSecondaryTarget { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool BypassMirrorImage { get; set; }
+        public bool IgnoreDifficulty { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
+    }
+
+    public enum ChargeDepletionBehaviour : Int16
+    {
+        ItemRemains,
+        ItemVanishes,
+        ReplaceWithUsedUp,
+        ItemRecharges
+    }
+
+    public enum DamageType : Int16
+    {
+        None,
+        Piercing,
+        Crushing,
+        Slashing,
+        Missile,
+        Fist,
+        PiercingCrushing_Better,
+        PiercingSlashing_Better,
+        CrushingSlashing_Worse,
+        BluntMissile
+    }
+
+    [Serializable]
+    public class Flags
+    {
+        public bool AddStengthBonus { get; set; }
+        public bool Breakable { get; set; }
+        public bool DamageStrengthBonus { get; set; }
+        public bool Thac0StrengthBonus { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool BreaksSantuaryInvisibility { get; set; }
+        public bool Hostile { get; set; }
+        public bool RechargeAfterResting { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool CannotTargetInvisible { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
+    }
+
+    public enum Proficiency : byte
+    {
+        None = 0,
+        BastardSword = 0x59,
+        LongSword = 0x5a,
+        ShortSword = 0x5b,
+        Axe = 0x5c,
+        TwoHandedSword = 0x5d,
+        Katana = 0x5e,
+        Scimitar = 0x5f,
+        Dagger = 0x60,
+        WarHammer = 0x61,
+        Spear = 0x62,
+        Halberd = 0x63,
+        FlailMorningStar = 0x64,
+        Mace = 0x65,
+        QuarterStaff = 0x66,
+        Crossbow = 0x67,
+        LongBow = 0x68,
+        ShortBow = 0x69,
+        Darts = 0x6a,
+        Sling = 0x6b,
+        Blackjack = 0x6c,
+        Gun = 0x6d,
+        MartialArts = 0x6e,
+        TwoHandedWeaponStyle = 0x6f,
+        SwordAndShieldStyle = 0x70,
+        SingleWeaponStyle = 0x71,
+        TwoWeaponStyle = 0x72,
+        Club = 0x73,
+        ExtraProficiency2 = 0x74,
+        ExtraProficiency3 = 0x75,
+        ExtraProficiency4 = 0x76,
+        ExtraProficiency5 = 0x77,
+        ExtraProficiency6 = 0x78,
+        ExtraProficiency7 = 0x79,
+        ExtraProficiency8 = 0x7a,
+        ExtraProficiency9 = 0x7b,
+        ExtraProficiency10 = 0x7c,
+        ExtraProficiency11 = 0x7d,
+        ExtraProficiency12 = 0x7e,
+        ExtraProficiency13 = 0x7f,
+        ExtraProficiency14 = 0x80,
+        ExtraProficiency15 = 0x81,
+        ExtraProficiency16 = 0x82,
+        ExtraProficiency17 = 0x83,
+        ExtraProficiency18 = 0x84,
+        ExtraProficiency19 = 0x85,
+        ExtraProficiency20 = 0x86
+    }
+
+    public enum ProjectileQualifier : Int16
+    {
+        No = 0,
+        Yes = 1
+    }
+
+    [Serializable]
+    public struct IdentificationRequirement
+    {
+        public bool IdRequired { get; set; }
+        public bool NonIdRequired { get; set; }
+        public bool Bit2 { get; set; }
+        public bool Bit3 { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+    }
+
+    [Serializable]
+    public class Resistance
+    {
+        public bool DispellableAffectedByMagicResistance { get; set; }
+        public bool IgnoreMagicResistance { get; set; }
+        public bool Bit2 { get; set; }
+        public bool Bit3 { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+    }    
 }
