@@ -41,7 +41,7 @@ namespace iiInfinityEngine.Core.Files
         public Int32 StartCenteredOnY { get; set; }
         public array8 MapIconsBam { get; set; }
         public WmapWorldmapFlags Flags { get; set; }
-        public byte[] Unused { get; set; } //TODO:wmp this is 124 bytes
+        public array124 Unused { get; set; }
     }
 
     [Serializable]
@@ -59,15 +59,15 @@ namespace iiInfinityEngine.Core.Files
 
         public array8 AreaFilename { get; set; }
         public array8 ShortName { get; set; }
-        public string LongName { get; set; }
+        public array32 LongName { get; set; }
         public WmpAreaFlags Flags { get; set; }
         public Int32 SequenceBam { get; set; }
         public Int32 XCoordinate { get; set; }
         public Int32 YCoordinate { get; set; }
         public IEString Caption { get; set; }
         public IEString Name { get; set; }
-        public string LoadingMos { get; set; }
-        public byte[] Unused { get; set; }
+        public array8 LoadingMos { get; set; }
+        public array128 Unused { get; set; }
     }
 
     [Serializable]
@@ -79,16 +79,16 @@ namespace iiInfinityEngine.Core.Files
         }
 
         public Int32 DestintationAreaIndex { get; set; }
-        public string EntryPoint { get; set; }
+        public array32 EntryPoint { get; set; }
         public Int32 TravelTime { get; set; }
         public WmapAreaLinkFlags DefaultEntryLocation { get; set; }
-        public string RandomEncounterArea1 { get; set; }
-        public string RandomEncounterArea2 { get; set; }
-        public string RandomEncounterArea3 { get; set; }
-        public string RandomEncounterArea4 { get; set; }
-        public string RandomEncounterArea5 { get; set; }
+        public array8 RandomEncounterArea1 { get; set; }
+        public array8 RandomEncounterArea2 { get; set; }
+        public array8 RandomEncounterArea3 { get; set; }
+        public array8 RandomEncounterArea4 { get; set; }
+        public array8 RandomEncounterArea5 { get; set; }
         public Int32 RandomEncounterProbability { get; set; }
-        public byte[] Unused { get; set; }
+        public array128 Unused { get; set; }
     }
 
     [Serializable]

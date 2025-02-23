@@ -71,7 +71,7 @@ namespace iiInfinityEngine.Core.Readers
                 stringInfo.Flags.Bit14 = (data.Flags & Common.Bit14) != 0;
                 stringInfo.Flags.Bit15 = (data.Flags & Common.Bit15) != 0;
                 stringInfo.PitchVariance = data.PitchVariance;
-                stringInfo.Sound = data.Sound.ToString();
+                stringInfo.Sound = data.Sound;
                 stringInfo.Text = stringEntries[stringIndex];
                 stringInfo.VolumeVariance = data.VolumeVariance;
                 tlk.Strings.Add(stringInfo);

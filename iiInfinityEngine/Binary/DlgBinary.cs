@@ -6,11 +6,8 @@ namespace iiInfinityEngine.Core.Binary
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     struct DlgHeaderBinary
     {
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 4)]
-        public char[] ftype;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 4)]
-        public char[] fversion;
-
+        public array4 ftype;
+        public array4 fversion;
         public Int32 StateCount;
         public Int32 StateOffset;
         public Int32 TransitionCount;
@@ -41,8 +38,7 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 JournalText;
         public Int32 TransitionTrigger;
         public Int32 ActionIndex;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
-        public char[] Dialog;
+        public array8 Dialog;
         public Int32 NextState;
     }
 

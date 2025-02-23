@@ -33,7 +33,7 @@ namespace iiInfinityEngine.Core.Files
 
         public string Text { get; set; }
         public StringEntryType Flags { get; set; }
-        public string Sound { get; set; }
+        public array8 Sound { get; set; }
         public Int32 VolumeVariance { get; set; }
         public Int32 PitchVariance { get; set; }
         public Int32 Strref { get; set; }

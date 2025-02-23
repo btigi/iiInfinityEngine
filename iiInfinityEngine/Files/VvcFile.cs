@@ -26,8 +26,8 @@ namespace iiInfinityEngine.Core.Files
             PositionFlags = new PositionFlags();
         }
 
-        public string Animation { get; set; }
-        public string Animation2 { get; set; }
+        public array8 Animation { get; set; }
+        public array8 Animation2 { get; set; }
         public DisplayFlags DisplayFlags { get; set; }
         public ColourFlags ColourFlags { get; set; }
         public Int32 Unused001c { get; set; }
@@ -40,23 +40,23 @@ namespace iiInfinityEngine.Core.Files
         public Int32 OrientationCount { get; set; }
         public Int32 BaseOrientation { get; set; }
         public PositionFlags PositionFlags { get; set; }
-        public string BitmapPalette { get; set; }
+        public array8 BitmapPalette { get; set; }
         public Int32 ZPosition { get; set; }
         public Int32 CentreX { get; set; }
         public Int32 CentreY { get; set; }
         public Int32 LightingBrightness { get; set; }
         public Int32 Duration { get; set; }
-        public string InternalName { get; set; }
+        public array8 InternalName { get; set; }
         public Int32 Bam1Sequence { get; set; }
         public Int32 Bam2Sequence { get; set; }
         public Int32 CurrentAnimationSequence { get; set; }
         public Int32 UseContinuousSequence { get; set; }
-        public string Wav1 { get; set; }
-        public string Wav2 { get; set; }
-        public string AlphaBlendingAnimation { get; set; }
+        public array8 Wav1 { get; set; }
+        public array8 Wav2 { get; set; }
+        public array8 AlphaBlendingAnimation { get; set; }
         public Int32 Bam3Sequence { get; set; }
-        public string Wav3 { get; set; }
-        public byte[] Unused009c { get; set; }
+        public array8 Wav3 { get; set; }
+        public array336 Unused009c { get; set; }
     }
 
     [Serializable]

@@ -46,12 +46,12 @@ namespace iiInfinityEngine.Core.Files
         public string Trigger { get; set; }
         public IEString TransitionText { get; set; }
         public IEString JournalText { get; set; }
-        public string Dialog { get; set; }
+        public array8 Dialog { get; set; }
         public Int32 NextState { get; set; }
         public string NextStateSymbolicName { get; set; }
         public string Action { get; set; }
 
-        public bool HasText { get; set; } //TODO:dlg
+        public bool HasText { get; set; } //TODO:dlg move to separate class and add missing unused bits
         public bool HasTrigger { get; set; }
         public bool HasAction { get; set; }
         public bool TerminateDialog { get; set; }

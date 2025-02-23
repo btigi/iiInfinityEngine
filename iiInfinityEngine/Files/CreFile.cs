@@ -22,7 +22,7 @@ namespace iiInfinityEngine.Core.Files
             MemorisedSpells.PriestLevel1 = [];
             MemorisedSpells.PriestLevel2 = [];
             MemorisedSpells.PriestLevel3 = [];
-            MemorisedSpells.PriestLevel4 = []   ;
+            MemorisedSpells.PriestLevel4 = [];
             MemorisedSpells.PriestLevel5 = [];
             MemorisedSpells.PriestLevel6 = [];
             MemorisedSpells.PriestLevel7 = [];

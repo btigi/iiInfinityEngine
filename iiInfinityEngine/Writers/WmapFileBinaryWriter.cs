@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 
 namespace iiInfinityEngine.Core.Writers
 {
@@ -115,8 +116,8 @@ namespace iiInfinityEngine.Core.Writers
                     binaryArea.Flags = area.Flags.Bit29 ? binaryArea.Flags | Common.Bit29 : binaryArea.Flags;
                     binaryArea.Flags = area.Flags.Bit30 ? binaryArea.Flags | Common.Bit30 : binaryArea.Flags;
                     binaryArea.Flags = area.Flags.Bit31 ? binaryArea.Flags | Common.Bit31 : binaryArea.Flags;
-                    binaryArea.LoadingMos = area.LoadingMos.ToArray();
-                    binaryArea.LongName = area.LongName.ToArray();
+                    binaryArea.LoadingMos = area.LoadingMos;
+                    binaryArea.LongName = area.LongName;
                     binaryArea.Name = Common.WriteString(area.Name, TlkFile);
                     binaryArea.SequenceBam = area.SequenceBam;
                     binaryArea.ShortName = area.ShortName;
@@ -131,12 +132,12 @@ namespace iiInfinityEngine.Core.Writers
                         var linkBinary = new WmapAreaLinkBinary();
                         linkBinary.DefaultEntryLocation = CalculateDefaultEntryLocationFlags(linkBinary.DefaultEntryLocation, link.DefaultEntryLocation);
                         linkBinary.DestintationAreaIndex = link.DestintationAreaIndex;
-                        linkBinary.EntryPoint = link.EntryPoint.ToArray();
-                        linkBinary.RandomEncounterArea1 = link.RandomEncounterArea1.ToArray();
-                        linkBinary.RandomEncounterArea2 = link.RandomEncounterArea2.ToArray();
-                        linkBinary.RandomEncounterArea3 = link.RandomEncounterArea3.ToArray();
-                        linkBinary.RandomEncounterArea4 = link.RandomEncounterArea4.ToArray();
-                        linkBinary.RandomEncounterArea5 = link.RandomEncounterArea5.ToArray();
+                        linkBinary.EntryPoint = link.EntryPoint;
+                        linkBinary.RandomEncounterArea1 = link.RandomEncounterArea1;
+                        linkBinary.RandomEncounterArea2 = link.RandomEncounterArea2;
+                        linkBinary.RandomEncounterArea3 = link.RandomEncounterArea3;
+                        linkBinary.RandomEncounterArea4 = link.RandomEncounterArea4;
+                        linkBinary.RandomEncounterArea5 = link.RandomEncounterArea5;
                         linkBinary.RandomEncounterProbability = link.RandomEncounterProbability;
                         linkBinary.TravelTime = link.TravelTime;
                         linkBinary.Unused = link.Unused;
@@ -151,12 +152,12 @@ namespace iiInfinityEngine.Core.Writers
                         var linkBinary = new WmapAreaLinkBinary();
                         linkBinary.DefaultEntryLocation = CalculateDefaultEntryLocationFlags(linkBinary.DefaultEntryLocation, link.DefaultEntryLocation);
                         linkBinary.DestintationAreaIndex = link.DestintationAreaIndex;
-                        linkBinary.EntryPoint = link.EntryPoint.ToArray();
-                        linkBinary.RandomEncounterArea1 = link.RandomEncounterArea1.ToArray();
-                        linkBinary.RandomEncounterArea2 = link.RandomEncounterArea2.ToArray();
-                        linkBinary.RandomEncounterArea3 = link.RandomEncounterArea3.ToArray();
-                        linkBinary.RandomEncounterArea4 = link.RandomEncounterArea4.ToArray();
-                        linkBinary.RandomEncounterArea5 = link.RandomEncounterArea5.ToArray();
+                        linkBinary.EntryPoint = link.EntryPoint;
+                        linkBinary.RandomEncounterArea1 = link.RandomEncounterArea1;
+                        linkBinary.RandomEncounterArea2 = link.RandomEncounterArea2;
+                        linkBinary.RandomEncounterArea3 = link.RandomEncounterArea3;
+                        linkBinary.RandomEncounterArea4 = link.RandomEncounterArea4;
+                        linkBinary.RandomEncounterArea5 = link.RandomEncounterArea5;
                         linkBinary.RandomEncounterProbability = link.RandomEncounterProbability;
                         linkBinary.TravelTime = link.TravelTime;
                         linkBinary.Unused = link.Unused;
@@ -171,12 +172,12 @@ namespace iiInfinityEngine.Core.Writers
                         var linkBinary = new WmapAreaLinkBinary();
                         linkBinary.DefaultEntryLocation = CalculateDefaultEntryLocationFlags(linkBinary.DefaultEntryLocation, link.DefaultEntryLocation);
                         linkBinary.DestintationAreaIndex = link.DestintationAreaIndex;
-                        linkBinary.EntryPoint = link.EntryPoint.ToArray();
-                        linkBinary.RandomEncounterArea1 = link.RandomEncounterArea1.ToArray();
-                        linkBinary.RandomEncounterArea2 = link.RandomEncounterArea2.ToArray();
-                        linkBinary.RandomEncounterArea3 = link.RandomEncounterArea3.ToArray();
-                        linkBinary.RandomEncounterArea4 = link.RandomEncounterArea4.ToArray();
-                        linkBinary.RandomEncounterArea5 = link.RandomEncounterArea5.ToArray();
+                        linkBinary.EntryPoint = link.EntryPoint;
+                        linkBinary.RandomEncounterArea1 = link.RandomEncounterArea1;
+                        linkBinary.RandomEncounterArea2 = link.RandomEncounterArea2;
+                        linkBinary.RandomEncounterArea3 = link.RandomEncounterArea3;
+                        linkBinary.RandomEncounterArea4 = link.RandomEncounterArea4;
+                        linkBinary.RandomEncounterArea5 = link.RandomEncounterArea5;
                         linkBinary.RandomEncounterProbability = link.RandomEncounterProbability;
                         linkBinary.TravelTime = link.TravelTime;
                         linkBinary.Unused = link.Unused;
@@ -191,12 +192,12 @@ namespace iiInfinityEngine.Core.Writers
                         var linkBinary = new WmapAreaLinkBinary();
                         linkBinary.DefaultEntryLocation = CalculateDefaultEntryLocationFlags(linkBinary.DefaultEntryLocation, link.DefaultEntryLocation);
                         linkBinary.DestintationAreaIndex = link.DestintationAreaIndex;
-                        linkBinary.EntryPoint = link.EntryPoint.ToArray();
-                        linkBinary.RandomEncounterArea1 = link.RandomEncounterArea1.ToArray();
-                        linkBinary.RandomEncounterArea2 = link.RandomEncounterArea2.ToArray();
-                        linkBinary.RandomEncounterArea3 = link.RandomEncounterArea3.ToArray();
-                        linkBinary.RandomEncounterArea4 = link.RandomEncounterArea4.ToArray();
-                        linkBinary.RandomEncounterArea5 = link.RandomEncounterArea5.ToArray();
+                        linkBinary.EntryPoint = link.EntryPoint;
+                        linkBinary.RandomEncounterArea1 = link.RandomEncounterArea1;
+                        linkBinary.RandomEncounterArea2 = link.RandomEncounterArea2;
+                        linkBinary.RandomEncounterArea3 = link.RandomEncounterArea3;
+                        linkBinary.RandomEncounterArea4 = link.RandomEncounterArea4;
+                        linkBinary.RandomEncounterArea5 = link.RandomEncounterArea5;
                         linkBinary.RandomEncounterProbability = link.RandomEncounterProbability;
                         linkBinary.TravelTime = link.TravelTime;
                         linkBinary.Unused = link.Unused;
@@ -217,8 +218,8 @@ namespace iiInfinityEngine.Core.Writers
             }
 
             var headerBinary = new WmapHeaderBinary();
-            headerBinary.ftype = ['W', 'M', 'A', 'P'];
-            headerBinary.fversion = ['V', '1', '.', '0'];
+            headerBinary.ftype = new array4() { character1 = 'W', character2 = 'M', character3 = 'A', character4 = 'P' };
+            headerBinary.fversion = new array4() { character1 = 'V', character2 = '1', character3 = '.', character4 = '0' };
             headerBinary.WorldmapCount = binaryWorldmaps.Count;
             headerBinary.WorldmapOffset = WmapBinaryHeaderSize;
 

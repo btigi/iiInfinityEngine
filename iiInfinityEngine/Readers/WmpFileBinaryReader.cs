@@ -38,7 +38,7 @@ namespace iiInfinityEngine.Core.Readers
             var binaryAreas = new List<WmapAreaBinary>();
             var binaryLinks = new List<WmapAreaLinkBinary>();
 
-            if (Common.TryGetString(header.ftype) != "WMAP")
+            if (header.ftype.ToString() != "WMAP")
                 return new WmpFile();
 
             br.BaseStream.Seek(header.WorldmapOffset, SeekOrigin.Begin);
@@ -154,8 +154,8 @@ namespace iiInfinityEngine.Core.Readers
                     area2.Flags.Bit30 = (binaryAreas[cummulativeAreaCount + i].Flags & Common.Bit30) != 0;
                     area2.Flags.Bit31 = (binaryAreas[cummulativeAreaCount + i].Flags & Common.Bit31) != 0;
 
-                    area2.LoadingMos = Common.TryGetString(binaryAreas[cummulativeAreaCount + i].LoadingMos);
-                    area2.LongName = Common.TryGetString(binaryAreas[cummulativeAreaCount + i].LongName);
+                    area2.LoadingMos = binaryAreas[cummulativeAreaCount + i].LoadingMos;
+                    area2.LongName = binaryAreas[cummulativeAreaCount + i].LongName;
                     area2.Name = Common.ReadString(binaryAreas[cummulativeAreaCount + i].Name, TlkFile);
                     area2.SequenceBam = binaryAreas[cummulativeAreaCount + i].SequenceBam;
                     area2.ShortName = binaryAreas[cummulativeAreaCount + i].ShortName;
@@ -171,12 +171,12 @@ namespace iiInfinityEngine.Core.Readers
 
                         link.DefaultEntryLocation = CalculateDefaultEntryLocationFlags(link.DefaultEntryLocation, binaryLinks[offset].DefaultEntryLocation);
                         link.DestintationAreaIndex = binaryLinks[offset].DestintationAreaIndex;
-                        link.EntryPoint = Common.TryGetString(binaryLinks[offset].EntryPoint);
-                        link.RandomEncounterArea1 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea1);
-                        link.RandomEncounterArea2 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea2);
-                        link.RandomEncounterArea3 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea3);
-                        link.RandomEncounterArea4 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea4);
-                        link.RandomEncounterArea5 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea5);
+                        link.EntryPoint = binaryLinks[offset].EntryPoint;
+                        link.RandomEncounterArea1 = binaryLinks[offset].RandomEncounterArea1;
+                        link.RandomEncounterArea2 = binaryLinks[offset].RandomEncounterArea2;
+                        link.RandomEncounterArea3 = binaryLinks[offset].RandomEncounterArea3;
+                        link.RandomEncounterArea4 = binaryLinks[offset].RandomEncounterArea4;
+                        link.RandomEncounterArea5 = binaryLinks[offset].RandomEncounterArea5;
                         link.RandomEncounterProbability = binaryLinks[offset].RandomEncounterProbability;
                         link.TravelTime = binaryLinks[offset].TravelTime;
                         link.Unused = binaryLinks[offset].Unused;
@@ -190,12 +190,12 @@ namespace iiInfinityEngine.Core.Readers
                         var link = new WmapAreaLink();
                         link.DefaultEntryLocation = CalculateDefaultEntryLocationFlags(link.DefaultEntryLocation, binaryLinks[offset].DefaultEntryLocation);
                         link.DestintationAreaIndex = binaryLinks[offset].DestintationAreaIndex;
-                        link.EntryPoint = Common.TryGetString(binaryLinks[offset].EntryPoint);
-                        link.RandomEncounterArea1 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea1);
-                        link.RandomEncounterArea2 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea2);
-                        link.RandomEncounterArea3 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea3);
-                        link.RandomEncounterArea4 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea4);
-                        link.RandomEncounterArea5 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea5);
+                        link.EntryPoint = binaryLinks[offset].EntryPoint;
+                        link.RandomEncounterArea1 = binaryLinks[offset].RandomEncounterArea1;
+                        link.RandomEncounterArea2 = binaryLinks[offset].RandomEncounterArea2;
+                        link.RandomEncounterArea3 = binaryLinks[offset].RandomEncounterArea3;
+                        link.RandomEncounterArea4 = binaryLinks[offset].RandomEncounterArea4;
+                        link.RandomEncounterArea5 = binaryLinks[offset].RandomEncounterArea5;
                         link.RandomEncounterProbability = binaryLinks[offset].RandomEncounterProbability;
                         link.TravelTime = binaryLinks[offset].TravelTime;
                         link.Unused = binaryLinks[offset].Unused;
@@ -209,12 +209,12 @@ namespace iiInfinityEngine.Core.Readers
                         var link = new WmapAreaLink();
                         link.DefaultEntryLocation = CalculateDefaultEntryLocationFlags(link.DefaultEntryLocation, binaryLinks[offset].DefaultEntryLocation);
                         link.DestintationAreaIndex = binaryLinks[offset].DestintationAreaIndex;
-                        link.EntryPoint = Common.TryGetString(binaryLinks[offset].EntryPoint);
-                        link.RandomEncounterArea1 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea1);
-                        link.RandomEncounterArea2 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea2);
-                        link.RandomEncounterArea3 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea3);
-                        link.RandomEncounterArea4 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea4);
-                        link.RandomEncounterArea5 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea5);
+                        link.EntryPoint = binaryLinks[offset].EntryPoint;
+                        link.RandomEncounterArea1 = binaryLinks[offset].RandomEncounterArea1;
+                        link.RandomEncounterArea2 = binaryLinks[offset].RandomEncounterArea2;
+                        link.RandomEncounterArea3 = binaryLinks[offset].RandomEncounterArea3;
+                        link.RandomEncounterArea4 = binaryLinks[offset].RandomEncounterArea4;
+                        link.RandomEncounterArea5 = binaryLinks[offset].RandomEncounterArea5;
                         link.RandomEncounterProbability = binaryLinks[offset].RandomEncounterProbability;
                         link.TravelTime = binaryLinks[offset].TravelTime;
                         link.Unused = binaryLinks[offset].Unused;
@@ -228,12 +228,12 @@ namespace iiInfinityEngine.Core.Readers
                         var link = new WmapAreaLink();
                         link.DefaultEntryLocation = CalculateDefaultEntryLocationFlags(link.DefaultEntryLocation, binaryLinks[offset].DefaultEntryLocation);
                         link.DestintationAreaIndex = binaryLinks[offset].DestintationAreaIndex;
-                        link.EntryPoint = Common.TryGetString(binaryLinks[offset].EntryPoint);
-                        link.RandomEncounterArea1 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea1);
-                        link.RandomEncounterArea2 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea2);
-                        link.RandomEncounterArea3 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea3);
-                        link.RandomEncounterArea4 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea4);
-                        link.RandomEncounterArea5 = Common.TryGetString(binaryLinks[offset].RandomEncounterArea5);
+                        link.EntryPoint = binaryLinks[offset].EntryPoint;
+                        link.RandomEncounterArea1 = binaryLinks[offset].RandomEncounterArea1;
+                        link.RandomEncounterArea2 = binaryLinks[offset].RandomEncounterArea2;
+                        link.RandomEncounterArea3 = binaryLinks[offset].RandomEncounterArea3;
+                        link.RandomEncounterArea4 = binaryLinks[offset].RandomEncounterArea4;
+                        link.RandomEncounterArea5 = binaryLinks[offset].RandomEncounterArea5;
                         link.RandomEncounterProbability = binaryLinks[offset].RandomEncounterProbability;
                         link.TravelTime = binaryLinks[offset].TravelTime;
                         link.Unused = binaryLinks[offset].Unused;

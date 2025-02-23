@@ -6,19 +6,15 @@ namespace iiInfinityEngine.Core.Binary
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     struct VvcHeaderBinary
     {
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 4)]
-        public char[] ftype;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 4)]
-        public char[] fversion;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
-        public char[] Animation;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
-        public char[] Animation2; // Unused ?
+        public array4 ftype;
+        public array4 fversion;
+        public array8 Animation;
+        public array8 Animation2; // Unused ?
         public ushort DisplayFlags;
         public ushort ColourFlags;
-        public Int32 Unused;
+        public Int32 Unused001c;
         public Int32 SequenceFlags;
-        public Int32 Unused2;
+        public Int32 Unused0024;
         public Int32 XPosition;
         public Int32 YPosition;
         public Int32 UseOrientation;
@@ -26,29 +22,22 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 OrientationCount;
         public Int32 BaseOrientation;
         public Int32 PositionFlags;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
-        public char[] BitmapPalette;
+        public array8 BitmapPalette;
         public Int32 ZPosition;
         public Int32 CentreX;
         public Int32 CentreY;
         public Int32 LightingBrightness;
         public Int32 Duration;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
-        public char[] InternalName;
+        public array8 InternalName;
         public Int32 Bam1Sequence;
         public Int32 Bam2Sequence;
         public Int32 CurrentAnimationSequence;
         public Int32 UseContinuousSequence;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
-        public char[] Wav1;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
-        public char[] Wav2;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
-        public char[] AlphaBlendingAnimation;
+        public array8 Wav1;
+        public array8 Wav2;
+        public array8 AlphaBlendingAnimation;
         public Int32 Bam3Sequence;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 8)]
-        public char[] Wav3;
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.U1, SizeConst = 336)]
-        public byte[] Unused3;
+        public array8 Wav3;
+        public array336 Unused009c;
     }
 }

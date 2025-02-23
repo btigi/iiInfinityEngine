@@ -33,7 +33,7 @@ namespace iiInfinityEngine.Core.Readers
             var header = (TisHeaderBinary)Common.ReadStruct(br, typeof(TisHeaderBinary));
             var streamReader = br;
 
-            if (Common.TryGetString(header.ftype) != "TIS ")
+            if (header.ftype.ToString() != "TIS ")
                 return new TisFile();
 
             var palette = new List<TisPaletteBinary>();

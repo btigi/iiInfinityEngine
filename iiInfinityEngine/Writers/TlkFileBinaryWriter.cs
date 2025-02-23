@@ -55,7 +55,7 @@ namespace iiInfinityEngine.Core.Writers
                 stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit14 ? stringInfoBinary.Flags | Common.Bit14 : stringInfoBinary.Flags);
                 stringInfoBinary.Flags = (Int16)(stringInfo.Flags.Bit15 ? stringInfoBinary.Flags | Common.Bit15 : stringInfoBinary.Flags);
                 stringInfoBinary.PitchVariance = stringInfo.PitchVariance;
-                stringInfoBinary.Sound = new array8(stringInfo.Sound);
+                stringInfoBinary.Sound = stringInfo.Sound;
                 stringInfoBinary.StringIndex = strings.Count;
                 stringInfoBinary.StringLength = stringInfo.Text.Length;
                 stringInfoBinary.VolumeVariance = stringInfo.VolumeVariance;

@@ -30,14 +30,14 @@ namespace iiInfinityEngine.Core.Readers
 
             var vvcFile = new VvcFile();
 
-            vvcFile.AlphaBlendingAnimation = Common.TryGetString(header.AlphaBlendingAnimation);
-            vvcFile.Animation = Common.TryGetString(header.Animation);
-            vvcFile.Animation2 = Common.TryGetString(header.Animation2);
+            vvcFile.AlphaBlendingAnimation = header.AlphaBlendingAnimation;
+            vvcFile.Animation = header.Animation;
+            vvcFile.Animation2 = header.Animation2;
             vvcFile.Bam1Sequence = header.Bam1Sequence;
             vvcFile.Bam2Sequence = header.Bam2Sequence;
             vvcFile.Bam3Sequence = header.Bam3Sequence;
             vvcFile.BaseOrientation = header.BaseOrientation;
-            vvcFile.BitmapPalette = Common.TryGetString(header.BitmapPalette);
+            vvcFile.BitmapPalette = header.BitmapPalette;
             vvcFile.CentreX = header.CentreX;
             vvcFile.CentreY = header.CentreY;
             vvcFile.ColourFlags.NotLightSource = (header.ColourFlags & Common.Bit0) != 0;
@@ -75,7 +75,7 @@ namespace iiInfinityEngine.Core.Readers
             vvcFile.DisplayFlags.Scale = (header.DisplayFlags & Common.Bit15) != 0;
             vvcFile.Duration = header.Duration;
             vvcFile.FrameRate = header.FrameRate;
-            vvcFile.InternalName = Common.TryGetString(header.InternalName);
+            vvcFile.InternalName = header.InternalName;
             vvcFile.LightingBrightness = header.LightingBrightness;
             vvcFile.OrientationCount = header.OrientationCount;
             vvcFile.PositionFlags.OrbitTarget = (header.PositionFlags & Common.Bit0) != 0;
@@ -142,14 +142,14 @@ namespace iiInfinityEngine.Core.Readers
             vvcFile.SequenceFlags.Bit29 = (header.SequenceFlags & Common.Bit29) != 0;
             vvcFile.SequenceFlags.Bit30 = (header.SequenceFlags & Common.Bit30) != 0;
             vvcFile.SequenceFlags.Bit31 = (header.SequenceFlags & Common.Bit31) != 0;
-            vvcFile.Unused001c = header.Unused;
-            vvcFile.Unused0024 = header.Unused2;
-            vvcFile.Unused009c = header.Unused3;
+            vvcFile.Unused001c = header.Unused001c;
+            vvcFile.Unused0024 = header.Unused0024;
+            vvcFile.Unused009c = header.Unused009c;
             vvcFile.UseContinuousSequence = header.UseContinuousSequence;
             vvcFile.UseOrientation = header.UseOrientation;
-            vvcFile.Wav1 = Common.TryGetString(header.Wav1);
-            vvcFile.Wav2 = Common.TryGetString(header.Wav2);
-            vvcFile.Wav3 = Common.TryGetString(header.Wav3);
+            vvcFile.Wav1 = header.Wav1;
+            vvcFile.Wav2 = header.Wav2;
+            vvcFile.Wav3 = header.Wav3;
             vvcFile.XPosition = header.XPosition;
             vvcFile.YPosition = header.YPosition;
             vvcFile.ZPosition = header.ZPosition;

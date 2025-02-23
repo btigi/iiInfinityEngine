@@ -3,7 +3,6 @@ using iiInfinityEngine.Core.Binary;
 using iiInfinityEngine.Core.Files;
 using System;
 using iiInfinityEngine.Core.Writers.Interfaces;
-using System.Linq;
 
 namespace iiInfinityEngine.Core.Writers
 {
@@ -22,18 +21,16 @@ namespace iiInfinityEngine.Core.Writers
                 return false;
 
             var header = new VvcHeaderBinary();
-
-            header.ftype = ['V', 'V', 'C', ' '];
-            header.fversion = ['V', '1', '.', '0'];
-
-            header.AlphaBlendingAnimation = vvcFile.AlphaBlendingAnimation.ToArray();
-            header.Animation = vvcFile.Animation.ToArray();
-            header.Animation2 = vvcFile.Animation2.ToArray();
+            header.ftype = new array4() { character1 = 'V', character2 = 'V', character3 = 'C', character4 = ' ' };
+            header.fversion = new array4() { character1 = 'V', character2 = '1', character3 = '.', character4 = '0' };
+            header.AlphaBlendingAnimation = vvcFile.AlphaBlendingAnimation;
+            header.Animation = vvcFile.Animation;
+            header.Animation2 = vvcFile.Animation2;
             header.Bam1Sequence = vvcFile.Bam1Sequence;
             header.Bam2Sequence = vvcFile.Bam2Sequence;
             header.Bam3Sequence = vvcFile.Bam3Sequence;
             header.BaseOrientation = vvcFile.BaseOrientation;
-            header.BitmapPalette = vvcFile.BitmapPalette.ToArray();
+            header.BitmapPalette = vvcFile.BitmapPalette;
             header.CentreX = vvcFile.CentreX;
             header.CentreY = vvcFile.CentreY;
             header.ColourFlags = vvcFile.ColourFlags.NotLightSource ? Convert.ToUInt16(header.ColourFlags | Common.Bit0) : header.ColourFlags;
@@ -71,7 +68,7 @@ namespace iiInfinityEngine.Core.Writers
             header.DisplayFlags = vvcFile.DisplayFlags.Scale ? Convert.ToUInt16(header.DisplayFlags | Common.Bit15) : header.DisplayFlags;
             header.Duration = vvcFile.Duration;
             header.FrameRate = vvcFile.FrameRate;
-            header.InternalName = vvcFile.InternalName.ToArray();
+            header.InternalName = vvcFile.InternalName;
             header.LightingBrightness = vvcFile.LightingBrightness;
             header.LightingBrightness = vvcFile.LightingBrightness;
             header.OrientationCount = vvcFile.OrientationCount;
@@ -139,14 +136,14 @@ namespace iiInfinityEngine.Core.Writers
             header.SequenceFlags = vvcFile.SequenceFlags.Bit29 ? Convert.ToInt16(header.PositionFlags | Common.Bit29) : header.PositionFlags;
             header.SequenceFlags = vvcFile.SequenceFlags.Bit30 ? Convert.ToInt16(header.PositionFlags | Common.Bit30) : header.PositionFlags;
             header.SequenceFlags = vvcFile.SequenceFlags.Bit31 ? Convert.ToInt16(header.PositionFlags | Common.Bit31) : header.PositionFlags;
-            header.Unused = vvcFile.Unused001c;
-            header.Unused2 = vvcFile.Unused0024;
-            header.Unused3 = vvcFile.Unused009c;
+            header.Unused001c = vvcFile.Unused001c;
+            header.Unused0024 = vvcFile.Unused0024;
+            header.Unused009c = vvcFile.Unused009c;
             header.UseContinuousSequence = vvcFile.UseContinuousSequence;
             header.UseOrientation = vvcFile.UseOrientation;
-            header.Wav1 = vvcFile.Wav1.ToArray();
-            header.Wav2 = vvcFile.Wav2.ToArray();
-            header.Wav3 = vvcFile.Wav3.ToArray();
+            header.Wav1 = vvcFile.Wav1;
+            header.Wav2 = vvcFile.Wav2;
+            header.Wav3 = vvcFile.Wav3;
             header.XPosition = vvcFile.XPosition;
             header.YPosition = vvcFile.YPosition;
             header.ZPosition = vvcFile.ZPosition;

@@ -21,6 +21,8 @@ namespace iiInfinityEngine.Core.Files
         public EffFile()
         {
             FlagsFromParent = new SpellFlags();
+            SavingThrowType = new SavingThrowType();
+            Resistance = new EffResistance();
         }
 
         public Int32 Opcode { get; set; }

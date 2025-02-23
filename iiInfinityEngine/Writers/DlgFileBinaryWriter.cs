@@ -83,7 +83,7 @@ namespace iiInfinityEngine.Core.Writers
 
                     var transitionBinary = new TransitionBinary();
                     transitionBinary.ActionIndex = transition.HasAction ? actions.Count - 1 : -1;
-                    transitionBinary.Dialog = transition.Dialog.ToArray();
+                    transitionBinary.Dialog = transition.Dialog;
                     transitionBinary.Flags = transition.HasText ? transitionBinary.Flags | Common.Bit0 : transitionBinary.Flags;
                     transitionBinary.Flags = transition.HasTrigger ? transitionBinary.Flags | Common.Bit1 : transitionBinary.Flags;
                     transitionBinary.Flags = transition.HasAction ? transitionBinary.Flags | Common.Bit2 : transitionBinary.Flags;
@@ -157,9 +157,8 @@ namespace iiInfinityEngine.Core.Writers
             header.Flags = dlgFile.Flags.Bit29 ? header.Flags | Common.Bit29 : header.Flags;
             header.Flags = dlgFile.Flags.Bit30 ? header.Flags | Common.Bit30 : header.Flags;
             header.Flags = dlgFile.Flags.Bit31 ? header.Flags | Common.Bit31 : header.Flags;
-
-            header.ftype = ['D', 'L', 'G', ' '];
-            header.fversion = ['V', '1', '.', '0'];
+            header.ftype = new array4() { character1 = 'D', character2 = 'L', character3 = 'G', character4 = ' ' };
+            header.fversion = new array4() { character1 = 'V', character2 = '1', character3 = '.', character4 = '0' };
             header.StateCount = states.Count;
             header.StateOffset = HeaderSize;
             header.TransitionCount = transitions.Count;

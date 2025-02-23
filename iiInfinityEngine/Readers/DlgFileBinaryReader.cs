@@ -32,7 +32,7 @@ namespace iiInfinityEngine.Core.Readers
         {
             var header = (DlgHeaderBinary)Common.ReadStruct(br, typeof(DlgHeaderBinary));
 
-            if (Common.TryGetString(header.ftype) != "DLG ")
+            if (header.ftype.ToString() != "DLG ")
                 return new DlgFile();
 
             List<StateBinary> states = [];
@@ -157,7 +157,7 @@ namespace iiInfinityEngine.Core.Readers
                     {
                         transition2.TerminateDialog = false;
                         transition2.NextState = transitions[state.TransitionIndex + i].NextState;
-                        transition2.Dialog = Common.TryGetString(transitions[state.TransitionIndex + i].Dialog);
+                        transition2.Dialog = transitions[state.TransitionIndex + i].Dialog;
                     }
 
                     if ((transitions[state.TransitionIndex + i].Flags & Common.Bit4) != 0)
