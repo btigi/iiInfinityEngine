@@ -98,7 +98,7 @@ namespace iiInfinityEngine.Core
             */
             #endregion
 
-            var bifList = new List<KeyBifEntry2>();
+            var bifList = new List<(KeyBifEntry2 entry, int index)>();
             var relevantResources = key.Resources.Where(a => a.ResourceType == resourceType).ToList();
             foreach (var c in relevantResources)
             {
@@ -131,20 +131,19 @@ namespace iiInfinityEngine.Core
             LoadOverride(gameDirectory);
         }
 
-        private void LoadResourcesFromBifs(string directory, List<KeyBifEntry2> files, List<KeyBifResource2> resources, List<IEFileType> fileTypes)
+        private void LoadResourcesFromBifs(string directory, List<(KeyBifEntry2 entry, int index)> files, List<KeyBifResource2> resources, List<IEFileType> fileTypes)
         {
             int bifIndex = 0;
             foreach (var bif in files)
             {
-                var cdDir = GetDirectoryLocation(bif);
-                var bifName = Path.Combine(directory, cdDir, bif.Filename);
+                var cdDir = GetDirectoryLocation(bif.Item1);
+                var bifName = Path.Combine(directory, cdDir, bif.Item1.Filename);
                 if (File.Exists(bifName))
                 {
                     var bbr = new BifFileBinaryReader();
                     using var bifFileStream = new FileStream(bifName, FileMode.Open, FileAccess.Read);
                     bbr.TlkFile = Tlk;
-                    //var bifFile = bbr.Read(bifFileStream, resources.Where(a => a.BifIndex == bifIndex).ToList(), fileTypes);
-                    var bifFile = bbr.Read(bifFileStream, resources, fileTypes);
+                    var bifFile = bbr.Read(bifFileStream, resources.Where(a => a.BifIndex == bif.Item2).ToList(), fileTypes);
                     Areas.AddRange(bifFile.areas);
                     Creatures.AddRange(bifFile.creatures);
                     Dialogs.AddRange(bifFile.dialogs);
@@ -242,7 +241,7 @@ namespace iiInfinityEngine.Core
 
         private void ReadIniFile(string directory)
         {
-            IniFile ini = new IniFile(Path.Combine(directory, "baldur.ini"));
+            var ini = new IniFile(Path.Combine(directory, "baldur.ini"));
             hd = ini.IniReadValue("Alias", "HD0:");
             cd1 = ini.IniReadValue("Alias", "CD1:");
             cd2 = ini.IniReadValue("Alias", "CD2:");
@@ -290,7 +289,6 @@ namespace iiInfinityEngine.Core
         /// <returns>True if the file was saved, false otherwise.</returns>
         public bool Save<T>(IEFile file) where T : IEFile
         {
-            var fileSaved = false;
             IIEFileWriter writer = null;
             switch (file.FileType)
             {
@@ -339,7 +337,7 @@ namespace iiInfinityEngine.Core
             }
 
             writer.BackupManger = this.backupManager;
-            fileSaved = writer.Write(file.Filename, file);
+            var fileSaved = writer.Write(file.Filename, file);
             return fileSaved;
         }
     }

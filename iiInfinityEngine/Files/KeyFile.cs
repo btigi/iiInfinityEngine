@@ -5,8 +5,8 @@ namespace iiInfinityEngine.Core.Files
 {
     public class KeyFile : IEFile
     {
-        public List<KeyBifEntry2> BifFiles = new List<KeyBifEntry2>();
-        public List<KeyBifResource2> Resources = new List<KeyBifResource2>();
+        public List<(KeyBifEntry2 entry, int index)> BifFiles = [];
+        public List<KeyBifResource2> Resources = [];
         [NonSerialized]
         private string checksum;
         public string Checksum { get { return checksum; } set { checksum = value; } }
