@@ -10,6 +10,7 @@ namespace iiInfinityEngine.Core.Files
     {
         public CreFile()
         {
+            MemorisedSpells = new CreMemorisedSpells();
             MemorisedSpells.MageLevel1 = [];
             MemorisedSpells.MageLevel2 = [];
             MemorisedSpells.MageLevel3 = [];
@@ -28,6 +29,7 @@ namespace iiInfinityEngine.Core.Files
             MemorisedSpells.PriestLevel7 = [];
             MemorisedSpells.Innate = [];
 
+            KnownSpells = new CreKnownSpells();
             KnownSpells.MageLevel1 = [];
             KnownSpells.MageLevel2 = [];
             KnownSpells.MageLevel3 = [];
@@ -45,13 +47,16 @@ namespace iiInfinityEngine.Core.Files
             KnownSpells.PriestLevel6 = [];
             KnownSpells.PriestLevel7 = [];
             KnownSpells.Innate = [];
+
+            Items = new CreItemSlots();
+            Flags = new CreatureFlags();
         }
 
         public List<Eff1File> Effects1 = [];
         public List<EmbeddedEffBinary> Effects2 = []; // TODO: this should not be a binary?
-        public CreItemSlots Items;
-        public CreMemorisedSpells MemorisedSpells;
-        public CreKnownSpells KnownSpells;
+        public CreItemSlots Items { get; set; }
+        public CreMemorisedSpells MemorisedSpells { get; set; }
+        public CreKnownSpells KnownSpells { get; set; }
 
         [NonSerialized]
         private string checksum;
@@ -68,7 +73,7 @@ namespace iiInfinityEngine.Core.Files
 
         public IEString LongName { get; set; }
         public IEString ShortName { get; set; }
-        public CreatureFlags Flags;
+        public CreatureFlags Flags { get; set; }
         public Int32 XPReward { get; set; }
         public Int32 PowerLevel { get; set; }
         public Int32 Gold { get; set; }
@@ -287,7 +292,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct CreatureFlags
+    public class CreatureFlags
     {
         //A multiclass char is indicated is by the absence of any of the "original class" flags being set
         public bool ShowLongname { get; set; }
@@ -319,8 +324,8 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct CreItemSlots
-    {
+    public class CreItemSlots
+    {   
         public CreItem2 Helmet { get; set; }
         public CreItem2 Armor { get; set; }
         public CreItem2 Shield { get; set; }
@@ -364,7 +369,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct CreKnownSpells
+    public class CreKnownSpells
     {
         public List<CreKnownSpell2> MageLevel1 { get; set; }
         public List<CreKnownSpell2> MageLevel2 { get; set; }
@@ -386,13 +391,13 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct CreKnownSpell2
+    public class CreKnownSpell2
     {
         public array8 Filename { get; set; }
     }
 
     [Serializable]
-    public struct CreMemorisedSpells
+    public class CreMemorisedSpells
     {
         public List<CreMemorisedSpell2> MageLevel1 { get; set; }
         public List<CreMemorisedSpell2> MageLevel2 { get; set; }
@@ -414,14 +419,14 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct CreMemorisedSpell2
+    public class CreMemorisedSpell2
     {
         public array8 Filename { get; set; }
         public bool IsMemorised { get; set; }
     }
 
     [Serializable]
-    public struct CreItem2
+    public class CreItem2
     {
         public array8 Filename { get; set; }
         public byte ExpiryHour { get; set; }
@@ -429,11 +434,11 @@ namespace iiInfinityEngine.Core.Files
         public Int16 Charges1 { get; set; }
         public Int16 Charges2 { get; set; }
         public Int16 Charges3 { get; set; }
-        public Int32 Flags { get; set; }
+        public Int32 Flags { get; set; }//TODO: cre
     }
 
     [Serializable]
-    public struct CreKnownSpells2
+    public class CreKnownSpells2
     {
         public array8 Filename { get; set; }
         public Int16 SpellLevel { get; set; }
@@ -441,12 +446,13 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct CreatureItemFlags
+    public class CreatureItemFlags
     {
         public bool IsIdentified { get; set; }
         public bool IsStealable { get; set; }
         public bool IsStolen { get; set; }
         public bool IsDroppable { get; set; }
+        //TODO: cre
     }
 
     [Serializable]
