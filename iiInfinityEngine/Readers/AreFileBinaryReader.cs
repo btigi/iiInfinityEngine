@@ -390,15 +390,15 @@ namespace iiInfinityEngine.Core.Readers
             areFile.AreaToTheWestFlags.Bit30 = (header.AreaToTheWestFlags & Common.Bit30) != 0;
             areFile.AreaToTheWestFlags.Bit31 = (header.AreaToTheWestFlags & Common.Bit31) != 0;
 
-            areFile.AreaScript = header.AreaScript.ToString();
-            areFile.AreaToTheEast = header.AreaToTheEast.ToString();
-            areFile.AreaToTheNorth = header.AreaToTheNorth.ToString();
-            areFile.AreaToTheSouth = header.AreaToTheSouth.ToString();
-            areFile.AreaToTheWest = header.AreaToTheWest.ToString();
-            areFile.AreaWED = header.AreaWED.ToString();
+            areFile.AreaScript = header.AreaScript;
+            areFile.AreaToTheEast = header.AreaToTheEast;
+            areFile.AreaToTheNorth = header.AreaToTheNorth;
+            areFile.AreaToTheSouth = header.AreaToTheSouth;
+            areFile.AreaToTheWest = header.AreaToTheWest;
+            areFile.AreaWED = header.AreaWED;
             areFile.LastSaved = header.LastSaved;
-            areFile.RestMovieDay = header.RestMovieDay.ToString();
-            areFile.RestMovieNight = header.RestMovieNight.ToString();
+            areFile.RestMovieDay = header.RestMovieDay;
+            areFile.RestMovieNight = header.RestMovieNight;
             areFile.OverlayTransparency = header.OverlayTransparency;
             areFile.TiledObjectFlagOffset = header.TiledObjectFlagOffset;
             areFile.TiledObjectFlagCount = header.TiledObjectFlagCount;
@@ -447,7 +447,7 @@ namespace iiInfinityEngine.Core.Readers
                 areActor2.ActorAppearenceSchedule = actor.ActorAppearenceSchedule;
                 areActor2.ActorOrientation = actor.ActorOrientation;
                 areActor2.ActorRemovalTimer = actor.ActorRemovalTimer;
-                areActor2.CREFile = actor.CREFile.ToString();
+                areActor2.CREFile = actor.CREFile;
                 areActor2.CreOffset = actor.CreOffset;
                 areActor2.CreSize = actor.CreSize;
                 areActor2.CurrentXCoordinate = actor.CurrentXCoordinate;
@@ -458,14 +458,14 @@ namespace iiInfinityEngine.Core.Readers
                 areActor2.HasBeenSpawned = actor.HasBeenSpawned;
                 areActor2.MovementRestrictionDistance = actor.MovementRestrictionDistance;
                 areActor2.MovementRestrictionDistanceMoveToObject = actor.MovementRestrictionDistanceMoveToObject;
-                areActor2.Name = actor.Name.ToString();
+                areActor2.Name = actor.Name;
                 areActor2.NumTimesTalkedTo = actor.NumTimesTalkedTo;
-                areActor2.ScriptClass = actor.ScriptClass.ToString();
-                areActor2.ScriptDefault = actor.ScriptDefault.ToString();
-                areActor2.ScriptGeneral = actor.ScriptGeneral.ToString();
-                areActor2.ScriptOverride = actor.ScriptOverride.ToString();
-                areActor2.ScriptRace = actor.ScriptRace.ToString();
-                areActor2.ScriptSpecific = actor.ScriptSpecific.ToString();
+                areActor2.ScriptClass = actor.ScriptClass;
+                areActor2.ScriptDefault = actor.ScriptDefault;
+                areActor2.ScriptGeneral = actor.ScriptGeneral;
+                areActor2.ScriptOverride = actor.ScriptOverride;
+                areActor2.ScriptRace = actor.ScriptRace;
+                areActor2.ScriptSpecific = actor.ScriptSpecific;
                 areActor2.Unknown = actor.Unknown;
                 areActor2.Unknown2 = actor.Unknown2;
                 areFile.actors.Add(areActor2);
@@ -514,17 +514,17 @@ namespace iiInfinityEngine.Core.Readers
                 region2.BoundingBoxRight = region.BoundingBoxRight;
                 region2.BoundingBoxTop = region.BoundingBoxTop;
                 region2.Cursor = region.Cursor;
-                region2.DestinationArea = region.DestinationArea.ToString();
-                region2.DestinationEntrance = region.DestinationEntrance.ToString();
-                region2.DialogFile = region.DialogFile.ToString();
+                region2.DestinationArea = region.DestinationArea;
+                region2.DestinationEntrance = region.DestinationEntrance;
+                region2.DialogFile = region.DialogFile;
                 region2.DialogName = Common.ReadString(region.DialogName, TlkFile);
                 region2.InformationText = Common.ReadString(region.InformationText, TlkFile);
                 region2.IsTrap = region.IsTrap;
-                region2.KeyItem = region.KeyItem.ToString();
-                region2.Name = region.Name.ToString();
-                region2.RegionScript = region.RegionScript.ToString();
+                region2.KeyItem = region.KeyItem;
+                region2.Name = region.Name;
+                region2.RegionScript = region.RegionScript;
                 region2.RegionType = (RegionType)region.RegionType;
-                region2.Sound = region.Sound.ToString();
+                region2.Sound = region.Sound;
                 region2.TalkLocationXCoordinate = region.TalkLocationXCoordinate;
                 region2.TalkLocationYCoordinate = region.TalkLocationYCoordinate;
                 region2.TrapDetected = region.TrapDetected;
@@ -551,19 +551,19 @@ namespace iiInfinityEngine.Core.Readers
                 spawn2.MaximumCreaturesToSpawn = spawn.MaximumCreaturesToSpawn;
                 spawn2.MovementRestrictionDistance = spawn.MovementRestrictionDistance;
                 spawn2.MovementRestrictionDistanceToObject = spawn.MovementRestrictionDistanceToObject;
-                spawn2.Name = spawn.Name.ToString();
+                spawn2.Name = spawn.Name;
                 spawn2.ProbabilityDay = spawn.ProbabilityDay;
                 spawn2.ProbabilityNight = spawn.ProbabilityNight;
-                spawn2.Resref1 = spawn.Resref1.ToString();
-                spawn2.Resref2 = spawn.Resref2.ToString();
-                spawn2.Resref3 = spawn.Resref3.ToString();
-                spawn2.Resref4 = spawn.Resref4.ToString();
-                spawn2.Resref5 = spawn.Resref5.ToString();
-                spawn2.Resref6 = spawn.Resref6.ToString();
-                spawn2.Resref7 = spawn.Resref7.ToString();
-                spawn2.Resref8 = spawn.Resref8.ToString();
-                spawn2.Resref9 = spawn.Resref9.ToString();
-                spawn2.Resref10 = spawn.Resref10.ToString();
+                spawn2.Resref1 = spawn.Resref1;
+                spawn2.Resref2 = spawn.Resref2;
+                spawn2.Resref3 = spawn.Resref3;
+                spawn2.Resref4 = spawn.Resref4;
+                spawn2.Resref5 = spawn.Resref5;
+                spawn2.Resref6 = spawn.Resref6;
+                spawn2.Resref7 = spawn.Resref7;
+                spawn2.Resref8 = spawn.Resref8;
+                spawn2.Resref9 = spawn.Resref9;
+                spawn2.Resref10 = spawn.Resref10;
                 spawn2.SpawnMethod = spawn.SpawnMethod;
                 spawn2.SpawnPointAppearenceSchedule = spawn.SpawnPointAppearenceSchedule;
                 spawn2.Unknown = spawn.Unknown;
@@ -588,7 +588,7 @@ namespace iiInfinityEngine.Core.Readers
             foreach (var entrance in entrances)
             {
                 var entrance2 = new AreEntrance2();
-                entrance2.Name = entrance.Name.ToString();
+                entrance2.Name = entrance.Name;
                 entrance2.Orientation = entrance.Orientation;
                 entrance2.Unknown = entrance.Unknown;
                 entrance2.XCoordinate = entrance.XCoordinate;
@@ -639,16 +639,16 @@ namespace iiInfinityEngine.Core.Readers
                 container2.BoundingBoxTop = container.BoundingBoxTop;
                 container2.ContainerType = (ContainerType)container.ContainerType;
                 container2.IsTrap = container.IsTrap;
-                container2.KeyItem = container.KeyItem.ToString();
+                container2.KeyItem = container.KeyItem;
                 container2.LockDifficulty = container.LockDifficulty;
                 container2.LockpickString = Common.ReadString(container.LockpickString, TlkFile);
-                container2.Name = container.Name.ToString();
+                container2.Name = container.Name;
                 container2.TrapDetected = container.TrapDetected;
                 container2.TrapDetectionDifficulty = container.TrapDetectionDifficulty;
                 container2.TrapLaunchXCoordinate = container.TrapLaunchXCoordinate;
                 container2.TrapLaunchYCoordinate = container.TrapLaunchYCoordinate;
                 container2.TrapRemovalDifficulty = container.TrapRemovalDifficulty;
-                container2.TrapScript = container.TrapScript.ToString();
+                container2.TrapScript = container.TrapScript;
                 container2.TriggerRange = container.TriggerRange;
                 container2.Owner = container.Owner;
                 container2.BreakDifficulty = container.BreakDifficulty;
@@ -696,7 +696,7 @@ namespace iiInfinityEngine.Core.Readers
                     item.Flags.Bit29 = (items[container.ItemIndex + 0].Flags & Common.Bit29) != 0;
                     item.Flags.Bit30 = (items[container.ItemIndex + 0].Flags & Common.Bit30) != 0;
                     item.Flags.Bit31 = (items[container.ItemIndex + 0].Flags & Common.Bit31) != 0;
-                    item.ItemResref = items[container.ItemIndex + 0].ItemResref.ToString();
+                    item.ItemResref = items[container.ItemIndex + 0].ItemResref;
                     container2.items.Add(item);
                 }
 
@@ -723,18 +723,18 @@ namespace iiInfinityEngine.Core.Readers
                 ambient2.FrequencyBase = ambient.FrequencyBase;
                 ambient2.FrequencyVariation = ambient.FrequencyVariation;
                 ambient2.Height = ambient.Height;
-                ambient2.Name = ambient.Name.ToString();
+                ambient2.Name = ambient.Name;
                 ambient2.Radius = ambient.Radius;
-                ambient2.Resref1 = ambient.Resref1.ToString();
-                ambient2.Resref2 = ambient.Resref2.ToString();
-                ambient2.Resref3 = ambient.Resref3.ToString();
-                ambient2.Resref4 = ambient.Resref4.ToString();
-                ambient2.Resref5 = ambient.Resref5.ToString();
-                ambient2.Resref6 = ambient.Resref6.ToString();
-                ambient2.Resref7 = ambient.Resref7.ToString();
-                ambient2.Resref8 = ambient.Resref8.ToString();
-                ambient2.Resref9 = ambient.Resref9.ToString();
-                ambient2.Resref10 = ambient.Resref10.ToString();
+                ambient2.Resref1 = ambient.Resref1;
+                ambient2.Resref2 = ambient.Resref2;
+                ambient2.Resref3 = ambient.Resref3;
+                ambient2.Resref4 = ambient.Resref4;
+                ambient2.Resref5 = ambient.Resref5;
+                ambient2.Resref6 = ambient.Resref6;
+                ambient2.Resref7 = ambient.Resref7;
+                ambient2.Resref8 = ambient.Resref8;
+                ambient2.Resref9 = ambient.Resref9;
+                ambient2.Resref10 = ambient.Resref10;
                 //ambient2.ResRefCount = ambient.ResRefCount;//xx
                 ambient2.PitchVariance = ambient.PitchVariance;
                 ambient2.VolumeVariance = ambient.VolumeVariance;
@@ -749,13 +749,13 @@ namespace iiInfinityEngine.Core.Readers
             foreach (var variable in variables)
             {
                 var variable2 = new AreVariable2();
-                variable2.Name = variable.Name.ToString();
+                variable2.Name = variable.Name;
                 variable2.Type = variable.Type;
                 variable2.ResourceType = variable.ResourceType;
                 variable2.ValueDword = variable.ValueDword;
                 variable2.ValueInt = variable.ValueInt;
                 variable2.ValueDouble = variable.ValueDouble;
-                variable2.ScriptName = variable.ScriptName.ToString();
+                variable2.ScriptName = variable.ScriptName;
                 areFile.variables.Add(variable2);
             }
 
@@ -772,21 +772,21 @@ namespace iiInfinityEngine.Core.Readers
                 door2.ClosedVertexIndex = door.ClosedVertexIndex;//xx
                 door2.Cursor = door.Cursor;
                 door2.DialogName = Common.ReadString(door.DialogName, TlkFile);
-                door2.DialogResref = door.DialogResref.ToString();
-                door2.DoorCloseSound = door.DoorCloseSound.ToString();
-                door2.DoorId = door.DoorId.ToString();
-                door2.DoorOpenSound = door.DoorOpenSound.ToString();
-                door2.DoorScript = door.DoorScript.ToString();
+                door2.DialogResref = door.DialogResref;
+                door2.DoorCloseSound = door.DoorCloseSound;
+                door2.DoorId = door.DoorId;
+                door2.DoorOpenSound = door.DoorOpenSound;
+                door2.DoorScript = door.DoorScript;
                 door2.DoorState1X = door.DoorState1X;
                 door2.DoorState1Y = door.DoorState1Y;
                 door2.DoorState2X = door.DoorState2X;
                 door2.DoorState2Y = door.DoorState2Y;
                 door2.Flags = door.Flags;//xx
                 door2.IsTrap = door.IsTrap;
-                door2.KeyItem = door.KeyItem.ToString();
+                door2.KeyItem = door.KeyItem;
                 door2.LockDifficulty = door.LockDifficulty;
                 door2.LockpickString = Common.ReadString(door.LockpickString, TlkFile);
-                door2.Name = door.Name.ToString();
+                door2.Name = door.Name;
                 door2.OpenBoundingBoxBottom = door.OpenBoundingBoxBottom;
                 door2.OpenBoundingBoxLeft = door.OpenBoundingBoxLeft;
                 door2.OpenBoundingBoxRight = door.OpenBoundingBoxRight;
@@ -801,7 +801,7 @@ namespace iiInfinityEngine.Core.Readers
                 door2.TrapDetected = door.TrapLaunchXCoordinate;
                 door2.TrapLaunchXCoordinate = door.TrapLaunchYCoordinate;
                 door2.TrapLaunchYCoordinate = door.TrapRemovalDifficulty;
-                door2.TravelTriggerName = door.TravelTriggerName.ToString();
+                door2.TravelTriggerName = door.TravelTriggerName;
                 door2.Unknown = door.Unknown;
                 door2.Hitpoints = door.Hitpoints;
                 door2.ArmourClass = door.ArmourClass;
@@ -812,14 +812,14 @@ namespace iiInfinityEngine.Core.Readers
             {
                 var animation2 = new AreAnimation2();
                 animation2.AnimationAppearenceSchedule = animation.AnimationAppearenceSchedule; //xx
-                animation2.BamAnimation = animation.BamAnimation.ToString();
+                animation2.BamAnimation = animation.BamAnimation;
                 animation2.BamFrame = animation.BamFrame;
                 animation2.BamSequence = animation.BamSequence;
                 animation2.Flags = animation.Flags; //xx
                 animation2.Height = animation.Height;
                 animation2.LoopChance = animation.LoopChance;
-                animation2.Name = animation.Name.ToString();
-                animation2.Palette = animation.Palette.ToString();
+                animation2.Name = animation.Name;
+                animation2.Palette = animation.Palette;
                 animation2.SkipCycles = animation.SkipCycles;
                 animation2.StartFrame = animation.StartFrame;
                 animation2.Transparency = animation.Transparency;
@@ -847,7 +847,7 @@ namespace iiInfinityEngine.Core.Readers
                 var tiledObject2 = new AreTiledObject2();
                 tiledObject2.ClosedSearchCount = tiledObject.ClosedSearchCount;
                 tiledObject2.ClosedSearchOffset = tiledObject.ClosedSearchOffset;
-                tiledObject2.Name = tiledObject.Name.ToString();
+                tiledObject2.Name = tiledObject.Name;
                 tiledObject2.OpenSearchCount = tiledObject.OpenSearchCount;
                 tiledObject2.OpenSearchOffset = tiledObject.OpenSearchOffset;
                 tiledObject2.Unknown = tiledObject.Unknown;
@@ -864,7 +864,7 @@ namespace iiInfinityEngine.Core.Readers
                 projectile2.EffectSize = projectile.EffectSize;
                 projectile2.MissileId = projectile.MissileId;
                 projectile2.PartyOwnerIndex = projectile.PartyOwnerIndex;
-                projectile2.Resref = projectile.Resref.ToString();
+                projectile2.Resref = projectile.Resref;
                 projectile2.TickUntilTriggerCheck = projectile.TickUntilTriggerCheck;
                 projectile2.TriggersRemaining = projectile.TriggersRemaining;
                 projectile2.XCoordinate = projectile.XCoordinate;
@@ -877,13 +877,13 @@ namespace iiInfinityEngine.Core.Readers
             {
                 var song2 = new AreSong2();
                 song2.BattleSong = song.BattleSong;
-                song2.DayAmbient1Wav = song.DayAmbient1Wav.ToString();
-                song2.DayAmbient2Wav = song.DayAmbient2Wav.ToString();
+                song2.DayAmbient1Wav = song.DayAmbient1Wav;
+                song2.DayAmbient2Wav = song.DayAmbient2Wav;
                 song2.DayAmbientVolume = song.DayAmbientVolume;
                 song2.DaySong = song.DaySong;
                 song2.LoseSong = song.LoseSong;
-                song2.NightAmbient1Wav = song.NightAmbient1Wav.ToString();
-                song2.NightAmbient2Wav = song.NightAmbient2Wav.ToString();
+                song2.NightAmbient1Wav = song.NightAmbient1Wav;
+                song2.NightAmbient2Wav = song.NightAmbient2Wav;
                 song2.NightAmbientVolume = song.NightAmbientVolume;
                 song2.NightSong = song.NightSong;
                 song2.NightSong = song.Reverb;
@@ -905,19 +905,19 @@ namespace iiInfinityEngine.Core.Readers
                 interruption2.Difficulty = interruption.Difficulty;
                 interruption2.Enabled = interruption.Enabled;
                 interruption2.MaximumCreaturesToSpawn = interruption.MaximumCreaturesToSpawn;
-                interruption2.Name = interruption.Name.ToString();
+                interruption2.Name = interruption.Name;
                 interruption2.NightProbability = interruption.NightProbability;
                 interruption2.RemovalTime = interruption.RemovalTime;
-                interruption2.ResRef1 = interruption.ResRef1.ToString();
-                interruption2.ResRef2 = interruption.ResRef2.ToString();
-                interruption2.ResRef3 = interruption.ResRef3.ToString();
-                interruption2.ResRef4 = interruption.ResRef4.ToString();
-                interruption2.ResRef5 = interruption.ResRef5.ToString();
-                interruption2.ResRef6 = interruption.ResRef6.ToString();
-                interruption2.ResRef7 = interruption.ResRef7.ToString();
-                interruption2.ResRef8 = interruption.ResRef8.ToString();
-                interruption2.ResRef9 = interruption.ResRef9.ToString();
-                interruption2.ResRef10 = interruption.ResRef10.ToString();
+                interruption2.ResRef1 = interruption.ResRef1;
+                interruption2.ResRef2 = interruption.ResRef2;
+                interruption2.ResRef3 = interruption.ResRef3;
+                interruption2.ResRef4 = interruption.ResRef4;
+                interruption2.ResRef5 = interruption.ResRef5;
+                interruption2.ResRef6 = interruption.ResRef6;
+                interruption2.ResRef7 = interruption.ResRef7;
+                interruption2.ResRef8 = interruption.ResRef8;
+                interruption2.ResRef9 = interruption.ResRef9;
+                interruption2.ResRef10 = interruption.ResRef10;
                 interruption2.RestrictionDistance = interruption.RestrictionDistance;
                 interruption2.RestrictionDistanceToObject = interruption.RestrictionDistanceToObject;
                 interruption2.Text1 = interruption.Text1;

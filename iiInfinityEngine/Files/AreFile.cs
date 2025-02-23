@@ -37,16 +37,16 @@ namespace iiInfinityEngine.Core.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
-        public string AreaWED { get; set; }
+        public array8 AreaWED { get; set; }
         public Int32 LastSaved { get; set; }
         public AreaFlags AreaFlags;
-        public string AreaToTheNorth { get; set; }
+        public array8 AreaToTheNorth { get; set; }
         public AreaLinkFlags AreaToTheNorthFlags;
-        public string AreaToTheEast { get; set; }
+        public array8 AreaToTheEast { get; set; }
         public AreaLinkFlags AreaToTheEastFlags;
-        public string AreaToTheSouth { get; set; }
+        public array8 AreaToTheSouth { get; set; }
         public AreaLinkFlags AreaToTheSouthFlags;
-        public string AreaToTheWest { get; set; }
+        public array8 AreaToTheWest { get; set; }
         public AreaLinkFlags AreaToTheWestFlags;
         public AreaTypeFlags AreaTypeFlags;
         public Int16 WeatherProbabilityRain { get; set; }
@@ -58,18 +58,18 @@ namespace iiInfinityEngine.Core.Files
         public Int16 VertexCount { get; set; }
         public Int16 TiledObjectFlagOffset { get; set; }
         public Int16 TiledObjectFlagCount { get; set; }
-        public string AreaScript { get; set; }
+        public array8 AreaScript { get; set; }
         public Int32 ExploredBitmaskSize { get; set; }
         public Int32 ExploredBitmaskOffset { get; set; }
-        public string RestMovieDay { get; set; }
-        public string RestMovieNight { get; set; }
+        public array8 RestMovieDay { get; set; }
+        public array8 RestMovieNight { get; set; }
         public array56 Unknown7 { get; set; }
     }
 
     [Serializable]
     public struct AreActor2
     {
-        public string Name { get; set; }
+        public array32 Name { get; set; }
         public Int16 CurrentXCoordinate { get; set; }
         public Int16 CurrentYCoordinate { get; set; }
         public Int16 DestinationXCoordinate { get; set; }
@@ -109,14 +109,14 @@ namespace iiInfinityEngine.Core.Files
         //bit 1 = 01:30 to 02:29
         //bit 0 = 00:30 to 01:29 
         public Int32 NumTimesTalkedTo { get; set; }
-        public string Dialog { get; set; }
-        public string ScriptOverride { get; set; }
-        public string ScriptGeneral { get; set; }
-        public string ScriptClass { get; set; }
-        public string ScriptRace { get; set; }
-        public string ScriptDefault { get; set; }
-        public string ScriptSpecific { get; set; }
-        public string CREFile { get; set; }
+        public array8 Dialog { get; set; }
+        public array8 ScriptOverride { get; set; }
+        public array8 ScriptGeneral { get; set; }
+        public array8 ScriptClass { get; set; }
+        public array8 ScriptRace { get; set; }
+        public array8 ScriptDefault { get; set; }
+        public array8 ScriptSpecific { get; set; }
+        public array8 CREFile { get; set; }
         public Int32 CreOffset { get; set; }
         public Int32 CreSize { get; set; }
         public array128 Unknown2 { get; set; }
@@ -125,7 +125,7 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct AreRegion2
     {
-        public string Name { get; set; }
+        public array32 Name { get; set; }
         public RegionType RegionType { get; set; }
         public Int16 BoundingBoxLeft { get; set; }
         public Int16 BoundingBoxTop { get; set; }
@@ -135,8 +135,8 @@ namespace iiInfinityEngine.Core.Files
         public Int32 VertexIndex { get; set; }
         public Int32 TriggerValue { get; set; }
         public Int32 Cursor { get; set; }
-        public string DestinationArea { get; set; }
-        public string DestinationEntrance { get; set; }
+        public array8 DestinationArea { get; set; }
+        public array32 DestinationEntrance { get; set; }
         public RegionFlags Flags;
         public IEString InformationText { get; set; }
         public Int16 TrapDetectionDifficulty { get; set; }
@@ -145,35 +145,35 @@ namespace iiInfinityEngine.Core.Files
         public Int16 TrapDetected { get; set; }
         public Int16 TrapLaunchXCoordinate { get; set; }
         public Int16 TrapLaunchYCoordinate { get; set; }
-        public string KeyItem { get; set; }
-        public string RegionScript { get; set; }
+        public array8 KeyItem { get; set; }
+        public array8 RegionScript { get; set; }
         public Int16 AlternativeUsePointXCoordinate { get; set; }
         public Int16 AlternativeUsePointYCoordinate { get; set; }
         public Int32 Unknown2 { get; set; }
         public array32 Unknown3 { get; set; }
-        public string Sound { get; set; }
+        public array8 Sound { get; set; }
         public Int16 TalkLocationXCoordinate { get; set; }
         public Int16 TalkLocationYCoordinate { get; set; }
         public IEString DialogName { get; set; }
-        public string DialogFile { get; set; }
+        public array8 DialogFile { get; set; }
     }
 
     [Serializable]
     public struct AreSpawnPoint2
     {
-        public string Name { get; set; }
+        public array32 Name { get; set; }
         public Int16 XCoordinate { get; set; }
         public Int16 YCoordinate { get; set; }
-        public string Resref1 { get; set; }
-        public string Resref2 { get; set; }
-        public string Resref3 { get; set; }
-        public string Resref4 { get; set; }
-        public string Resref5 { get; set; }
-        public string Resref6 { get; set; }
-        public string Resref7 { get; set; }
-        public string Resref8 { get; set; }
-        public string Resref9 { get; set; }
-        public string Resref10 { get; set; }
+        public array8 Resref1 { get; set; }
+        public array8 Resref2 { get; set; }
+        public array8 Resref3 { get; set; }
+        public array8 Resref4 { get; set; }
+        public array8 Resref5 { get; set; }
+        public array8 Resref6 { get; set; }
+        public array8 Resref7 { get; set; }
+        public array8 Resref8 { get; set; }
+        public array8 Resref9 { get; set; }
+        public array8 Resref10 { get; set; }
         public Int16 CreatureSpawnCount { get; set; }
         public Int16 BaseCreatureNumberToSpawn { get; set; }
         public Int16 Frequency { get; set; }
@@ -234,7 +234,7 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct AreEntrance2
     {
-        public string Name { get; set; }
+        public array32 Name { get; set; }
         public Int16 XCoordinate { get; set; }
         public Int16 YCoordinate { get; set; }
         public Int16 Orientation { get; set; }
@@ -246,7 +246,7 @@ namespace iiInfinityEngine.Core.Files
     {
         public List<AreItem2> items = new List<AreItem2>();
 
-        public string Name { get; set; }
+        public array32 Name { get; set; }
         public Int16 XCoordinate { get; set; }
         public Int16 YCoordinate { get; set; }
         public ContainerType ContainerType { get; set; }
@@ -262,12 +262,12 @@ namespace iiInfinityEngine.Core.Files
         public Int16 BoundingBoxTop { get; set; }
         public Int16 BoundingBoxRight { get; set; }
         public Int16 BoundingBoxBottom { get; set; }
-        public string TrapScript { get; set; }
+        public array8 TrapScript { get; set; }
         public Int32 VertexIndex { get; set; }
         public Int16 VertexCount { get; set; }
         public Int16 TriggerRange { get; set; }
         public array32 Owner { get; set; }
-        public string KeyItem { get; set; }
+        public array8 KeyItem { get; set; }
         public Int32 BreakDifficulty { get; set; }
         public IEString LockpickString { get; set; }
         public array56 Unknown3 { get; set; }
@@ -276,7 +276,7 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct AreItem2
     {
-        public string ItemResref { get; set; }
+        public array8 ItemResref { get; set; }
         public Int16 ExpirationTime { get; set; }
         public Int16 Charges1 { get; set; }
         public Int16 Charges2 { get; set; }
@@ -287,7 +287,7 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct AreAmbient2
     {
-        public string Name { get; set; }
+        public array32 Name { get; set; }
         public Int16 XCoordinate { get; set; }
         public Int16 YCoordinate { get; set; }
         public Int16 Radius { get; set; }
@@ -295,16 +295,16 @@ namespace iiInfinityEngine.Core.Files
         public Int32 PitchVariance { get; set; }
         public Int16 VolumeVariance { get; set; }
         public Int16 Volume { get; set; }
-        public string Resref1 { get; set; }
-        public string Resref2 { get; set; }
-        public string Resref3 { get; set; }
-        public string Resref4 { get; set; }
-        public string Resref5 { get; set; }
-        public string Resref6 { get; set; }
-        public string Resref7 { get; set; }
-        public string Resref8 { get; set; }
-        public string Resref9 { get; set; }
-        public string Resref10 { get; set; }
+        public array8 Resref1 { get; set; }
+        public array8 Resref2 { get; set; }
+        public array8 Resref3 { get; set; }
+        public array8 Resref4 { get; set; }
+        public array8 Resref5 { get; set; }
+        public array8 Resref6 { get; set; }
+        public array8 Resref7 { get; set; }
+        public array8 Resref8 { get; set; }
+        public array8 Resref9 { get; set; }
+        public array8 Resref10 { get; set; }
         public Int16 ResRefCount { get; set; }
         public Int16 Unknown2 { get; set; }
         public Int32 FrequencyBase { get; set; }
@@ -317,20 +317,20 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct AreVariable2
     {
-        public string Name { get; set; }
+        public array32 Name { get; set; }
         public Int16 Type { get; set; }
         public Int16 ResourceType { get; set; }
         public Int32 ValueDword { get; set; }
         public Int32 ValueInt { get; set; }
         public double ValueDouble { get; set; }
-        public string ScriptName { get; set; }
+        public array32 ScriptName { get; set; }
     }
 
     [Serializable]
     public struct AreDoor2
     {
-        public string Name { get; set; }
-        public string DoorId { get; set; }
+        public array32 Name { get; set; }
+        public array8 DoorId { get; set; }
         public Int32 Flags { get; set; }
         //bit 0: Door open
         //bit 1: Door locked
@@ -362,8 +362,8 @@ namespace iiInfinityEngine.Core.Files
         public Int32 ClosedVertexBlockIndex { get; set; }
         public Int16 Hitpoints { get; set; }
         public Int16 ArmourClass { get; set; }
-        public string DoorOpenSound { get; set; }
-        public string DoorCloseSound { get; set; }
+        public array8 DoorOpenSound { get; set; }
+        public array8 DoorCloseSound { get; set; }
         public Int32 Cursor { get; set; }
         public Int16 TrapDetectionDifficulty { get; set; }
         public Int16 TrapRemovalDifficulty { get; set; }
@@ -371,8 +371,8 @@ namespace iiInfinityEngine.Core.Files
         public Int16 TrapDetected { get; set; }
         public Int16 TrapLaunchXCoordinate { get; set; }
         public Int16 TrapLaunchYCoordinate { get; set; }
-        public string KeyItem { get; set; }
-        public string DoorScript { get; set; }
+        public array8 KeyItem { get; set; }
+        public array8 DoorScript { get; set; }
         public Int32 SecretDoorDetectionDifficulty { get; set; }
         public Int32 LockDifficulty { get; set; }
         public Int16 DoorState1X { get; set; }
@@ -380,20 +380,20 @@ namespace iiInfinityEngine.Core.Files
         public Int16 DoorState2X { get; set; }
         public Int16 DoorState2Y { get; set; }
         public IEString LockpickString { get; set; }
-        public string TravelTriggerName { get; set; }
+        public array24 TravelTriggerName { get; set; }
         public IEString DialogName { get; set; }
-        public string DialogResref { get; set; }
+        public array8 DialogResref { get; set; }
         public array8 Unknown { get; set; }
     }
 
     [Serializable]
     public struct AreAnimation2
     {
-        public string Name { get; set; }
+        public array32 Name { get; set; }
         public Int16 XCoordinate { get; set; }
         public Int16 YCoordinate { get; set; }
         public Int32 AnimationAppearenceSchedule { get; set; }
-        public string BamAnimation { get; set; }
+        public array8 BamAnimation { get; set; }
         public Int16 BamSequence { get; set; }
         public Int16 BamFrame { get; set; }
         public Int32 Flags { get; set; }
@@ -402,7 +402,7 @@ namespace iiInfinityEngine.Core.Files
         public Int16 StartFrame { get; set; }
         public byte LoopChance { get; set; }
         public byte SkipCycles { get; set; }
-        public string Palette { get; set; }
+        public array8 Palette { get; set; }
         public Int16 WidthPVRZ { get; set; }
         public Int16 HeightPVRZ { get; set; }
     }
@@ -421,7 +421,7 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct AreTiledObject2
     {
-        public string Name { get; set; }
+        public array32 Name { get; set; }
         public array8 TileId { get; set; }
         public Int32 Flags { get; set; }
         public Int32 OpenSearchOffset { get; set; }
@@ -434,7 +434,7 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct AreProjectile2
     {
-        public string Resref { get; set; }
+        public array8 Resref { get; set; }
         public Int32 EffectOffset { get; set; }
         public Int16 EffectSize { get; set; }
         public Int16 MissileId { get; set; } // missile.ids or projectile.ids - 1
@@ -460,11 +460,11 @@ namespace iiInfinityEngine.Core.Files
         public Int32 AltMusic3 { get; set; }
         public Int32 AltMusic4 { get; set; }
         public Int32 AltMusic5 { get; set; }
-        public string DayAmbient1Wav { get; set; }
-        public string DayAmbient2Wav { get; set; }
+        public array8 DayAmbient1Wav { get; set; }
+        public array8 DayAmbient2Wav { get; set; }
         public Int32 DayAmbientVolume { get; set; }
-        public string NightAmbient1Wav { get; set; }
-        public string NightAmbient2Wav { get; set; }
+        public array8 NightAmbient1Wav { get; set; }
+        public array8 NightAmbient2Wav { get; set; }
         public Int32 NightAmbientVolume { get; set; }
         public Int32 Reverb { get; set; }
         public array60 Unknown { get; set; }
@@ -473,7 +473,7 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct AreInterruption2
     {
-        public string Name { get; set; }
+        public array32 Name { get; set; }
         public Int32 Text1 { get; set; }
         public Int32 Text2 { get; set; }
         public Int32 Text3 { get; set; }
@@ -484,16 +484,16 @@ namespace iiInfinityEngine.Core.Files
         public Int32 Text8 { get; set; }
         public Int32 Text9 { get; set; }
         public Int32 Text10 { get; set; }
-        public string ResRef1 { get; set; }
-        public string ResRef2 { get; set; }
-        public string ResRef3 { get; set; }
-        public string ResRef4 { get; set; }
-        public string ResRef5 { get; set; }
-        public string ResRef6 { get; set; }
-        public string ResRef7 { get; set; }
-        public string ResRef8 { get; set; }
-        public string ResRef9 { get; set; }
-        public string ResRef10 { get; set; }
+        public array8 ResRef1 { get; set; }
+        public array8 ResRef2 { get; set; }
+        public array8 ResRef3 { get; set; }
+        public array8 ResRef4 { get; set; }
+        public array8 ResRef5 { get; set; }
+        public array8 ResRef6 { get; set; }
+        public array8 ResRef7 { get; set; }
+        public array8 ResRef8 { get; set; }
+        public array8 ResRef9 { get; set; }
+        public array8 ResRef10 { get; set; }
         public Int16 CreatureCount { get; set; }
         public Int16 Difficulty { get; set; }
         public Int32 RemovalTime { get; set; }
