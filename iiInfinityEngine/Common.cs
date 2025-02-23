@@ -204,6 +204,12 @@ namespace iiInfinityEngine.Core
             x = x.Substring(0, x.IndexOf('\0') >= 0 ? x.IndexOf('\0') : x.Length);
             return x;
         }
+
+        public static bool IsNullOrEmpty(array8 value)
+        {
+            var x = value.ToString();
+            return x.Length == 0;
+        }
     }
 
     [Serializable]

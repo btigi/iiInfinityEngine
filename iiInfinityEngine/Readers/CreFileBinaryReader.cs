@@ -427,7 +427,7 @@ namespace iiInfinityEngine.Core.Readers
                     //Note: This means we cannot set NumberOfSpellSlots (after effects)
                     var memorisedSpell = creMemorisedSpells[info.SpellOffset + i];
                     var memorisedSpell2 = new CreMemorisedSpell2();
-                    memorisedSpell2.Filename = memorisedSpell.Filename.ToString();
+                    memorisedSpell2.Filename = memorisedSpell.Filename;
                     memorisedSpell2.IsMemorised = memorisedSpell.Memorised != 0;
 
                     if (info.SpellLevel == 0 && info.SpellType == 0)
@@ -474,7 +474,7 @@ namespace iiInfinityEngine.Core.Readers
             foreach (var knownSpell in creKnownSpells)
             {
                 var knownSpell2 = new CreKnownSpell2();
-                knownSpell2.Filename = knownSpell.Filename.ToString();
+                knownSpell2.Filename = knownSpell.Filename;
                 if (knownSpell.SpellLevel == 0 && knownSpell.SpellType == 0)
                     creFile.KnownSpells.PriestLevel1.Add(knownSpell2);
                 if (knownSpell.SpellLevel == 1 && knownSpell.SpellType == 0)
@@ -524,7 +524,7 @@ namespace iiInfinityEngine.Core.Readers
                 creItem2.Charges3 = creItem.Charges3;
                 creItem2.ExpiryHour = creItem.ExpiryHour;
                 creItem2.ExpiryValue = creItem.ExpiryValue;
-                creItem2.Filename = creItem.Filename.ToString();
+                creItem2.Filename = creItem.Filename;
                 creItem2.Flags = creItem.Flags;
                 interimItems.Add(creItem2);
             }

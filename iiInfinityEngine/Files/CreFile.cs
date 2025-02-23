@@ -388,7 +388,7 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct CreKnownSpell2
     {
-        public string Filename { get; set; }
+        public array8 Filename { get; set; }
     }
 
     [Serializable]
@@ -416,14 +416,14 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct CreMemorisedSpell2
     {
-        public string Filename { get; set; }
+        public array8 Filename { get; set; }
         public bool IsMemorised { get; set; }
     }
 
     [Serializable]
     public struct CreItem2
     {
-        public string Filename { get; set; }
+        public array8 Filename { get; set; }
         public byte ExpiryHour { get; set; }
         public byte ExpiryValue { get; set; }
         public Int16 Charges1 { get; set; }
@@ -435,7 +435,7 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct CreKnownSpells2
     {
-        public string Filename { get; set; }
+        public array8 Filename { get; set; }
         public Int16 SpellLevel { get; set; }
         public Int16 SpellType { get; set; }
     }
