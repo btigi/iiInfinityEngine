@@ -36,7 +36,7 @@ namespace iiInfinityEngine.Core.Files
         public SparkColour SparkColour { get; set; }
         public Int16 ProjectileWidth { get; set; }
         public ExtendedFlags ExtendedFlags { get; set; }
-        public Int32 DisplayedMessage { get; set; }
+        public IEString DisplayedMessage { get; set; }
         public Int32 PulseColour { get; set; }
         public Int16 ColourSpeed { get; set; }
         public Int16 ScreenShakeAmount { get; set; }

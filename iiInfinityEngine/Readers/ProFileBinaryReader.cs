@@ -6,32 +6,30 @@ namespace iiInfinityEngine.Core.Readers
 {
     public class ProFileBinaryReader : IProFileReader
     {
+        public TlkFile TlkFile { get; set; }
+
         public ProFile Read(string filename)
         {
-            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
-            {
-                var f = Read(fs);
-                f.Filename = Path.GetFileName(filename);
-                return f;
-            }
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var f = Read(fs);
+            f.Filename = Path.GetFileName(filename);
+            return f;
         }
 
         public ProFile Read(Stream s)
         {
-            using (BinaryReader br = new BinaryReader(s))
-            {
-                var proFile = ParseFile(br);
-                br.BaseStream.Seek(0, SeekOrigin.Begin);
-                proFile.OriginalFile = ParseFile(br);
-                return proFile;
-            }
+            using var br = new BinaryReader(s);
+            var proFile = ParseFile(br);
+            br.BaseStream.Seek(0, SeekOrigin.Begin);
+            proFile.OriginalFile = ParseFile(br);
+            return proFile;
         }
 
         private ProFile ParseFile(BinaryReader br)
         {
             var header = (ProHeaderBinary)Common.ReadStruct(br, typeof(ProHeaderBinary));
 
-            ProFile proFile = new ProFile();
+            var proFile = new ProFile();
             proFile.AngleIncreaseMaximum = header.AngleIncreaseMaximum;
             proFile.AngleIncreaseMinimum = header.AngleIncreaseMinimum;
             proFile.ColourSpeed = header.ColourSpeed;
@@ -42,7 +40,7 @@ namespace iiInfinityEngine.Core.Readers
             proFile.CurveMaximum = header.CurveMaximum;
             proFile.CurveMinimum = header.CurveMinimum;
             proFile.DefaultSpell = header.DefaultSpell;
-            proFile.DisplayedMessage = header.DisplayedMessage;
+            proFile.DisplayedMessage = Common.ReadString(header.DisplayedMessage, TlkFile);
             proFile.ImpactWav = header.ImpactWav;
             proFile.FaceTargetGranularity = (FaceTargetGranularity)header.FaceTargetGranularity;
             proFile.LightSpotHeight = header.LightSpotHeight;

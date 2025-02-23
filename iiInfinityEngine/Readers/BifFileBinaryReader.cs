@@ -6,6 +6,7 @@ using System.Linq;
 using iiInfinityEngine.Core.Binary;
 using iiInfinityEngine.Core.Files;
 using System.IO.Compression;
+using System.Runtime.ConstrainedExecution;
 
 namespace iiInfinityEngine.Core.Readers
 {
@@ -114,6 +115,7 @@ namespace iiInfinityEngine.Core.Readers
                                 try
                                 {
                                     var are = new AreFileBinaryReader();
+                                    are.TlkFile = TlkFile;
                                     var area = (AreFile)are.Read(ms);
                                     resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
@@ -129,6 +131,7 @@ namespace iiInfinityEngine.Core.Readers
                                 try
                                 {
                                     var pro = new ProFileBinaryReader();
+                                    pro.TlkFile = TlkFile;
                                     var projectile = (ProFile)pro.Read(ms);
                                     resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
@@ -175,6 +178,7 @@ namespace iiInfinityEngine.Core.Readers
                                 try
                                 {
                                     var cre = new CreFileBinaryReader();
+                                    cre.TlkFile = TlkFile;
                                     var creature = (CreFile)cre.Read(ms);
                                     resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
@@ -190,6 +194,7 @@ namespace iiInfinityEngine.Core.Readers
                                 try
                                 {
                                     var dlg = new DlgFileBinaryReader();
+                                    dlg.TlkFile = TlkFile;
                                     var dialog = (DlgFile)dlg.Read(ms);
                                     resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
@@ -236,6 +241,7 @@ namespace iiInfinityEngine.Core.Readers
                                 try
                                 {
                                     var spl = new SplFileBinaryReader();
+                                    spl.TlkFile = TlkFile;
                                     var spell = (SplFile)spl.Read(ms);
                                     resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
@@ -251,6 +257,7 @@ namespace iiInfinityEngine.Core.Readers
                                 try
                                 {
                                     var sto = new StoFileBinaryReader();
+                                    sto.TlkFile = TlkFile;
                                     var store = (StoFile)sto.Read(ms);
                                     resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
@@ -296,6 +303,7 @@ namespace iiInfinityEngine.Core.Readers
                                 try
                                 {
                                     var wmp = new WmpFileBinaryReader();
+                                    wmp.TlkFile = TlkFile;
                                     var worldmap = (WmpFile)wmp.Read(ms);
                                     resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)

@@ -8,6 +8,7 @@ namespace iiInfinityEngine.Core.Writers
 {
     public class ProFileBinaryWriter : IProFileWriter
     {
+        public TlkFile TlkFile { get; set; }
         public BackupManager BackupManger { get; set; }
 
         public bool Write(string filename, IEFile file, bool forceSave = false)
@@ -130,7 +131,7 @@ namespace iiInfinityEngine.Core.Writers
             header.CurveMaximum = proFile.CurveMaximum;
             header.CurveMinimum = proFile.CurveMinimum;
             header.DefaultSpell = proFile.DefaultSpell;
-            header.DisplayedMessage = proFile.DisplayedMessage;
+            header.DisplayedMessage = Common.WriteString(proFile.DisplayedMessage, TlkFile);
             header.ImpactWav = proFile.ImpactWav;
             header.FaceTargetGranularity = (byte)proFile.FaceTargetGranularity;
             header.LightSpotHeight = proFile.LightSpotHeight;
