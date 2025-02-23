@@ -68,20 +68,27 @@ namespace iiInfinityEngine.Core
         {
             #region Parallel
             /*
-            var po = new System.Threading.Tasks.ParallelOptions();
-            po.MaxDegreeOfParallelism = 40;
-
-            System.Threading.Tasks.Parallel.ForEach(key.BifFiles, po, bif =>
+            var bifList = new List<(KeyBifEntry2 entry, int index)>();
+            var relevantResources = key.Resources.Where(a => a.ResourceType == resourceType).ToList();
+            foreach (var c in relevantResources)
             {
-                var cdDir = GetDirectoryLocation(bif);
-                var bifName = Path.Combine(directory, cdDir, bif.filename);
+                bifList.Add(key.BifFiles[c.BifIndex]);
+            }
+            bifList = bifList.Distinct().ToList();
+
+            var parallelOptions = new System.Threading.Tasks.ParallelOptions();
+            //parallelOptions.MaxDegreeOfParallelism = 150;
+            System.Threading.Tasks.Parallel.ForEach(bifList, parallelOptions, bif =>
+            {
+                var cdDir = GetDirectoryLocation(bif.entry);
+                var bifName = Path.Combine(gameDirectory, cdDir, bif.entry.Filename);
                 if (File.Exists(bifName))
                 {
                     var bbr = new BifFileBinaryReader();
                     var bifFileStream = new FileStream(bifName, FileMode.Open, FileAccess.Read);
                     //bbr.TlkFile = Tlk;
-                    var bifFile = bbr.Read(bifFileStream, new List<KeyBifResource2>());//key.Resources.ToList());
-                    
+                    var bifFile = bbr.Read(bifFileStream, relevantResources.Where(a => a.BifIndex == bif.Item2).ToList(), [resourceType]);
+
                     Areas.AddRange(bifFile.areas);
                     Creatures.AddRange(bifFile.creatures);
                     DimensionalArrays.AddRange(bifFile.dimensionalArrays);
@@ -95,6 +102,8 @@ namespace iiInfinityEngine.Core
                     Wfxs.AddRange(bifFile.wfx);
                 }
             });
+
+            LoadOverride(gameDirectory);
             */
             #endregion
 
