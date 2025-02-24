@@ -31,6 +31,7 @@ namespace iiInfinityEngine.Core
         public List<EffFile> Effects = [];
         public List<IdsFile> Identifiers = [];
         public List<ItmFile> Items = [];
+        public List<MosFile> Mosaics = [];
         public List<ProFile> Projectiles = [];
         public List<SplFile> Spells = [];
         public List<StoFile> Stores = [];
@@ -160,6 +161,7 @@ namespace iiInfinityEngine.Core
                     Effects.AddRange(bifFile.effects);
                     Identifiers.AddRange(bifFile.identifiers);
                     Items.AddRange(bifFile.items);
+                    Mosaics.AddRange(bifFile.mosaics);
                     Projectiles.AddRange(bifFile.projectiles);
                     Spells.AddRange(bifFile.spells);
                     Stores.AddRange(bifFile.stores);
@@ -180,6 +182,7 @@ namespace iiInfinityEngine.Core
             var effReader = new EffFileBinaryReader();
             var idsReader = new IdsFileReader();
             var itmReader = new ItmFileBinaryReader();
+            var mosReader = new MosFileBinaryReader();
             var proReader = new ProFileBinaryReader();
             var splReader = new SplFileBinaryReader();
             var stoReader = new StoFileBinaryReader();
@@ -229,6 +232,11 @@ namespace iiInfinityEngine.Core
                         var item = itmReader.Read(file);
                         item.Filename = file;
                         Items.Add(item);
+                        break;
+                    case ".mos":
+                        var mos = mosReader.Read(file);
+                        mos.Filename = file;
+                        Mosaics.Add(mos);
                         break;
                     case ".pro":
                         var projectile = proReader.Read(file);

@@ -26,6 +26,7 @@ namespace iiInfinityEngine.Core.Readers
         List<IdsFile> identifiers = [];
         List<DimensionalArrayFile> dimensionalArrays = [];
         List<AreFile> areas = [];
+        List<MosFile> mosaics = [];
         List<WmpFile> worldmaps = [];
         List<VvcFile> vvcs = [];
         List<TisFile> tilesets = [];
@@ -237,6 +238,21 @@ namespace iiInfinityEngine.Core.Readers
                                 catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
                                 break;
 
+                            case IEFileType.Mos:
+                                try
+                                {
+                                    var mos = new MosFileBinaryReader();
+                                    var mosFile = (MosFile)mos.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
+                                    {
+                                        mosFile.Filename = resource.ResourceName + "." + resource.ResourceType;
+                                    }
+                                    mosaics.Add(mosFile);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
+
                             case IEFileType.Spl:
                                 try
                                 {
@@ -358,6 +374,7 @@ namespace iiInfinityEngine.Core.Readers
                 bifFile.identifiers = identifiers;
                 bifFile.dimensionalArrays = dimensionalArrays;
                 bifFile.areas = areas;
+                bifFile.mosaics = mosaics;
                 bifFile.worldmaps = worldmaps;
                 bifFile.vvcs = vvcs;
                 bifFile.tilesets = tilesets;

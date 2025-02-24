@@ -19,6 +19,7 @@ namespace iiInfinityEngine.Core.Files
         public List<IdsFile> identifiers = [];
         public List<DimensionalArrayFile> dimensionalArrays = [];
         public List<AreFile> areas = [];
+        public List<MosFile> mosaics = [];
         public List<WmpFile> worldmaps = [];
         public List<VvcFile> vvcs = [];
         public List<TisFile> tilesets = [];
@@ -47,7 +48,7 @@ namespace iiInfinityEngine.Core.Files
         public Int32 ResourceOffset { get; set; }
         public Int32 ResourceSize { get; set; }
         public Int16 ResourceType { get; set; }
-        public Int16 Unknown { get; set; }
+        public Int16 Unknowne { get; set; }
     }
 
     public struct BifTilesetEntry2
@@ -57,6 +58,6 @@ namespace iiInfinityEngine.Core.Files
         public Int32 TileCount { get; set; }
         public Int32 TileSize { get; set; }
         public Int16 ResourceType { get; set; }
-        public Int16 Unknown { get; set; }
+        public Int16 Unknowne { get; set; }
     }
 }
