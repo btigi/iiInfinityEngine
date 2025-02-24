@@ -124,8 +124,8 @@ namespace iiInfinityEngine.Core.Binary
         public array8 RegionScript { get; set; }
         public Int16 AlternativeUsePointXCoordinate { get; set; }
         public Int16 AlternativeUsePointYCoordinate { get; set; }
-        public Int32 Unknown2 { get; set; }
-        public array32 Unknown3 { get; set; }
+        public Int32 Unknown88 { get; set; }
+        public array32 Unknown8c { get; set; }
         public array8 Sound { get; set; }
         public Int16 TalkLocationXCoordinate { get; set; }
         public Int16 TalkLocationYCoordinate { get; set; }
@@ -173,7 +173,7 @@ namespace iiInfinityEngine.Core.Binary
         public byte SpawnWeight8 { get; set; }
         public byte SpawnWeight9 { get; set; }
         public byte SpawnWeight10 { get; set; }
-        public array38 Unknown { get; set; }
+        public array38 Unknowna2 { get; set; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -183,7 +183,7 @@ namespace iiInfinityEngine.Core.Binary
         public Int16 XCoordinate { get; set; }
         public Int16 YCoordinate { get; set; }
         public Int16 Orientation { get; set; }
-        public array66 Unknown { get; set; }
+        public array66 Unknown26 { get; set; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -215,7 +215,7 @@ namespace iiInfinityEngine.Core.Binary
         public array8 KeyItem { get; set; }
         public Int32 BreakDifficulty { get; set; }
         public Int32 LockpickString { get; set; }
-        public array56 Unknown3 { get; set; }
+        public array56 Unknown88 { get; set; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -251,12 +251,12 @@ namespace iiInfinityEngine.Core.Binary
         public array8 Resref9 { get; set; }
         public array8 Resref10 { get; set; }
         public Int16 ResRefCount { get; set; }
-        public Int16 Unknown2 { get; set; }
+        public Int16 Unknown82 { get; set; }
         public Int32 FrequencyBase { get; set; }
         public Int32 FrequencyVariation { get; set; }
         public Int32 AmbientAppearenceSchedule { get; set; }
         public Int32 Flags { get; set; }
-        public array64 Unknown3 { get; set; }
+        public array64 Unknownc0 { get; set; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -316,7 +316,7 @@ namespace iiInfinityEngine.Core.Binary
         public array24 TravelTriggerName { get; set; }
         public Int32 DialogName { get; set; }
         public array8 DialogResref { get; set; }
-        public array8 Unknown { get; set; }
+        public array8 Unknownc0 { get; set; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -437,6 +437,6 @@ namespace iiInfinityEngine.Core.Binary
         public Int16 Enabled { get; set; }
         public Int16 DayProbability { get; set; }
         public Int16 NightProbability { get; set; }
-        public array56 Unknown { get; set; }
+        public array56 Unknownac { get; set; }
     }
 }

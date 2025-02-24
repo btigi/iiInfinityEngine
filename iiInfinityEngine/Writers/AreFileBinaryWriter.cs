@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using iiInfinityEngine.Core.Binary;
+﻿using iiInfinityEngine.Core.Binary;
 using iiInfinityEngine.Core.Files;
-using System.IO;
 using iiInfinityEngine.Core.Writers.Interfaces;
-using System.Diagnostics.CodeAnalysis;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace iiInfinityEngine.Core.Writers
 {
@@ -90,7 +89,7 @@ namespace iiInfinityEngine.Core.Writers
                 interruptionBinary.Text8 = interruption.Text8;
                 interruptionBinary.Text9 = interruption.Text9;
                 interruptionBinary.Text10 = interruption.Text10;
-                interruptionBinary.Unknown = interruption.Unknown;
+                interruptionBinary.Unknownac = interruption.Unknownac;
                 interruptions.Add(interruptionBinary);
             }
 
@@ -226,7 +225,7 @@ namespace iiInfinityEngine.Core.Writers
                 doorBinary.TrapLaunchYCoordinate = door.TrapLaunchYCoordinate;
                 doorBinary.TrapRemovalDifficulty = door.TrapRemovalDifficulty;
                 doorBinary.TravelTriggerName = door.TravelTriggerName;
-                doorBinary.Unknown = door.Unknown;
+                doorBinary.Unknownc0 = door.Unknownc0;
                 doorBinary.Hitpoints = door.Hitpoints;
                 doorBinary.ArmourClass = door.ArmourClass;
                 doors.Add(doorBinary);
@@ -270,8 +269,8 @@ namespace iiInfinityEngine.Core.Writers
                 ambientBinary.YCoordinate = ambient.YCoordinate;
                 ambientBinary.PitchVariance = ambient.PitchVariance;
                 ambientBinary.VolumeVariance = ambient.VolumeVariance;
-                ambientBinary.Unknown2 = ambient.Unknown2;
-                ambientBinary.Unknown3 = ambient.Unknown3;
+                ambientBinary.Unknown82 = ambient.Unknown82;
+                ambientBinary.Unknownc0 = ambient.Unknown94;
                 ambientBinary.Volume = ambient.Volume;
                 ambients.Add(ambientBinary);
             }
@@ -285,12 +284,12 @@ namespace iiInfinityEngine.Core.Writers
                 containerBinary.BoundingBoxTop = container.BoundingBoxTop;
                 containerBinary.ContainerType = (Int16)container.ContainerType;
                 containerBinary.Flags = container.Flags.Locked ? containerBinary.Flags | Common.Bit0 : containerBinary.Flags;
-                containerBinary.Flags = container.Flags.Bit01 ? containerBinary.Flags | Common.Bit1 : containerBinary.Flags;
-                containerBinary.Flags = container.Flags.Bit02 ? containerBinary.Flags | Common.Bit2 : containerBinary.Flags;
+                containerBinary.Flags = container.Flags.DisabledIfNoOwner ? containerBinary.Flags | Common.Bit1 : containerBinary.Flags;
+                containerBinary.Flags = container.Flags.MagicalLock ? containerBinary.Flags | Common.Bit2 : containerBinary.Flags;
                 containerBinary.Flags = container.Flags.TrapResets ? containerBinary.Flags | Common.Bit3 : containerBinary.Flags;
-                containerBinary.Flags = container.Flags.Bit04 ? containerBinary.Flags | Common.Bit4 : containerBinary.Flags;
+                containerBinary.Flags = container.Flags.RemoveOnly ? containerBinary.Flags | Common.Bit4 : containerBinary.Flags;
                 containerBinary.Flags = container.Flags.Disabled ? containerBinary.Flags | Common.Bit5 : containerBinary.Flags;
-                containerBinary.Flags = container.Flags.Bit06 ? containerBinary.Flags | Common.Bit6 : containerBinary.Flags;
+                containerBinary.Flags = container.Flags.DoNotClear ? containerBinary.Flags | Common.Bit6 : containerBinary.Flags;
                 containerBinary.Flags = container.Flags.Bit07 ? containerBinary.Flags | Common.Bit7 : containerBinary.Flags;
                 containerBinary.Flags = container.Flags.Bit08 ? containerBinary.Flags | Common.Bit8 : containerBinary.Flags;
                 containerBinary.Flags = container.Flags.Bit09 ? containerBinary.Flags | Common.Bit9 : containerBinary.Flags;
@@ -388,7 +387,7 @@ namespace iiInfinityEngine.Core.Writers
                 var entranceBinary = new AreEntranceBinary();
                 entranceBinary.Name = entrance.Name;
                 entranceBinary.Orientation = entrance.Orientation;
-                entranceBinary.Unknown = entrance.Unknown;
+                entranceBinary.Unknown26 = entrance.Unknown26;
                 entranceBinary.XCoordinate = entrance.XCoordinate;
                 entranceBinary.YCoordinate = entrance.YCoordinate;
                 entrances.Add(entranceBinary);
@@ -420,7 +419,7 @@ namespace iiInfinityEngine.Core.Writers
                 spawnBinary.Resref10 = spawn.Resref10;
                 spawnBinary.SpawnMethod = spawn.SpawnMethod;
                 spawnBinary.SpawnPointAppearenceSchedule = spawn.SpawnPointAppearenceSchedule;
-                spawnBinary.Unknown = spawn.Unknown;
+                spawnBinary.Unknowna2 = spawn.Unknowna2;
                 spawnBinary.XCoordinate = spawn.XCoordinate;
                 spawnBinary.YCoordinate = spawn.YCoordinate;
                 spawnBinary.SpawnFrequency = spawn.SpawnFrequency;
@@ -435,7 +434,7 @@ namespace iiInfinityEngine.Core.Writers
                 spawnBinary.SpawnWeight8 = spawn.SpawnWeight8;
                 spawnBinary.SpawnWeight9 = spawn.SpawnWeight9;
                 spawnBinary.SpawnWeight10 = spawn.SpawnWeight10;
-                spawnBinary.Unknown = spawn.Unknown;
+                spawnBinary.Unknowna2 = spawn.Unknowna2;
                 spawns.Add(spawnBinary);
             }
 
@@ -453,18 +452,18 @@ namespace iiInfinityEngine.Core.Writers
                 regionBinary.DestinationEntrance = region.DestinationEntrance;
                 regionBinary.DialogFile = region.DialogFile;
                 regionBinary.DialogName = Common.WriteString(region.DialogName, TlkFile);
-                regionBinary.Flags = region.Flags.InvisibleTrap ? regionBinary.Flags | Common.Bit0 : regionBinary.Flags;
+                regionBinary.Flags = region.Flags.KeyRequired ? regionBinary.Flags | Common.Bit0 : regionBinary.Flags;
                 regionBinary.Flags = region.Flags.ResetTrap ? regionBinary.Flags | Common.Bit1 : regionBinary.Flags;
                 regionBinary.Flags = region.Flags.PartyRequired ? regionBinary.Flags | Common.Bit2 : regionBinary.Flags;
                 regionBinary.Flags = region.Flags.Detectable ? regionBinary.Flags | Common.Bit3 : regionBinary.Flags;
-                regionBinary.Flags = region.Flags.Bit04 ? regionBinary.Flags | Common.Bit4 : regionBinary.Flags;
-                regionBinary.Flags = region.Flags.Bit05 ? regionBinary.Flags | Common.Bit5 : regionBinary.Flags;
-                regionBinary.Flags = region.Flags.NPCCanTrigger ? regionBinary.Flags | Common.Bit6 : regionBinary.Flags;
-                regionBinary.Flags = region.Flags.Bit07 ? regionBinary.Flags | Common.Bit7 : regionBinary.Flags;
+                regionBinary.Flags = region.Flags.EnemiesActivates ? regionBinary.Flags | Common.Bit4 : regionBinary.Flags;
+                regionBinary.Flags = region.Flags.TutorialTrigger ? regionBinary.Flags | Common.Bit5 : regionBinary.Flags;
+                regionBinary.Flags = region.Flags.NpcActivates ? regionBinary.Flags | Common.Bit6 : regionBinary.Flags;
+                regionBinary.Flags = region.Flags.SilentTrigger ? regionBinary.Flags | Common.Bit7 : regionBinary.Flags;
                 regionBinary.Flags = region.Flags.Deactivated ? regionBinary.Flags | Common.Bit8 : regionBinary.Flags;
                 regionBinary.Flags = region.Flags.NPCCannotPass ? regionBinary.Flags | Common.Bit9 : regionBinary.Flags;
                 regionBinary.Flags = region.Flags.AlternativePoint ? regionBinary.Flags | Common.Bit10 : regionBinary.Flags;
-                regionBinary.Flags = region.Flags.UsedByDoor ? regionBinary.Flags | Common.Bit11 : regionBinary.Flags;
+                regionBinary.Flags = region.Flags.DoorClosed ? regionBinary.Flags | Common.Bit11 : regionBinary.Flags;
                 regionBinary.Flags = region.Flags.Bit12 ? regionBinary.Flags | Common.Bit12 : regionBinary.Flags;
                 regionBinary.Flags = region.Flags.Bit13 ? regionBinary.Flags | Common.Bit13 : regionBinary.Flags;
                 regionBinary.Flags = region.Flags.Bit14 ? regionBinary.Flags | Common.Bit14 : regionBinary.Flags;
@@ -500,8 +499,8 @@ namespace iiInfinityEngine.Core.Writers
                 regionBinary.TrapLaunchYCoordinate = region.TrapLaunchYCoordinate;
                 regionBinary.TrapRemovalDifficulty = region.TrapRemovalDifficulty;
                 regionBinary.TriggerValue = region.TriggerValue;
-                regionBinary.Unknown2 = region.Unknown2;
-                regionBinary.Unknown3 = region.Unknown3;
+                regionBinary.Unknown88 = region.Unknown88;
+                regionBinary.Unknown8c = region.Unknown8c;
                 regionBinary.VertexCount = region.VertexCount;
                 regionBinary.VertexIndex = region.VertexIndex;
                 regions.Add(regionBinary);
@@ -513,8 +512,8 @@ namespace iiInfinityEngine.Core.Writers
                 actorBinary.ActorAnimation = actor.ActorAnimation;
                 actorBinary.ActorAppearenceSchedule = actor.ActorAppearenceSchedule;
                 actorBinary.Flags = actor.ActorFlags.CreAttached ? actorBinary.Flags | Common.Bit0 : actorBinary.Flags;
-                actorBinary.Flags = actor.ActorFlags.Bit01 ? actorBinary.Flags | Common.Bit1 : actorBinary.Flags;
-                actorBinary.Flags = actor.ActorFlags.Bit02 ? actorBinary.Flags | Common.Bit2 : actorBinary.Flags;
+                actorBinary.Flags = actor.ActorFlags.HasSeenParty ? actorBinary.Flags | Common.Bit1 : actorBinary.Flags;
+                actorBinary.Flags = actor.ActorFlags.Invulnerable ? actorBinary.Flags | Common.Bit2 : actorBinary.Flags;
                 actorBinary.Flags = actor.ActorFlags.OverrideScriptName ? actorBinary.Flags | Common.Bit3 : actorBinary.Flags;
                 actorBinary.Flags = actor.ActorFlags.Bit04 ? actorBinary.Flags | Common.Bit4 : actorBinary.Flags;
                 actorBinary.Flags = actor.ActorFlags.Bit05 ? actorBinary.Flags | Common.Bit5 : actorBinary.Flags;
@@ -635,9 +634,9 @@ namespace iiInfinityEngine.Core.Writers
             header.AreaFlags = areFile.AreaFlags.TutorialArea ? header.AreaFlags | Common.Bit1 : header.AreaFlags;
             header.AreaFlags = areFile.AreaFlags.DeadMagicZone ? header.AreaFlags | Common.Bit2 : header.AreaFlags;
             header.AreaFlags = areFile.AreaFlags.Dream ? header.AreaFlags | Common.Bit3 : header.AreaFlags;
-            header.AreaFlags = areFile.AreaFlags.Bit04 ? header.AreaFlags | Common.Bit4 : header.AreaFlags;
-            header.AreaFlags = areFile.AreaFlags.Bit05 ? header.AreaFlags | Common.Bit5 : header.AreaFlags;
-            header.AreaFlags = areFile.AreaFlags.Bit06 ? header.AreaFlags | Common.Bit6 : header.AreaFlags;
+            header.AreaFlags = areFile.AreaFlags.Player1DeathDoesNotEndGame ? header.AreaFlags | Common.Bit4 : header.AreaFlags;
+            header.AreaFlags = areFile.AreaFlags.RestingNotAllowed ? header.AreaFlags | Common.Bit5 : header.AreaFlags;
+            header.AreaFlags = areFile.AreaFlags.TravelNotAllowed ? header.AreaFlags | Common.Bit6 : header.AreaFlags;
             header.AreaFlags = areFile.AreaFlags.Bit07 ? header.AreaFlags | Common.Bit7 : header.AreaFlags;
             header.AreaFlags = areFile.AreaFlags.Bit08 ? header.AreaFlags | Common.Bit8 : header.AreaFlags;
             header.AreaFlags = areFile.AreaFlags.Bit09 ? header.AreaFlags | Common.Bit9 : header.AreaFlags;

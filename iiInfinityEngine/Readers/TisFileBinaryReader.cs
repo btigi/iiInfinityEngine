@@ -65,11 +65,8 @@ namespace iiInfinityEngine.Core.Readers
                     var paletteEntry = (TisPaletteBinary)Common.ReadStruct(streamReader, typeof(TisPaletteBinary));
                     palette.Add(paletteEntry);
                 }
-                for (int j = 0; j < header.TileDimension * header.TileDimension; j++)
-                {
-                    var tileData = (byte)Common.ReadStruct(streamReader, typeof(byte));
-                    tileDatas.Add(tileData);
-                }
+                var bytes = streamReader.ReadBytes(header.TileDimension * header.TileDimension);
+                tileDatas.AddRange(bytes);
             }
 
             int width = header.TileCount;// 20;

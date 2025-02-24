@@ -335,30 +335,33 @@ namespace iiInfinityEngine.Core.Readers
                     ix++;
                 }
 
-                foreach (var ts in tileStructs)
+                if (fileTypes.Contains(IEFileType.Tis))
                 {
-                    br.BaseStream.Seek(ts.resourceOffset, SeekOrigin.Begin);
-                    var byteCount = ts.tileSize * ts.tileCount;
-                    var file = br.ReadBytes(byteCount);
-                    using var ms = new MemoryStream(file);
-                    KeyBifResource2 resource;
-                    switch ((IEFileType)ts.resourceType)
+                    foreach (var ts in tileStructs)
                     {
-                        case IEFileType.Tis:
-                            try
-                            {
-                                var tis = new TisFileBinaryReader();
-                                tis.FromBiff = true;
-                                var tisfile = (TisFile)tis.Read(ms, true, ts.tileCount, ts.tileSize, 64);
-                                resource = resources.Where(a => a.TileSetIndex == ((ts.resourceLocator & 0x000FC000) >> 14)).SingleOrDefault();
-                                if (resource != null)
+                        br.BaseStream.Seek(ts.resourceOffset, SeekOrigin.Begin);
+                        var byteCount = ts.tileSize * ts.tileCount;
+                        var file = br.ReadBytes(byteCount);
+                        using var ms = new MemoryStream(file);
+                        KeyBifResource2 resource;
+                        switch ((IEFileType)ts.resourceType)
+                        {
+                            case IEFileType.Tis:
+                                try
                                 {
-                                    tisfile.Filename = resource.ResourceName + "." + resource.ResourceType;
+                                    var tis = new TisFileBinaryReader();
+                                    tis.FromBiff = true;
+                                    var tisfile = (TisFile)tis.Read(ms, true, ts.tileCount, ts.tileSize, 64);
+                                    resource = resources.Where(a => a.TileSetIndex == ((ts.resourceLocator & 0x000FC000) >> 14)).SingleOrDefault();
+                                    if (resource != null)
+                                    {
+                                        tisfile.Filename = resource.ResourceName + "." + resource.ResourceType;
+                                    }
+                                    tilesets.Add(tisfile);
                                 }
-                                tilesets.Add(tisfile);
-                            }
-                            catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
-                            break;
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
+                        }
                     }
                 }
 

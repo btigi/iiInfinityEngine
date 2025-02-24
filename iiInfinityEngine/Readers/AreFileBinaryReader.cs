@@ -12,23 +12,19 @@ namespace iiInfinityEngine.Core.Readers
 
         public AreFile Read(string filename)
         {
-            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
-            {
-                var f = Read(fs);
-                f.Filename = Path.GetFileName(filename);
-                return f;
-            }
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var f = Read(fs);
+            f.Filename = Path.GetFileName(filename);
+            return f;
         }
 
         public AreFile Read(Stream s)
         {
-            using (BinaryReader br = new BinaryReader(s))
-            {
-                var areFile = ParseFile(br);
-                br.BaseStream.Seek(0, SeekOrigin.Begin);
-                areFile.OriginalFile = ParseFile(br);
-                return areFile;
-            }
+            using var br = new BinaryReader(s);
+            var areFile = ParseFile(br);
+            br.BaseStream.Seek(0, SeekOrigin.Begin);
+            areFile.OriginalFile = ParseFile(br);
+            return areFile;
         }
 
         private AreFile ParseFile(BinaryReader br)
@@ -38,23 +34,23 @@ namespace iiInfinityEngine.Core.Readers
             if (header.ftype.ToString() != "AREA")
                 return new AreFile();
 
-            List<AreActorBinary> actors = new List<AreActorBinary>();
-            List<AreRegionBinary> regions = new List<AreRegionBinary>();
-            List<AreSpawnPointBinary> spawns = new List<AreSpawnPointBinary>();
-            List<AreEntranceBinary> entrances = new List<AreEntranceBinary>();
-            List<AreContainerBinary> containers = new List<AreContainerBinary>();
-            List<AreItemBinary> items = new List<AreItemBinary>();
-            List<AreAmbientBinary> ambients = new List<AreAmbientBinary>();
-            List<AreVariableBinary> variables = new List<AreVariableBinary>();
-            List<AreDoorBinary> doors = new List<AreDoorBinary>();
-            List<AreAnimationBinary> animations = new List<AreAnimationBinary>();
-            List<AreNoteBinary> notes = new List<AreNoteBinary>();
-            List<AreTiledObjectBinary> tiledObjects = new List<AreTiledObjectBinary>();
-            List<AreProjectileBinary> projectiles = new List<AreProjectileBinary>();
-            List<AreSongBinary> songs = new List<AreSongBinary>();
-            List<AreInterruptionBinary> interruptions = new List<AreInterruptionBinary>();
+            List<AreActorBinary> actors = [];
+            List<AreRegionBinary> regions = [];
+            List<AreSpawnPointBinary> spawns = [];
+            List<AreEntranceBinary> entrances = [];
+            List<AreContainerBinary> containers = [];
+            List<AreItemBinary> items = [];
+            List<AreAmbientBinary> ambients = [];
+            List<AreVariableBinary> variables = [];
+            List<AreDoorBinary> doors = [];
+            List<AreAnimationBinary> animations = [];
+            List<AreNoteBinary> notes = [];
+            List<AreTiledObjectBinary> tiledObjects = [];
+            List<AreProjectileBinary> projectiles = [];
+            List<AreSongBinary> songs = [];
+            List<AreInterruptionBinary> interruptions = [];
             List<bool> exploredArea = new List<bool>();
-            List<Int32> vertices = new List<Int32>();
+            List<Int32> vertices = [];
 
             br.BaseStream.Seek(header.ActorOffset, SeekOrigin.Begin);
             for (int i = 0; i < header.ActorCount; i++)
@@ -212,9 +208,9 @@ namespace iiInfinityEngine.Core.Readers
             areFile.AreaFlags.TutorialArea = (header.AreaFlags & Common.Bit1) != 0;
             areFile.AreaFlags.DeadMagicZone = (header.AreaFlags & Common.Bit2) != 0;
             areFile.AreaFlags.Dream = (header.AreaFlags & Common.Bit3) != 0;
-            areFile.AreaFlags.Bit04 = (header.AreaFlags & Common.Bit4) != 0;
-            areFile.AreaFlags.Bit05 = (header.AreaFlags & Common.Bit5) != 0;
-            areFile.AreaFlags.Bit06 = (header.AreaFlags & Common.Bit6) != 0;
+            areFile.AreaFlags.Player1DeathDoesNotEndGame = (header.AreaFlags & Common.Bit4) != 0;
+            areFile.AreaFlags.RestingNotAllowed = (header.AreaFlags & Common.Bit5) != 0;
+            areFile.AreaFlags.TravelNotAllowed = (header.AreaFlags & Common.Bit6) != 0;
             areFile.AreaFlags.Bit07 = (header.AreaFlags & Common.Bit7) != 0;
             areFile.AreaFlags.Bit08 = (header.AreaFlags & Common.Bit8) != 0;
             areFile.AreaFlags.Bit09 = (header.AreaFlags & Common.Bit9) != 0;
@@ -411,8 +407,8 @@ namespace iiInfinityEngine.Core.Readers
             {
                 var areActor2 = new AreActor2();
                 areActor2.ActorFlags.CreAttached = (actor.Flags & Common.Bit0) != 0;
-                areActor2.ActorFlags.Bit01 = (actor.Flags & Common.Bit1) != 0;
-                areActor2.ActorFlags.Bit02 = (actor.Flags & Common.Bit2) != 0;
+                areActor2.ActorFlags.HasSeenParty = (actor.Flags & Common.Bit1) != 0;
+                areActor2.ActorFlags.Invulnerable = (actor.Flags & Common.Bit2) != 0;
                 areActor2.ActorFlags.OverrideScriptName = (actor.Flags & Common.Bit3) != 0;
                 areActor2.ActorFlags.Bit04 = (actor.Flags & Common.Bit4) != 0;
                 areActor2.ActorFlags.Bit05 = (actor.Flags & Common.Bit5) != 0;
@@ -474,18 +470,18 @@ namespace iiInfinityEngine.Core.Readers
             foreach (var region in regions)
             {
                 var region2 = new AreRegion2();
-                region2.Flags.InvisibleTrap = (region.Flags & Common.Bit0) != 0;
+                region2.Flags.KeyRequired = (region.Flags & Common.Bit0) != 0;
                 region2.Flags.ResetTrap = (region.Flags & Common.Bit1) != 0;
                 region2.Flags.PartyRequired = (region.Flags & Common.Bit2) != 0;
                 region2.Flags.Detectable = (region.Flags & Common.Bit3) != 0;
-                region2.Flags.Bit04 = (region.Flags & Common.Bit4) != 0;
-                region2.Flags.Bit05 = (region.Flags & Common.Bit5) != 0;
-                region2.Flags.NPCCanTrigger = (region.Flags & Common.Bit6) != 0;
-                region2.Flags.Bit07 = (region.Flags & Common.Bit7) != 0;
+                region2.Flags.EnemiesActivates = (region.Flags & Common.Bit4) != 0;
+                region2.Flags.TutorialTrigger = (region.Flags & Common.Bit5) != 0;
+                region2.Flags.NpcActivates = (region.Flags & Common.Bit6) != 0;
+                region2.Flags.SilentTrigger = (region.Flags & Common.Bit7) != 0;
                 region2.Flags.Deactivated = (region.Flags & Common.Bit8) != 0;
                 region2.Flags.NPCCannotPass = (region.Flags & Common.Bit9) != 0;
                 region2.Flags.AlternativePoint = (region.Flags & Common.Bit10) != 0;
-                region2.Flags.UsedByDoor = (region.Flags & Common.Bit11) != 0;
+                region2.Flags.DoorClosed = (region.Flags & Common.Bit11) != 0;
                 region2.Flags.Bit12 = (region.Flags & Common.Bit12) != 0;
                 region2.Flags.Bit13 = (region.Flags & Common.Bit13) != 0;
                 region2.Flags.Bit14 = (region.Flags & Common.Bit14) != 0;
@@ -533,8 +529,8 @@ namespace iiInfinityEngine.Core.Readers
                 region2.TrapLaunchYCoordinate = region.TrapLaunchYCoordinate;
                 region2.TrapRemovalDifficulty = region.TrapRemovalDifficulty;
                 region2.TriggerValue = region.TriggerValue;
-                region2.Unknown2 = region.Unknown2;
-                region2.Unknown3 = region.Unknown3;
+                region2.Unknown88 = region.Unknown88;
+                region2.Unknown8c = region.Unknown8c;
                 region2.VertexCount = region.VertexCount;//xx
                 region2.VertexIndex = region.VertexIndex;//xx
                 areFile.regions.Add(region2);
@@ -566,7 +562,7 @@ namespace iiInfinityEngine.Core.Readers
                 spawn2.Resref10 = spawn.Resref10;
                 spawn2.SpawnMethod = spawn.SpawnMethod;
                 spawn2.SpawnPointAppearenceSchedule = spawn.SpawnPointAppearenceSchedule;
-                spawn2.Unknown = spawn.Unknown;
+                spawn2.Unknowna2 = spawn.Unknowna2;
                 spawn2.XCoordinate = spawn.XCoordinate;
                 spawn2.YCoordinate = spawn.YCoordinate;
                 spawn2.SpawnFrequency = spawn.SpawnFrequency;
@@ -581,7 +577,7 @@ namespace iiInfinityEngine.Core.Readers
                 spawn2.SpawnWeight8 = spawn.SpawnWeight8;
                 spawn2.SpawnWeight9 = spawn.SpawnWeight9;
                 spawn2.SpawnWeight10 = spawn.SpawnWeight10;
-                spawn2.Unknown = spawn.Unknown;
+                spawn2.Unknowna2 = spawn.Unknowna2;
                 areFile.spawns.Add(spawn2);
             }
 
@@ -590,7 +586,7 @@ namespace iiInfinityEngine.Core.Readers
                 var entrance2 = new AreEntrance2();
                 entrance2.Name = entrance.Name;
                 entrance2.Orientation = entrance.Orientation;
-                entrance2.Unknown = entrance.Unknown;
+                entrance2.Unknown26 = entrance.Unknown26;
                 entrance2.XCoordinate = entrance.XCoordinate;
                 entrance2.YCoordinate = entrance.YCoordinate;
                 areFile.entrances.Add(entrance2);
@@ -601,12 +597,12 @@ namespace iiInfinityEngine.Core.Readers
                 var container2 = new AreContainer2();
 
                 container2.Flags.Locked = (container.Flags & Common.Bit0) != 0;
-                container2.Flags.Bit01 = (container.Flags & Common.Bit1) != 0;
-                container2.Flags.Bit02 = (container.Flags & Common.Bit2) != 0;
+                container2.Flags.DisabledIfNoOwner = (container.Flags & Common.Bit1) != 0;
+                container2.Flags.MagicalLock = (container.Flags & Common.Bit2) != 0;
                 container2.Flags.TrapResets = (container.Flags & Common.Bit3) != 0;
-                container2.Flags.Bit04 = (container.Flags & Common.Bit4) != 0;
+                container2.Flags.RemoveOnly = (container.Flags & Common.Bit4) != 0;
                 container2.Flags.Disabled = (container.Flags & Common.Bit5) != 0;
-                container2.Flags.Bit06 = (container.Flags & Common.Bit6) != 0;
+                container2.Flags.DoNotClear = (container.Flags & Common.Bit6) != 0;
                 container2.Flags.Bit07 = (container.Flags & Common.Bit7) != 0;
                 container2.Flags.Bit08 = (container.Flags & Common.Bit8) != 0;
                 container2.Flags.Bit09 = (container.Flags & Common.Bit9) != 0;
@@ -738,8 +734,8 @@ namespace iiInfinityEngine.Core.Readers
                 //ambient2.ResRefCount = ambient.ResRefCount;//xx
                 ambient2.PitchVariance = ambient.PitchVariance;
                 ambient2.VolumeVariance = ambient.VolumeVariance;
-                ambient2.Unknown2 = ambient.Unknown2;
-                ambient2.Unknown3 = ambient.Unknown3;
+                ambient2.Unknown82 = ambient.Unknown82;
+                ambient2.Unknown94 = ambient.Unknownc0;
                 ambient2.Volume = ambient.Volume;
                 ambient2.XCoordinate = ambient.XCoordinate;
                 ambient2.YCoordinate = ambient.YCoordinate;
@@ -802,7 +798,7 @@ namespace iiInfinityEngine.Core.Readers
                 door2.TrapLaunchXCoordinate = door.TrapLaunchYCoordinate;
                 door2.TrapLaunchYCoordinate = door.TrapRemovalDifficulty;
                 door2.TravelTriggerName = door.TravelTriggerName;
-                door2.Unknown = door.Unknown;
+                door2.Unknownc0 = door.Unknownc0;
                 door2.Hitpoints = door.Hitpoints;
                 door2.ArmourClass = door.ArmourClass;
                 areFile.doors.Add(door2);
@@ -930,7 +926,7 @@ namespace iiInfinityEngine.Core.Readers
                 interruption2.Text8 = interruption.Text8;
                 interruption2.Text9 = interruption.Text9;
                 interruption2.Text10 = interruption.Text10;
-                interruption2.Unknown = interruption.Unknown;
+                interruption2.Unknownac = interruption.Unknownac;
                 areFile.interruptions.Add(interruption2);
             }
 
