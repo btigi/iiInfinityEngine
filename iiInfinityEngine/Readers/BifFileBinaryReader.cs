@@ -322,7 +322,8 @@ namespace iiInfinityEngine.Core.Readers
                 foreach (var ts in tileStructs)
                 {
                     br.BaseStream.Seek(ts.resourceOffset, SeekOrigin.Begin);
-                    var file = br.ReadBytes(ts.tileSize);
+                    var byteCount = ts.tileSize * ts.tileCount;
+                    var file = br.ReadBytes(byteCount);
                     using var ms = new MemoryStream(file);
                     KeyBifResource2 resource;
                     switch ((IEFileType)ts.resourceType)
@@ -331,8 +332,9 @@ namespace iiInfinityEngine.Core.Readers
                             try
                             {
                                 var tis = new TisFileBinaryReader();
-                                var tisfile = (TisFile)tis.Read(ms);
-                                resource = resources.Where(a => a.TileSetIndex == (ts.resourceLocator & ~0xFFF)).SingleOrDefault();
+                                tis.FromBiff = true;
+                                var tisfile = (TisFile)tis.Read(ms, true, ts.tileCount, ts.tileSize, 64);
+                                resource = resources.Where(a => a.TileSetIndex == ((ts.resourceLocator & 0x000FC000) >> 14)).SingleOrDefault();
                                 if (resource != null)
                                 {
                                     tisfile.Filename = resource.ResourceName + "." + resource.ResourceType;

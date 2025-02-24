@@ -11,31 +11,44 @@ namespace iiInfinityEngine.Core.Readers
 {
     public class TisFileBinaryReader : ITisFileReader
     {
+        public bool FromBiff = false;
+
         public TisFile Read(string filename)
         {
-            using FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
-            var f = Read(fs);
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var f = Read(fs, false, 0, 0, 0);
             f.Filename = Path.GetFileName(filename);
             return f;
         }
 
-        public TisFile Read(Stream s)
+        public TisFile Read(Stream s, bool fromBiff, int tileCount, int tileLength, int tileDimension)
         {
             using var br = new BinaryReader(s);
-            var tisFile = ParseFile(br);
+            var tisFile = ParseFile(br, fromBiff, tileCount, tileLength, tileDimension);
             br.BaseStream.Seek(0, SeekOrigin.Begin);
-            tisFile.OriginalFile = ParseFile(br);
+            tisFile.OriginalFile = ParseFile(br, fromBiff, tileCount, tileLength, tileDimension);
             return tisFile;
         }
 
-        private TisFile ParseFile(BinaryReader br)
+        private TisFile ParseFile(BinaryReader br, bool fromBiff, int tileCount, int tileLength, int tileDimension)
         {
-            var header = (TisHeaderBinary)Common.ReadStruct(br, typeof(TisHeaderBinary));
+            TisHeaderBinary header;
+            if (tileCount == 0)
+            {
+                header = (TisHeaderBinary)Common.ReadStruct(br, typeof(TisHeaderBinary));
+
+                if (header.ftype.ToString() != "TIS ")
+                    return new TisFile();
+            }
+            else
+            {
+                header.TileCount = tileCount;
+                header.TileLength = tileLength;
+                header.TileDimension = tileDimension;
+                header.TileOffset = 0;
+            }
+
             var streamReader = br;
-
-            if (header.ftype.ToString() != "TIS ")
-                return new TisFile();
-
             var palette = new List<TisPaletteBinary>();
             var tileDatas = new List<byte>();
 

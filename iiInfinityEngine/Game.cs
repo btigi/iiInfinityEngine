@@ -145,14 +145,14 @@ namespace iiInfinityEngine.Core
             int bifIndex = 0;
             foreach (var bif in files)
             {
-                var cdDir = GetDirectoryLocation(bif.Item1);
-                var bifName = Path.Combine(directory, cdDir, bif.Item1.Filename);
+                var cdDir = GetDirectoryLocation(bif.entry);
+                var bifName = Path.Combine(directory, cdDir, bif.entry.Filename);
                 if (File.Exists(bifName))
                 {
                     var bbr = new BifFileBinaryReader();
                     using var bifFileStream = new FileStream(bifName, FileMode.Open, FileAccess.Read);
                     bbr.TlkFile = Tlk;
-                    var bifFile = bbr.Read(bifFileStream, resources.Where(a => a.BifIndex == bif.Item2).ToList(), fileTypes);
+                    var bifFile = bbr.Read(bifFileStream, resources.Where(a => a.BifIndex == bif.index).ToList(), fileTypes);
                     Areas.AddRange(bifFile.areas);
                     Creatures.AddRange(bifFile.creatures);
                     Dialogs.AddRange(bifFile.dialogs);
