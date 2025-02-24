@@ -77,7 +77,7 @@ namespace iiInfinityEngine.Core.Files
         public Int32 XPReward { get; set; }
         public Int32 PowerLevel { get; set; }
         public Int32 Gold { get; set; }
-        public Int32 StatusFlags { get; set; } // state.ids
+        public Int32 StatusFlags { get; set; } //TODO:cre
         public Int16 CurrentHP { get; set; }
         public Int16 MaximumHP { get; set; }
         public Int32 Animation { get; set; }
@@ -126,21 +126,30 @@ namespace iiInfinityEngine.Core.Files
         public byte PickPockets { get; set; }
         public byte Fatigue { get; set; }
         public byte Intoxication { get; set; }
-        public byte Luck { get; set; }
-        public byte UnusedLargeSwords { get; set; }
-        public byte UnusedSmallSwords { get; set; }
-        public byte UnusedBows { get; set; }
-        public byte UnusedSpears { get; set; }
-        public byte UnusedBlunt { get; set; }
-        public byte UnusedSpiked { get; set; }
-        public byte UnusedAxe { get; set; }
-        public byte UnusedMissile { get; set; } //
-        public Int32 Unknownx1 { get; set; }
-        public Int32 Unknownx2 { get; set; }
-        public Int32 Unknownx3 { get; set; }
-        public byte Unknownx4 { get; set; }
+        public byte Luck { get; set; }        
+        public byte UnusedLargeSwordProficiency { get; set; }
+        public byte UnusedSmallSwordProficiency { get; set; }
+        public byte UnusedBowProficiency { get; set; }
+        public byte UnusedSpearProficiency { get; set; }
+        public byte UnusedBluntProficiency { get; set; }
+        public byte UnusedSpikedProficiency { get; set; }
+        public byte UnusedAxeProficiency { get; set; }
+        public byte UnusedMissileProficiency { get; set; }
+        public byte Unused1Proficiency { get; set; }
+        public byte Unused2Proficiency { get; set; }
+        public byte Unused3Proficiency { get; set; }
+        public byte Unused4Proficiency { get; set; }
+        public byte Unused5Proficiency { get; set; }
+        public byte Unused6Proficiency { get; set; }
+        public byte Unused7Proficiency { get; set; }
+        public byte NightmareMode { get; set; }
+        public byte Translucency { get; set; }
+        public byte ReputationKill { get; set; }
+        public byte ReputationJoin { get; set; }
+        public byte ReputationLeave { get; set; }
+        public byte TurnUndead { get; set; }
         public byte Tracking { get; set; }
-        public array32 Unknownx5 { get; set; }
+        public array32 TrackingTarget { get; set; }
         public IEString Strref1 { get; set; }
         public IEString Strref2 { get; set; }
         public IEString Strref3 { get; set; }
@@ -256,7 +265,7 @@ namespace iiInfinityEngine.Core.Files
         public byte MoraleBreak { get; set; }
         public byte RacialEnemy { get; set; }
         public Int16 MoraleRecoveryTime { get; set; }
-        public Int32 Kit { get; set; }
+        public Int32 Kit { get; set; } //TODO:cre
         public array8 ScriptOverride { get; set; }
         public array8 ScriptClass { get; set; }
         public array8 ScriptRace { get; set; }
@@ -294,7 +303,6 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public class CreatureFlags
     {
-        //A multiclass char is indicated is by the absence of any of the "original class" flags being set
         public bool ShowLongname { get; set; }
         public bool NoCorpse { get; set; }
         public bool KeepCorpse { get; set; }
@@ -309,10 +317,16 @@ namespace iiInfinityEngine.Core.Files
         public bool Exportable { get; set; }
         public bool HideInjuryStatus { get; set; }
         public bool QuestCritical { get; set; }
-        public bool CanActivateTriggers { get; set; }
+        public bool MovingBetweenAreas { get; set; }
         public bool BeenInParty { get; set; }
         public bool RestoreItem { get; set; }
         public bool ClearRestoreItem { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool PreventExplodingDeath { get; set; }
+        public bool Bit21 { get; set; }
+        public bool DoNotApplyNightmareModeModifiers { get; set; }
+        public bool NotTooltip { get; set; }
         public bool RandomWalkEa { get; set; }
         public bool RandomWalkGeneral { get; set; }
         public bool RandomWalkRace { get; set; }
@@ -342,7 +356,7 @@ namespace iiInfinityEngine.Core.Files
         public CreItem2 Quiver1 { get; set; }
         public CreItem2 Quiver2 { get; set; }
         public CreItem2 Quiver3 { get; set; }
-        public CreItem2 Unknown { get; set; }
+        public CreItem2 Quiver4 { get; set; }
         public CreItem2 Cloak { get; set; }
         public CreItem2 QuickItem1 { get; set; }
         public CreItem2 QuickItem2 { get; set; }
@@ -434,7 +448,7 @@ namespace iiInfinityEngine.Core.Files
         public Int16 Charges1 { get; set; }
         public Int16 Charges2 { get; set; }
         public Int16 Charges3 { get; set; }
-        public Int32 Flags { get; set; }//TODO: cre
+        public CreatureItemFlags Flags { get; set; }
     }
 
     [Serializable]
@@ -452,7 +466,34 @@ namespace iiInfinityEngine.Core.Files
         public bool IsStealable { get; set; }
         public bool IsStolen { get; set; }
         public bool IsDroppable { get; set; }
-        //TODO: cre
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
     }
 
     [Serializable]

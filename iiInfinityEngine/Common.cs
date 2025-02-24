@@ -205,10 +205,10 @@ namespace iiInfinityEngine.Core
             return x;
         }
 
-        public static bool IsNullOrEmpty(array8 value)
+        public static bool IsNullOrEmpty(array8? value)
         {
-            var x = value.ToString();
-            return x.Length == 0;
+            var x = value?.ToString();
+            return x == null || x?.Length == 0;
         }
     }
 

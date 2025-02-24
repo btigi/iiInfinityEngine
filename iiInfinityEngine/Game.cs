@@ -117,7 +117,7 @@ namespace iiInfinityEngine.Core
 
             var fileTypes = new List<IEFileType>() { resourceType };
             LoadResourcesFromBifs(gameDirectory, bifList, relevantResources, fileTypes);
-            LoadOverride(gameDirectory);
+            LoadOverride(gameDirectory, fileTypes);
         }
 
         public void LoadAllResources()
@@ -137,7 +137,7 @@ namespace iiInfinityEngine.Core
                                                      IEFileType.Tis };
 
             LoadResourcesFromBifs(gameDirectory, key.BifFiles, key.Resources, fileTypes);
-            LoadOverride(gameDirectory);
+            LoadOverride(gameDirectory, fileTypes);
         }
 
         private void LoadResourcesFromBifs(string directory, List<(KeyBifEntry2 entry, int index)> files, List<KeyBifResource2> resources, List<IEFileType> fileTypes)
@@ -171,9 +171,8 @@ namespace iiInfinityEngine.Core
             }
         }
 
-        private void LoadOverride(string directory)
+        private void LoadOverride(string directory, List<IEFileType> resourceTypes)
         {
-
             var dimensionalArrayReader = new DimensionalArrayFileReader();
             var areReader = new AreFileBinaryReader();
             var creReader = new CreFileBinaryReader();
@@ -187,62 +186,79 @@ namespace iiInfinityEngine.Core
             var vvcReader = new VvcFileBinaryReader();
             var wfxReader = new WfxFileBinaryReader();
             var tisReader = new TisFileBinaryReader();
+            var fileExtensions = resourceTypes.Select(s => $".{s.ToString().Replace("DimensionalArray", "2da").ToLower()}");
             foreach (var file in Directory.GetFiles(Path.Combine(directory, "override")))
             {
-                string extension = Path.GetExtension(file.ToLower());
+                var extension = Path.GetExtension(file.ToLower());
+                if (!fileExtensions.Contains(extension))
+                    continue;
+
                 switch (extension)
                 {
                     case ".2da":
                         var dimentionalArray = dimensionalArrayReader.Read(file);
                         dimentionalArray.Filename = file;
+                        DimensionalArrays.Add(dimentionalArray);
                         break;
                     case ".are":
                         var area = areReader.Read(file);
                         area.Filename = file;
+                        Areas.Add(area);
                         break;
                     case ".cre":
                         var creature = creReader.Read(file);
                         creature.Filename = file;
+                        Creatures.Add(creature);
                         break;
                     case ".dlg":
                         var dialog = dlgReader.Read(file);
                         dialog.Filename = file;
+                        Dialogs.Add(dialog);
                         break;
                     case ".eff":
                         var effect = effReader.Read(file);
                         effect.Filename = file;
+                        Effects.Add(effect);
                         break;
                     case ".ids":
                         var identifier = idsReader.Read(file);
                         identifier.Filename = file;
+                        Identifiers.Add(identifier);
                         break;
                     case ".itm":
                         var item = itmReader.Read(file);
                         item.Filename = file;
+                        Items.Add(item);
                         break;
                     case ".pro":
                         var projectile = proReader.Read(file);
                         projectile.Filename = file;
+                        Projectiles.Add(projectile);
                         break;
                     case ".spl":
                         var spell = splReader.Read(file);
                         spell.Filename = file;
+                        Spells.Add(spell);
                         break;
                     case ".sto":
                         var store = stoReader.Read(file);
                         store.Filename = file;
+                        Stores.Add(store);
                         break;
                     case ".vvc":
                         var visualEffect = vvcReader.Read(file);
                         visualEffect.Filename = file;
+                        VisualEffects.Add(visualEffect);
                         break;
                     case ".wfx":
                         var wavEffect = wfxReader.Read(file);
                         wavEffect.Filename = file;
+                        Wfxs.Add(wavEffect);
                         break;
                     case ".tis":
                         var tileset = tisReader.Read(file);
                         tileset.Filename = file;
+                        Tilesets.Add(tileset);
                         break;
                 }
             }

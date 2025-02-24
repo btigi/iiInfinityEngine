@@ -72,12 +72,21 @@ namespace iiInfinityEngine.Core.Binary
         public byte UnusedSpiked { get; set; }
         public byte UnusedAxe { get; set; }
         public byte UnusedMissile { get; set; }       
-        public Int32 Unknownx1 { get; set; }
-        public Int32 Unknownx2 { get; set; }
-        public Int32 Unknownx3 { get; set; }
-        public byte Unknownx4 { get; set; }
+        public byte Unused1Proficiency { get; set; }
+        public byte Unused2Proficiency { get; set; }
+        public byte Unused3Proficiency { get; set; }
+        public byte Unused4Proficiency { get; set; }
+        public byte Unused5Proficiency { get; set; }
+        public byte Unused6Proficiency { get; set; }
+        public byte Unused7Proficiency { get; set; }
+        public byte NightmareMode { get; set; }
+        public byte Translucency { get; set; }
+        public byte ReputationKill { get; set; }
+        public byte ReputationJoin { get; set; }
+        public byte ReputationLeave { get; set; }
+        public byte TurnUndead { get; set; }
         public byte Tracking { get; set; }
-        public array32 Unknownx5 { get; set; }
+        public array32 TrackingTarget { get; set; }
         public Int32 Strref1 { get; set; }
         public Int32 Strref2 { get; set; }
         public Int32 Strref3 { get; set; }

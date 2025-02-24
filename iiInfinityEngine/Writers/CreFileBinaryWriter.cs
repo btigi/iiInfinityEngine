@@ -129,7 +129,7 @@ namespace iiInfinityEngine.Core.Writers
 
             short itemCount = 0;
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Helmet.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Helmet?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Helmet.Charges1;
@@ -138,14 +138,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Helmet.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Helmet.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Helmet.Filename;
-                itemBinary.Flags = creFile.Items.Helmet.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Helmet.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[0] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Armor.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Armor?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Armor.Charges1;
@@ -154,14 +154,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Armor.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Armor.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Armor.Filename;
-                itemBinary.Flags = creFile.Items.Armor.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Armor.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[1] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Shield.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Shield?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Shield.Charges1;
@@ -170,14 +170,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Shield.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Shield.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Shield.Filename;
-                itemBinary.Flags = creFile.Items.Shield.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Shield.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[2] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Gloves.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Gloves?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Gloves.Charges1;
@@ -186,14 +186,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Gloves.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Gloves.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Gloves.Filename;
-                itemBinary.Flags = creFile.Items.Gloves.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Gloves.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[3] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.RingLeft.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.RingLeft?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.RingLeft.Charges1;
@@ -202,14 +202,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.RingLeft.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.RingLeft.ExpiryValue;
                 itemBinary.Filename = creFile.Items.RingLeft.Filename;
-                itemBinary.Flags = creFile.Items.RingLeft.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.RingLeft.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[4] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.RingRight.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.RingRight?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.RingRight.Charges1;
@@ -218,15 +218,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.RingRight.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.RingRight.ExpiryValue;
                 itemBinary.Filename = creFile.Items.RingRight.Filename;
-                itemBinary.Flags = creFile.Items.RingRight.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.RingRight.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[5] = itemCount;
                 itemCount++;
             }
 
-
-            if (!array8.IsNullOrEmpty(creFile.Items.Amulet.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Amulet?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Amulet.Charges1;
@@ -235,14 +234,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Amulet.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Amulet.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Amulet.Filename;
-                itemBinary.Flags = creFile.Items.Amulet.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Amulet.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[6] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Belt.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Belt?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Belt.Charges1;
@@ -251,14 +250,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Belt.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Belt.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Belt.Filename;
-                itemBinary.Flags = creFile.Items.Amulet.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Belt.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[7] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Boots.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Boots?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Boots.Charges1;
@@ -267,14 +266,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Boots.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Boots.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Boots.Filename;
-                itemBinary.Flags = creFile.Items.Boots.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Boots.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[8] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Weapon1.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Weapon1?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Weapon1.Charges1;
@@ -283,14 +282,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Weapon1.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Weapon1.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Weapon1.Filename;
-                itemBinary.Flags = creFile.Items.Weapon1.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Weapon1.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[9] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Weapon2.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Weapon2?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Weapon2.Charges1;
@@ -299,14 +298,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Weapon2.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Weapon2.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Weapon2.Filename;
-                itemBinary.Flags = creFile.Items.Weapon2.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Weapon2.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[10] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Weapon3.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Weapon3?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Weapon3.Charges1;
@@ -315,14 +314,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Weapon3.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Weapon3.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Weapon3.Filename;
-                itemBinary.Flags = creFile.Items.Weapon3.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Weapon3.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[11] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Weapon4.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Weapon4?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Weapon4.Charges1;
@@ -331,14 +330,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Weapon4.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Weapon4.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Weapon4.Filename;
-                itemBinary.Flags = creFile.Items.Weapon4.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Weapon4.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[12] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Quiver1.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Quiver1?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Quiver1.Charges1;
@@ -347,14 +346,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Quiver1.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Quiver1.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Quiver1.Filename;
-                itemBinary.Flags = creFile.Items.Quiver1.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Quiver1.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[13] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Quiver2.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Quiver2?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Quiver2.Charges1;
@@ -363,14 +362,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Quiver2.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Quiver2.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Quiver2.Filename;
-                itemBinary.Flags = creFile.Items.Quiver2.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Quiver2.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[14] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Quiver3.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Quiver3?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Quiver3.Charges1;
@@ -379,30 +378,30 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Quiver3.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Quiver3.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Quiver3.Filename;
-                itemBinary.Flags = creFile.Items.Quiver3.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Quiver3.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[15] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Unknown.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Quiver4?.Filename))
             {
                 var itemBinary = new CreItemBinary();
-                itemBinary.Charges1 = creFile.Items.Unknown.Charges1;
-                itemBinary.Charges2 = creFile.Items.Unknown.Charges2;
-                itemBinary.Charges3 = creFile.Items.Unknown.Charges3;
-                itemBinary.ExpiryHour = creFile.Items.Unknown.ExpiryHour;
-                itemBinary.ExpiryValue = creFile.Items.Unknown.ExpiryValue;
-                itemBinary.Filename = creFile.Items.Unknown.Filename;
-                itemBinary.Flags = creFile.Items.Unknown.Flags;
+                itemBinary.Charges1 = creFile.Items.Quiver4.Charges1;
+                itemBinary.Charges2 = creFile.Items.Quiver4.Charges2;
+                itemBinary.Charges3 = creFile.Items.Quiver4.Charges3;
+                itemBinary.ExpiryHour = creFile.Items.Quiver4.ExpiryHour;
+                itemBinary.ExpiryValue = creFile.Items.Quiver4.ExpiryValue;
+                itemBinary.Filename = creFile.Items.Quiver4.Filename;
+                itemBinary.Flags = ItemFlags(creFile.Items.Quiver4.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[16] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.Cloak.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.Cloak?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.Cloak.Charges1;
@@ -411,62 +410,62 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.Cloak.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.Cloak.ExpiryValue;
                 itemBinary.Filename = creFile.Items.Cloak.Filename;
-                itemBinary.Flags = creFile.Items.Cloak.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.Cloak.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[17] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.QuickItem1.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.QuickItem1?.Filename))
             {
                 var itemBinary = new CreItemBinary();
-                itemBinary.Charges1 = creFile.Items.Amulet.Charges1;
-                itemBinary.Charges2 = creFile.Items.Amulet.Charges2;
-                itemBinary.Charges3 = creFile.Items.Amulet.Charges3;
-                itemBinary.ExpiryHour = creFile.Items.Amulet.ExpiryHour;
-                itemBinary.ExpiryValue = creFile.Items.Amulet.ExpiryValue;
-                itemBinary.Filename = creFile.Items.Amulet.Filename;
-                itemBinary.Flags = creFile.Items.Amulet.Flags;
+                itemBinary.Charges1 = creFile.Items.QuickItem1.Charges1;
+                itemBinary.Charges2 = creFile.Items.QuickItem1.Charges2;
+                itemBinary.Charges3 = creFile.Items.QuickItem1.Charges3;
+                itemBinary.ExpiryHour = creFile.Items.QuickItem1.ExpiryHour;
+                itemBinary.ExpiryValue = creFile.Items.QuickItem1.ExpiryValue;
+                itemBinary.Filename = creFile.Items.QuickItem1.Filename;
+                itemBinary.Flags = ItemFlags(creFile.Items.QuickItem1.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[18] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.QuickItem2.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.QuickItem2?.Filename))
             {
                 var itemBinary = new CreItemBinary();
-                itemBinary.Charges1 = creFile.Items.Amulet.Charges1;
-                itemBinary.Charges2 = creFile.Items.Amulet.Charges2;
-                itemBinary.Charges3 = creFile.Items.Amulet.Charges3;
-                itemBinary.ExpiryHour = creFile.Items.Amulet.ExpiryHour;
-                itemBinary.ExpiryValue = creFile.Items.Amulet.ExpiryValue;
-                itemBinary.Filename = creFile.Items.Amulet.Filename;
-                itemBinary.Flags = creFile.Items.Amulet.Flags;
+                itemBinary.Charges1 = creFile.Items.QuickItem2.Charges1;
+                itemBinary.Charges2 = creFile.Items.QuickItem2.Charges2;
+                itemBinary.Charges3 = creFile.Items.QuickItem2.Charges3;
+                itemBinary.ExpiryHour = creFile.Items.QuickItem2.ExpiryHour;
+                itemBinary.ExpiryValue = creFile.Items.QuickItem2.ExpiryValue;
+                itemBinary.Filename = creFile.Items.QuickItem2.Filename;
+                itemBinary.Flags = ItemFlags(creFile.Items.QuickItem2.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[19] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.QuickItem3.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.QuickItem3?.Filename))
             {
                 var itemBinary = new CreItemBinary();
-                itemBinary.Charges1 = creFile.Items.Amulet.Charges1;
-                itemBinary.Charges2 = creFile.Items.Amulet.Charges2;
-                itemBinary.Charges3 = creFile.Items.Amulet.Charges3;
-                itemBinary.ExpiryHour = creFile.Items.Amulet.ExpiryHour;
-                itemBinary.ExpiryValue = creFile.Items.Amulet.ExpiryValue;
-                itemBinary.Filename = creFile.Items.Amulet.Filename;
-                itemBinary.Flags = creFile.Items.Amulet.Flags;
+                itemBinary.Charges1 = creFile.Items.QuickItem3.Charges1;
+                itemBinary.Charges2 = creFile.Items.QuickItem3.Charges2;
+                itemBinary.Charges3 = creFile.Items.QuickItem3.Charges3;
+                itemBinary.ExpiryHour = creFile.Items.QuickItem3.ExpiryHour;
+                itemBinary.ExpiryValue = creFile.Items.QuickItem3.ExpiryValue;
+                itemBinary.Filename = creFile.Items.QuickItem3.Filename;
+                itemBinary.Flags = ItemFlags(creFile.Items.QuickItem3.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[20] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem1.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem1?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem1.Charges1;
@@ -475,14 +474,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem1.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem1.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem1.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem1.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem1.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[21] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem2.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem2?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem2.Charges1;
@@ -491,14 +490,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem2.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem2.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem2.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem2.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem2.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[22] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem3.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem3?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem3.Charges1;
@@ -507,14 +506,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem3.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem3.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem3.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem3.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem3.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[23] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem4.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem4?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem4.Charges1;
@@ -523,14 +522,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem4.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem4.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem4.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem4.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem4.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[24] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem5.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem5?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem5.Charges1;
@@ -539,14 +538,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem5.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem5.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem5.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem5.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem5.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[25] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem6.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem6?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem6.Charges1;
@@ -555,14 +554,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem6.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem6.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem6.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem6.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem6.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[26] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem7.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem7?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem7.Charges1;
@@ -571,14 +570,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem7.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem7.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem7.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem7.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem7.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[27] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem8.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem8?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem8.Charges1;
@@ -587,14 +586,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem8.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem8.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem8.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem8.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem8.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[28] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem9.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem9?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem9.Charges1;
@@ -603,14 +602,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem9.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem9.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem9.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem9.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem9.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[29] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem10.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem10?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem10.Charges1;
@@ -619,14 +618,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem10.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem10.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem10.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem10.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem10.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[30] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem11.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem11?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem11.Charges1;
@@ -635,14 +634,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem11.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem11.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem11.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem11.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem11.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[31] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem12.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem12?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem12.Charges1;
@@ -651,14 +650,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem12.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem12.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem12.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem12.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem12.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[32] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem13.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem13?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem13.Charges1;
@@ -667,14 +666,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem13.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem13.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem13.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem13.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem13.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[33] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem14.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem14?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem14.Charges1;
@@ -683,14 +682,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem14.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem14.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem14.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem14.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem14.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[34] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem15.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem15?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem15.Charges1;
@@ -699,14 +698,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem15.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem15.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem15.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem15.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem15.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[35] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem16.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.InventoryItem16?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.InventoryItem16.Charges1;
@@ -715,14 +714,14 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.InventoryItem16.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.InventoryItem16.ExpiryValue;
                 itemBinary.Filename = creFile.Items.InventoryItem16.Filename;
-                itemBinary.Flags = creFile.Items.InventoryItem16.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.InventoryItem16.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[36] = itemCount;
                 itemCount++;
             }
 
-            if (!array8.IsNullOrEmpty(creFile.Items.MagicWeapon.Filename))
+            if (!array8.IsNullOrEmpty(creFile.Items.MagicWeapon?.Filename))
             {
                 var itemBinary = new CreItemBinary();
                 itemBinary.Charges1 = creFile.Items.MagicWeapon.Charges1;
@@ -731,7 +730,7 @@ namespace iiInfinityEngine.Core.Writers
                 itemBinary.ExpiryHour = creFile.Items.MagicWeapon.ExpiryHour;
                 itemBinary.ExpiryValue = creFile.Items.MagicWeapon.ExpiryValue;
                 itemBinary.Filename = creFile.Items.MagicWeapon.Filename;
-                itemBinary.Flags = creFile.Items.MagicWeapon.Flags;
+                itemBinary.Flags = ItemFlags(creFile.Items.MagicWeapon.Flags);
 
                 creItems.Add(itemBinary);
                 creItemSlots[37] = itemCount;
@@ -1220,7 +1219,6 @@ namespace iiInfinityEngine.Core.Writers
             }
 
             var header = new CreHeaderBinary();
-
             header.Flags = creFile.Flags.ShowLongname ? header.Flags | Common.Bit0 : header.Flags;
             header.Flags = creFile.Flags.NoCorpse ? header.Flags | Common.Bit1 : header.Flags;
             header.Flags = creFile.Flags.KeepCorpse ? header.Flags | Common.Bit2 : header.Flags;
@@ -1229,19 +1227,22 @@ namespace iiInfinityEngine.Core.Writers
             header.Flags = creFile.Flags.OriginalCleric ? header.Flags | Common.Bit5 : header.Flags;
             header.Flags = creFile.Flags.OriginalThief ? header.Flags | Common.Bit6 : header.Flags;
             header.Flags = creFile.Flags.OriginalDruid ? header.Flags | Common.Bit7 : header.Flags;
-
             header.Flags = creFile.Flags.OriginalRanger ? header.Flags | Common.Bit8 : header.Flags;
             header.Flags = creFile.Flags.FallenPaladin ? header.Flags | Common.Bit9 : header.Flags;
             header.Flags = creFile.Flags.FallenRanger ? header.Flags | Common.Bit10 : header.Flags;
             header.Flags = creFile.Flags.Exportable ? header.Flags | Common.Bit11 : header.Flags;
             header.Flags = creFile.Flags.HideInjuryStatus ? header.Flags | Common.Bit12 : header.Flags;
             header.Flags = creFile.Flags.QuestCritical ? header.Flags | Common.Bit13 : header.Flags;
-            header.Flags = creFile.Flags.CanActivateTriggers ? header.Flags | Common.Bit14 : header.Flags;
+            header.Flags = creFile.Flags.MovingBetweenAreas ? header.Flags | Common.Bit14 : header.Flags;
             header.Flags = creFile.Flags.BeenInParty ? header.Flags | Common.Bit15 : header.Flags;
-
             header.Flags = creFile.Flags.RestoreItem ? header.Flags | Common.Bit16 : header.Flags;
             header.Flags = creFile.Flags.ClearRestoreItem ? header.Flags | Common.Bit17 : header.Flags;
-            // TODO:cre
+            header.Flags = creFile.Flags.Bit18 ? header.Flags | Common.Bit18 : header.Flags;
+            header.Flags = creFile.Flags.Bit19 ? header.Flags | Common.Bit19 : header.Flags;
+            header.Flags = creFile.Flags.PreventExplodingDeath ? header.Flags | Common.Bit20 : header.Flags;
+            header.Flags = creFile.Flags.Bit21 ? header.Flags | Common.Bit21 : header.Flags;
+            header.Flags = creFile.Flags.DoNotApplyNightmareModeModifiers ? header.Flags | Common.Bit22 : header.Flags;
+            header.Flags = creFile.Flags.NotTooltip ? header.Flags | Common.Bit23 : header.Flags;
             header.Flags = creFile.Flags.RandomWalkEa ? header.Flags | Common.Bit24 : header.Flags;
             header.Flags = creFile.Flags.RandomWalkGender ? header.Flags | Common.Bit25 : header.Flags;
             header.Flags = creFile.Flags.RandomWalkRace ? header.Flags | Common.Bit26 : header.Flags;
@@ -1250,7 +1251,6 @@ namespace iiInfinityEngine.Core.Writers
             header.Flags = creFile.Flags.RandomWalkGender ? header.Flags | Common.Bit29 : header.Flags;
             header.Flags = creFile.Flags.RandomWalkAlignment ? header.Flags | Common.Bit30 : header.Flags;
             header.Flags = creFile.Flags.UnInterruptable ? header.Flags | Common.Bit31 : header.Flags;
-
             header.ftype = new array4() { character1 = 'C', character2 = 'R', character3 = 'E', character4 = ' ' };
             header.fversion = new array4() { character1 = 'V', character2 = '1', character3 = '.', character4 = '0' };
             header.AcidResistance = creFile.AcidResistance;
@@ -1443,23 +1443,23 @@ namespace iiInfinityEngine.Core.Writers
             header.Strref100 = Common.WriteString(creFile.Strref100, TlkFile);
             header.Thac0 = creFile.Thac0;
             header.Tracking = creFile.Tracking;
-            header.Unknownx1 = creFile.Unknownx1;
-            header.Unknownx2 = creFile.Unknownx2;
-            header.Unknownx3 = creFile.Unknownx3;
-            header.Unknownx4 = creFile.Unknownx4;
-            header.Unknownx5 = creFile.Unknownx5;
-            header.UnusedAxe = creFile.UnusedAxe;
-            header.UnusedBlunt = creFile.UnusedBlunt;
-            header.UnusedBows = creFile.UnusedBows;
-            header.UnusedLargeSwords = creFile.UnusedLargeSwords;
-            header.UnusedMissile = creFile.UnusedMissile;
-            header.UnusedSmallSwords = creFile.UnusedSmallSwords;
-            header.UnusedSpears = creFile.UnusedSpears;
-            header.UnusedSpiked = creFile.UnusedSpiked;
+            header.Unused1Proficiency = creFile.Unused1Proficiency;
+            header.Unused2Proficiency = creFile.Unused2Proficiency;
+            header.Unused3Proficiency = creFile.Unused3Proficiency;
+            header.Unused4Proficiency = creFile.Unused4Proficiency;
+            header.Unused5Proficiency = creFile.Unused5Proficiency;
+            header.Unused6Proficiency = creFile.Unused6Proficiency;
+            header.Unused7Proficiency = creFile.Unused7Proficiency;
+            header.UnusedAxe = creFile.UnusedAxeProficiency;
+            header.UnusedBlunt = creFile.UnusedBluntProficiency;
+            header.UnusedBows = creFile.UnusedBowProficiency;
+            header.UnusedLargeSwords = creFile.UnusedLargeSwordProficiency;
+            header.UnusedMissile = creFile.UnusedMissileProficiency;
+            header.UnusedSmallSwords = creFile.UnusedSmallSwordProficiency;
+            header.UnusedSpears = creFile.UnusedSpearProficiency;
+            header.UnusedSpiked = creFile.UnusedSpikedProficiency;
             header.Wisdom = creFile.Wisdom;
             header.XPReward = creFile.XPReward;
-
-
             header.KnownSpellsCount = creKnownSpells.Count;
             header.KnownSpellsoffset = HeaderSize;
 
@@ -1550,6 +1550,44 @@ namespace iiInfinityEngine.Core.Writers
             bw.BaseStream.CopyTo(fs);
             fs.Flush(flushToDisk: true);
             return true;
+        }
+
+        private int ItemFlags(CreatureItemFlags flags)
+        {
+            var result = 0;
+            result = flags.IsIdentified ? result | Common.Bit0 : result;
+            result = flags.IsStealable ? result | Common.Bit1 : result;
+            result = flags.IsStealable ? result | Common.Bit2 : result;
+            result = flags.IsDroppable ? result | Common.Bit3 : result;
+            result = flags.Bit4 ? result | Common.Bit4 : result;
+            result = flags.Bit5 ? result | Common.Bit5 : result;
+            result = flags.Bit6 ? result | Common.Bit6 : result;
+            result = flags.Bit7 ? result | Common.Bit7 : result;
+            result = flags.Bit8 ? result | Common.Bit8 : result;
+            result = flags.Bit9 ? result | Common.Bit9 : result;
+            result = flags.Bit10 ? result | Common.Bit10 : result;
+            result = flags.Bit11 ? result | Common.Bit11 : result;
+            result = flags.Bit12 ? result | Common.Bit12 : result;
+            result = flags.Bit13 ? result | Common.Bit13 : result;
+            result = flags.Bit14 ? result | Common.Bit14 : result;
+            result = flags.Bit15 ? result | Common.Bit15 : result;
+            result = flags.Bit16 ? result | Common.Bit16 : result;
+            result = flags.Bit17 ? result | Common.Bit17 : result;
+            result = flags.Bit18 ? result | Common.Bit18 : result;
+            result = flags.Bit19 ? result | Common.Bit19 : result;
+            result = flags.Bit20 ? result | Common.Bit20 : result;
+            result = flags.Bit21 ? result | Common.Bit21 : result;
+            result = flags.Bit22 ? result | Common.Bit22 : result;
+            result = flags.Bit23 ? result | Common.Bit23 : result;
+            result = flags.Bit24 ? result | Common.Bit24 : result;
+            result = flags.Bit25 ? result | Common.Bit25 : result;
+            result = flags.Bit26 ? result | Common.Bit26 : result;
+            result = flags.Bit27 ? result | Common.Bit27 : result;
+            result = flags.Bit28 ? result | Common.Bit28 : result;
+            result = flags.Bit29 ? result | Common.Bit29 : result;
+            result = flags.Bit30 ? result | Common.Bit30 : result;
+            result = flags.Bit31 ? result | Common.Bit31 : result;
+            return result;
         }
     }
 }
