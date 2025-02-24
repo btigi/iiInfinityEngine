@@ -202,7 +202,7 @@ namespace iiInfinityEngine.Core.Binary
         public byte MoraleBreak { get; set; }
         public byte RacialEnemy { get; set; }
         public Int16 MoraleRecoveryTime { get; set; }
-        public Int32 Kit { get; set; }
+        public UInt32 Kit { get; set; }
         public array8 ScriptOverride { get; set; }
         public array8 ScriptClass { get; set; }
         public array8 ScriptRace { get; set; }

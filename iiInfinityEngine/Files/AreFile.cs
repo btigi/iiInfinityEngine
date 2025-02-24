@@ -37,7 +37,7 @@ namespace iiInfinityEngine.Core.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
-        public array8 AreaWED { get; set; }
+        public array8 AreaWed { get; set; }
         public Int32 LastSaved { get; set; }
         public AreaFlags AreaFlags;
         public array8 AreaToTheNorth { get; set; }
@@ -48,10 +48,10 @@ namespace iiInfinityEngine.Core.Files
         public AreaLinkFlags AreaToTheSouthFlags;
         public array8 AreaToTheWest { get; set; }
         public AreaLinkFlags AreaToTheWestFlags;
-        public AreaTypeFlags AreaTypeFlags;
+        public AreaTypeFlags AreaTypeFlags; //TODO:are
         public Int16 WeatherProbabilityRain { get; set; }
         public Int16 WeatherProbabilitySnow { get; set; }
-        public Int16 WeatherProbabilityFog { get; set; }// - not implemented 
+        public Int16 WeatherProbabilityFog { get; set; }
         public Int16 WeatherProbabilityLightning { get; set; }
         public Int16 OverlayTransparency { get; set; }
         public Int32 VertexOffset { get; set; }
@@ -63,7 +63,7 @@ namespace iiInfinityEngine.Core.Files
         public Int32 ExploredBitmaskOffset { get; set; }
         public array8 RestMovieDay { get; set; }
         public array8 RestMovieNight { get; set; }
-        public array56 Unknown7 { get; set; }
+        public array56 Unknowne4 { get; set; }
     }
 
     [Serializable]
@@ -74,16 +74,16 @@ namespace iiInfinityEngine.Core.Files
         public Int16 CurrentYCoordinate { get; set; }
         public Int16 DestinationXCoordinate { get; set; }
         public Int16 DestinationYCoordinate { get; set; }
-        public ActorFlags ActorFlags;
+        public ActorFlags ActorFlags; //TODO:are
         public Int16 HasBeenSpawned { get; set; }
         public byte FilenameInitialCharacter { get; set; }
-        public byte Unknown { get; set; }
+        public byte Unknownef { get; set; }
         public Int32 ActorAnimation { get; set; }
-        public Int32 ActorOrientation { get; set; }
+        public Int32 ActorOrientation { get; set; } //TODO:are - int16, with another int16 (unknown36) after it
         public Int32 ActorRemovalTimer { get; set; }
         public Int16 MovementRestrictionDistance { get; set; }
         public Int16 MovementRestrictionDistanceMoveToObject { get; set; }
-        public Int32 ActorAppearenceSchedule { get; set; }
+        public Int32 ActorAppearenceSchedule { get; set; } //TODO:are
         //bit 23 = 23:30 to 00:29
         //bit 22 = 22:30 to 23:29
         //bit 21 = 21:30 to 22:29 (Night)
@@ -119,13 +119,13 @@ namespace iiInfinityEngine.Core.Files
         public array8 CREFile { get; set; }
         public Int32 CreOffset { get; set; }
         public Int32 CreSize { get; set; }
-        public array128 Unknown2 { get; set; }
+        public array128 Unknown90 { get; set; }
     }
 
     [Serializable]
     public struct AreRegion2
     {
-        public array32 Name { get; set; }
+        public array32 Name { get; set; } //TODO:are
         public RegionType RegionType { get; set; }
         public Int16 BoundingBoxLeft { get; set; }
         public Int16 BoundingBoxTop { get; set; }
@@ -137,7 +137,7 @@ namespace iiInfinityEngine.Core.Files
         public Int32 Cursor { get; set; }
         public array8 DestinationArea { get; set; }
         public array32 DestinationEntrance { get; set; }
-        public RegionFlags Flags;
+        public RegionFlags Flags; //TODO:are
         public IEString InformationText { get; set; }
         public Int16 TrapDetectionDifficulty { get; set; }
         public Int16 TrapRemovalDifficulty { get; set; }
@@ -149,8 +149,8 @@ namespace iiInfinityEngine.Core.Files
         public array8 RegionScript { get; set; }
         public Int16 AlternativeUsePointXCoordinate { get; set; }
         public Int16 AlternativeUsePointYCoordinate { get; set; }
-        public Int32 Unknown2 { get; set; }
-        public array32 Unknown3 { get; set; }
+        public Int32 Unknown2 { get; set; } //TODO:are
+        public array32 Unknown3 { get; set; } //TODO:are
         public array8 Sound { get; set; }
         public Int16 TalkLocationXCoordinate { get; set; }
         public Int16 TalkLocationYCoordinate { get; set; }
@@ -177,7 +177,7 @@ namespace iiInfinityEngine.Core.Files
         public Int16 CreatureSpawnCount { get; set; }
         public Int16 BaseCreatureNumberToSpawn { get; set; }
         public Int16 Frequency { get; set; }
-        public Int16 SpawnMethod { get; set; }
+        public Int16 SpawnMethod { get; set; } //TODO:are
         //Bit 0: If Bit 2 is set, don't spawn
         //Bit 1: One-time-spawnpoint (checked for after the spawning, and disables the spawn point if set)
         //Bit 2: Used internally to disable the spawn point temporarily
@@ -189,7 +189,7 @@ namespace iiInfinityEngine.Core.Files
         public Int16 MovementRestrictionDistanceToObject { get; set; }
         public Int16 MaximumCreaturesToSpawn { get; set; }
         public Int16 Enabled { get; set; }
-        public Int32 SpawnPointAppearenceSchedule { get; set; }
+        public Int32 SpawnPointAppearenceSchedule { get; set; } //TODO:are
         //bit 23 = 23:30 to 00:29
         //bit 22 = 22:30 to 23:29
         //bit 21 = 21:30 to 22:29 (Night)
@@ -228,7 +228,7 @@ namespace iiInfinityEngine.Core.Files
         public byte SpawnWeight8 { get; set; }
         public byte SpawnWeight9 { get; set; }
         public byte SpawnWeight10 { get; set; }
-        public array38 Unknown { get; set; }
+        public array38 Unknown { get; set; } //TODO:are
     }
 
     [Serializable]
@@ -238,20 +238,20 @@ namespace iiInfinityEngine.Core.Files
         public Int16 XCoordinate { get; set; }
         public Int16 YCoordinate { get; set; }
         public Int16 Orientation { get; set; }
-        public array66 Unknown { get; set; }
+        public array66 Unknown { get; set; } //TODO:are
     }
 
     [Serializable]
     public class AreContainer2
     {
-        public List<AreItem2> items = new List<AreItem2>();
+        public List<AreItem2> items = [];
 
         public array32 Name { get; set; }
         public Int16 XCoordinate { get; set; }
         public Int16 YCoordinate { get; set; }
         public ContainerType ContainerType { get; set; }
         public Int16 LockDifficulty { get; set; }
-        public ContainerFlags Flags;
+        public ContainerFlags Flags;//TODO:are
         public Int16 TrapDetectionDifficulty { get; set; }
         public Int16 TrapRemovalDifficulty { get; set; }
         public Int16 IsTrap { get; set; }
@@ -270,7 +270,7 @@ namespace iiInfinityEngine.Core.Files
         public array8 KeyItem { get; set; }
         public Int32 BreakDifficulty { get; set; }
         public IEString LockpickString { get; set; }
-        public array56 Unknown3 { get; set; }
+        public array56 Unknown3 { get; set; }//TODO:are
     }
 
     [Serializable]
@@ -281,7 +281,7 @@ namespace iiInfinityEngine.Core.Files
         public Int16 Charges1 { get; set; }
         public Int16 Charges2 { get; set; }
         public Int16 Charges3 { get; set; }
-        public AreaItemFlags Flags;
+        public AreaItemFlags Flags;//TODO:are
     }
 
     [Serializable]
@@ -306,12 +306,12 @@ namespace iiInfinityEngine.Core.Files
         public array8 Resref9 { get; set; }
         public array8 Resref10 { get; set; }
         public Int16 ResRefCount { get; set; }
-        public Int16 Unknown2 { get; set; }
+        public Int16 Unknown2 { get; set; } //TODO:are
         public Int32 FrequencyBase { get; set; }
         public Int32 FrequencyVariation { get; set; }
-        public Int32 AmbientAppearenceSchedule { get; set; }
-        public Int32 Flags { get; set; }
-        public array64 Unknown3 { get; set; }
+        public Int32 AmbientAppearenceSchedule { get; set; } //TODO:are
+        public Int32 Flags { get; set; } //TODO:are
+        public array64 Unknown3 { get; set; } //TODO:are
     }
 
     [Serializable]
@@ -331,7 +331,7 @@ namespace iiInfinityEngine.Core.Files
     {
         public array32 Name { get; set; }
         public array8 DoorId { get; set; }
-        public Int32 Flags { get; set; }
+        public Int32 Flags { get; set; } //TODO:are
         //bit 0: Door open
         //bit 1: Door locked
         //bit 2: Reset trap
@@ -383,20 +383,20 @@ namespace iiInfinityEngine.Core.Files
         public array24 TravelTriggerName { get; set; }
         public IEString DialogName { get; set; }
         public array8 DialogResref { get; set; }
-        public array8 Unknown { get; set; }
+        public array8 Unknown { get; set; } //TODO:are
     }
 
     [Serializable]
     public struct AreAnimation2
     {
-        public array32 Name { get; set; }
+        public array32 Name { get; set; } //TODO:are here and below
         public Int16 XCoordinate { get; set; }
         public Int16 YCoordinate { get; set; }
-        public Int32 AnimationAppearenceSchedule { get; set; }
+        public Int32 AnimationAppearenceSchedule { get; set; } //TODO:are
         public array8 BamAnimation { get; set; }
         public Int16 BamSequence { get; set; }
         public Int16 BamFrame { get; set; }
-        public Int32 Flags { get; set; }
+        public Int32 Flags { get; set; } //TODO:are
         public Int16 Height { get; set; }
         public Int16 Transparency { get; set; }
         public Int16 StartFrame { get; set; }
@@ -414,8 +414,8 @@ namespace iiInfinityEngine.Core.Files
         public Int16 YCoordinate { get; set; }
         public IEString Text { get; set; }
         public Int16 Location { get; set; }
-        public Int16 Colour { get; set; }
-        public array36 Unknown { get; set; }
+        public Int16 Colour { get; set; } //TODO:are
+        public array36 Unknown { get; set; } //TODO:are
     }
 
     [Serializable]
@@ -423,12 +423,12 @@ namespace iiInfinityEngine.Core.Files
     {
         public array32 Name { get; set; }
         public array8 TileId { get; set; }
-        public Int32 Flags { get; set; }
+        public Int32 Flags { get; set; } //TODO:are
         public Int32 OpenSearchOffset { get; set; }
         public Int16 OpenSearchCount { get; set; }
         public Int16 ClosedSearchCount { get; set; }
         public Int32 ClosedSearchOffset { get; set; }
-        public array48 Unknown { get; set; }
+        public array48 Unknown { get; set; } //TODO:are
     }
 
     [Serializable]
@@ -467,23 +467,23 @@ namespace iiInfinityEngine.Core.Files
         public array8 NightAmbient2Wav { get; set; }
         public Int32 NightAmbientVolume { get; set; }
         public Int32 Reverb { get; set; }
-        public array60 Unknown { get; set; }
+        public array60 Unknown { get; set; } //TODO:are
     }
 
     [Serializable]
     public struct AreInterruption2
     {
         public array32 Name { get; set; }
-        public Int32 Text1 { get; set; }
-        public Int32 Text2 { get; set; }
-        public Int32 Text3 { get; set; }
-        public Int32 Text4 { get; set; }
-        public Int32 Text5 { get; set; }
-        public Int32 Text6 { get; set; }
-        public Int32 Text7 { get; set; }
-        public Int32 Text8 { get; set; }
-        public Int32 Text9 { get; set; }
-        public Int32 Text10 { get; set; }
+        public Int32 Text1 { get; set; } //TODO:are strref
+        public Int32 Text2 { get; set; } //TODO:are strref
+        public Int32 Text3 { get; set; } //TODO:are strref
+        public Int32 Text4 { get; set; } //TODO:are strref
+        public Int32 Text5 { get; set; } //TODO:are strref
+        public Int32 Text6 { get; set; } //TODO:are strref
+        public Int32 Text7 { get; set; } //TODO:are strref
+        public Int32 Text8 { get; set; } //TODO:are strref
+        public Int32 Text9 { get; set; } //TODO:are strref
+        public Int32 Text10 { get; set; } //TODO:are strref
         public array8 ResRef1 { get; set; }
         public array8 ResRef2 { get; set; }
         public array8 ResRef3 { get; set; }
@@ -503,7 +503,7 @@ namespace iiInfinityEngine.Core.Files
         public Int16 Enabled { get; set; }
         public Int16 DayProbability { get; set; }
         public Int16 NightProbability { get; set; }
-        public array56 Unknown { get; set; }
+        public array56 Unknown { get; set; }//TODO:are
     }
 
     [Serializable]
@@ -716,10 +716,10 @@ namespace iiInfinityEngine.Core.Files
     public struct ContainerFlags
     {
         public bool Locked { get; set; }
-        public bool Bit01 { get; set; }
-        public bool Bit02 { get; set; }
+        public bool Bit01 { get; set; }//TODO:are
+        public bool Bit02 { get; set; }//TODO:are
         public bool TrapResets { get; set; }
-        public bool Bit04 { get; set; }
+        public bool Bit04 { get; set; }//TODO:are
         public bool Disabled { get; set; }
         public bool Bit06 { get; set; }
         public bool Bit07 { get; set; }

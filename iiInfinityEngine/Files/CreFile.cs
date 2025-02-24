@@ -77,7 +77,7 @@ namespace iiInfinityEngine.Core.Files
         public Int32 XPReward { get; set; }
         public Int32 PowerLevel { get; set; }
         public Int32 Gold { get; set; }
-        public Int32 StatusFlags { get; set; } //TODO:cre
+        public StatusFlags StatusFlags { get; set; }
         public Int16 CurrentHP { get; set; }
         public Int16 MaximumHP { get; set; }
         public Int32 Animation { get; set; }
@@ -126,7 +126,7 @@ namespace iiInfinityEngine.Core.Files
         public byte PickPockets { get; set; }
         public byte Fatigue { get; set; }
         public byte Intoxication { get; set; }
-        public byte Luck { get; set; }        
+        public byte Luck { get; set; }
         public byte UnusedLargeSwordProficiency { get; set; }
         public byte UnusedSmallSwordProficiency { get; set; }
         public byte UnusedBowProficiency { get; set; }
@@ -265,7 +265,7 @@ namespace iiInfinityEngine.Core.Files
         public byte MoraleBreak { get; set; }
         public byte RacialEnemy { get; set; }
         public Int16 MoraleRecoveryTime { get; set; }
-        public Int32 Kit { get; set; } //TODO:cre
+        public Kit Kit { get; set; }
         public array8 ScriptOverride { get; set; }
         public array8 ScriptClass { get; set; }
         public array8 ScriptRace { get; set; }
@@ -339,7 +339,7 @@ namespace iiInfinityEngine.Core.Files
 
     [Serializable]
     public class CreItemSlots
-    {   
+    {
         public CreItem2 Helmet { get; set; }
         public CreItem2 Armor { get; set; }
         public CreItem2 Shield { get; set; }
@@ -494,6 +494,80 @@ namespace iiInfinityEngine.Core.Files
         public bool Bit29 { get; set; }
         public bool Bit30 { get; set; }
         public bool Bit31 { get; set; }
+    }
+
+    [Serializable]
+    public class StatusFlags
+    {
+        public bool Sleeping { get; set; }
+        public bool Berserk { get; set; }
+        public bool Panic { get; set; }
+        public bool Stunned { get; set; }
+        public bool Invisible { get; set; }
+        public bool Helpless { get; set; }
+        public bool FrozenDeath { get; set; }
+        public bool StoneDeath { get; set; }
+        public bool ExplodingDeath { get; set; }
+        public bool FlameDeath { get; set; }
+        public bool AcidDeath { get; set; }
+        public bool Dead { get; set; }
+        public bool Silenced { get; set; }
+        public bool Charmed { get; set; }
+        public bool Poisoned { get; set; }
+        public bool Hasted { get; set; }
+        public bool Slowed { get; set; }
+        public bool Infravision { get; set; }
+        public bool Blind { get; set; }
+        public bool Diseased { get; set; }
+        public bool Feebleminded { get; set; }
+        public bool Nondetection { get; set; }
+        public bool ImprovedInvisibility { get; set; }
+        public bool Bless { get; set; }
+        public bool Chant { get; set; }
+        public bool DrawUponHolyMight { get; set; }
+        public bool Luck { get; set; }
+        public bool Aid { get; set; }
+        public bool ChantBad { get; set; }
+        public bool Blur { get; set; }
+        public bool MirrorImage { get; set; }
+        public bool Confused { get; set; }
+    }
+
+    [Serializable]
+    public class Kit
+    {
+        public bool None { get; set; }
+        public bool Barbarian { get; set; }
+        public bool TrueClass { get; set; }
+        public bool Berserker { get; set; }
+        public bool WizardSlayer { get; set; }
+        public bool Kensai { get; set; }
+        public bool Cavalier { get; set; }
+        public bool Inquisitor { get; set; }
+        public bool Undeadhunter { get; set; }
+        public bool Archer { get; set; }
+        public bool Stalker { get; set; }
+        public bool Beastmaster { get; set; }
+        public bool Assassin { get; set; }
+        public bool Bountyhunter { get; set; }
+        public bool Swashbuckler { get; set; }
+        public bool Blade { get; set; }
+        public bool Jester { get; set; }
+        public bool Skald { get; set; }
+        public bool Totemic { get; set; }
+        public bool Shapeshifter { get; set; }
+        public bool Avenger { get; set; }
+        public bool ClericOfTalos { get; set; }
+        public bool ClericOfHelm { get; set; }
+        public bool ClericOfLathander { get; set; }
+        public bool Abjurer { get; set; }
+        public bool Conjurer { get; set; }
+        public bool Diviner { get; set; }
+        public bool Enchanter { get; set; }
+        public bool Illusionist { get; set; }
+        public bool Invoker { get; set; }
+        public bool Necromancer { get; set; }
+        public bool Transmuter { get; set; }
     }
 
     [Serializable]

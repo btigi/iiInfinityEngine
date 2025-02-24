@@ -566,8 +566,8 @@ namespace iiInfinityEngine.Core.Writers
                 actorBinary.ScriptOverride = actor.ScriptOverride;
                 actorBinary.ScriptRace = actor.ScriptRace;
                 actorBinary.ScriptSpecific = actor.ScriptSpecific;
-                actorBinary.Unknown = actor.Unknown;
-                actorBinary.Unknown2 = actor.Unknown2;
+                actorBinary.Unknownef = actor.Unknownef;
+                actorBinary.Unknown90 = actor.Unknown90;
                 actors.Add(actorBinary);
             }
 
@@ -820,7 +820,7 @@ namespace iiInfinityEngine.Core.Writers
             header.AreaToTheNorth = areFile.AreaToTheNorth;
             header.AreaToTheSouth = areFile.AreaToTheSouth;
             header.AreaToTheWest = areFile.AreaToTheWest;
-            header.AreaWED = areFile.AreaWED;
+            header.AreaWED = areFile.AreaWed;
             header.LastSaved = areFile.LastSaved;
             header.RestMovieDay = areFile.RestMovieDay;
             header.RestMovieNight = areFile.RestMovieNight;

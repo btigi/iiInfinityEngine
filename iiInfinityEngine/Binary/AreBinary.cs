@@ -62,7 +62,7 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 ProjectileCount { get; set; }
         public array8 RestMovieDay { get; set; }
         public array8 RestMovieNight { get; set; }
-        public array56 Unused { get; set; }
+        public array56 Unknowne4 { get; set; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -76,7 +76,7 @@ namespace iiInfinityEngine.Core.Binary
         public Int32 Flags { get; set; }
         public Int16 HasBeenSpawned { get; set; }
         public byte FilenameInitialCharacter { get; set; }
-        public byte Unknown { get; set; }
+        public byte Unknownef { get; set; }
         public Int32 ActorAnimation { get; set; }
         public Int32 ActorOrientation { get; set; }
         public Int32 ActorRemovalTimer { get; set; }
@@ -94,7 +94,7 @@ namespace iiInfinityEngine.Core.Binary
         public array8 CREFile { get; set; }
         public Int32 CreOffset { get; set; }
         public Int32 CreSize { get; set; }
-        public array128 Unknown2 { get; set; }
+        public array128 Unknown90 { get; set; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]

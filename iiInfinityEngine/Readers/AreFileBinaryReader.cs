@@ -395,7 +395,7 @@ namespace iiInfinityEngine.Core.Readers
             areFile.AreaToTheNorth = header.AreaToTheNorth;
             areFile.AreaToTheSouth = header.AreaToTheSouth;
             areFile.AreaToTheWest = header.AreaToTheWest;
-            areFile.AreaWED = header.AreaWED;
+            areFile.AreaWed = header.AreaWED;
             areFile.LastSaved = header.LastSaved;
             areFile.RestMovieDay = header.RestMovieDay;
             areFile.RestMovieNight = header.RestMovieNight;
@@ -466,8 +466,8 @@ namespace iiInfinityEngine.Core.Readers
                 areActor2.ScriptOverride = actor.ScriptOverride;
                 areActor2.ScriptRace = actor.ScriptRace;
                 areActor2.ScriptSpecific = actor.ScriptSpecific;
-                areActor2.Unknown = actor.Unknown;
-                areActor2.Unknown2 = actor.Unknown2;
+                areActor2.Unknownef = actor.Unknownef;
+                areActor2.Unknown90 = actor.Unknown90;
                 areFile.actors.Add(areActor2);
             }
 
