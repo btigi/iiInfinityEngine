@@ -40,6 +40,7 @@ namespace iiInfinityEngine.Core.Files
 
         public AreFile()
         {
+            AreaFlags = new AreaFlags();
             AreaToTheNorthFlags = new AreaLinkFlags();
             AreaToTheEastFlags = new AreaLinkFlags();
             AreaToTheSouthFlags = new AreaLinkFlags();
@@ -49,7 +50,7 @@ namespace iiInfinityEngine.Core.Files
 
         public array8 AreaWed { get; set; }
         public Int32 LastSaved { get; set; }
-        public AreaFlags AreaFlags;
+        public AreaFlags AreaFlags { get; set; }
         public array8 AreaToTheNorth { get; set; }
         public AreaLinkFlags AreaToTheNorthFlags { get; set; }
         public array8 AreaToTheEast { get; set; }
@@ -77,7 +78,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreActor2
+    public class AreActor2
     {
         public AreActor2()
         {
@@ -116,7 +117,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreRegion2
+    public class AreRegion2
     {
         public AreRegion2()
         {
@@ -206,7 +207,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreEntrance2
+    public class AreEntrance2
     {
         public array32 Name { get; set; }
         public Int16 XCoordinate { get; set; }
@@ -253,7 +254,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreItem2
+    public class AreItem2
     {
         public AreItem2()
         {
@@ -305,7 +306,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreVariable2
+    public class AreVariable2
     {
         public array32 Name { get; set; }
         public Int16 Type { get; set; }
@@ -317,7 +318,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreDoor2
+    public class AreDoor2
     {
         public AreDoor2()
         {
@@ -370,7 +371,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreAnimation2
+    public class AreAnimation2
     {
         public AreAnimation2()
         {
@@ -397,7 +398,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreNote2
+    public class AreNote2
     {
         public Int16 XCoordinate { get; set; }
         public Int16 YCoordinate { get; set; }
@@ -408,7 +409,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreTiledObject2
+    public class AreTiledObject2
     {
         public array32 Name { get; set; }
         public array8 TileId { get; set; }
@@ -421,7 +422,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreProjectile2
+    public class AreProjectile2
     {
         public array8 Resref { get; set; }
         public Int32 EffectOffset { get; set; }
@@ -437,7 +438,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreSong2
+    public class AreSong2
     {
         public Int32 DaySong { get; set; }
         public Int32 NightSong { get; set; }
@@ -460,7 +461,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreInterruption2
+    public class AreInterruption2
     {
         public array32 Name { get; set; }
         public IEString Text1 { get; set; }
@@ -496,7 +497,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreaFlags
+    public class AreaFlags
     {
         public bool SaveAllowed { get; set; }
         public bool TutorialArea { get; set; }
