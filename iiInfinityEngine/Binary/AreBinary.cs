@@ -354,7 +354,7 @@ namespace iiInfinityEngine.Core.Binary
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    struct AreTiledObjectBinary //TODO:
+    struct AreTiledObjectBinary
     {
         public array32 Name { get; set; }
         public array8 TileId { get; set; }
