@@ -34,6 +34,7 @@ namespace iiInfinityEngine.Core
         public List<MosFile> Mosaics = [];
         public List<PltFile> Paperdolls = [];
         public List<ProFile> Projectiles = [];
+        public List<GlslFile> Shaders = [];
         public List<SplFile> Spells = [];
         public List<StoFile> Stores = [];
         public List<VvcFile> VisualEffects = [];
@@ -129,6 +130,7 @@ namespace iiInfinityEngine.Core
                                                      IEFileType.Spl,
                                                      IEFileType.Itm,
                                                      IEFileType.Eff,
+                                                     IEFileType.Glsl,
                                                      IEFileType.Cre,
                                                      IEFileType.Plt,
                                                      IEFileType.Pro,
@@ -167,6 +169,7 @@ namespace iiInfinityEngine.Core
                     Mosaics.AddRange(bifFile.mosaics);
                     Paperdolls.AddRange(bifFile.paperdolls);
                     Projectiles.AddRange(bifFile.projectiles);
+                    Shaders.AddRange(bifFile.shaders);
                     Spells.AddRange(bifFile.spells);
                     Stores.AddRange(bifFile.stores);
                     VisualEffects.AddRange(bifFile.vvcs);
@@ -184,6 +187,7 @@ namespace iiInfinityEngine.Core
             var creReader = new CreFileBinaryReader();
             var dlgReader = new DlgFileBinaryReader();
             var effReader = new EffFileBinaryReader();
+            var glslReader = new GlslFileReader();
             var idsReader = new IdsFileReader();
             var itmReader = new ItmFileBinaryReader();
             var mosReader = new MosFileBinaryReader();
@@ -227,6 +231,11 @@ namespace iiInfinityEngine.Core
                         var effect = effReader.Read(file);
                         effect.Filename = file;
                         Effects.Add(effect);
+                        break;
+                    case ".glsl":
+                        var glsl = glslReader.Read(file);
+                        glsl.Filename = file;
+                        Shaders.Add(glsl);
                         break;
                     case ".ids":
                         var identifier = idsReader.Read(file);
@@ -349,6 +358,9 @@ namespace iiInfinityEngine.Core
                     break;
                 case IEFileType.Eff:
                     writer = new EffFileBinaryWriter();
+                    break;
+                case IEFileType.Glsl:
+                    writer = new GlslFileWriter();
                     break;
                 case IEFileType.Ids:
                     writer = new IdsFileWriter();

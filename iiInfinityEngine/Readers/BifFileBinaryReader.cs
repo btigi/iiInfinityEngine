@@ -29,6 +29,7 @@ namespace iiInfinityEngine.Core.Readers
         List<MosFile> mosaics = [];
         List<WmpFile> worldmaps = [];
         List<VvcFile> vvcs = [];
+        List<GlslFile> shaders = [];
         List<TisFile> tilesets = [];
 
         public TlkFile TlkFile { get; set; }
@@ -247,6 +248,21 @@ namespace iiInfinityEngine.Core.Readers
                                 catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
                                 break;
 
+                            case IEFileType.Glsl:
+                                try
+                                {
+                                    var glsl = new GlslFileReader();
+                                    var shader = (GlslFile)glsl.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
+                                    {
+                                        shader.Filename = resource.ResourceName + ".glsl";
+                                    }
+                                    shaders.Add(shader);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
+
                             case IEFileType.Itm:
                                 try
                                 {
@@ -406,6 +422,7 @@ namespace iiInfinityEngine.Core.Readers
                 bifFile.mosaics = mosaics;
                 bifFile.worldmaps = worldmaps;
                 bifFile.vvcs = vvcs;
+                bifFile.shaders = shaders;
                 bifFile.tilesets = tilesets;
                 return bifFile;
             }

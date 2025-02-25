@@ -23,6 +23,7 @@ namespace iiInfinityEngine.Core.Files
         public List<MosFile> mosaics = [];
         public List<WmpFile> worldmaps = [];
         public List<VvcFile> vvcs = [];
+        public List<GlslFile> shaders = [];
         public List<TisFile> tilesets = [];
 
         [NonSerialized]
