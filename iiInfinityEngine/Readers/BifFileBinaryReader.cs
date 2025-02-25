@@ -6,7 +6,6 @@ using System.Linq;
 using iiInfinityEngine.Core.Binary;
 using iiInfinityEngine.Core.Files;
 using System.IO.Compression;
-using System.Runtime.ConstrainedExecution;
 
 namespace iiInfinityEngine.Core.Readers
 {
@@ -22,6 +21,7 @@ namespace iiInfinityEngine.Core.Readers
         List<WfxFile> wfxs = [];
         List<EffFile> effs = [];
         List<CreFile> creatures = [];
+        List<PltFile> paperdolls = [];
         List<ProFile> projectiles = [];
         List<IdsFile> identifiers = [];
         List<DimensionalArrayFile> dimensionalArrays = [];
@@ -124,6 +124,31 @@ namespace iiInfinityEngine.Core.Readers
                                         area.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
                                     areas.Add(area);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
+
+                            case IEFileType.Plt:
+                                try
+                                {
+                                    var plt = new PltFileBinaryReader();
+                                    var signature = new byte[4];
+                                    var readCount = ms.Read(signature, 0, 4);
+                                    ms.Position = 0;
+                                    if (readCount == 4 && signature[0] == 66 && signature[1] == 65 && signature[2] == 77 && signature[3] == 67)
+                                    {
+                                        //TODO: EE games often have BAMC files as PLT resources
+                                    }
+                                    else
+                                    {
+                                        var paperdoll = (PltFile)plt.Read(ms, null);
+                                        resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                        if (resource != null)
+                                        {
+                                            paperdoll.Filename = resource.ResourceName + "." + resource.ResourceType;
+                                        }
+                                        paperdolls.Add(paperdoll);
+                                    }
                                 }
                                 catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
                                 break;
@@ -373,6 +398,7 @@ namespace iiInfinityEngine.Core.Readers
                 bifFile.stores = stores;
                 bifFile.dialogs = dialogs;
                 bifFile.creatures = creatures;
+                bifFile.paperdolls = paperdolls;
                 bifFile.projectiles = projectiles;
                 bifFile.identifiers = identifiers;
                 bifFile.dimensionalArrays = dimensionalArrays;

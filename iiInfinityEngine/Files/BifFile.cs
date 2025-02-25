@@ -15,6 +15,7 @@ namespace iiInfinityEngine.Core.Files
         public List<StoFile> stores = [];
         public List<DlgFile> dialogs = [];
         public List<CreFile> creatures = [];
+        public List<PltFile> paperdolls = [];
         public List<ProFile> projectiles = [];
         public List<IdsFile> identifiers = [];
         public List<DimensionalArrayFile> dimensionalArrays = [];

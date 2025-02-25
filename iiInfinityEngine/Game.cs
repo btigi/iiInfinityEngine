@@ -32,6 +32,7 @@ namespace iiInfinityEngine.Core
         public List<IdsFile> Identifiers = [];
         public List<ItmFile> Items = [];
         public List<MosFile> Mosaics = [];
+        public List<PltFile> Paperdolls = [];
         public List<ProFile> Projectiles = [];
         public List<SplFile> Spells = [];
         public List<StoFile> Stores = [];
@@ -129,6 +130,7 @@ namespace iiInfinityEngine.Core
                                                      IEFileType.Itm,
                                                      IEFileType.Eff,
                                                      IEFileType.Cre,
+                                                     IEFileType.Plt,
                                                      IEFileType.Pro,
                                                      IEFileType.Ids,
                                                      IEFileType.DimensionalArray,
@@ -163,6 +165,7 @@ namespace iiInfinityEngine.Core
                     Identifiers.AddRange(bifFile.identifiers);
                     Items.AddRange(bifFile.items);
                     Mosaics.AddRange(bifFile.mosaics);
+                    Paperdolls.AddRange(bifFile.paperdolls);
                     Projectiles.AddRange(bifFile.projectiles);
                     Spells.AddRange(bifFile.spells);
                     Stores.AddRange(bifFile.stores);
@@ -184,6 +187,7 @@ namespace iiInfinityEngine.Core
             var idsReader = new IdsFileReader();
             var itmReader = new ItmFileBinaryReader();
             var mosReader = new MosFileBinaryReader();
+            var pltReader = new PltFileBinaryReader();
             var proReader = new ProFileBinaryReader();
             var splReader = new SplFileBinaryReader();
             var stoReader = new StoFileBinaryReader();
@@ -239,6 +243,11 @@ namespace iiInfinityEngine.Core
                         mos.Filename = file;
                         Mosaics.Add(mos);
                         break;
+                    case ".plt":
+                        var plt = pltReader.Read(file, null);
+                        plt.Filename = file;
+                        Paperdolls.Add(plt);
+                        break;                        
                     case ".pro":
                         var projectile = proReader.Read(file);
                         projectile.Filename = file;
