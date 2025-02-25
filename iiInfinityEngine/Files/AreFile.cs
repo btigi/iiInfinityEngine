@@ -82,6 +82,7 @@ namespace iiInfinityEngine.Core.Files
         public AreActor2()
         {
             ActorFlags = new ActorFlags();
+            ActorAppearenceSchedule = new AppearenceSchedule();
         }
 
         public array32 Name { get; set; }
@@ -94,35 +95,12 @@ namespace iiInfinityEngine.Core.Files
         public byte FilenameInitialCharacter { get; set; }
         public byte Unknownef { get; set; }
         public Int32 ActorAnimation { get; set; }
-        public Int32 ActorOrientation { get; set; } //TODO:are - int16, with another int16 (unknown36) after it
+        public Int16 ActorOrientation { get; set; }
+        public Int16 Unknown36 { get; set; }
         public Int32 ActorRemovalTimer { get; set; }
         public Int16 MovementRestrictionDistance { get; set; }
         public Int16 MovementRestrictionDistanceMoveToObject { get; set; }
-        public Int32 ActorAppearenceSchedule { get; set; } //TODO:are
-        //bit 23 = 23:30 to 00:29
-        //bit 22 = 22:30 to 23:29
-        //bit 21 = 21:30 to 22:29 (Night)
-        //bit 20 = 20:30 to 21:29 (Dusk)
-        //bit 19 = 19:30 to 20:29
-        //bit 18 = 18:30 to 19:29
-        //bit 17 = 17:30 to 18:29
-        //bit 16 = 16:30 to 17:29
-        //bit 15 = 15:30 to 16:29
-        //bit 14 = 14:30 to 15:29
-        //bit 13 = 13:30 to 14:29
-        //bit 12 = 12:30 to 13:29
-        //bit 11 = 11:30 to 12:29
-        //bit 10 = 10:30 to 11:29
-        //bit 9 = 09:30 to 10:29
-        //bit 8 = 08:30 to 09:29
-        //bit 7 = 07:30 to 08:29
-        //bit 6 = 06:30 to 07:29 (Day)
-        //bit 5 = 05:30 to 06:29 (Dawn)
-        //bit 4 = 04:30 to 05:29
-        //bit 3 = 03:30 to 04:29
-        //bit 2 = 02:30 to 03:29
-        //bit 1 = 01:30 to 02:29
-        //bit 0 = 00:30 to 01:29 
+        public AppearenceSchedule ActorAppearenceSchedule { get; set; }
         public Int32 NumTimesTalkedTo { get; set; }
         public array8 Dialog { get; set; }
         public array8 ScriptOverride { get; set; }
@@ -144,7 +122,7 @@ namespace iiInfinityEngine.Core.Files
         {
             Flags = new RegionFlags();
         }
-        
+
         public array32 Name { get; set; }
         public RegionType RegionType { get; set; }
         public Int16 BoundingBoxLeft { get; set; }
@@ -179,8 +157,14 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreSpawnPoint2
+    public class AreSpawnPoint2
     {
+        public AreSpawnPoint2()
+        {
+            SpawnPointAppearenceSchedule = new AppearenceSchedule();
+            SpawnMethod = new SpawnMethod();
+        }
+
         public array32 Name { get; set; }
         public Int16 XCoordinate { get; set; }
         public Int16 YCoordinate { get; set; }
@@ -197,43 +181,13 @@ namespace iiInfinityEngine.Core.Files
         public Int16 CreatureSpawnCount { get; set; }
         public Int16 BaseCreatureNumberToSpawn { get; set; }
         public Int16 Frequency { get; set; }
-        public Int16 SpawnMethod { get; set; } //TODO:are
-        //Bit 0: If Bit 2 is set, don't spawn
-        //Bit 1: One-time-spawnpoint (checked for after the spawning, and disables the spawn point if set)
-        //Bit 2: Used internally to disable the spawn point temporarily
-        //Set after a spawning and cleared in two situations:
-        //(1) after the CompressTime() method for the spawn point is called with a time amount of at least 16 hours
-        //(2) if Bit 0 is not set and there are no living spawns in the area 
+        public SpawnMethod SpawnMethod { get; set; }
         public Int32 ActorRemovalTime { get; set; }
         public Int16 MovementRestrictionDistance { get; set; }
         public Int16 MovementRestrictionDistanceToObject { get; set; }
         public Int16 MaximumCreaturesToSpawn { get; set; }
         public Int16 Enabled { get; set; }
-        public Int32 SpawnPointAppearenceSchedule { get; set; } //TODO:are
-        //bit 23 = 23:30 to 00:29
-        //bit 22 = 22:30 to 23:29
-        //bit 21 = 21:30 to 22:29 (Night)
-        //bit 20 = 20:30 to 21:29 (Dusk)
-        //bit 19 = 19:30 to 20:29
-        //bit 18 = 18:30 to 19:29
-        //bit 17 = 17:30 to 18:29
-        //bit 16 = 16:30 to 17:29
-        //bit 15 = 15:30 to 16:29
-        //bit 14 = 14:30 to 15:29
-        //bit 13 = 13:30 to 14:29
-        //bit 12 = 12:30 to 13:29
-        //bit 11 = 11:30 to 12:29
-        //bit 10 = 10:30 to 11:29
-        //bit 9 = 09:30 to 10:29
-        //bit 8 = 08:30 to 09:29
-        //bit 7 = 07:30 to 08:29
-        //bit 6 = 06:30 to 07:29 (Day)
-        //bit 5 = 05:30 to 06:29 (Dawn)
-        //bit 4 = 04:30 to 05:29
-        //bit 3 = 03:30 to 04:29
-        //bit 2 = 02:30 to 03:29
-        //bit 1 = 01:30 to 02:29
-        //bit 0 = 00:30 to 01:29 
+        public AppearenceSchedule SpawnPointAppearenceSchedule { get; set; }
         public Int16 ProbabilityDay { get; set; }
         public Int16 ProbabilityNight { get; set; }
         public Int32 SpawnFrequency { get; set; }
@@ -266,7 +220,8 @@ namespace iiInfinityEngine.Core.Files
     {
         public List<AreItem2> items = [];
 
-        public AreContainer2() {
+        public AreContainer2()
+        {
             Flags = new ContainerFlags();
         }
 
@@ -300,17 +255,28 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct AreItem2
     {
+        public AreItem2()
+        {
+            Flags = new AreaItemFlags();
+        }
+
         public array8 ItemResref { get; set; }
         public Int16 ExpirationTime { get; set; }
         public Int16 Charges1 { get; set; }
         public Int16 Charges2 { get; set; }
         public Int16 Charges3 { get; set; }
-        public AreaItemFlags Flags;//TODO:are
+        public AreaItemFlags Flags { get; set; }
     }
 
     [Serializable]
-    public struct AreAmbient2
+    public class AreAmbient2
     {
+        public AreAmbient2()
+        {
+            AmbientAppearenceSchedule = new AppearenceSchedule();
+            Flags = new AmbientFlags();
+        }
+
         public array32 Name { get; set; }
         public Int16 XCoordinate { get; set; }
         public Int16 YCoordinate { get; set; }
@@ -333,8 +299,8 @@ namespace iiInfinityEngine.Core.Files
         public Int16 Unknown82 { get; set; }
         public Int32 FrequencyBase { get; set; }
         public Int32 FrequencyVariation { get; set; }
-        public Int32 AmbientAppearenceSchedule { get; set; } //TODO:are
-        public Int32 Flags { get; set; } //TODO:are
+        public AppearenceSchedule AmbientAppearenceSchedule { get; set; }
+        public AmbientFlags Flags { get; set; }
         public array64 Unknown94 { get; set; }
     }
 
@@ -353,21 +319,14 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct AreDoor2
     {
+        public AreDoor2()
+        {
+            Flags = new DoorFlags();
+        }
+
         public array32 Name { get; set; }
         public array8 DoorId { get; set; }
-        public Int32 Flags { get; set; } //TODO:are
-        //bit 0: Door open
-        //bit 1: Door locked
-        //bit 2: Reset trap
-        //bit 3: Trap detectable
-        //bit 4: Door has been bashed
-        //bit 5: Can't close
-        //bit 6: Linked
-        //bit 7: Door Hidden
-        //bit 8: Door Found (if hidden)
-        //bit 9: Don't block line of sight
-        //bit 10: Remove Key (BG2 only)
-        //bit 11: Slide
+        public DoorFlags Flags { get; set; }
         public Int32 OpenVertexIndex { get; set; }
         public Int16 OpenVertexCount { get; set; }
         public Int16 ClosedVertexCount { get; set; }
@@ -413,14 +372,20 @@ namespace iiInfinityEngine.Core.Files
     [Serializable]
     public struct AreAnimation2
     {
+        public AreAnimation2()
+        {
+            AnimationAppearenceSchedule = new AppearenceSchedule();
+            Flags = new AnimationFlags();
+        }
+
         public array32 Name { get; set; }
         public Int16 XCoordinate { get; set; }
         public Int16 YCoordinate { get; set; }
-        public Int32 AnimationAppearenceSchedule { get; set; } //TODO:are
+        public AppearenceSchedule AnimationAppearenceSchedule { get; set; }
         public array8 BamAnimation { get; set; }
         public Int16 BamSequence { get; set; }
         public Int16 BamFrame { get; set; }
-        public Int32 Flags { get; set; } //TODO:are
+        public AnimationFlags Flags { get; set; }
         public Int16 Height { get; set; }
         public Int16 Transparency { get; set; }
         public Int16 StartFrame { get; set; }
@@ -438,8 +403,8 @@ namespace iiInfinityEngine.Core.Files
         public Int16 YCoordinate { get; set; }
         public IEString Text { get; set; }
         public Int16 Location { get; set; }
-        public Int16 Colour { get; set; } //TODO:are
-        public array36 Unknown { get; set; } //TODO:are
+        public NoteColor Colour { get; set; }
+        public array36 Unknown10 { get; set; }
     }
 
     [Serializable]
@@ -447,12 +412,12 @@ namespace iiInfinityEngine.Core.Files
     {
         public array32 Name { get; set; }
         public array8 TileId { get; set; }
-        public Int32 Flags { get; set; } //TODO:are
+        public TiledObjectFlags Flags { get; set; }
         public Int32 OpenSearchOffset { get; set; }
         public Int16 OpenSearchCount { get; set; }
         public Int16 ClosedSearchCount { get; set; }
         public Int32 ClosedSearchOffset { get; set; }
-        public array48 Unknown { get; set; } //TODO:are
+        public array48 Unknown3c { get; set; }
     }
 
     [Serializable]
@@ -491,23 +456,23 @@ namespace iiInfinityEngine.Core.Files
         public array8 NightAmbient2Wav { get; set; }
         public Int32 NightAmbientVolume { get; set; }
         public Int32 Reverb { get; set; }
-        public array60 Unknown { get; set; } //TODO:are
+        public array60 Unknown54 { get; set; }
     }
 
     [Serializable]
     public struct AreInterruption2
     {
         public array32 Name { get; set; }
-        public Int32 Text1 { get; set; } //TODO:are strref
-        public Int32 Text2 { get; set; } //TODO:are strref
-        public Int32 Text3 { get; set; } //TODO:are strref
-        public Int32 Text4 { get; set; } //TODO:are strref
-        public Int32 Text5 { get; set; } //TODO:are strref
-        public Int32 Text6 { get; set; } //TODO:are strref
-        public Int32 Text7 { get; set; } //TODO:are strref
-        public Int32 Text8 { get; set; } //TODO:are strref
-        public Int32 Text9 { get; set; } //TODO:are strref
-        public Int32 Text10 { get; set; } //TODO:are strref
+        public IEString Text1 { get; set; }
+        public IEString Text2 { get; set; }
+        public IEString Text3 { get; set; }
+        public IEString Text4 { get; set; }
+        public IEString Text5 { get; set; }
+        public IEString Text6 { get; set; }
+        public IEString Text7 { get; set; }
+        public IEString Text8 { get; set; }
+        public IEString Text9 { get; set; }
+        public IEString Text10 { get; set; }
         public array8 ResRef1 { get; set; }
         public array8 ResRef2 { get; set; }
         public array8 ResRef3 { get; set; }
@@ -700,7 +665,7 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
-    public struct AreaItemFlags
+    public class AreaItemFlags
     {
         public bool Identified { get; set; }
         public bool Unstealable { get; set; }
@@ -774,6 +739,212 @@ namespace iiInfinityEngine.Core.Files
     }
 
     [Serializable]
+    public class AppearenceSchedule
+    {
+        public bool Am1 { get; set; }
+        public bool Am2 { get; set; }
+        public bool Am3 { get; set; }
+        public bool Am4 { get; set; }
+        public bool Am5 { get; set; }
+        public bool Am6 { get; set; }
+        public bool Am7 { get; set; }
+        public bool Am8 { get; set; }
+        public bool Am9 { get; set; }
+        public bool Am10 { get; set; }
+        public bool Am11 { get; set; }
+        public bool Am12 { get; set; }
+        public bool Pm1 { get; set; }
+        public bool Pm2 { get; set; }
+        public bool Pm3 { get; set; }
+        public bool Pm4 { get; set; }
+        public bool Pm5 { get; set; }
+        public bool Pm6 { get; set; }
+        public bool Pm7 { get; set; }
+        public bool Pm8 { get; set; }
+        public bool Pm9 { get; set; }
+        public bool Pm10 { get; set; }
+        public bool Pm11 { get; set; }
+        public bool Pm12 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
+    }
+
+    [Serializable]
+    public class AmbientFlags
+    {
+        public bool Enabled { get; set; }
+        public bool DisableEnvironmentalEffects { get; set; }
+        public bool IgnoreRadius { get; set; }
+        public bool PlayInRandomOrder { get; set; }
+        public bool HighMemoryAmbient { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
+    }
+
+    [Serializable]
+    public class TiledObjectFlags
+    {
+        public bool InSecondaryState { get; set; }
+        public bool CanBeSeenThrough { get; set; }
+        public bool Bit2 { get; set; }
+        public bool Bit3 { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
+    }
+
+    [Serializable]
+    public class DoorFlags
+    {
+        public bool DoorOpen { get; set; }
+        public bool DoorLocked { get; set; }
+        public bool ResetTrap { get; set; }
+        public bool DetectableTrap { get; set; }
+        public bool DoorForced { get; set; }
+        public bool CannotClose { get; set; }
+        public bool Linked { get; set; }
+        public bool DoorHidden { get; set; }
+        public bool DoorFound { get; set; }
+        public bool DoNotBlockLos { get; set; }
+        public bool RemoveKey { get; set; }
+        public bool IgnoreObstaclesWhenClosing { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
+    }
+
+    [Serializable]
+    public class AnimationFlags
+    {
+        public bool Enabled { get; set; }
+        public bool TransparentBlack { get; set; }
+        public bool NotLightSource { get; set; }
+        public bool PartialAnimation { get; set; }
+        public bool SynchronizedDraw { get; set; }
+        public bool RandomStartFrame { get; set; }
+        public bool NotCoveredByWall { get; set; }
+        public bool DisableOnSlowMachines { get; set; }
+        public bool DrawAsBackground { get; set; }
+        public bool PlayAllFrames { get; set; }
+        public bool UsePaletteBitmap { get; set; }
+        public bool MirrorYAxis { get; set; }
+        public bool DoNotRemoveInCombat { get; set; }
+        public bool WbmResref { get; set; }
+        public bool DrawStenciled { get; set; }
+        public bool PvrzResref { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
+    }
+
+    [Serializable]
+    public class SpawnMethod
+    {
+        public bool SpawnUntilPaused { get; set; }
+        public bool DisableAfterSpawn { get; set; }
+        public bool SpawnPaused { get; set; }
+        public bool Bit3 { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+    }    
+
+    [Serializable]
     public enum RegionType
     {
         ProximityTrigger = 0,
@@ -797,5 +968,18 @@ namespace iiInfinityEngine.Core.Files
         Body,
         Barrel,
         Crate
+    }
+
+    [Serializable]
+    public enum NoteColor : Int16
+    {
+        Gray = 0,
+        Violet = 1,
+        Green = 2,
+        Orange = 3,
+        Red = 4,
+        Blue = 5,
+        DarkBlue = 6,
+        LightGray = 7
     }
 }

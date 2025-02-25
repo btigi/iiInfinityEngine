@@ -78,7 +78,8 @@ namespace iiInfinityEngine.Core.Binary
         public byte FilenameInitialCharacter { get; set; }
         public byte Unknownef { get; set; }
         public Int32 ActorAnimation { get; set; }
-        public Int32 ActorOrientation { get; set; }
+        public Int16 ActorOrientation { get; set; }
+        public Int16 Unknown36 { get; set; }
         public Int32 ActorRemovalTimer { get; set; }
         public Int16 MovementRestrictionDistance { get; set; }
         public Int16 MovementRestrictionDistanceMoveToObject { get; set; }
@@ -349,7 +350,7 @@ namespace iiInfinityEngine.Core.Binary
         public Int16 Location { get; set; }
         public Int16 Colour { get; set; }
         public Int32 NoteCountPlus { get; set; }
-        public array36 Unknown { get; set; }
+        public array36 Unknown10 { get; set; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -362,7 +363,7 @@ namespace iiInfinityEngine.Core.Binary
         public Int16 OpenSearchCount { get; set; }
         public Int16 ClosedSearchCount { get; set; }
         public Int32 ClosedSearchOffset { get; set; }
-        public array48 Unknown { get; set; }
+        public array48 Unknown3c { get; set; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -401,7 +402,7 @@ namespace iiInfinityEngine.Core.Binary
         public array8 NightAmbient2Wav { get; set; }
         public Int32 NightAmbientVolume { get; set; }
         public Int32 Reverb { get; set; }
-        public array60 Unknown { get; set; }
+        public array60 Unknown54 { get; set; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]

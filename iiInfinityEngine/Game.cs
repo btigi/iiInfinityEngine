@@ -104,7 +104,8 @@ namespace iiInfinityEngine.Core
                 }
             });
 
-            LoadOverride(gameDirectory);
+            var fileTypes = new List<IEFileType>() { resourceType };
+            LoadOverride(gameDirectory, fileTypes);
             */
             #endregion
 
