@@ -33,6 +33,7 @@ namespace iiInfinityEngine.Core
         public List<ItmFile> Items = [];
         public List<MosFile> Mosaics = [];
         public List<PltFile> Paperdolls = [];
+        public List<MusFile> Playlists = [];
         public List<ProFile> Projectiles = [];
         public List<GlslFile> Shaders = [];
         public List<SplFile> Spells = [];
@@ -132,6 +133,7 @@ namespace iiInfinityEngine.Core
                                                      IEFileType.Eff,
                                                      IEFileType.Glsl,
                                                      IEFileType.Cre,
+                                                     IEFileType.Mus,
                                                      IEFileType.Plt,
                                                      IEFileType.Pro,
                                                      IEFileType.Ids,
@@ -168,6 +170,7 @@ namespace iiInfinityEngine.Core
                     Items.AddRange(bifFile.items);
                     Mosaics.AddRange(bifFile.mosaics);
                     Paperdolls.AddRange(bifFile.paperdolls);
+                    Playlists.AddRange(bifFile.playlists);
                     Projectiles.AddRange(bifFile.projectiles);
                     Shaders.AddRange(bifFile.shaders);
                     Spells.AddRange(bifFile.spells);
@@ -191,6 +194,7 @@ namespace iiInfinityEngine.Core
             var idsReader = new IdsFileReader();
             var itmReader = new ItmFileBinaryReader();
             var mosReader = new MosFileBinaryReader();
+            var musReader = new MusFileReader();
             var pltReader = new PltFileBinaryReader();
             var proReader = new ProFileBinaryReader();
             var splReader = new SplFileBinaryReader();
@@ -252,11 +256,16 @@ namespace iiInfinityEngine.Core
                         mos.Filename = file;
                         Mosaics.Add(mos);
                         break;
+                    case ".mus":
+                        var mus = musReader.Read(file);
+                        mus.Filename = file;
+                        Playlists.Add(mus);
+                        break;
                     case ".plt":
                         var plt = pltReader.Read(file, null);
                         plt.Filename = file;
                         Paperdolls.Add(plt);
-                        break;                        
+                        break;
                     case ".pro":
                         var projectile = proReader.Read(file);
                         projectile.Filename = file;

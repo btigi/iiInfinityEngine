@@ -2557,7 +2557,8 @@ namespace iiInfinityEngine.Core
         Scr = 0x0803,
         Bif = 0x5000,  // custom
         Key = 0x5001,  // custom
-        Tlk = 0x5002  // custom
+        Tlk = 0x5002,  // custom
+        Mus = 0x5003,  // custom
     }
 
     [Serializable]

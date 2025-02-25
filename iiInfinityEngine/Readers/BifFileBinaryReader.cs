@@ -22,6 +22,7 @@ namespace iiInfinityEngine.Core.Readers
         List<EffFile> effs = [];
         List<CreFile> creatures = [];
         List<PltFile> paperdolls = [];
+        List<MusFile> playlists = [];
         List<ProFile> projectiles = [];
         List<IdsFile> identifiers = [];
         List<DimensionalArrayFile> dimensionalArrays = [];
@@ -125,6 +126,21 @@ namespace iiInfinityEngine.Core.Readers
                                         area.Filename = resource.ResourceName + "." + resource.ResourceType;
                                     }
                                     areas.Add(area);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
+
+                            case IEFileType.Mus:
+                                try
+                                {
+                                    var mus = new MusFileReader();
+                                    var playlist = (MusFile)mus.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
+                                    {
+                                        playlist.Filename = resource.ResourceName + "." + resource.ResourceType;
+                                    }
+                                    playlists.Add(playlist);
                                 }
                                 catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
                                 break;
@@ -415,6 +431,7 @@ namespace iiInfinityEngine.Core.Readers
                 bifFile.dialogs = dialogs;
                 bifFile.creatures = creatures;
                 bifFile.paperdolls = paperdolls;
+                bifFile.playlists = playlists;
                 bifFile.projectiles = projectiles;
                 bifFile.identifiers = identifiers;
                 bifFile.dimensionalArrays = dimensionalArrays;
