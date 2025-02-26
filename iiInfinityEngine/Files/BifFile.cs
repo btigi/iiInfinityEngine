@@ -10,6 +10,7 @@ namespace iiInfinityEngine.Core.Files
 
         public List<WfxFile> wfx = [];
         public List<EffFile> effects = [];
+        public List<GuiFile> guis = [];
         public List<ItmFile> items = [];
         public List<SplFile> spells = [];
         public List<StoFile> stores = [];

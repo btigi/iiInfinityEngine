@@ -29,6 +29,7 @@ namespace iiInfinityEngine.Core
         public List<DimensionalArrayFile> DimensionalArrays = [];
         public List<DlgFile> Dialogs = [];
         public List<EffFile> Effects = [];
+        public List<GuiFile> Guis = [];
         public List<IdsFile> Identifiers = [];
         public List<ItmFile> Items = [];
         public List<MosFile> Mosaics = [];
@@ -168,6 +169,7 @@ namespace iiInfinityEngine.Core
                     Dialogs.AddRange(bifFile.dialogs);
                     DimensionalArrays.AddRange(bifFile.dimensionalArrays);
                     Effects.AddRange(bifFile.effects);
+                    Guis.AddRange(bifFile.guis);
                     Identifiers.AddRange(bifFile.identifiers);
                     Items.AddRange(bifFile.items);
                     Mosaics.AddRange(bifFile.mosaics);
@@ -194,6 +196,7 @@ namespace iiInfinityEngine.Core
             var dlgReader = new DlgFileBinaryReader();
             var effReader = new EffFileBinaryReader();
             var glslReader = new GlslFileReader();
+            var guiReader = new GuiFileReader();
             var idsReader = new IdsFileReader();
             var itmReader = new ItmFileBinaryReader();
             var mosReader = new MosFileBinaryReader();
@@ -244,6 +247,11 @@ namespace iiInfinityEngine.Core
                         var glsl = glslReader.Read(file);
                         glsl.Filename = file;
                         Shaders.Add(glsl);
+                        break;
+                    case ".gui":
+                        var gui = guiReader.Read(file);
+                        gui.Filename = file;
+                        Guis.Add(gui);
                         break;
                     case ".ids":
                         var identifier = idsReader.Read(file);

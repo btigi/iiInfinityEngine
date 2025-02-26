@@ -20,6 +20,7 @@ namespace iiInfinityEngine.Core.Readers
         List<ItmFile> items = [];
         List<WfxFile> wfxs = [];
         List<EffFile> effs = [];
+        List<GuiFile> guis = [];
         List<CreFile> creatures = [];
         List<PltFile> paperdolls = [];
         List<MusFile> playlists = [];
@@ -280,6 +281,21 @@ namespace iiInfinityEngine.Core.Readers
                                 catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
                                 break;
 
+                            case IEFileType.Gui:
+                                try
+                                {
+                                    var gui = new GuiFileReader();
+                                    var guifile = (GuiFile)gui.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
+                                    {
+                                        guifile.Filename = resource.ResourceName + ".gui";
+                                    }
+                                    guis.Add(guifile);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
+
                             case IEFileType.Itm:
                                 try
                                 {
@@ -442,6 +458,7 @@ namespace iiInfinityEngine.Core.Readers
                 bifFile.items = items;
                 bifFile.spells = spells;
                 bifFile.effects = effs;
+                bifFile.guis = guis;
                 bifFile.wfx = wfxs;
                 bifFile.stores = stores;
                 bifFile.dialogs = dialogs;
