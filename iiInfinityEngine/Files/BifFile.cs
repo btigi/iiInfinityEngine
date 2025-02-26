@@ -25,6 +25,7 @@ namespace iiInfinityEngine.Core.Files
         public List<WmpFile> worldmaps = [];
         public List<VvcFile> vvcs = [];
         public List<GlslFile> shaders = [];
+        public List<SqlFile> sqls = [];
         public List<TisFile> tilesets = [];
 
         [NonSerialized]

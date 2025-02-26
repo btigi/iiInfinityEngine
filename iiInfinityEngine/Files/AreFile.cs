@@ -780,7 +780,7 @@ namespace iiInfinityEngine.Core.Files
     public class AmbientFlags
     {
         public bool Enabled { get; set; }
-        public bool DisableEnvironmentalEffects { get; set; }
+        public bool Looping { get; set; }
         public bool IgnoreRadius { get; set; }
         public bool PlayInRandomOrder { get; set; }
         public bool HighMemoryAmbient { get; set; }

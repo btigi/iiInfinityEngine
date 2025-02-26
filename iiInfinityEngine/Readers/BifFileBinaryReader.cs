@@ -31,6 +31,7 @@ namespace iiInfinityEngine.Core.Readers
         List<WmpFile> worldmaps = [];
         List<VvcFile> vvcs = [];
         List<GlslFile> shaders = [];
+        List<SqlFile> sqls = [];
         List<TisFile> tilesets = [];
 
         public TlkFile TlkFile { get; set; }
@@ -326,6 +327,21 @@ namespace iiInfinityEngine.Core.Readers
                                 catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
                                 break;
 
+                            case IEFileType.Sql:
+                                try
+                                {
+                                    var sql = new SqlFileReader();
+                                    var script = (SqlFile)sql.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
+                                    {
+                                        script.Filename = resource.ResourceName + "." + resource.ResourceType;
+                                    }
+                                    sqls.Add(script);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
+
                             case IEFileType.Sto:
                                 try
                                 {
@@ -440,6 +456,7 @@ namespace iiInfinityEngine.Core.Readers
                 bifFile.worldmaps = worldmaps;
                 bifFile.vvcs = vvcs;
                 bifFile.shaders = shaders;
+                bifFile.sqls = sqls;
                 bifFile.tilesets = tilesets;
                 return bifFile;
             }

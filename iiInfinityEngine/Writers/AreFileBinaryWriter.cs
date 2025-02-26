@@ -406,7 +406,7 @@ namespace iiInfinityEngine.Core.Writers
                 ambientBinary.AmbientAppearenceSchedule = ambient.AmbientAppearenceSchedule.Bit30 ? ambientBinary.AmbientAppearenceSchedule | Common.Bit30 : ambientBinary.AmbientAppearenceSchedule;
                 ambientBinary.AmbientAppearenceSchedule = ambient.AmbientAppearenceSchedule.Bit31 ? ambientBinary.AmbientAppearenceSchedule | Common.Bit31 : ambientBinary.AmbientAppearenceSchedule;
                 ambientBinary.Flags = ambient.Flags.Enabled ? ambientBinary.Flags | Common.Bit0 : ambientBinary.Flags;
-                ambientBinary.Flags = ambient.Flags.DisableEnvironmentalEffects ? ambientBinary.Flags | Common.Bit1 : ambientBinary.Flags;
+                ambientBinary.Flags = ambient.Flags.Looping ? ambientBinary.Flags | Common.Bit1 : ambientBinary.Flags;
                 ambientBinary.Flags = ambient.Flags.IgnoreRadius ? ambientBinary.Flags | Common.Bit2 : ambientBinary.Flags;
                 ambientBinary.Flags = ambient.Flags.PlayInRandomOrder ? ambientBinary.Flags | Common.Bit3 : ambientBinary.Flags;
                 ambientBinary.Flags = ambient.Flags.HighMemoryAmbient ? ambientBinary.Flags | Common.Bit4 : ambientBinary.Flags;

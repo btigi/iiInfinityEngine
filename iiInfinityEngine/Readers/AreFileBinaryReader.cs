@@ -826,7 +826,7 @@ namespace iiInfinityEngine.Core.Readers
                 ambient2.AmbientAppearenceSchedule.Bit30 = (ambient.AmbientAppearenceSchedule & Common.Bit30) != 0;
                 ambient2.AmbientAppearenceSchedule.Bit31 = (ambient.AmbientAppearenceSchedule & Common.Bit31) != 0;
                 ambient2.Flags.Enabled = (ambient.Flags & Common.Bit0) != 0;
-                ambient2.Flags.DisableEnvironmentalEffects = (ambient.Flags & Common.Bit1) != 0;
+                ambient2.Flags.Looping = (ambient.Flags & Common.Bit1) != 0;
                 ambient2.Flags.IgnoreRadius = (ambient.Flags & Common.Bit2) != 0;
                 ambient2.Flags.PlayInRandomOrder = (ambient.Flags & Common.Bit3) != 0;
                 ambient2.Flags.HighMemoryAmbient = (ambient.Flags & Common.Bit4) != 0;

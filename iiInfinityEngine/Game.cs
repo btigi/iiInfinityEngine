@@ -37,6 +37,7 @@ namespace iiInfinityEngine.Core
         public List<ProFile> Projectiles = [];
         public List<GlslFile> Shaders = [];
         public List<SplFile> Spells = [];
+        public List<SqlFile> Sqls = [];
         public List<StoFile> Stores = [];
         public List<VvcFile> VisualEffects = [];
         public List<WfxFile> Wfxs = [];
@@ -140,6 +141,7 @@ namespace iiInfinityEngine.Core
                                                      IEFileType.DimensionalArray,
                                                      IEFileType.Are,
                                                      IEFileType.Wmp,
+                                                     IEFileType.Sql,
                                                      IEFileType.Vvc,
                                                      IEFileType.Wfx,
                                                      IEFileType.Tis };
@@ -174,6 +176,7 @@ namespace iiInfinityEngine.Core
                     Projectiles.AddRange(bifFile.projectiles);
                     Shaders.AddRange(bifFile.shaders);
                     Spells.AddRange(bifFile.spells);
+                    Sqls.AddRange(bifFile.sqls);
                     Stores.AddRange(bifFile.stores);
                     VisualEffects.AddRange(bifFile.vvcs);
                     Wfxs.AddRange(bifFile.wfx);
@@ -198,6 +201,7 @@ namespace iiInfinityEngine.Core
             var pltReader = new PltFileBinaryReader();
             var proReader = new ProFileBinaryReader();
             var splReader = new SplFileBinaryReader();
+            var sqlReader = new SqlFileReader();
             var stoReader = new StoFileBinaryReader();
             var vvcReader = new VvcFileBinaryReader();
             var wfxReader = new WfxFileBinaryReader();
@@ -276,6 +280,11 @@ namespace iiInfinityEngine.Core
                         spell.Filename = file;
                         Spells.Add(spell);
                         break;
+                    case ".sql":
+                        var sql = sqlReader.Read(file);
+                        sql.Filename = file;
+                        Sqls.Add(sql);
+                        break;                        
                     case ".sto":
                         var store = stoReader.Read(file);
                         store.Filename = file;
@@ -382,6 +391,9 @@ namespace iiInfinityEngine.Core
                     break;
                 case IEFileType.Spl:
                     writer = new SplFileBinaryWriter();
+                    break;
+                case IEFileType.Sql:
+                    writer = new SqlFileWriter();
                     break;
                 case IEFileType.Sto:
                     writer = new StoFileBinaryWriter();
