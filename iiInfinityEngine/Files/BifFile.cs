@@ -28,6 +28,7 @@ namespace iiInfinityEngine.Core.Files
         public List<GlslFile> shaders = [];
         public List<SqlFile> sqls = [];
         public List<TisFile> tilesets = [];
+        public List<MenuFile> menus = [];
 
         [NonSerialized]
         private string checksum;

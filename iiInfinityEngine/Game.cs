@@ -43,6 +43,7 @@ namespace iiInfinityEngine.Core
         public List<VvcFile> VisualEffects = [];
         public List<WfxFile> Wfxs = [];
         public List<TisFile> Tilesets = [];
+        public List<MenuFile> Menus = [];
 
         public TlkFile Tlk { get; private set; }
 
@@ -70,7 +71,7 @@ namespace iiInfinityEngine.Core
             key = keyReader.Read(chitinLocation);
         }
 
-        public void LoadResources(IEFileType resourceType)
+        public void LoadResources(List<IEFileType> resourceTypes)
         {
             #region Parallel
             /*
@@ -115,16 +116,15 @@ namespace iiInfinityEngine.Core
             #endregion
 
             var bifList = new List<(KeyBifEntry2 entry, int index)>();
-            var relevantResources = key.Resources.Where(a => a.ResourceType == resourceType).ToList();
+            var relevantResources = key.Resources.Where(a => resourceTypes.Contains(a.ResourceType)).ToList();
             foreach (var c in relevantResources)
             {
                 bifList.Add(key.BifFiles[c.BifIndex]);
             }
             bifList = bifList.Distinct().ToList();
 
-            var fileTypes = new List<IEFileType>() { resourceType };
-            LoadResourcesFromBifs(gameDirectory, bifList, relevantResources, fileTypes);
-            LoadOverride(gameDirectory, fileTypes);
+            LoadResourcesFromBifs(gameDirectory, bifList, relevantResources, resourceTypes);
+            LoadOverride(gameDirectory, resourceTypes);
         }
 
         public void LoadAllResources()
@@ -134,6 +134,7 @@ namespace iiInfinityEngine.Core
                                                      IEFileType.Itm,
                                                      IEFileType.Eff,
                                                      IEFileType.Glsl,
+                                                     IEFileType.Gui,
                                                      IEFileType.Cre,
                                                      IEFileType.Mus,
                                                      IEFileType.Plt,
@@ -172,6 +173,7 @@ namespace iiInfinityEngine.Core
                     Guis.AddRange(bifFile.guis);
                     Identifiers.AddRange(bifFile.identifiers);
                     Items.AddRange(bifFile.items);
+                    Menus.AddRange(bifFile.menus);
                     Mosaics.AddRange(bifFile.mosaics);
                     Paperdolls.AddRange(bifFile.paperdolls);
                     Playlists.AddRange(bifFile.playlists);
@@ -199,6 +201,7 @@ namespace iiInfinityEngine.Core
             var guiReader = new GuiFileReader();
             var idsReader = new IdsFileReader();
             var itmReader = new ItmFileBinaryReader();
+            var menuReader = new MenuFileReader();
             var mosReader = new MosFileBinaryReader();
             var musReader = new MusFileReader();
             var pltReader = new PltFileBinaryReader();
@@ -263,6 +266,11 @@ namespace iiInfinityEngine.Core
                         item.Filename = file;
                         Items.Add(item);
                         break;
+                    case ".menu":
+                        var menu = menuReader.Read(file);
+                        menu.Filename = file;
+                        Menus.Add(menu);
+                        break;                        
                     case ".mos":
                         var mos = mosReader.Read(file);
                         mos.Filename = file;

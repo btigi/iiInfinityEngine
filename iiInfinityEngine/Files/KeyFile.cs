@@ -22,29 +22,10 @@ namespace iiInfinityEngine.Core.Files
     }
 
     public class KeyBifResource2
-    {/*
-        public T Load<T>() where T : new() 
-        {
-            // attempt to load from override
-            // otherwise load from bif
-
-            switch (this.ResourceType)
-            {
-                case FileType.Sto:
-                    var x = new T();
-                    (x as StoFile).Lore = 1;
-                    return x;
-
-                case FileType.Bam:
-                    return new T();
-
-            }
-
-            return default(T);
-        }*/
-
+    {
         public string ResourceName { get; set; }
         public IEFileType ResourceType { get; set; }
+        public string Filename { get { return $"{ResourceName}.{ResourceType.ToString().ToUpper()}"; } }
 
         //bits 31-20
         private Int32 bifIndex;
@@ -88,7 +69,7 @@ namespace iiInfinityEngine.Core.Files
             }
         }
 
-        //bits 13- 0
+        //bits 13-0
         private Int16 nonTileSetIndex;
         public Int16 NonTileSetIndex
         {

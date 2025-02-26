@@ -34,6 +34,7 @@ namespace iiInfinityEngine.Core.Readers
         List<GlslFile> shaders = [];
         List<SqlFile> sqls = [];
         List<TisFile> tilesets = [];
+        List<MenuFile> menus = [];
 
         public TlkFile TlkFile { get; set; }
 
@@ -312,6 +313,21 @@ namespace iiInfinityEngine.Core.Readers
                                 catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
                                 break;
 
+                            case IEFileType.Menu:
+                                try
+                                {
+                                    var menu = new MenuFileReader();
+                                    var menufile = (MenuFile)menu.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
+                                    {
+                                        menufile.Filename = resource.ResourceName + ".menu";
+                                    }
+                                    menus.Add(menufile);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
+
                             case IEFileType.Mos:
                                 try
                                 {
@@ -475,6 +491,7 @@ namespace iiInfinityEngine.Core.Readers
                 bifFile.shaders = shaders;
                 bifFile.sqls = sqls;
                 bifFile.tilesets = tilesets;
+                bifFile.menus = menus;
                 return bifFile;
             }
             finally
