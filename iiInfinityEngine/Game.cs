@@ -147,7 +147,9 @@ namespace iiInfinityEngine.Core
                                                      IEFileType.Sql,
                                                      IEFileType.Vvc,
                                                      IEFileType.Wfx,
-                                                     IEFileType.Tis };
+                                                     IEFileType.Tis,
+                                                     IEFileType.Menu,
+                                                     IEFileType.Lua};
 
             LoadResourcesFromBifs(gameDirectory, key.BifFiles, key.Resources, fileTypes);
             LoadOverride(gameDirectory, fileTypes);
