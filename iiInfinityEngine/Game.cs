@@ -44,6 +44,7 @@ namespace iiInfinityEngine.Core
         public List<WfxFile> Wfxs = [];
         public List<TisFile> Tilesets = [];
         public List<MenuFile> Menus = [];
+        public List<LuaFile> Luas = [];
 
         public TlkFile Tlk { get; private set; }
 
@@ -173,6 +174,7 @@ namespace iiInfinityEngine.Core
                     Guis.AddRange(bifFile.guis);
                     Identifiers.AddRange(bifFile.identifiers);
                     Items.AddRange(bifFile.items);
+                    Luas.AddRange(bifFile.luas);
                     Menus.AddRange(bifFile.menus);
                     Mosaics.AddRange(bifFile.mosaics);
                     Paperdolls.AddRange(bifFile.paperdolls);
@@ -201,6 +203,7 @@ namespace iiInfinityEngine.Core
             var guiReader = new GuiFileReader();
             var idsReader = new IdsFileReader();
             var itmReader = new ItmFileBinaryReader();
+            var luaReader = new LuaFileReader();
             var menuReader = new MenuFileReader();
             var mosReader = new MosFileBinaryReader();
             var musReader = new MusFileReader();
@@ -266,6 +269,11 @@ namespace iiInfinityEngine.Core
                         item.Filename = file;
                         Items.Add(item);
                         break;
+                    case ".lua":
+                        var lua = luaReader.Read(file);
+                        lua.Filename = file;
+                        Luas.Add(lua);
+                        break;                        
                     case ".menu":
                         var menu = menuReader.Read(file);
                         menu.Filename = file;

@@ -29,6 +29,7 @@ namespace iiInfinityEngine.Core.Files
         public List<SqlFile> sqls = [];
         public List<TisFile> tilesets = [];
         public List<MenuFile> menus = [];
+        public List<LuaFile> luas = [];
 
         [NonSerialized]
         private string checksum;

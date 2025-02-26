@@ -35,6 +35,7 @@ namespace iiInfinityEngine.Core.Readers
         List<SqlFile> sqls = [];
         List<TisFile> tilesets = [];
         List<MenuFile> menus = [];
+        List<LuaFile> luas = [];
 
         public TlkFile TlkFile { get; set; }
 
@@ -313,6 +314,21 @@ namespace iiInfinityEngine.Core.Readers
                                 catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
                                 break;
 
+                            case IEFileType.Lua:
+                                try
+                                {
+                                    var lua = new LuaFileReader();
+                                    var luaFile = (LuaFile)lua.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
+                                    {
+                                        luaFile.Filename = resource.ResourceName + ".lua";
+                                    }
+                                    luas.Add(luaFile);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
+
                             case IEFileType.Menu:
                                 try
                                 {
@@ -492,6 +508,7 @@ namespace iiInfinityEngine.Core.Readers
                 bifFile.sqls = sqls;
                 bifFile.tilesets = tilesets;
                 bifFile.menus = menus;
+                bifFile.luas = luas;
                 return bifFile;
             }
             finally
