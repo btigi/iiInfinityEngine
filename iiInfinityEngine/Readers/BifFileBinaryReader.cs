@@ -60,10 +60,10 @@ namespace iiInfinityEngine.Core.Readers
                         var compressedLength = br.ReadInt32();
                         var bytes = br.ReadBytes(compressedLength);
 
-                        using (MemoryStream compressedStream = new MemoryStream(bytes))
-                        using (MemoryStream decompressedStream = new MemoryStream())
+                        using (var compressedStream = new MemoryStream(bytes))
+                        using (var decompressedStream = new MemoryStream())
                         {
-                            ZLibStream zlibStream = new ZLibStream(compressedStream, CompressionMode.Decompress);
+                            var zlibStream = new ZLibStream(compressedStream, CompressionMode.Decompress);
                             zlibStream.CopyTo(decompressedStream);
                             var decompressedData = decompressedStream.ToArray();
                             m.Write(decompressedData, 0, decompressedLength);
@@ -518,6 +518,87 @@ namespace iiInfinityEngine.Core.Readers
                     ((IDisposable)br).Dispose();
                 }
             }
+        }
+
+        public (bool success, byte[] bytes) ReadRaw(Stream s, List<KeyBifResource2> resources)
+        {
+            var br = new BinaryReader(s);
+            try
+            {
+                var header = (BifHeaderBinary)Common.ReadStruct(br, typeof(BifHeaderBinary));
+
+                if ((header.ftype.ToString() == "BIFC") && (header.fversion.ToString() == "V1.0"))
+                {
+                    br.BaseStream.Seek(0, SeekOrigin.Begin);
+                    var headerC = (BifCHeaderV1Binary)Common.ReadStruct(br, typeof(BifCHeaderV1Binary));
+
+                    var m = new MemoryStream();
+                    int size = 0;
+                    var theseBytes = new byte[headerC.FileLength];
+                    while (size < headerC.FileLength)
+                    {
+                        var decompressedLength = br.ReadInt32();
+                        var compressedLength = br.ReadInt32();
+                        var bytes = br.ReadBytes(compressedLength);
+
+                        using (var compressedStream = new MemoryStream(bytes))
+                        using (var decompressedStream = new MemoryStream())
+                        {
+                            var zlibStream = new ZLibStream(compressedStream, CompressionMode.Decompress);
+                            zlibStream.CopyTo(decompressedStream);
+                            var decompressedData = decompressedStream.ToArray();
+                            m.Write(decompressedData, 0, decompressedLength);
+                        }
+
+                        size = size + decompressedLength;
+                    }
+
+                    if (br != null)
+                    {
+                        ((IDisposable)br).Dispose();
+                    }
+                    s = new MemoryStream();
+                    m.Position = 0;
+                    m.CopyTo(s);
+                    s.Position = 0;
+
+                    br = new BinaryReader(s);
+                    header = (BifHeaderBinary)Common.ReadStruct(br, typeof(BifHeaderBinary));
+                }
+
+                Debug.WriteLine("Bif is uncompressed - reading");
+
+                br.BaseStream.Seek(header.FileOffset, SeekOrigin.Begin);
+                for (int i = 0; i < header.FileCount; i++)
+                {
+                    var resource = (BifFileEntryBinary)Common.ReadStruct(br, typeof(BifFileEntryBinary));
+                    fileStructs.Add(resource);
+                }
+
+                for (int i = 0; i < header.TilesetCount; i++)
+                {
+                    var resource = (BifTilesetEntryBinary)Common.ReadStruct(br, typeof(BifTilesetEntryBinary));
+                    tileStructs.Add(resource);
+                }
+
+                foreach (var f in fileStructs)
+                {
+                    var resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                    if (resource != null)
+                    {
+                        br.BaseStream.Seek(f.resourceOffset, SeekOrigin.Begin);
+                        var bytes = br.ReadBytes(f.resourceSize);
+                    }
+                }
+            }
+            finally
+            {
+                if (br != null)
+                {
+                    ((IDisposable)br).Dispose();
+                }
+            }
+            return (false, null);
         }
     }
 }

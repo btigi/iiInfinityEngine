@@ -275,12 +275,12 @@ namespace iiInfinityEngine.Core
                         var lua = luaReader.Read(file);
                         lua.Filename = file;
                         Luas.Add(lua);
-                        break;                        
+                        break;
                     case ".menu":
                         var menu = menuReader.Read(file);
                         menu.Filename = file;
                         Menus.Add(menu);
-                        break;                        
+                        break;
                     case ".mos":
                         var mos = mosReader.Read(file);
                         mos.Filename = file;
@@ -310,7 +310,7 @@ namespace iiInfinityEngine.Core
                         var sql = sqlReader.Read(file);
                         sql.Filename = file;
                         Sqls.Add(sql);
-                        break;                        
+                        break;
                     case ".sto":
                         var store = stoReader.Read(file);
                         store.Filename = file;
@@ -441,6 +441,23 @@ namespace iiInfinityEngine.Core
             writer.BackupManger = this.backupManager;
             var fileSaved = writer.Write(file.Filename, file);
             return fileSaved;
+        }
+
+        public (bool success, byte[] bytes) ExtractFile(string filename)
+        {
+            var relevantResources = key.Resources.Where(w => w.Filename == filename.ToUpper()).SingleOrDefault();
+            var bif = key.BifFiles[relevantResources.BifIndex];
+            var cdDir = GetDirectoryLocation(bif.entry);
+            var bifName = Path.Combine(gameDirectory, cdDir, bif.entry.Filename);
+            if (File.Exists(bifName))
+            {
+                var bbr = new BifFileBinaryReader();
+                using var bifFileStream = new FileStream(bifName, FileMode.Open, FileAccess.Read);
+                bbr.TlkFile = Tlk;
+                return bbr.ReadRaw(bifFileStream, new List<KeyBifResource2>() { relevantResources });
+            }
+
+            return (false, null);
         }
     }
 }
