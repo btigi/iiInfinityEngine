@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using ii.InfinityEngine.Binary;
 using ii.InfinityEngine.Files;
 using ii.InfinityEngine.Readers.Interfaces;
@@ -42,7 +43,8 @@ namespace ii.InfinityEngine.Readers
             br.BaseStream.Seek(header.StringOffset, SeekOrigin.Begin);
             for (int i = 0; i < header.StringCount; i++)
             {
-                var stringEntry = br.ReadChars(stringDataEntries[i].StringLength);
+                var stringEntryBytes = br.ReadBytes(stringDataEntries[i].StringLength);
+                var stringEntry = Encoding.UTF8.GetString(stringEntryBytes);
                 stringEntries.Add(new string(stringEntry));
             }
 
