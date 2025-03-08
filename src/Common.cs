@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
+using ii.InfinityEngine.Binary;
 using ii.InfinityEngine.Files;
 
 namespace ii.InfinityEngine
@@ -127,6 +129,42 @@ namespace ii.InfinityEngine
                 }
             }
             return strref;
+        }
+
+        public static void DecompressSave(string filename, string outputDirectory)
+        {
+            if (!File.Exists(filename))
+            {
+                throw new FileNotFoundException(filename);
+            }
+
+            Directory.CreateDirectory(outputDirectory);
+
+            using var br = new BinaryReader(File.OpenRead(filename));
+            var header = (SavHeaderBinary)Common.ReadStruct(br, typeof(SavHeaderBinary));
+            var streamReader = br;
+
+            if ((header.ftype.ToString() == "SAV ") && (header.fversion.ToString() == "V1.0"))
+            {
+                while (br.BaseStream.Position != br.BaseStream.Length)
+                {
+                    var compressedFilenameLength = br.ReadInt32();
+                    var compressedFilename = br.ReadChars(compressedFilenameLength);
+                    var uncompressedDataLength = br.ReadInt32();
+                    var compressedDataLength = br.ReadInt32();
+                    var compressedData = br.ReadBytes(compressedDataLength);
+
+                    var s = new MemoryStream();
+                    using var m = new MemoryStream();
+                    using var compressedStream = new MemoryStream(compressedData);
+                    using var decompressedStream = new MemoryStream();
+                    var zlibStream = new ZLibStream(compressedStream, CompressionMode.Decompress);
+                    zlibStream.CopyTo(decompressedStream);
+                    var decompressedData = decompressedStream.ToArray();
+                    var filenameString = new string(compressedFilename.TakeWhile(c => c != '\0').ToArray());
+                    File.WriteAllBytes(Path.Combine(outputDirectory, filenameString), decompressedData);
+                }
+            }
         }
     }
 
