@@ -166,6 +166,47 @@ namespace ii.InfinityEngine
                 }
             }
         }
+
+        public static void CompressSave(string inputDirectory, string filename)
+        {
+            if (!Directory.Exists(inputDirectory))
+            {
+                throw new DirectoryNotFoundException(inputDirectory);
+            }
+
+            using var bw = new BinaryWriter(File.Create(filename));
+            var header = new SavHeaderBinary
+            {
+                ftype = new array4 { character1 = 'S', character2 = 'A', character3 = 'V', character4 = ' ' },
+                fversion = new array4 { character1 = 'V', character2 = '1', character3 = '.', character4 = '0' }
+            };
+            var headerBytes = Common.WriteStruct(header);
+            bw.Write(headerBytes);
+
+            var files = Directory.GetFiles(inputDirectory);
+            foreach (var file in files)
+            {
+                var fileNameBytes = Path.GetFileName(file).ToCharArray();
+                var fileNameLength = fileNameBytes.Length;
+                var fileData = File.ReadAllBytes(file);
+
+                byte[] compressedData;
+                using (var compressedStream = new MemoryStream())
+                {
+                    using (var zlibStream = new ZLibStream(compressedStream, CompressionMode.Compress))
+                    {
+                        zlibStream.Write(fileData, 0, fileData.Length);
+                    }
+                    compressedData = compressedStream.ToArray();
+                }
+
+                bw.Write(fileNameLength);
+                bw.Write(fileNameBytes);
+                bw.Write(fileData.Length);
+                bw.Write(compressedData.Length);
+                bw.Write(compressedData);
+            }
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
