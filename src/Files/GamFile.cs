@@ -106,7 +106,7 @@ namespace ii.InfinityEngine.Files
         public Int16 QuickItemSlot3Ability {get; set;}
         public array32 Name {get; set;}
         public int TalkCount {get; set;}
-        public GamCharacterBinary CharacterStats {get; set;} = new()
+        public GamCharacterBinary CharacterStats { get; set; } = new();
         public array8 VoiceSet {get; set;}
     }
 
