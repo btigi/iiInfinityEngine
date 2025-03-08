@@ -50,6 +50,8 @@ namespace ii.InfinityEngine.Files
 
             Items = new CreItemSlots();
             Flags = new CreatureFlags();
+            Kit = new Kit();
+            StatusFlags = new StatusFlags();
         }
 
         public List<Eff1File> Effects1 = [];

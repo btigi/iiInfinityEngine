@@ -2562,7 +2562,7 @@ namespace ii.InfinityEngine
     }
 
     [Serializable]
-    public struct IEString
+    public class IEString
     {
         public IEString()
         {
