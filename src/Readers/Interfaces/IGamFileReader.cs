@@ -3,7 +3,7 @@ using ii.InfinityEngine.Files;
 
 namespace ii.InfinityEngine
 {
-    interface IGamFileBinaryReader
+    interface IGamFileReader
     {
         GamFile Read(string filename);
         GamFile Read(Stream s);

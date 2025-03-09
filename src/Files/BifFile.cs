@@ -31,6 +31,7 @@ namespace ii.InfinityEngine.Files
         public List<TisFile> tilesets = [];
         public List<MenuFile> menus = [];
         public List<LuaFile> luas = [];
+        public List<VefFile> vefs = [];
 
         [NonSerialized]
         private string checksum;

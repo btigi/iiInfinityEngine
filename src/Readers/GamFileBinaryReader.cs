@@ -6,7 +6,7 @@ using System.IO;
 
 namespace ii.InfinityEngine.Readers
 {
-    public class GamFileBinaryReader : IGamFileBinaryReader
+    public class GamFileBinaryReader : IGamFileReader
     {
         public TlkFile TlkFile { get; set; }
 

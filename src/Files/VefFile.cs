@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ii.InfinityEngine.Files
 {
@@ -18,8 +19,8 @@ namespace ii.InfinityEngine.Files
         private IEFile originalFile;
         public IEFile OriginalFile { get { return originalFile; } set { originalFile = value; } }
 
-        VefBody VefComponent1 { get; set; }
-        VefBody VefComponent2 { get; set; }
+        public List<VefBody> PrimaryComponents { get; set; } = new();
+        public List<VefBody> SecondaryComponents { get; set; } = new();
     }
 
     [Serializable]

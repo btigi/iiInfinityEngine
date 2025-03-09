@@ -37,6 +37,7 @@ namespace ii.InfinityEngine.Readers
         List<TisFile> tilesets = [];
         List<MenuFile> menus = [];
         List<LuaFile> luas = [];
+        List<VefFile> vefs = [];
 
         public TlkFile TlkFile { get; set; }
 
@@ -437,6 +438,21 @@ namespace ii.InfinityEngine.Readers
                                 catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
                                 break;
 
+                            case IEFileType.Vef:
+                                try
+                                {
+                                    var vef = new VefFileBinaryReader();
+                                    var vefFile = (VefFile)vef.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
+                                    {
+                                        vefFile.Filename = resource.ResourceName + "." + resource.ResourceType;
+                                    }
+                                    vefs.Add(vefFile);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
+
                             case IEFileType.Wfx:
                                 try
                                 {
@@ -526,6 +542,7 @@ namespace ii.InfinityEngine.Readers
                 bifFile.tilesets = tilesets;
                 bifFile.menus = menus;
                 bifFile.luas = luas;
+                bifFile.vefs = vefs;
                 return bifFile;
             }
             finally

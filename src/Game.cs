@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using ii.InfinityEngine.Files;
 using ii.InfinityEngine.Readers;
 using ii.InfinityEngine.Writers;
@@ -46,6 +47,7 @@ namespace ii.InfinityEngine
         public List<TisFile> Tilesets = [];
         public List<MenuFile> Menus = [];
         public List<LuaFile> Luas = [];
+        public List<VefFile> Vefs = [];
 
         public TlkFile Tlk { get; private set; }
 
@@ -151,7 +153,8 @@ namespace ii.InfinityEngine
                                                      IEFileType.Wfx,
                                                      IEFileType.Tis,
                                                      IEFileType.Menu,
-                                                     IEFileType.Lua};
+                                                     IEFileType.Lua,
+                                                     IEFileType.Vef};
 
             LoadResourcesFromBifs(gameDirectory, key.BifFiles, key.Resources, fileTypes);
             LoadOverride(gameDirectory, fileTypes);
@@ -190,6 +193,7 @@ namespace ii.InfinityEngine
                     Sqls.AddRange(bifFile.sqls);
                     Stores.AddRange(bifFile.stores);
                     VisualEffects.AddRange(bifFile.vvcs);
+                    Vefs.AddRange(bifFile.vefs);
                     Wfxs.AddRange(bifFile.wfx);
                     Tilesets.AddRange(bifFile.tilesets);
                 }
@@ -219,6 +223,7 @@ namespace ii.InfinityEngine
             var sqlReader = new SqlFileReader();
             var stoReader = new StoFileBinaryReader();
             var vvcReader = new VvcFileBinaryReader();
+            var vefReader = new VefFileBinaryReader();
             var wfxReader = new WfxFileBinaryReader();
             var tisReader = new TisFileBinaryReader();
             var fileExtensions = resourceTypes.Select(s => $".{s.ToString().Replace("DimensionalArray", "2da").ToLower()}");
@@ -329,6 +334,11 @@ namespace ii.InfinityEngine
                         var visualEffect = vvcReader.Read(file);
                         visualEffect.Filename = file;
                         VisualEffects.Add(visualEffect);
+                        break;
+                    case ".vef":
+                        var vef = vefReader.Read(file);
+                        vef.Filename = file;
+                        Vefs.Add(vef);
                         break;
                     case ".wfx":
                         var wavEffect = wfxReader.Read(file);
