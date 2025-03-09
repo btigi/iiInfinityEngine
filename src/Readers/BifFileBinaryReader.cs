@@ -20,6 +20,7 @@ namespace ii.InfinityEngine.Readers
         List<ItmFile> items = [];
         List<WfxFile> wfxs = [];
         List<EffFile> effs = [];
+        List<GamFile> games = [];
         List<GuiFile> guis = [];
         List<CreFile> creatures = [];
         List<PltFile> paperdolls = [];
@@ -268,6 +269,21 @@ namespace ii.InfinityEngine.Readers
                                 catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
                                 break;
 
+                            case IEFileType.Gam:
+                                try
+                                {
+                                    var gam = new GamFileBinaryReader();
+                                    var gamfile = (GamFile)gam.Read(ms);
+                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                                    if (resource != null)
+                                    {
+                                        gamfile.Filename = resource.ResourceName + ".gam";
+                                    }
+                                    games.Add(gamfile);
+                                }
+                                catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                break;
+
                             case IEFileType.Glsl:
                                 try
                                 {
@@ -490,6 +506,7 @@ namespace ii.InfinityEngine.Readers
                 bifFile.items = items;
                 bifFile.spells = spells;
                 bifFile.effects = effs;
+                bifFile.games = games;
                 bifFile.guis = guis;
                 bifFile.wfx = wfxs;
                 bifFile.stores = stores;

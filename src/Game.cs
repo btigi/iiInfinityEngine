@@ -28,6 +28,7 @@ namespace ii.InfinityEngine
         public List<CreFile> Creatures = [];
         public List<DimensionalArrayFile> DimensionalArrays = [];
         public List<DlgFile> Dialogs = [];
+        public List<GamFile> Games = [];
         public List<EffFile> Effects = [];
         public List<GuiFile> Guis = [];
         public List<IdsFile> Identifiers = [];
@@ -134,6 +135,7 @@ namespace ii.InfinityEngine
                                                      IEFileType.Spl,
                                                      IEFileType.Itm,
                                                      IEFileType.Eff,
+                                                     IEFileType.Gam,
                                                      IEFileType.Glsl,
                                                      IEFileType.Gui,
                                                      IEFileType.Cre,
@@ -173,6 +175,7 @@ namespace ii.InfinityEngine
                     Dialogs.AddRange(bifFile.dialogs);
                     DimensionalArrays.AddRange(bifFile.dimensionalArrays);
                     Effects.AddRange(bifFile.effects);
+                    Games.AddRange(bifFile.games);
                     Guis.AddRange(bifFile.guis);
                     Identifiers.AddRange(bifFile.identifiers);
                     Items.AddRange(bifFile.items);
@@ -201,6 +204,7 @@ namespace ii.InfinityEngine
             var creReader = new CreFileBinaryReader();
             var dlgReader = new DlgFileBinaryReader();
             var effReader = new EffFileBinaryReader();
+            var gamReader = new GamFileBinaryReader();
             var glslReader = new GlslFileReader();
             var guiReader = new GuiFileReader();
             var idsReader = new IdsFileReader();
@@ -250,6 +254,11 @@ namespace ii.InfinityEngine
                         var effect = effReader.Read(file);
                         effect.Filename = file;
                         Effects.Add(effect);
+                        break;
+                    case ".gam":
+                        var game = gamReader.Read(file);
+                        game.Filename = file;
+                        Games.Add(game);
                         break;
                     case ".glsl":
                         var glsl = glslReader.Read(file);
