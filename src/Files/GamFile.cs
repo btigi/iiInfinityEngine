@@ -127,12 +127,12 @@ namespace ii.InfinityEngine.Files
         public Int16 FormationButton5 { get; set; }
         public int Gold { get; set; }
         public Int16 UseActiveAreaFromPartyMember { get; set; }
-        public Int16 Weather { get; set; }        
+        public Int16 Weather { get; set; } //TODO:GAM
         public array8 MainArea { get; set; }
         public int PartyReputation { get; set; }
         public array8 CurrentArea { get; set; }
-        public int GuiFlags { get; set; }
-        public int LoadingProgress { get; set; }
+        public int GuiFlags { get; set; } //TODO:GAM
+        public int LoadingProgress { get; set; } //TODO:GAM
         public int GameTimeReal { get; set; }
         public int ZoomPercentage { get; set; }
         public array8 RandomEncounterArea { get; set; }
@@ -245,7 +245,7 @@ namespace ii.InfinityEngine.Files
         public int Time { get; set; }
         public byte Chapter { get; set; }
         public byte ReadBy { get; set; }
-        public byte JournalSection { get; set; }
+        public byte JournalSection { get; set; } //TODO:GAM
         public byte LocationFlag { get; set; }
     }
 
