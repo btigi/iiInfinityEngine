@@ -1,14 +1,109 @@
-﻿using ii.InfinityEngine.Binary;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace ii.InfinityEngine.Files
 {
     [Serializable]
     public class GamFile : IEFile
     {
-        public List<GamNpcStruct> npcBlocks = [];
+        public List<GamNpcStruct> PartyMembers = [];
+        public List<GamNpcStruct> NonPartyMembers = [];
+        public List<GamVariable> Variables = [];
+        public List<GamJournal> JournalEntries = [];
+        public List<GamStoredLocation> StoredLocations = [];
+        public List<GamStoredLocation> PocketPlaneLocations = [];
+        public GamFamiliarInfo FamiliarInfo = new();
+
+        public List<array8> LGLevel1Familiar = new();
+        public List<array8> LGLevel2Familiar = new();
+        public List<array8> LGLevel3Familiar = new();
+        public List<array8> LGLevel4Familiar = new();
+        public List<array8> LGLevel5Familiar = new();
+        public List<array8> LGLevel6Familiar = new();
+        public List<array8> LGLevel7Familiar = new();
+        public List<array8> LGLevel8Familiar = new();
+        public List<array8> LGLevel9Familiar = new();
+
+        public List<array8> LNLevel1Familiar = new();
+        public List<array8> LNLevel2Familiar = new();
+        public List<array8> LNLevel3Familiar = new();
+        public List<array8> LNLevel4Familiar = new();
+        public List<array8> LNLevel5Familiar = new();
+        public List<array8> LNLevel6Familiar = new();
+        public List<array8> LNLevel7Familiar = new();
+        public List<array8> LNLevel8Familiar = new();
+        public List<array8> LNLevel9Familiar = new();
+
+        public List<array8> CGLevel1Familiar = new();
+        public List<array8> CGLevel2Familiar = new();
+        public List<array8> CGLevel3Familiar = new();
+        public List<array8> CGLevel4Familiar = new();
+        public List<array8> CGLevel5Familiar = new();
+        public List<array8> CGLevel6Familiar = new();
+        public List<array8> CGLevel7Familiar = new();
+        public List<array8> CGLevel8Familiar = new();
+        public List<array8> CGLevel9Familiar = new();
+
+        public List<array8> NGLevel1Familiar = new();
+        public List<array8> NGLevel2Familiar = new();
+        public List<array8> NGLevel3Familiar = new();
+        public List<array8> NGLevel4Familiar = new();
+        public List<array8> NGLevel5Familiar = new();
+        public List<array8> NGLevel6Familiar = new();
+        public List<array8> NGLevel7Familiar = new();
+        public List<array8> NGLevel8Familiar = new();
+        public List<array8> NGLevel9Familiar = new();
+
+        public List<array8> TNLevel1Familiar = new();
+        public List<array8> TNLevel2Familiar = new();
+        public List<array8> TNLevel3Familiar = new();
+        public List<array8> TNLevel4Familiar = new();
+        public List<array8> TNLevel5Familiar = new();
+        public List<array8> TNLevel6Familiar = new();
+        public List<array8> TNLevel7Familiar = new();
+        public List<array8> TNLevel8Familiar = new();
+        public List<array8> TNLevel9Familiar = new();
+
+        public List<array8> NELevel1Familiar = new();
+        public List<array8> NELevel2Familiar = new();
+        public List<array8> NELevel3Familiar = new();
+        public List<array8> NELevel4Familiar = new();
+        public List<array8> NELevel5Familiar = new();
+        public List<array8> NELevel6Familiar = new();
+        public List<array8> NELevel7Familiar = new();
+        public List<array8> NELevel8Familiar = new();
+        public List<array8> NELevel9Familiar = new();
+
+        public List<array8> LELevel1Familiar = new();
+        public List<array8> LELevel2Familiar = new();
+        public List<array8> LELevel3Familiar = new();
+        public List<array8> LELevel4Familiar = new();
+        public List<array8> LELevel5Familiar = new();
+        public List<array8> LELevel6Familiar = new();
+        public List<array8> LELevel7Familiar = new();
+        public List<array8> LELevel8Familiar = new();
+        public List<array8> LELevel9Familiar = new();
+
+        public List<array8> CNLevel1Familiar = new();
+        public List<array8> CNLevel2Familiar = new();
+        public List<array8> CNLevel3Familiar = new();
+        public List<array8> CNLevel4Familiar = new();
+        public List<array8> CNLevel5Familiar = new();
+        public List<array8> CNLevel6Familiar = new();
+        public List<array8> CNLevel7Familiar = new();
+        public List<array8> CNLevel8Familiar = new();
+        public List<array8> CNLevel9Familiar = new();
+
+        public List<array8> CELevel1Familiar = new();
+        public List<array8> CELevel2Familiar = new();
+        public List<array8> CELevel3Familiar = new();
+        public List<array8> CELevel4Familiar = new();
+        public List<array8> CELevel5Familiar = new();
+        public List<array8> CELevel6Familiar = new();
+        public List<array8> CELevel7Familiar = new();
+        public List<array8> CELevel8Familiar = new();
+        public List<array8> CELevel9Familiar = new();
+
 
         [NonSerialized]
         private string checksum;
@@ -106,12 +201,12 @@ namespace ii.InfinityEngine.Files
         public Int16 QuickItemSlot3Ability {get; set;}
         public array32 Name {get; set;}
         public int TalkCount {get; set;}
-        public GamCharacterBinary CharacterStats { get; set; } = new();
+        public GamCharacter CharacterStats { get; set; } = new();
         public array8 VoiceSet {get; set;}
     }
 
     [Serializable]
-    public class GamCharacterBinary
+    public class GamCharacter
     {
         public int MostPowerfulVanquishedName {get; set;}
         public int MostPowerfulVanquishedXP {get; set;}
@@ -142,22 +237,11 @@ namespace ii.InfinityEngine.Files
         public Int16 FavouriteWeapon4Time {get; set;}
     }
 
-    [Serializable]
-    public class GamVariableBinary
-    {
-        public array32 Name { get; set; }
-        public Int16 Type { get; set; }
-        public Int16 ResourceType { get; set; }
-        public Int32 ValueDword { get; set; }
-        public Int32 ValueInt { get; set; }
-        public double ValueDouble { get; set; }
-        public array32 ScriptName { get; set; }
-    }
 
     [Serializable]
-    public class GamJournalBinary
+    public class GamJournal
     {
-        public int JournalText { get; set; }
+        public IEString JournalText { get; set; }
         public int Time { get; set; }
         public byte Chapter { get; set; }
         public byte ReadBy { get; set; }
@@ -166,7 +250,7 @@ namespace ii.InfinityEngine.Files
     }
 
     [Serializable]
-    public class GamFamiliarInfoBinary
+    public class GamFamiliarInfo
     {
         public array8 LawfulGoodFamiliar;
         public array8 LawfulNeutralFamiliar;
@@ -261,10 +345,22 @@ namespace ii.InfinityEngine.Files
     }
 
     [Serializable]
-    public class GamStoredLocationBinary
+    public class GamStoredLocation
     {
         public array8 Area;
         public Int16 XCoordinate;
         public Int16 YCoordinate;
-    }     
+    }
+
+    [Serializable]
+    public class GamVariable
+    {
+        public array32 Name { get; set; }
+        public Int16 Type { get; set; }
+        public Int16 ResourceType { get; set; }
+        public Int32 ValueDword { get; set; }
+        public Int32 ValueInt { get; set; }
+        public double ValueDouble { get; set; }
+        public array32 ScriptName { get; set; }
+    }
 }
