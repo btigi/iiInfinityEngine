@@ -446,6 +446,9 @@ namespace ii.InfinityEngine
                 case IEFileType.Tlk:
                     writer = new TlkFileBinaryWriter();
                     break;
+                case IEFileType.Vef:
+                    writer = new VefFileBinaryWriter();
+                    break;
                 case IEFileType.Vvc:
                     writer = new VvcFileBinaryWriter();
                     break;

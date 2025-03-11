@@ -227,10 +227,7 @@ namespace ii.InfinityEngine.Writers
                 bw.Write(encoding.GetBytes(str));
             }
 
-            if (BackupManger != null)
-            {
-                BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-            }
+            BackupManger?.BackupFile(file, file.Filename, file.FileType, this);
 
             using var fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
             bw.BaseStream.Position = 0;

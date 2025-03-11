@@ -301,33 +301,24 @@ namespace ii.InfinityEngine.Writers
             extendedHeader.Unused219 = proFile.ExtendedHeader.Unused219;
             extendedHeader.Unused24c = proFile.ExtendedHeader.Unused24c;
 
-            using (MemoryStream s = new MemoryStream())
+            using var s = new MemoryStream();
+            using var bw = new BinaryWriter(s);
+            var headerAsBytes = Common.WriteStruct(header);
+
+            bw.Write(headerAsBytes);
+
+            if (header.ProjectileType == (int)ProjectileType.AreaOfEffect)
             {
-                using (BinaryWriter bw = new BinaryWriter(s))
-                {
-                    var headerAsBytes = Common.WriteStruct(header);
-
-                    bw.Write(headerAsBytes);
-
-                    if (header.ProjectileType == (int)ProjectileType.AreaOfEffect)
-                    {
-                        var extendedHeaderAsBytes = Common.WriteStruct(extendedHeader);
-                        bw.Write(extendedHeaderAsBytes);
-                    }
-
-                    if (BackupManger != null)
-                    {
-                        BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-                    }
-
-                    using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
-                    {
-                        bw.BaseStream.Position = 0;
-                        bw.BaseStream.CopyTo(fs);
-                        fs.Flush(flushToDisk: true);
-                    }
-                }
+                var extendedHeaderAsBytes = Common.WriteStruct(extendedHeader);
+                bw.Write(extendedHeaderAsBytes);
             }
+
+            BackupManger?.BackupFile(file, file.Filename, file.FileType, this);
+
+            using var fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            bw.BaseStream.Position = 0;
+            bw.BaseStream.CopyTo(fs);
+            fs.Flush(flushToDisk: true);
             return true;
         }
     }

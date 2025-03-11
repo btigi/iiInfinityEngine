@@ -19,10 +19,7 @@ namespace ii.InfinityEngine.Writers
             if (!(forceSave) && (HashGenerator.GenerateKey(dlg) == dlg.Checksum))
                 return false;
 
-            if (BackupManger != null)
-            {
-                BackupManger.BackupFile(file, file.Filename, file.FileType, this);
-            }
+            BackupManger?.BackupFile(file, file.Filename, file.FileType, this);
 
             var str = String.Empty;
             foreach (var state in dlg.states)

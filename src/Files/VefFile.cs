@@ -13,7 +13,7 @@ namespace ii.InfinityEngine.Files
         private string filename;
         public string Filename { get { return filename; } set { filename = value; } }
         [NonSerialized]
-        private readonly IEFileType fileType = IEFileType.Vvc;
+        private readonly IEFileType fileType = IEFileType.Vef;
         public IEFileType FileType { get { return fileType; } }
         [NonSerialized]
         private IEFile originalFile;
@@ -32,6 +32,6 @@ namespace ii.InfinityEngine.Files
         public int ResourceType { get; set; }
         public array8 ResRef { get; set; }
         public int ContinuousCycles { get; set; }
-        public array124 Unused1c { get; set; }
+        public array196 Unused1c { get; set; }
     }
 }

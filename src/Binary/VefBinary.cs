@@ -22,6 +22,6 @@ namespace ii.InfinityEngine.Binary
         public int ResourceType;
         public array8 Resref;
         public int ContinuousCycles;
-        public array124 Unused1c;
+        public array196 Unused1c;
     }
 }
