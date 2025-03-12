@@ -129,6 +129,7 @@ namespace ii.InfinityEngine.Files
         public Int16 UseActiveAreaFromPartyMember { get; set; }
         public Int16 Weather { get; set; } //TODO:GAM
         public array8 MainArea { get; set; }
+        public int CurrentLink { get; set; }        
         public int PartyReputation { get; set; }
         public array8 CurrentArea { get; set; }
         public int GuiFlags { get; set; } //TODO:GAM
@@ -145,10 +146,10 @@ namespace ii.InfinityEngine.Files
     [Serializable]
     public class GamNpcStruct
     {
+        public CreFile CreFile { get; set; }
         public Int16 Selection {get; set;}
         public Int16 PartyOrder {get; set;}
-        public int OffsetToCre {get; set;}
-        public int SizeOfCre {get; set;}
+        public CreFile Creature { get; set; }
         public array8 CreResref {get; set;}
         public int Orientation {get; set;}
         public array8 Area {get; set;}

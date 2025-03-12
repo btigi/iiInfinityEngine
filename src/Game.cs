@@ -422,6 +422,9 @@ namespace ii.InfinityEngine
                 case IEFileType.Eff:
                     writer = new EffFileBinaryWriter();
                     break;
+                case IEFileType.Gam:
+                    writer = new GamFileBinaryWriter();
+                    break;
                 case IEFileType.Glsl:
                     writer = new GlslFileWriter();
                     break;

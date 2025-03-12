@@ -27,7 +27,7 @@ namespace ii.InfinityEngine.Binary
         public int GlobalVariableOffset;
         public int GlobalVariableCount;
         public array8 MainArea;
-        public int FamiliarExtraOffset;
+        public int CurrentLink;
         public int JournalEntryCount;
         public int JournalEntryOffset;
         public int PartyReputation;
