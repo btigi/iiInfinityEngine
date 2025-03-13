@@ -264,8 +264,6 @@ namespace ii.InfinityEngine.Writers
                 binaryPocketPlaneLocations.Add(pocketPlaneLocationBinary);
             }
 
-            //TODO:GAM Loop through partyStruct and nonPartyStruct and write to binary
-
             var headerBinary = new GamBinaryHeader();
             headerBinary.ftype = new array4() { character1 = 'G', character2 = 'A', character3 = 'M', character4 = 'E' };
             headerBinary.fversion = new array4() { character1 = 'V', character2 = '2', character3 = '.', character4 = '0' };
@@ -458,6 +456,16 @@ namespace ii.InfinityEngine.Writers
                 {
                     bw.Write(Common.WriteStruct(familiar));
                 }
+            }
+
+            foreach (var character in binaryPartyMembers)
+            {
+                bw.Write(Common.WriteStruct(character));
+            }
+
+            foreach (var character in binaryNonPartyMembers)
+            {
+                bw.Write(Common.WriteStruct(character));
             }
 
             BackupManger?.BackupFile(file, file.Filename, file.FileType, this);

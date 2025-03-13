@@ -9,7 +9,7 @@ namespace ii.InfinityEngine.Readers
     public class GamFileBinaryReader : IGamFileReader
     {
         public TlkFile TlkFile { get; set; }
-        private CreFileBinaryReader CreReader = new CreFileBinaryReader();
+        private CreFileBinaryReader CreReader = new();
 
         public GamFile Read(string filename)
         {
