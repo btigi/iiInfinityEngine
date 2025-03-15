@@ -85,7 +85,7 @@ namespace ii.InfinityEngine.Writers
                 binaryPocketPlaneLocations.Add(pocketPlaneLocationBinary);
             }
 
-            var creOffset = 0;
+            var partyCreOffset = 0;
             foreach (var character in gamFile.PartyMembers)
             {
                 var characterBinary = new GamNpcStructBinary();
@@ -175,12 +175,13 @@ namespace ii.InfinityEngine.Writers
 
                 var creBytes = CreWriter.Write(character.CreFile);
                 characterBinary.SizeOfCre = creBytes.Length;
-                characterBinary.OffsetToCre = HeaderSize + (gamFile.PartyMembers.Count * GamNpcStructSize) + (partyinventorycount * GamPartyInventorySize) + (gamFile.NonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + GamFamiliarInfoSize + (binaryStoredLocations.Count * GamStoredLocationSize) + (binaryPocketPlaneLocations.Count * GamStoredLocationSize) + creOffset;
+                characterBinary.OffsetToCre = HeaderSize + (gamFile.PartyMembers.Count * GamNpcStructSize) + partyCreOffset;
 
-                creOffset += creBytes.Length;
+                partyCreOffset += creBytes.Length;
                 binaryPartyMembers.Add((characterBinary, creBytes));
             }
 
+            var nonPartyCreOffset = 0;
             foreach (var character in gamFile.NonPartyMembers)
             {
                 var characterBinary = new GamNpcStructBinary();
@@ -270,8 +271,8 @@ namespace ii.InfinityEngine.Writers
 
                 var creBytes = CreWriter.Write(character.CreFile);
                 characterBinary.SizeOfCre = creBytes.Length;
-                characterBinary.OffsetToCre = HeaderSize + (gamFile.PartyMembers.Count * GamNpcStructSize) + (partyinventorycount * GamPartyInventorySize) + (gamFile.NonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + GamFamiliarInfoSize + (binaryStoredLocations.Count * GamStoredLocationSize) + (binaryPocketPlaneLocations.Count * GamStoredLocationSize) + creOffset;
-                creOffset += creBytes.Length;
+                characterBinary.OffsetToCre = HeaderSize + (gamFile.PartyMembers.Count * GamNpcStructSize) + (partyinventorycount * GamPartyInventorySize) + (gamFile.NonPartyMembers.Count * GamNpcStructSize) + partyCreOffset + nonPartyCreOffset;
+                nonPartyCreOffset += creBytes.Length;
                 binaryNonPartyMembers.Add((characterBinary, creBytes));
             }
 
@@ -292,22 +293,22 @@ namespace ii.InfinityEngine.Writers
             headerBinary.NpcStructPartyCount = binaryPartyMembers.Count;
             headerBinary.PartyInventoryOffset = 0;// HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize);
             headerBinary.PartyInventoryCount = 0; //TODO: We need a binary struct, a gamFile class, to update the reader and to update the writer (we write 20 blank bytes at the moment)
-            headerBinary.NpcStructNonPartyOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize);
+            headerBinary.NpcStructNonPartyOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + partyCreOffset;
             headerBinary.NpcStructNonPartyCount = binaryNonPartyMembers.Count;
-            headerBinary.GlobalVariableOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize);
+            headerBinary.GlobalVariableOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + partyCreOffset+ nonPartyCreOffset;
             headerBinary.GlobalVariableCount = binaryVariables.Count;
             headerBinary.MainArea = gamFile.MainArea;
             headerBinary.CurrentLink = gamFile.CurrentLink;
             headerBinary.JournalEntryCount = binaryJournals.Count;
-            headerBinary.JournalEntryOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize);
+            headerBinary.JournalEntryOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + partyCreOffset+ nonPartyCreOffset;
             headerBinary.PartyReputation = gamFile.PartyReputation;
             headerBinary.CurrentArea = gamFile.CurrentArea;
             headerBinary.GuiFlags = gamFile.GuiFlags;
             headerBinary.LoadingProgress = gamFile.LoadingProgress;
-            headerBinary.FamiliarInfoOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize);
-            headerBinary.StoredLocationOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + GamFamiliarInfoSize;
+            headerBinary.FamiliarInfoOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + partyCreOffset+ nonPartyCreOffset;
+            headerBinary.StoredLocationOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + GamFamiliarInfoSize + partyCreOffset+ nonPartyCreOffset;
             headerBinary.GameTimeReal = gamFile.GameTimeReal;
-            headerBinary.PocketPlaneLocationOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + GamFamiliarInfoSize + (binaryStoredLocations.Count * GamStoredLocationSize);
+            headerBinary.PocketPlaneLocationOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + GamFamiliarInfoSize + (binaryStoredLocations.Count * GamStoredLocationSize) + partyCreOffset+ nonPartyCreOffset;
             headerBinary.PocketPlaneLocationCount = binaryPocketPlaneLocations.Count;
             headerBinary.ZoomPercentage = gamFile.ZoomPercentage;
             headerBinary.RandomEncounterArea = gamFile.RandomEncounterArea;
@@ -327,6 +328,14 @@ namespace ii.InfinityEngine.Writers
                 bw.Write(characterAsBytes);
             }
 
+            foreach (var character in binaryPartyMembers)
+            {
+                if (character.cre != null && character.cre.Length > 0)
+                {
+                    bw.Write(character.cre);
+                }
+            }
+
             for (int i = 0; i < headerBinary.PartyInventoryCount; i++)
             {
                 bw.Write(new byte[20]);
@@ -336,6 +345,14 @@ namespace ii.InfinityEngine.Writers
             {
                 var characterAsBytes = Common.WriteStruct(character.data);
                 bw.Write(characterAsBytes);
+            }
+
+            foreach (var character in binaryNonPartyMembers)
+            {
+                if (character.cre != null && character.cre.Length > 0)
+                {
+                    bw.Write(character.cre);
+                }
             }
 
             foreach (var variable in binaryVariables)
@@ -472,22 +489,6 @@ namespace ii.InfinityEngine.Writers
                 foreach (var familiar in familiarList)
                 {
                     bw.Write(Common.WriteStruct(familiar));
-                }
-            }
-
-            foreach (var character in binaryPartyMembers)
-            {
-                if (character.cre != null && character.cre.Length > 0)
-                {
-                    bw.Write(character.cre);
-                }
-            }
-
-            foreach (var character in binaryNonPartyMembers)
-            {
-                if (character.cre != null && character.cre.Length > 0)
-                {
-                    bw.Write(character.cre);
                 }
             }
 
