@@ -108,6 +108,7 @@ namespace ii.InfinityEngine.Files
         public GamFile()
         {
             Weather = new();
+            GuiFlags = new();
         }
 
         [NonSerialized]
@@ -134,10 +135,10 @@ namespace ii.InfinityEngine.Files
         public Int16 UseActiveAreaFromPartyMember { get; set; }
         public WeatherFlags Weather { get; set; }
         public array8 MainArea { get; set; }
-        public int CurrentLink { get; set; }        
+        public int CurrentLink { get; set; }
         public int PartyReputation { get; set; }
         public array8 CurrentArea { get; set; }
-        public int GuiFlags { get; set; } //TODO:GAM
+        public GuiFlags GuiFlags { get; set; }
         public int LoadingProgress { get; set; } //TODO:GAM
         public int GameTimeReal { get; set; }
         public int ZoomPercentage { get; set; }
@@ -152,94 +153,94 @@ namespace ii.InfinityEngine.Files
     public class GamNpcStruct
     {
         public CreFile CreFile { get; set; }
-        public Int16 Selection {get; set;}
-        public Int16 PartyOrder {get; set;}
-        public array8 CreResref {get; set;}
-        public int Orientation {get; set;}
-        public array8 Area {get; set;}
-        public Int16 XCoordinate {get; set;}
-        public Int16 YCoordinate {get; set;}
-        public Int16 XCoordinateView {get; set;}
-        public Int16 YCoordinateView {get; set;}
-        public Int16 ModalAction {get; set;}
-        public Int16 Happiness {get; set;}
-        public int NumTimesInteractedNpcCount1 {get; set;}
-        public int NumTimesInteractedNpcCount2 {get; set;}
-        public int NumTimesInteractedNpcCount3 {get; set;}
-        public int NumTimesInteractedNpcCount4 {get; set;}
-        public int NumTimesInteractedNpcCount5 {get; set;}
-        public int NumTimesInteractedNpcCount6 {get; set;}
-        public int NumTimesInteractedNpcCount7 {get; set;}
-        public int NumTimesInteractedNpcCount8 {get; set;}
-        public int NumTimesInteractedNpcCount9 {get; set;}
-        public int NumTimesInteractedNpcCount10 {get; set;}
-        public int NumTimesInteractedNpcCount11 {get; set;}
-        public int NumTimesInteractedNpcCount12 {get; set;}
-        public int NumTimesInteractedNpcCount13 {get; set;}
-        public int NumTimesInteractedNpcCount14 {get; set;}
-        public int NumTimesInteractedNpcCount15 {get; set;}
-        public int NumTimesInteractedNpcCount16 {get; set;}
-        public int NumTimesInteractedNpcCount17 {get; set;}
-        public int NumTimesInteractedNpcCount18 {get; set;}
-        public int NumTimesInteractedNpcCount19 {get; set;}
-        public int NumTimesInteractedNpcCount20 {get; set;}
-        public int NumTimesInteractedNpcCount21 {get; set;}
-        public int NumTimesInteractedNpcCount22 {get; set;}
-        public int NumTimesInteractedNpcCount23 {get; set;}
-        public int NumTimesInteractedNpcCount24 {get; set;}
-        public Int16 QuickWeaponSlot1 {get; set;}
-        public Int16 QuickWeaponSlot2 {get; set;}
-        public Int16 QuickWeaponSlot3 {get; set;}
-        public Int16 QuickWeaponSlot4 {get; set;}
-        public Int16 QuickWeaponSlot1Ability {get; set;}
-        public Int16 QuickWeaponSlot2Ability {get; set;}
-        public Int16 QuickWeaponSlot3Ability {get; set;}
-        public Int16 QuickWeaponSlot4Ability {get; set;}
-        public array8 QuickSpell1Resource {get; set;}
-        public array8 QuickSpell2Resource {get; set;}
-        public array8 QuickSpell3Resource {get; set;}
-        public Int16 QuickItemSlot1 {get; set;}
-        public Int16 QuickItemSlot2 {get; set;}
-        public Int16 QuickItemSlot3 {get; set;}
-        public Int16 QuickItemSlot1Ability {get; set;}
-        public Int16 QuickItemSlot2Ability {get; set;}
-        public Int16 QuickItemSlot3Ability {get; set;}
-        public array32 Name {get; set;}
-        public int TalkCount {get; set;}
+        public Int16 Selection { get; set; }
+        public Int16 PartyOrder { get; set; }
+        public array8 CreResref { get; set; }
+        public int Orientation { get; set; }
+        public array8 Area { get; set; }
+        public Int16 XCoordinate { get; set; }
+        public Int16 YCoordinate { get; set; }
+        public Int16 XCoordinateView { get; set; }
+        public Int16 YCoordinateView { get; set; }
+        public Int16 ModalAction { get; set; }
+        public Int16 Happiness { get; set; }
+        public int NumTimesInteractedNpcCount1 { get; set; }
+        public int NumTimesInteractedNpcCount2 { get; set; }
+        public int NumTimesInteractedNpcCount3 { get; set; }
+        public int NumTimesInteractedNpcCount4 { get; set; }
+        public int NumTimesInteractedNpcCount5 { get; set; }
+        public int NumTimesInteractedNpcCount6 { get; set; }
+        public int NumTimesInteractedNpcCount7 { get; set; }
+        public int NumTimesInteractedNpcCount8 { get; set; }
+        public int NumTimesInteractedNpcCount9 { get; set; }
+        public int NumTimesInteractedNpcCount10 { get; set; }
+        public int NumTimesInteractedNpcCount11 { get; set; }
+        public int NumTimesInteractedNpcCount12 { get; set; }
+        public int NumTimesInteractedNpcCount13 { get; set; }
+        public int NumTimesInteractedNpcCount14 { get; set; }
+        public int NumTimesInteractedNpcCount15 { get; set; }
+        public int NumTimesInteractedNpcCount16 { get; set; }
+        public int NumTimesInteractedNpcCount17 { get; set; }
+        public int NumTimesInteractedNpcCount18 { get; set; }
+        public int NumTimesInteractedNpcCount19 { get; set; }
+        public int NumTimesInteractedNpcCount20 { get; set; }
+        public int NumTimesInteractedNpcCount21 { get; set; }
+        public int NumTimesInteractedNpcCount22 { get; set; }
+        public int NumTimesInteractedNpcCount23 { get; set; }
+        public int NumTimesInteractedNpcCount24 { get; set; }
+        public Int16 QuickWeaponSlot1 { get; set; }
+        public Int16 QuickWeaponSlot2 { get; set; }
+        public Int16 QuickWeaponSlot3 { get; set; }
+        public Int16 QuickWeaponSlot4 { get; set; }
+        public Int16 QuickWeaponSlot1Ability { get; set; }
+        public Int16 QuickWeaponSlot2Ability { get; set; }
+        public Int16 QuickWeaponSlot3Ability { get; set; }
+        public Int16 QuickWeaponSlot4Ability { get; set; }
+        public array8 QuickSpell1Resource { get; set; }
+        public array8 QuickSpell2Resource { get; set; }
+        public array8 QuickSpell3Resource { get; set; }
+        public Int16 QuickItemSlot1 { get; set; }
+        public Int16 QuickItemSlot2 { get; set; }
+        public Int16 QuickItemSlot3 { get; set; }
+        public Int16 QuickItemSlot1Ability { get; set; }
+        public Int16 QuickItemSlot2Ability { get; set; }
+        public Int16 QuickItemSlot3Ability { get; set; }
+        public array32 Name { get; set; }
+        public int TalkCount { get; set; }
         public GamCharacter CharacterStats { get; set; } = new();
-        public array8 VoiceSet {get; set;}
+        public array8 VoiceSet { get; set; }
     }
 
     [Serializable]
     public class GamCharacter
     {
-        public int MostPowerfulVanquishedName {get; set;}
-        public int MostPowerfulVanquishedXP {get; set;}
-        public int TimeInParty {get; set;}
-        public int TimeJoinedParty {get; set;}
-        public byte PartyMember {get; set;}
-        public Int16 Unused11 {get; set;}
-        public char FirstLetterofCreResref {get; set;}
-        public int KillsXPGainedChapter {get; set;}
-        public int KillsNumberChapter {get; set;}
-        public int KillsXPGainedGame {get; set;}
-        public int KillsNumberGame {get; set;}
-        public array8 FavouriteSpell1 {get; set;}
-        public array8 FavouriteSpell2 {get; set;}
-        public array8 FavouriteSpell3 {get; set;}
-        public array8 FavouriteSpell4 {get; set;}
-        public Int16 FavouriteSpell1Count {get; set;}
-        public Int16 FavouriteSpell2Count {get; set;}
-        public Int16 FavouriteSpell3Count {get; set;}
-        public Int16 FavouriteSpell4Count {get; set;}
-        public array8 FavouriteWeapon1 {get; set;}
-        public array8 FavouriteWeapon2 {get; set;}
-        public array8 FavouriteWeapon3 {get; set;}
-        public array8 FavouriteWeapon4 {get; set;}
-        public Int16 FavouriteWeapon1Time {get; set;}
-        public Int16 FavouriteWeapon2Time {get; set;}
-        public Int16 FavouriteWeapon3Time {get; set;}
-        public Int16 FavouriteWeapon4Time {get; set;}
+        public int MostPowerfulVanquishedName { get; set; }
+        public int MostPowerfulVanquishedXP { get; set; }
+        public int TimeInParty { get; set; }
+        public int TimeJoinedParty { get; set; }
+        public byte PartyMember { get; set; }
+        public Int16 Unused11 { get; set; }
+        public char FirstLetterofCreResref { get; set; }
+        public int KillsXPGainedChapter { get; set; }
+        public int KillsNumberChapter { get; set; }
+        public int KillsXPGainedGame { get; set; }
+        public int KillsNumberGame { get; set; }
+        public array8 FavouriteSpell1 { get; set; }
+        public array8 FavouriteSpell2 { get; set; }
+        public array8 FavouriteSpell3 { get; set; }
+        public array8 FavouriteSpell4 { get; set; }
+        public Int16 FavouriteSpell1Count { get; set; }
+        public Int16 FavouriteSpell2Count { get; set; }
+        public Int16 FavouriteSpell3Count { get; set; }
+        public Int16 FavouriteSpell4Count { get; set; }
+        public array8 FavouriteWeapon1 { get; set; }
+        public array8 FavouriteWeapon2 { get; set; }
+        public array8 FavouriteWeapon3 { get; set; }
+        public array8 FavouriteWeapon4 { get; set; }
+        public Int16 FavouriteWeapon1Time { get; set; }
+        public Int16 FavouriteWeapon2Time { get; set; }
+        public Int16 FavouriteWeapon3Time { get; set; }
+        public Int16 FavouriteWeapon4Time { get; set; }
     }
 
 
@@ -394,5 +395,42 @@ namespace ii.InfinityEngine.Files
         public bool Bit13 { get; set; }
         public bool Bit14 { get; set; }
         public bool Bit15 { get; set; }
+    }
+
+    [Serializable]
+    public class GuiFlags
+    {
+        public bool AiEnabled { get; set; }
+        public bool TextWindowSize1 { get; set; }
+        public bool TextWindowSize2 { get; set; }
+        public bool Bit3 { get; set; }
+        public bool HideGui { get; set; }
+        public bool HideOptionsPanel { get; set; }
+        public bool HidePortraitPanel { get; set; }
+        public bool ShowAutomapNotes { get; set; }
+        public bool Bit8 { get; set; }
+        public bool Bit9 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
+        public bool Bit16 { get; set; }
+        public bool Bit17 { get; set; }
+        public bool Bit18 { get; set; }
+        public bool Bit19 { get; set; }
+        public bool Bit20 { get; set; }
+        public bool Bit21 { get; set; }
+        public bool Bit22 { get; set; }
+        public bool Bit23 { get; set; }
+        public bool Bit24 { get; set; }
+        public bool Bit25 { get; set; }
+        public bool Bit26 { get; set; }
+        public bool Bit27 { get; set; }
+        public bool Bit28 { get; set; }
+        public bool Bit29 { get; set; }
+        public bool Bit30 { get; set; }
+        public bool Bit31 { get; set; }
     }
 }
