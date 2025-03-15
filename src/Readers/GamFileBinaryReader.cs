@@ -587,7 +587,14 @@ namespace ii.InfinityEngine.Readers
                 gamJournal.Time = journal.Time;
                 gamJournal.Chapter = journal.Chapter;
                 gamJournal.ReadBy = journal.ReadBy;
-                gamJournal.JournalSection = journal.JournalSection;
+                gamJournal.JournalSection.Quests = (journal.JournalSection & Common.Bit0) != 0;
+                gamJournal.JournalSection.CompletedQuests = (journal.JournalSection & Common.Bit1) != 0;
+                gamJournal.JournalSection.Journal = (journal.JournalSection & Common.Bit2) != 0;
+                gamJournal.JournalSection.Bit3 = (journal.JournalSection & Common.Bit3) != 0;
+                gamJournal.JournalSection.Bit4 = (journal.JournalSection & Common.Bit4) != 0;
+                gamJournal.JournalSection.Bit5 = (journal.JournalSection & Common.Bit5) != 0;
+                gamJournal.JournalSection.Bit6 = (journal.JournalSection & Common.Bit6) != 0;
+                gamJournal.JournalSection.Bit7 = (journal.JournalSection & Common.Bit7) != 0;
                 gamJournal.LocationFlag = journal.LocationFlag;
                 gamFile.JournalEntries.Add(gamJournal);
             }

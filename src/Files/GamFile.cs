@@ -247,11 +247,16 @@ namespace ii.InfinityEngine.Files
     [Serializable]
     public class GamJournal
     {
+        public GamJournal()
+        {
+            JournalSection = new();
+        }
+
         public IEString JournalText { get; set; }
         public int Time { get; set; }
         public byte Chapter { get; set; }
         public byte ReadBy { get; set; }
-        public byte JournalSection { get; set; } //TODO:GAM
+        public JournalSection JournalSection { get; set; }
         public byte LocationFlag { get; set; }
     }
 
@@ -443,5 +448,18 @@ namespace ii.InfinityEngine.Files
         XNewAreaPending,
         XNewAreaComplete,
         ToB
-    }    
+    }
+
+    [Serializable]
+    public class JournalSection
+    {
+        public bool Quests { get; set; }
+        public bool CompletedQuests { get; set; }
+        public bool Journal { get; set; }
+        public bool Bit3 { get; set; }
+        public bool Bit4 { get; set; }
+        public bool Bit5 { get; set; }
+        public bool Bit6 { get; set; }
+        public bool Bit7 { get; set; }
+    }
 }

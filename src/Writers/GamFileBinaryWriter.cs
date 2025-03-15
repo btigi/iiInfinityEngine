@@ -61,7 +61,14 @@ namespace ii.InfinityEngine.Writers
                 journalBinary.Time = journal.Time;
                 journalBinary.Chapter = journal.Chapter;
                 journalBinary.ReadBy = journal.ReadBy;
-                journalBinary.JournalSection = journal.JournalSection;
+                journalBinary.JournalSection = (byte)(journal.JournalSection.Quests ? journalBinary.JournalSection | Common.Bit0 : journalBinary.JournalSection);
+                journalBinary.JournalSection = (byte)(journal.JournalSection.CompletedQuests ? journalBinary.JournalSection | Common.Bit1 : journalBinary.JournalSection);
+                journalBinary.JournalSection = (byte)(journal.JournalSection.Journal ? journalBinary.JournalSection | Common.Bit2 : journalBinary.JournalSection);
+                journalBinary.JournalSection = (byte)(journal.JournalSection.Bit3 ? journalBinary.JournalSection | Common.Bit3 : journalBinary.JournalSection);
+                journalBinary.JournalSection = (byte)(journal.JournalSection.Bit4 ? journalBinary.JournalSection | Common.Bit4 : journalBinary.JournalSection);
+                journalBinary.JournalSection = (byte)(journal.JournalSection.Bit5 ? journalBinary.JournalSection | Common.Bit5 : journalBinary.JournalSection);
+                journalBinary.JournalSection = (byte)(journal.JournalSection.Bit6 ? journalBinary.JournalSection | Common.Bit6 : journalBinary.JournalSection);
+                journalBinary.JournalSection = (byte)(journal.JournalSection.Bit7 ? journalBinary.JournalSection | Common.Bit7 : journalBinary.JournalSection);
                 journalBinary.LocationFlag = journal.LocationFlag;
                 binaryJournals.Add(journalBinary);
             }
