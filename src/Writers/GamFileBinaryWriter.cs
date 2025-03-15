@@ -13,213 +13,34 @@ namespace ii.InfinityEngine.Writers
         const int GamNpcStructSize = 352;
         const int GamVariableSize = 84;
         const int GamJournalEntrySize = 12;
-        const int GamFamiliarInfoSize = 592;
+        const int GamFamiliarInfoSize = 400;
         const int GamStoredLocationSize = 12;
         const int GamPocketLocationSize = 12;
+        const int GamPartyInventorySize = 20;
 
         public TlkFile TlkFile { get; set; }
+        private CreFileBinaryWriter CreWriter = new();
         public BackupManager BackupManger { get; set; }
 
         public bool Write(string filename, IEFile file, bool forceSave = false)
         {
+            int partyinventorycount = 0;
+
             if (file is not GamFile)
                 throw new ArgumentException("File is not a valid gam file");
 
             var gamFile = file as GamFile;
+            CreWriter.TlkFile = TlkFile;
 
             if (!(forceSave) && (HashGenerator.GenerateKey(gamFile) == gamFile.Checksum))
                 return false;
 
-            var binaryPartyMembers = new List<GamNpcStructBinary>();
-            var binaryNonPartyMembers = new List<GamNpcStructBinary>();
+            var binaryPartyMembers = new List<(GamNpcStructBinary data, byte[] cre)>();
+            var binaryNonPartyMembers = new List<(GamNpcStructBinary data, byte[] cre)>();
             var binaryVariables = new List<GamVariableBinary>();
             var binaryJournals = new List<GamJournalBinary>();
             var binaryStoredLocations = new List<GamStoredLocationBinary>();
             var binaryPocketPlaneLocations = new List<GamStoredLocationBinary>();
-
-            foreach (var character in gamFile.PartyMembers)
-            {
-                var characterBinary = new GamNpcStructBinary();
-                characterBinary.Selection = character.Selection;
-                characterBinary.PartyOrder = character.PartyOrder;
-                //TODO:GAM - write CRE file
-                //characterBinary.OffsetToCre = character.OffsetToCre;
-                //characterBinary.SizeOfCre = character.SizeOfCre;
-                characterBinary.Name = character.Name;
-                characterBinary.Orientation = character.Orientation;
-                characterBinary.Area = character.Area;
-                characterBinary.XCoordinate = character.XCoordinate;
-                characterBinary.YCoordinate = character.YCoordinate;
-                characterBinary.XCoordinateView = character.XCoordinateView;
-                characterBinary.YCoordinateView = character.YCoordinateView;
-                characterBinary.ModalAction = character.ModalAction;
-                characterBinary.Happiness = character.Happiness;
-                characterBinary.NumTimesInteractedNpcCount1 = character.NumTimesInteractedNpcCount1;
-                characterBinary.NumTimesInteractedNpcCount2 = character.NumTimesInteractedNpcCount2;
-                characterBinary.NumTimesInteractedNpcCount3 = character.NumTimesInteractedNpcCount3;
-                characterBinary.NumTimesInteractedNpcCount4 = character.NumTimesInteractedNpcCount4;
-                characterBinary.NumTimesInteractedNpcCount5 = character.NumTimesInteractedNpcCount5;
-                characterBinary.NumTimesInteractedNpcCount6 = character.NumTimesInteractedNpcCount6;
-                characterBinary.NumTimesInteractedNpcCount7 = character.NumTimesInteractedNpcCount7;
-                characterBinary.NumTimesInteractedNpcCount8 = character.NumTimesInteractedNpcCount8;
-                characterBinary.NumTimesInteractedNpcCount9 = character.NumTimesInteractedNpcCount9;
-                characterBinary.NumTimesInteractedNpcCount10 = character.NumTimesInteractedNpcCount10;
-                characterBinary.NumTimesInteractedNpcCount11 = character.NumTimesInteractedNpcCount11;
-                characterBinary.NumTimesInteractedNpcCount12 = character.NumTimesInteractedNpcCount12;
-                characterBinary.NumTimesInteractedNpcCount13 = character.NumTimesInteractedNpcCount13;
-                characterBinary.NumTimesInteractedNpcCount14 = character.NumTimesInteractedNpcCount14;
-                characterBinary.NumTimesInteractedNpcCount15 = character.NumTimesInteractedNpcCount15;
-                characterBinary.NumTimesInteractedNpcCount16 = character.NumTimesInteractedNpcCount16;
-                characterBinary.NumTimesInteractedNpcCount17 = character.NumTimesInteractedNpcCount17;
-                characterBinary.NumTimesInteractedNpcCount18 = character.NumTimesInteractedNpcCount18;
-                characterBinary.NumTimesInteractedNpcCount19 = character.NumTimesInteractedNpcCount19;
-                characterBinary.NumTimesInteractedNpcCount20 = character.NumTimesInteractedNpcCount20;
-                characterBinary.NumTimesInteractedNpcCount21 = character.NumTimesInteractedNpcCount21;
-                characterBinary.NumTimesInteractedNpcCount22 = character.NumTimesInteractedNpcCount22;
-                characterBinary.NumTimesInteractedNpcCount23 = character.NumTimesInteractedNpcCount23;
-                characterBinary.NumTimesInteractedNpcCount24 = character.NumTimesInteractedNpcCount24;
-                characterBinary.QuickWeaponSlot1 = character.QuickWeaponSlot1;
-                characterBinary.QuickWeaponSlot2 = character.QuickWeaponSlot2;
-                characterBinary.QuickWeaponSlot3 = character.QuickWeaponSlot3;
-                characterBinary.QuickWeaponSlot4 = character.QuickWeaponSlot4;
-                characterBinary.QuickWeaponSlot1Ability = character.QuickWeaponSlot1Ability;
-                characterBinary.QuickWeaponSlot2Ability = character.QuickWeaponSlot2Ability;
-                characterBinary.QuickWeaponSlot3Ability = character.QuickWeaponSlot3Ability;
-                characterBinary.QuickWeaponSlot4Ability = character.QuickWeaponSlot4Ability;
-                characterBinary.QuickSpell1Resource = character.QuickSpell1Resource;
-                characterBinary.QuickSpell2Resource = character.QuickSpell2Resource;
-                characterBinary.QuickSpell3Resource = character.QuickSpell3Resource;
-                characterBinary.QuickItemSlot1 = character.QuickItemSlot1;
-                characterBinary.QuickItemSlot2 = character.QuickItemSlot2;
-                characterBinary.QuickItemSlot3 = character.QuickItemSlot3;
-                characterBinary.QuickItemSlot1Ability = character.QuickItemSlot1Ability;
-                characterBinary.QuickItemSlot2Ability = character.QuickItemSlot2Ability;
-                characterBinary.QuickItemSlot3Ability = character.QuickItemSlot3Ability;
-                characterBinary.Name = character.Name;
-                characterBinary.TalkCount = character.TalkCount;
-                characterBinary.CharacterStats = new GamCharacterBinary();
-                characterBinary.CharacterStats.MostPowerfulVanquishedName = character.CharacterStats.MostPowerfulVanquishedName;
-                characterBinary.CharacterStats.MostPowerfulVanquishedXP = character.CharacterStats.MostPowerfulVanquishedXP;
-                characterBinary.CharacterStats.TimeInParty = character.CharacterStats.TimeInParty;
-                characterBinary.CharacterStats.TimeJoinedParty = character.CharacterStats.TimeJoinedParty;
-                characterBinary.CharacterStats.PartyMember = character.CharacterStats.PartyMember;
-                characterBinary.CharacterStats.Unused11 = character.CharacterStats.Unused11;
-                characterBinary.CharacterStats.FirstLetterofCreResref = character.CharacterStats.FirstLetterofCreResref;
-                characterBinary.CharacterStats.KillsXPGainedChapter = character.CharacterStats.KillsXPGainedChapter;
-                characterBinary.CharacterStats.KillsNumberChapter = character.CharacterStats.KillsNumberChapter;
-                characterBinary.CharacterStats.KillsXPGainedGame = character.CharacterStats.KillsXPGainedGame;
-                characterBinary.CharacterStats.KillsNumberGame = character.CharacterStats.KillsNumberGame;
-                characterBinary.CharacterStats.FavouriteSpell1 = character.CharacterStats.FavouriteSpell1;
-                characterBinary.CharacterStats.FavouriteSpell2 = character.CharacterStats.FavouriteSpell2;
-                characterBinary.CharacterStats.FavouriteSpell3 = character.CharacterStats.FavouriteSpell3;
-                characterBinary.CharacterStats.FavouriteSpell4 = character.CharacterStats.FavouriteSpell4;
-                characterBinary.CharacterStats.FavouriteSpell1Count = character.CharacterStats.FavouriteSpell1Count;
-                characterBinary.CharacterStats.FavouriteSpell2Count = character.CharacterStats.FavouriteSpell2Count;
-                characterBinary.CharacterStats.FavouriteSpell3Count = character.CharacterStats.FavouriteSpell3Count;
-                characterBinary.CharacterStats.FavouriteSpell4Count = character.CharacterStats.FavouriteSpell4Count;
-                characterBinary.CharacterStats.FavouriteWeapon1 = character.CharacterStats.FavouriteWeapon1;
-                characterBinary.CharacterStats.FavouriteWeapon2 = character.CharacterStats.FavouriteWeapon2;
-                characterBinary.CharacterStats.FavouriteWeapon3 = character.CharacterStats.FavouriteWeapon3;
-                characterBinary.CharacterStats.FavouriteWeapon4 = character.CharacterStats.FavouriteWeapon4;
-                characterBinary.CharacterStats.FavouriteWeapon1Time = character.CharacterStats.FavouriteWeapon1Time;
-                characterBinary.CharacterStats.FavouriteWeapon2Time = character.CharacterStats.FavouriteWeapon2Time;
-                characterBinary.CharacterStats.FavouriteWeapon3Time = character.CharacterStats.FavouriteWeapon3Time;
-                characterBinary.CharacterStats.FavouriteWeapon4Time = character.CharacterStats.FavouriteWeapon4Time;
-                characterBinary.VoiceSet = character.VoiceSet;
-                binaryPartyMembers.Add(characterBinary);
-            }
-
-            foreach (var character in gamFile.NonPartyMembers)
-            {
-                var characterBinary = new GamNpcStructBinary();
-                characterBinary.Selection = character.Selection;
-                characterBinary.PartyOrder = character.PartyOrder;
-                //TODO:GAM - write CRE file
-                //characterBinary.OffsetToCre = character.OffsetToCre;
-                //characterBinary.SizeOfCre = character.SizeOfCre;
-                characterBinary.Name = character.Name;
-                characterBinary.Orientation = character.Orientation;
-                characterBinary.Area = character.Area;
-                characterBinary.XCoordinate = character.XCoordinate;
-                characterBinary.YCoordinate = character.YCoordinate;
-                characterBinary.XCoordinateView = character.XCoordinateView;
-                characterBinary.YCoordinateView = character.YCoordinateView;
-                characterBinary.ModalAction = character.ModalAction;
-                characterBinary.Happiness = character.Happiness;
-                characterBinary.NumTimesInteractedNpcCount1 = character.NumTimesInteractedNpcCount1;
-                characterBinary.NumTimesInteractedNpcCount2 = character.NumTimesInteractedNpcCount2;
-                characterBinary.NumTimesInteractedNpcCount3 = character.NumTimesInteractedNpcCount3;
-                characterBinary.NumTimesInteractedNpcCount4 = character.NumTimesInteractedNpcCount4;
-                characterBinary.NumTimesInteractedNpcCount5 = character.NumTimesInteractedNpcCount5;
-                characterBinary.NumTimesInteractedNpcCount6 = character.NumTimesInteractedNpcCount6;
-                characterBinary.NumTimesInteractedNpcCount7 = character.NumTimesInteractedNpcCount7;
-                characterBinary.NumTimesInteractedNpcCount8 = character.NumTimesInteractedNpcCount8;
-                characterBinary.NumTimesInteractedNpcCount9 = character.NumTimesInteractedNpcCount9;
-                characterBinary.NumTimesInteractedNpcCount10 = character.NumTimesInteractedNpcCount10;
-                characterBinary.NumTimesInteractedNpcCount11 = character.NumTimesInteractedNpcCount11;
-                characterBinary.NumTimesInteractedNpcCount12 = character.NumTimesInteractedNpcCount12;
-                characterBinary.NumTimesInteractedNpcCount13 = character.NumTimesInteractedNpcCount13;
-                characterBinary.NumTimesInteractedNpcCount14 = character.NumTimesInteractedNpcCount14;
-                characterBinary.NumTimesInteractedNpcCount15 = character.NumTimesInteractedNpcCount15;
-                characterBinary.NumTimesInteractedNpcCount16 = character.NumTimesInteractedNpcCount16;
-                characterBinary.NumTimesInteractedNpcCount17 = character.NumTimesInteractedNpcCount17;
-                characterBinary.NumTimesInteractedNpcCount18 = character.NumTimesInteractedNpcCount18;
-                characterBinary.NumTimesInteractedNpcCount19 = character.NumTimesInteractedNpcCount19;
-                characterBinary.NumTimesInteractedNpcCount20 = character.NumTimesInteractedNpcCount20;
-                characterBinary.NumTimesInteractedNpcCount21 = character.NumTimesInteractedNpcCount21;
-                characterBinary.NumTimesInteractedNpcCount22 = character.NumTimesInteractedNpcCount22;
-                characterBinary.NumTimesInteractedNpcCount23 = character.NumTimesInteractedNpcCount23;
-                characterBinary.NumTimesInteractedNpcCount24 = character.NumTimesInteractedNpcCount24;
-                characterBinary.QuickWeaponSlot1 = character.QuickWeaponSlot1;
-                characterBinary.QuickWeaponSlot2 = character.QuickWeaponSlot2;
-                characterBinary.QuickWeaponSlot3 = character.QuickWeaponSlot3;
-                characterBinary.QuickWeaponSlot4 = character.QuickWeaponSlot4;
-                characterBinary.QuickWeaponSlot1Ability = character.QuickWeaponSlot1Ability;
-                characterBinary.QuickWeaponSlot2Ability = character.QuickWeaponSlot2Ability;
-                characterBinary.QuickWeaponSlot3Ability = character.QuickWeaponSlot3Ability;
-                characterBinary.QuickWeaponSlot4Ability = character.QuickWeaponSlot4Ability;
-                characterBinary.QuickSpell1Resource = character.QuickSpell1Resource;
-                characterBinary.QuickSpell2Resource = character.QuickSpell2Resource;
-                characterBinary.QuickSpell3Resource = character.QuickSpell3Resource;
-                characterBinary.QuickItemSlot1 = character.QuickItemSlot1;
-                characterBinary.QuickItemSlot2 = character.QuickItemSlot2;
-                characterBinary.QuickItemSlot3 = character.QuickItemSlot3;
-                characterBinary.QuickItemSlot1Ability = character.QuickItemSlot1Ability;
-                characterBinary.QuickItemSlot2Ability = character.QuickItemSlot2Ability;
-                characterBinary.QuickItemSlot3Ability = character.QuickItemSlot3Ability;
-                characterBinary.Name = character.Name;
-                characterBinary.TalkCount = character.TalkCount;
-                characterBinary.CharacterStats = new GamCharacterBinary();
-                characterBinary.CharacterStats.MostPowerfulVanquishedName = character.CharacterStats.MostPowerfulVanquishedName;
-                characterBinary.CharacterStats.MostPowerfulVanquishedXP = character.CharacterStats.MostPowerfulVanquishedXP;
-                characterBinary.CharacterStats.TimeInParty = character.CharacterStats.TimeInParty;
-                characterBinary.CharacterStats.TimeJoinedParty = character.CharacterStats.TimeJoinedParty;
-                characterBinary.CharacterStats.PartyMember = character.CharacterStats.PartyMember;
-                characterBinary.CharacterStats.Unused11 = character.CharacterStats.Unused11;
-                characterBinary.CharacterStats.FirstLetterofCreResref = character.CharacterStats.FirstLetterofCreResref;
-                characterBinary.CharacterStats.KillsXPGainedChapter = character.CharacterStats.KillsXPGainedChapter;
-                characterBinary.CharacterStats.KillsNumberChapter = character.CharacterStats.KillsNumberChapter;
-                characterBinary.CharacterStats.KillsXPGainedGame = character.CharacterStats.KillsXPGainedGame;
-                characterBinary.CharacterStats.KillsNumberGame = character.CharacterStats.KillsNumberGame;
-                characterBinary.CharacterStats.FavouriteSpell1 = character.CharacterStats.FavouriteSpell1;
-                characterBinary.CharacterStats.FavouriteSpell2 = character.CharacterStats.FavouriteSpell2;
-                characterBinary.CharacterStats.FavouriteSpell3 = character.CharacterStats.FavouriteSpell3;
-                characterBinary.CharacterStats.FavouriteSpell4 = character.CharacterStats.FavouriteSpell4;
-                characterBinary.CharacterStats.FavouriteSpell1Count = character.CharacterStats.FavouriteSpell1Count;
-                characterBinary.CharacterStats.FavouriteSpell2Count = character.CharacterStats.FavouriteSpell2Count;
-                characterBinary.CharacterStats.FavouriteSpell3Count = character.CharacterStats.FavouriteSpell3Count;
-                characterBinary.CharacterStats.FavouriteSpell4Count = character.CharacterStats.FavouriteSpell4Count;
-                characterBinary.CharacterStats.FavouriteWeapon1 = character.CharacterStats.FavouriteWeapon1;
-                characterBinary.CharacterStats.FavouriteWeapon2 = character.CharacterStats.FavouriteWeapon2;
-                characterBinary.CharacterStats.FavouriteWeapon3 = character.CharacterStats.FavouriteWeapon3;
-                characterBinary.CharacterStats.FavouriteWeapon4 = character.CharacterStats.FavouriteWeapon4;
-                characterBinary.CharacterStats.FavouriteWeapon1Time = character.CharacterStats.FavouriteWeapon1Time;
-                characterBinary.CharacterStats.FavouriteWeapon2Time = character.CharacterStats.FavouriteWeapon2Time;
-                characterBinary.CharacterStats.FavouriteWeapon3Time = character.CharacterStats.FavouriteWeapon3Time;
-                characterBinary.CharacterStats.FavouriteWeapon4Time = character.CharacterStats.FavouriteWeapon4Time;
-                characterBinary.VoiceSet = character.VoiceSet;
-                binaryNonPartyMembers.Add(characterBinary);
-            }
 
             foreach (var variable in gamFile.Variables)
             {
@@ -264,6 +85,196 @@ namespace ii.InfinityEngine.Writers
                 binaryPocketPlaneLocations.Add(pocketPlaneLocationBinary);
             }
 
+            var creOffset = 0;
+            foreach (var character in gamFile.PartyMembers)
+            {
+                var characterBinary = new GamNpcStructBinary();
+                characterBinary.Selection = character.Selection;
+                characterBinary.PartyOrder = character.PartyOrder;
+                characterBinary.Name = character.Name;
+                characterBinary.Orientation = character.Orientation;
+                characterBinary.Area = character.Area;
+                characterBinary.XCoordinate = character.XCoordinate;
+                characterBinary.YCoordinate = character.YCoordinate;
+                characterBinary.XCoordinateView = character.XCoordinateView;
+                characterBinary.YCoordinateView = character.YCoordinateView;
+                characterBinary.ModalAction = character.ModalAction;
+                characterBinary.Happiness = character.Happiness;
+                characterBinary.NumTimesInteractedNpcCount1 = character.NumTimesInteractedNpcCount1;
+                characterBinary.NumTimesInteractedNpcCount2 = character.NumTimesInteractedNpcCount2;
+                characterBinary.NumTimesInteractedNpcCount3 = character.NumTimesInteractedNpcCount3;
+                characterBinary.NumTimesInteractedNpcCount4 = character.NumTimesInteractedNpcCount4;
+                characterBinary.NumTimesInteractedNpcCount5 = character.NumTimesInteractedNpcCount5;
+                characterBinary.NumTimesInteractedNpcCount6 = character.NumTimesInteractedNpcCount6;
+                characterBinary.NumTimesInteractedNpcCount7 = character.NumTimesInteractedNpcCount7;
+                characterBinary.NumTimesInteractedNpcCount8 = character.NumTimesInteractedNpcCount8;
+                characterBinary.NumTimesInteractedNpcCount9 = character.NumTimesInteractedNpcCount9;
+                characterBinary.NumTimesInteractedNpcCount10 = character.NumTimesInteractedNpcCount10;
+                characterBinary.NumTimesInteractedNpcCount11 = character.NumTimesInteractedNpcCount11;
+                characterBinary.NumTimesInteractedNpcCount12 = character.NumTimesInteractedNpcCount12;
+                characterBinary.NumTimesInteractedNpcCount13 = character.NumTimesInteractedNpcCount13;
+                characterBinary.NumTimesInteractedNpcCount14 = character.NumTimesInteractedNpcCount14;
+                characterBinary.NumTimesInteractedNpcCount15 = character.NumTimesInteractedNpcCount15;
+                characterBinary.NumTimesInteractedNpcCount16 = character.NumTimesInteractedNpcCount16;
+                characterBinary.NumTimesInteractedNpcCount17 = character.NumTimesInteractedNpcCount17;
+                characterBinary.NumTimesInteractedNpcCount18 = character.NumTimesInteractedNpcCount18;
+                characterBinary.NumTimesInteractedNpcCount19 = character.NumTimesInteractedNpcCount19;
+                characterBinary.NumTimesInteractedNpcCount20 = character.NumTimesInteractedNpcCount20;
+                characterBinary.NumTimesInteractedNpcCount21 = character.NumTimesInteractedNpcCount21;
+                characterBinary.NumTimesInteractedNpcCount22 = character.NumTimesInteractedNpcCount22;
+                characterBinary.NumTimesInteractedNpcCount23 = character.NumTimesInteractedNpcCount23;
+                characterBinary.NumTimesInteractedNpcCount24 = character.NumTimesInteractedNpcCount24;
+                characterBinary.QuickWeaponSlot1 = character.QuickWeaponSlot1;
+                characterBinary.QuickWeaponSlot2 = character.QuickWeaponSlot2;
+                characterBinary.QuickWeaponSlot3 = character.QuickWeaponSlot3;
+                characterBinary.QuickWeaponSlot4 = character.QuickWeaponSlot4;
+                characterBinary.QuickWeaponSlot1Ability = character.QuickWeaponSlot1Ability;
+                characterBinary.QuickWeaponSlot2Ability = character.QuickWeaponSlot2Ability;
+                characterBinary.QuickWeaponSlot3Ability = character.QuickWeaponSlot3Ability;
+                characterBinary.QuickWeaponSlot4Ability = character.QuickWeaponSlot4Ability;
+                characterBinary.QuickSpell1Resource = character.QuickSpell1Resource;
+                characterBinary.QuickSpell2Resource = character.QuickSpell2Resource;
+                characterBinary.QuickSpell3Resource = character.QuickSpell3Resource;
+                characterBinary.QuickItemSlot1 = character.QuickItemSlot1;
+                characterBinary.QuickItemSlot2 = character.QuickItemSlot2;
+                characterBinary.QuickItemSlot3 = character.QuickItemSlot3;
+                characterBinary.QuickItemSlot1Ability = character.QuickItemSlot1Ability;
+                characterBinary.QuickItemSlot2Ability = character.QuickItemSlot2Ability;
+                characterBinary.QuickItemSlot3Ability = character.QuickItemSlot3Ability;
+                characterBinary.Name = character.Name;
+                characterBinary.TalkCount = character.TalkCount;
+                characterBinary.CharacterStats = new GamCharacterBinary();
+                characterBinary.CharacterStats.MostPowerfulVanquishedName = character.CharacterStats.MostPowerfulVanquishedName;
+                characterBinary.CharacterStats.MostPowerfulVanquishedXP = character.CharacterStats.MostPowerfulVanquishedXP;
+                characterBinary.CharacterStats.TimeInParty = character.CharacterStats.TimeInParty;
+                characterBinary.CharacterStats.TimeJoinedParty = character.CharacterStats.TimeJoinedParty;
+                characterBinary.CharacterStats.PartyMember = character.CharacterStats.PartyMember;
+                characterBinary.CharacterStats.Unused11 = character.CharacterStats.Unused11;
+                characterBinary.CharacterStats.FirstLetterofCreResref = character.CharacterStats.FirstLetterofCreResref;
+                characterBinary.CharacterStats.KillsXPGainedChapter = character.CharacterStats.KillsXPGainedChapter;
+                characterBinary.CharacterStats.KillsNumberChapter = character.CharacterStats.KillsNumberChapter;
+                characterBinary.CharacterStats.KillsXPGainedGame = character.CharacterStats.KillsXPGainedGame;
+                characterBinary.CharacterStats.KillsNumberGame = character.CharacterStats.KillsNumberGame;
+                characterBinary.CharacterStats.FavouriteSpell1 = character.CharacterStats.FavouriteSpell1;
+                characterBinary.CharacterStats.FavouriteSpell2 = character.CharacterStats.FavouriteSpell2;
+                characterBinary.CharacterStats.FavouriteSpell3 = character.CharacterStats.FavouriteSpell3;
+                characterBinary.CharacterStats.FavouriteSpell4 = character.CharacterStats.FavouriteSpell4;
+                characterBinary.CharacterStats.FavouriteSpell1Count = character.CharacterStats.FavouriteSpell1Count;
+                characterBinary.CharacterStats.FavouriteSpell2Count = character.CharacterStats.FavouriteSpell2Count;
+                characterBinary.CharacterStats.FavouriteSpell3Count = character.CharacterStats.FavouriteSpell3Count;
+                characterBinary.CharacterStats.FavouriteSpell4Count = character.CharacterStats.FavouriteSpell4Count;
+                characterBinary.CharacterStats.FavouriteWeapon1 = character.CharacterStats.FavouriteWeapon1;
+                characterBinary.CharacterStats.FavouriteWeapon2 = character.CharacterStats.FavouriteWeapon2;
+                characterBinary.CharacterStats.FavouriteWeapon3 = character.CharacterStats.FavouriteWeapon3;
+                characterBinary.CharacterStats.FavouriteWeapon4 = character.CharacterStats.FavouriteWeapon4;
+                characterBinary.CharacterStats.FavouriteWeapon1Time = character.CharacterStats.FavouriteWeapon1Time;
+                characterBinary.CharacterStats.FavouriteWeapon2Time = character.CharacterStats.FavouriteWeapon2Time;
+                characterBinary.CharacterStats.FavouriteWeapon3Time = character.CharacterStats.FavouriteWeapon3Time;
+                characterBinary.CharacterStats.FavouriteWeapon4Time = character.CharacterStats.FavouriteWeapon4Time;
+                characterBinary.VoiceSet = character.VoiceSet;
+
+                var creBytes = CreWriter.Write(character.CreFile);
+                characterBinary.SizeOfCre = creBytes.Length;
+                characterBinary.OffsetToCre = HeaderSize + (gamFile.PartyMembers.Count * GamNpcStructSize) + (partyinventorycount * GamPartyInventorySize) + (gamFile.NonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + GamFamiliarInfoSize + (binaryStoredLocations.Count * GamStoredLocationSize) + (binaryPocketPlaneLocations.Count * GamStoredLocationSize) + creOffset;
+
+                creOffset += creBytes.Length;
+                binaryPartyMembers.Add((characterBinary, creBytes));
+            }
+
+            foreach (var character in gamFile.NonPartyMembers)
+            {
+                var characterBinary = new GamNpcStructBinary();
+                characterBinary.Selection = character.Selection;
+                characterBinary.PartyOrder = character.PartyOrder;
+                characterBinary.Name = character.Name;
+                characterBinary.Orientation = character.Orientation;
+                characterBinary.Area = character.Area;
+                characterBinary.XCoordinate = character.XCoordinate;
+                characterBinary.YCoordinate = character.YCoordinate;
+                characterBinary.XCoordinateView = character.XCoordinateView;
+                characterBinary.YCoordinateView = character.YCoordinateView;
+                characterBinary.ModalAction = character.ModalAction;
+                characterBinary.Happiness = character.Happiness;
+                characterBinary.NumTimesInteractedNpcCount1 = character.NumTimesInteractedNpcCount1;
+                characterBinary.NumTimesInteractedNpcCount2 = character.NumTimesInteractedNpcCount2;
+                characterBinary.NumTimesInteractedNpcCount3 = character.NumTimesInteractedNpcCount3;
+                characterBinary.NumTimesInteractedNpcCount4 = character.NumTimesInteractedNpcCount4;
+                characterBinary.NumTimesInteractedNpcCount5 = character.NumTimesInteractedNpcCount5;
+                characterBinary.NumTimesInteractedNpcCount6 = character.NumTimesInteractedNpcCount6;
+                characterBinary.NumTimesInteractedNpcCount7 = character.NumTimesInteractedNpcCount7;
+                characterBinary.NumTimesInteractedNpcCount8 = character.NumTimesInteractedNpcCount8;
+                characterBinary.NumTimesInteractedNpcCount9 = character.NumTimesInteractedNpcCount9;
+                characterBinary.NumTimesInteractedNpcCount10 = character.NumTimesInteractedNpcCount10;
+                characterBinary.NumTimesInteractedNpcCount11 = character.NumTimesInteractedNpcCount11;
+                characterBinary.NumTimesInteractedNpcCount12 = character.NumTimesInteractedNpcCount12;
+                characterBinary.NumTimesInteractedNpcCount13 = character.NumTimesInteractedNpcCount13;
+                characterBinary.NumTimesInteractedNpcCount14 = character.NumTimesInteractedNpcCount14;
+                characterBinary.NumTimesInteractedNpcCount15 = character.NumTimesInteractedNpcCount15;
+                characterBinary.NumTimesInteractedNpcCount16 = character.NumTimesInteractedNpcCount16;
+                characterBinary.NumTimesInteractedNpcCount17 = character.NumTimesInteractedNpcCount17;
+                characterBinary.NumTimesInteractedNpcCount18 = character.NumTimesInteractedNpcCount18;
+                characterBinary.NumTimesInteractedNpcCount19 = character.NumTimesInteractedNpcCount19;
+                characterBinary.NumTimesInteractedNpcCount20 = character.NumTimesInteractedNpcCount20;
+                characterBinary.NumTimesInteractedNpcCount21 = character.NumTimesInteractedNpcCount21;
+                characterBinary.NumTimesInteractedNpcCount22 = character.NumTimesInteractedNpcCount22;
+                characterBinary.NumTimesInteractedNpcCount23 = character.NumTimesInteractedNpcCount23;
+                characterBinary.NumTimesInteractedNpcCount24 = character.NumTimesInteractedNpcCount24;
+                characterBinary.QuickWeaponSlot1 = character.QuickWeaponSlot1;
+                characterBinary.QuickWeaponSlot2 = character.QuickWeaponSlot2;
+                characterBinary.QuickWeaponSlot3 = character.QuickWeaponSlot3;
+                characterBinary.QuickWeaponSlot4 = character.QuickWeaponSlot4;
+                characterBinary.QuickWeaponSlot1Ability = character.QuickWeaponSlot1Ability;
+                characterBinary.QuickWeaponSlot2Ability = character.QuickWeaponSlot2Ability;
+                characterBinary.QuickWeaponSlot3Ability = character.QuickWeaponSlot3Ability;
+                characterBinary.QuickWeaponSlot4Ability = character.QuickWeaponSlot4Ability;
+                characterBinary.QuickSpell1Resource = character.QuickSpell1Resource;
+                characterBinary.QuickSpell2Resource = character.QuickSpell2Resource;
+                characterBinary.QuickSpell3Resource = character.QuickSpell3Resource;
+                characterBinary.QuickItemSlot1 = character.QuickItemSlot1;
+                characterBinary.QuickItemSlot2 = character.QuickItemSlot2;
+                characterBinary.QuickItemSlot3 = character.QuickItemSlot3;
+                characterBinary.QuickItemSlot1Ability = character.QuickItemSlot1Ability;
+                characterBinary.QuickItemSlot2Ability = character.QuickItemSlot2Ability;
+                characterBinary.QuickItemSlot3Ability = character.QuickItemSlot3Ability;
+                characterBinary.Name = character.Name;
+                characterBinary.TalkCount = character.TalkCount;
+                characterBinary.CharacterStats = new GamCharacterBinary();
+                characterBinary.CharacterStats.MostPowerfulVanquishedName = character.CharacterStats.MostPowerfulVanquishedName;
+                characterBinary.CharacterStats.MostPowerfulVanquishedXP = character.CharacterStats.MostPowerfulVanquishedXP;
+                characterBinary.CharacterStats.TimeInParty = character.CharacterStats.TimeInParty;
+                characterBinary.CharacterStats.TimeJoinedParty = character.CharacterStats.TimeJoinedParty;
+                characterBinary.CharacterStats.PartyMember = character.CharacterStats.PartyMember;
+                characterBinary.CharacterStats.Unused11 = character.CharacterStats.Unused11;
+                characterBinary.CharacterStats.FirstLetterofCreResref = character.CharacterStats.FirstLetterofCreResref;
+                characterBinary.CharacterStats.KillsXPGainedChapter = character.CharacterStats.KillsXPGainedChapter;
+                characterBinary.CharacterStats.KillsNumberChapter = character.CharacterStats.KillsNumberChapter;
+                characterBinary.CharacterStats.KillsXPGainedGame = character.CharacterStats.KillsXPGainedGame;
+                characterBinary.CharacterStats.KillsNumberGame = character.CharacterStats.KillsNumberGame;
+                characterBinary.CharacterStats.FavouriteSpell1 = character.CharacterStats.FavouriteSpell1;
+                characterBinary.CharacterStats.FavouriteSpell2 = character.CharacterStats.FavouriteSpell2;
+                characterBinary.CharacterStats.FavouriteSpell3 = character.CharacterStats.FavouriteSpell3;
+                characterBinary.CharacterStats.FavouriteSpell4 = character.CharacterStats.FavouriteSpell4;
+                characterBinary.CharacterStats.FavouriteSpell1Count = character.CharacterStats.FavouriteSpell1Count;
+                characterBinary.CharacterStats.FavouriteSpell2Count = character.CharacterStats.FavouriteSpell2Count;
+                characterBinary.CharacterStats.FavouriteSpell3Count = character.CharacterStats.FavouriteSpell3Count;
+                characterBinary.CharacterStats.FavouriteSpell4Count = character.CharacterStats.FavouriteSpell4Count;
+                characterBinary.CharacterStats.FavouriteWeapon1 = character.CharacterStats.FavouriteWeapon1;
+                characterBinary.CharacterStats.FavouriteWeapon2 = character.CharacterStats.FavouriteWeapon2;
+                characterBinary.CharacterStats.FavouriteWeapon3 = character.CharacterStats.FavouriteWeapon3;
+                characterBinary.CharacterStats.FavouriteWeapon4 = character.CharacterStats.FavouriteWeapon4;
+                characterBinary.CharacterStats.FavouriteWeapon1Time = character.CharacterStats.FavouriteWeapon1Time;
+                characterBinary.CharacterStats.FavouriteWeapon2Time = character.CharacterStats.FavouriteWeapon2Time;
+                characterBinary.CharacterStats.FavouriteWeapon3Time = character.CharacterStats.FavouriteWeapon3Time;
+                characterBinary.CharacterStats.FavouriteWeapon4Time = character.CharacterStats.FavouriteWeapon4Time;
+                characterBinary.VoiceSet = character.VoiceSet;
+
+                var creBytes = CreWriter.Write(character.CreFile);
+                characterBinary.SizeOfCre = creBytes.Length;
+                characterBinary.OffsetToCre = HeaderSize + (gamFile.PartyMembers.Count * GamNpcStructSize) + (partyinventorycount * GamPartyInventorySize) + (gamFile.NonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + GamFamiliarInfoSize + (binaryStoredLocations.Count * GamStoredLocationSize) + (binaryPocketPlaneLocations.Count * GamStoredLocationSize) + creOffset;
+                creOffset += creBytes.Length;
+                binaryNonPartyMembers.Add((characterBinary, creBytes));
+            }
+
             var headerBinary = new GamBinaryHeader();
             headerBinary.ftype = new array4() { character1 = 'G', character2 = 'A', character3 = 'M', character4 = 'E' };
             headerBinary.fversion = new array4() { character1 = 'V', character2 = '2', character3 = '.', character4 = '0' };
@@ -279,24 +290,25 @@ namespace ii.InfinityEngine.Writers
             headerBinary.Weather = gamFile.Weather;
             headerBinary.NpcStructPartyOffset = HeaderSize;
             headerBinary.NpcStructPartyCount = binaryPartyMembers.Count;
-            headerBinary.PartyInventoryOffset = 0;
-            headerBinary.PartyInventoryCount = 0;
-            headerBinary.NpcStructNonPartyOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize);
+            headerBinary.PartyInventoryOffset = 0;// HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize);
+            headerBinary.PartyInventoryCount = 0; //TODO: We need a binary struct, a gamFile class, to update the reader and to update the writer (we write 20 blank bytes at the moment)
+            headerBinary.NpcStructNonPartyOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize);
             headerBinary.NpcStructNonPartyCount = binaryNonPartyMembers.Count;
-            headerBinary.GlobalVariableOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (binaryNonPartyMembers.Count * GamNpcStructSize);
+            headerBinary.GlobalVariableOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize);
             headerBinary.GlobalVariableCount = binaryVariables.Count;
             headerBinary.MainArea = gamFile.MainArea;
             headerBinary.CurrentLink = gamFile.CurrentLink;
             headerBinary.JournalEntryCount = binaryJournals.Count;
-            headerBinary.JournalEntryOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize);
+            headerBinary.JournalEntryOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize);
             headerBinary.PartyReputation = gamFile.PartyReputation;
             headerBinary.CurrentArea = gamFile.CurrentArea;
             headerBinary.GuiFlags = gamFile.GuiFlags;
             headerBinary.LoadingProgress = gamFile.LoadingProgress;
-            headerBinary.FamiliarInfoOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize);
-            headerBinary.StoredLocationOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + GamFamiliarInfoSize;
+            headerBinary.FamiliarInfoOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize);
+            headerBinary.StoredLocationOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + GamFamiliarInfoSize;
             headerBinary.GameTimeReal = gamFile.GameTimeReal;
-            headerBinary.PocketPlaneLocationOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + GamFamiliarInfoSize + (binaryStoredLocations.Count * GamStoredLocationSize);
+            headerBinary.PocketPlaneLocationOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + GamFamiliarInfoSize + (binaryStoredLocations.Count * GamStoredLocationSize);
+            headerBinary.PocketPlaneLocationCount = binaryPocketPlaneLocations.Count;
             headerBinary.ZoomPercentage = gamFile.ZoomPercentage;
             headerBinary.RandomEncounterArea = gamFile.RandomEncounterArea;
             headerBinary.CurrentWorldmap = gamFile.CurrentWorldmap;
@@ -311,13 +323,18 @@ namespace ii.InfinityEngine.Writers
 
             foreach (var character in binaryPartyMembers)
             {
-                var characterAsBytes = Common.WriteStruct(character);
+                var characterAsBytes = Common.WriteStruct(character.data);
                 bw.Write(characterAsBytes);
+            }
+
+            for (int i = 0; i < headerBinary.PartyInventoryCount; i++)
+            {
+                bw.Write(new byte[20]);
             }
 
             foreach (var character in binaryNonPartyMembers)
             {
-                var characterAsBytes = Common.WriteStruct(character);
+                var characterAsBytes = Common.WriteStruct(character.data);
                 bw.Write(characterAsBytes);
             }
 
@@ -460,12 +477,18 @@ namespace ii.InfinityEngine.Writers
 
             foreach (var character in binaryPartyMembers)
             {
-                bw.Write(Common.WriteStruct(character));
+                if (character.cre != null && character.cre.Length > 0)
+                {
+                    bw.Write(character.cre);
+                }
             }
 
             foreach (var character in binaryNonPartyMembers)
             {
-                bw.Write(Common.WriteStruct(character));
+                if (character.cre != null && character.cre.Length > 0)
+                {
+                    bw.Write(character.cre);
+                }
             }
 
             BackupManger?.BackupFile(file, file.Filename, file.FileType, this);

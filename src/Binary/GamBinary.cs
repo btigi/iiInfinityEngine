@@ -45,7 +45,7 @@ namespace ii.InfinityEngine.Binary
         public array8 CurrentWorldmap;
         public array8 CurrentCampaign;
         public int FamiliarOwner;
-        public array32 RandomEncountryEntry;
+        public array20 RandomEncountryEntry;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]

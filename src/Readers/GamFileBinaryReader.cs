@@ -35,6 +35,8 @@ namespace ii.InfinityEngine.Readers
             if (header.ftype.ToString() != "GAME" || header.fversion.ToString() != "V2.0")
                 return new GamFile();
 
+            CreReader.TlkFile = TlkFile;
+
             var gamFile = new GamFile();
             var npcStructPartyMembers = new List<(GamNpcStructBinary data, CreFile cre)>();
             var npcStructNonParty = new List<(GamNpcStructBinary data, CreFile cre)>();
@@ -71,15 +73,18 @@ namespace ii.InfinityEngine.Readers
             for (int i = 0; i < npcStructNonParty.Count; i++)
             {
                 var npc = npcStructNonParty.ElementAt(i);
-                br.BaseStream.Seek(npc.data.OffsetToCre, SeekOrigin.Begin);
-                var npcStruct = br.ReadBytes(npc.data.SizeOfCre);
-                var ms = new MemoryStream(npcStruct);
-                var cre = CreReader.Read(ms);
-                npc.cre = cre;
+                if (npc.data.OffsetToCre != default)
+                {
+                    br.BaseStream.Seek(npc.data.OffsetToCre, SeekOrigin.Begin);
+                    var npcStruct = br.ReadBytes(npc.data.SizeOfCre);
+                    var ms = new MemoryStream(npcStruct);
+                    var cre = CreReader.Read(ms);
+                    npc.cre = cre;
+                }
                 npcStructNonParty[i] = npc;
             }
 
-            //Note: We ignore 'Party Inventory' as there's no definition of the structure - it's likely not used
+            //TODO: We currently ignore 'Party Inventory'
 
             br.BaseStream.Seek(header.GlobalVariableOffset, SeekOrigin.Begin);
             for (int i = 0; i < header.GlobalVariableCount; i++)
@@ -192,8 +197,6 @@ namespace ii.InfinityEngine.Readers
                 var journal = (GamJournalBinary)Common.ReadStruct(br, typeof(GamJournalBinary));
                 journals.Add(journal);
             }
-
-            //Looks like we never need/use header.FamiliarExtraOffset ?
 
             br.BaseStream.Seek(header.StoredLocationOffset, SeekOrigin.Begin);
             for (int i = 0; i < header.StoredLocationCount; i++)

@@ -140,7 +140,7 @@ namespace ii.InfinityEngine.Files
         public array8 CurrentWorldmap { get; set; }
         public array8 CurrentCampaign { get; set; }
         public int FamiliarOwner { get; set; }
-        public array32 RandomEncountryEntry { get; set; }
+        public array20 RandomEncountryEntry { get; set; }
     }
 
     [Serializable]
@@ -149,7 +149,6 @@ namespace ii.InfinityEngine.Files
         public CreFile CreFile { get; set; }
         public Int16 Selection {get; set;}
         public Int16 PartyOrder {get; set;}
-        public CreFile Creature { get; set; }
         public array8 CreResref {get; set;}
         public int Orientation {get; set;}
         public array8 Area {get; set;}

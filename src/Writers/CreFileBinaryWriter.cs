@@ -21,16 +21,8 @@ namespace ii.InfinityEngine.Writers
         public TlkFile TlkFile { get; set; }
         public BackupManager BackupManger { get; set; }
 
-        public bool Write(string filename, IEFile file, bool forceSave = false)
+        internal byte[] Write(CreFile creFile)
         {
-            if (file is not CreFile)
-                throw new ArgumentException("File is not a valid cre file");
-
-            var creFile = file as CreFile;
-
-            if (!(forceSave) && (HashGenerator.GenerateKey(creFile) == creFile.Checksum))
-                return false;
-
             List<CreKnownSpellBinary> creKnownSpells = [];
             List<CreSpellMemorisationInfoBinary> creSpellMemorisationInfo = [];
             List<CreMemorisedSpellBinary> creMemorisedSpells = [];
@@ -1609,12 +1601,27 @@ namespace ii.InfinityEngine.Writers
                 bw.Write(itemSlot);
             }
 
+
+            var byteArray = s.ToArray();
+            return byteArray;
+        }
+
+        public bool Write(string filename, IEFile file, bool forceSave = false)
+        {
+            if (file is not CreFile)
+                throw new ArgumentException("File is not a valid cre file");
+
+            var creFile = file as CreFile;
+
+            if (!(forceSave) && (HashGenerator.GenerateKey(creFile) == creFile.Checksum))
+                return false;
+
+            var bytes = Write(creFile);
+
             BackupManger?.BackupFile(file, file.Filename, file.FileType, this);
 
             using var fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
-            bw.BaseStream.Position = 0;
-            bw.BaseStream.CopyTo(fs);
-            fs.Flush(flushToDisk: true);
+            fs.Write(bytes);
             return true;
         }
 

@@ -293,6 +293,41 @@ namespace ii.InfinityEngine
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct array20
+    {
+        public byte byte00;
+        public byte byte01;
+        public byte byte02;
+        public byte byte03;
+        public byte byte04;
+        public byte byte05;
+        public byte byte06;
+        public byte byte07;
+        public byte byte08;
+        public byte byte09;
+        public byte byte10;
+        public byte byte11;
+        public byte byte12;
+        public byte byte13;
+        public byte byte14;
+        public byte byte15;
+        public byte byte16;
+        public byte byte17;
+        public byte byte18;
+        public byte byte19;
+
+        public override string ToString()
+        {
+            var x = String.Format("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}{13}{14}{15}{16}{17}{18}{19}",
+                byte00, byte01, byte02, byte03, byte04, byte05, byte06, byte07, byte08, byte09, byte10, byte11,
+                byte12, byte13, byte14, byte15, byte16, byte17, byte18, byte19);
+            //x = x.Replace("\0", "");
+            return x;
+        }
+    }
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct array24
     {
         public byte byte00;

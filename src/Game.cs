@@ -409,9 +409,11 @@ namespace ii.InfinityEngine
             {
                 case IEFileType.Are:
                     writer = new AreFileBinaryWriter();
+                    (writer as AreFileBinaryWriter).TlkFile = Tlk;
                     break;
                 case IEFileType.Cre:
                     writer = new CreFileBinaryWriter();
+                    (writer as CreFileBinaryWriter).TlkFile = Tlk;
                     break;
                 case IEFileType.Dlg:
                     writer = new DlgFileBinaryWriter();
@@ -424,6 +426,7 @@ namespace ii.InfinityEngine
                     break;
                 case IEFileType.Gam:
                     writer = new GamFileBinaryWriter();
+                    (writer as GamFileBinaryWriter).TlkFile = Tlk;
                     break;
                 case IEFileType.Glsl:
                     writer = new GlslFileWriter();
@@ -433,12 +436,14 @@ namespace ii.InfinityEngine
                     break;
                 case IEFileType.Itm:
                     writer = new ItmFileBinaryWriter();
+                    (writer as ItmFileBinaryWriter).TlkFile = Tlk;
                     break;
                 case IEFileType.Pro:
                     writer = new ProFileBinaryWriter();
                     break;
                 case IEFileType.Spl:
                     writer = new SplFileBinaryWriter();
+                    (writer as SplFileBinaryWriter).TlkFile = Tlk;
                     break;
                 case IEFileType.Sql:
                     writer = new SqlFileWriter();

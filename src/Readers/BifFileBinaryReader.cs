@@ -274,6 +274,7 @@ namespace ii.InfinityEngine.Readers
                                 try
                                 {
                                     var gam = new GamFileBinaryReader();
+                                    gam.TlkFile = TlkFile;
                                     var gamfile = (GamFile)gam.Read(ms);
                                     resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
