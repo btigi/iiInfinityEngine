@@ -105,6 +105,10 @@ namespace ii.InfinityEngine.Files
         public List<array8> CELevel8Familiar = new();
         public List<array8> CELevel9Familiar = new();
 
+        public GamFile()
+        {
+            Weather = new();
+        }
 
         [NonSerialized]
         private string checksum;
@@ -128,7 +132,7 @@ namespace ii.InfinityEngine.Files
         public Int16 FormationButton5 { get; set; }
         public int Gold { get; set; }
         public Int16 UseActiveAreaFromPartyMember { get; set; }
-        public Int16 Weather { get; set; } //TODO:GAM
+        public WeatherFlags Weather { get; set; }
         public array8 MainArea { get; set; }
         public int CurrentLink { get; set; }        
         public int PartyReputation { get; set; }
@@ -369,5 +373,26 @@ namespace ii.InfinityEngine.Files
     public class GamPartyInventory
     {
         public array20 Unknown0;
+    }
+
+    [Serializable]
+    public class WeatherFlags
+    {
+        public bool Rain { get; set; }
+        public bool Snow { get; set; }
+        public bool LightRain { get; set; }
+        public bool MediumRain { get; set; }
+        public bool LightWind { get; set; }
+        public bool MediumWind { get; set; }
+        public bool RareLightning { get; set; }
+        public bool Lightning { get; set; }
+        public bool StormIncreasing { get; set; }
+        public bool Bit9 { get; set; }
+        public bool Bit10 { get; set; }
+        public bool Bit11 { get; set; }
+        public bool Bit12 { get; set; }
+        public bool Bit13 { get; set; }
+        public bool Bit14 { get; set; }
+        public bool Bit15 { get; set; }
     }
 }
