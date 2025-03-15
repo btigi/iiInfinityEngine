@@ -96,6 +96,16 @@ namespace ii.InfinityEngine
         public static int WriteString(IEString stringInfo, TlkFile tlkFile)
         {
             var strref = stringInfo.Strref;
+            if (strref == -1)
+            {
+                return -1;
+            }
+
+            if (stringInfo.Text == null)
+            {
+                return strref;
+            }
+
             if (tlkFile != null)
             {
                 if ((stringInfo.Strref != Common.NewString) && (stringInfo.Strref <= tlkFile.Strings.Count))
