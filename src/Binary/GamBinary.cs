@@ -269,4 +269,10 @@ namespace ii.InfinityEngine.Binary
         public Int16 XCoordinate;
         public Int16 YCoordinate;
     }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    struct GamPartyInventoryBinary
+    {
+        public array20 Unknown0;
+    }
 }

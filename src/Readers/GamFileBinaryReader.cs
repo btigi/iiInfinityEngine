@@ -41,6 +41,7 @@ namespace ii.InfinityEngine.Readers
             var npcStructPartyMembers = new List<(GamNpcStructBinary data, CreFile cre)>();
             var npcStructNonParty = new List<(GamNpcStructBinary data, CreFile cre)>();
             var variables = new List<GamVariableBinary>();
+            var partryInventories = new List<GamPartyInventoryBinary>();
             var journals = new List<GamJournalBinary>();
             var storedLocations = new List<GamStoredLocationBinary>();
             var pocketPlaneLocations = new List<GamStoredLocationBinary>();
@@ -84,7 +85,12 @@ namespace ii.InfinityEngine.Readers
                 npcStructNonParty[i] = npc;
             }
 
-            //TODO: We currently ignore 'Party Inventory'
+            br.BaseStream.Seek(header.PartyInventoryOffset, SeekOrigin.Begin);
+            for (int i = 0; i < header.PartyInventoryCount; i++)
+            {
+                var partyInventory = (GamPartyInventoryBinary)Common.ReadStruct(br, typeof(GamPartyInventoryBinary));
+                partryInventories.Add(partyInventory);
+            }
 
             br.BaseStream.Seek(header.GlobalVariableOffset, SeekOrigin.Begin);
             for (int i = 0; i < header.GlobalVariableCount; i++)
@@ -505,6 +511,14 @@ namespace ii.InfinityEngine.Readers
                 gamNpcStruct.CharacterStats.FavouriteWeapon4Time = npcStructParty.data.CharacterStats.FavouriteWeapon4Time;
                 gamNpcStruct.VoiceSet = npcStructParty.data.VoiceSet;
                 gamFile.NonPartyMembers.Add(gamNpcStruct);
+            }
+
+
+            foreach (var inventory in partryInventories)
+            {
+                var gamInventory = new GamPartyInventory();
+                gamInventory.Unknown0 = inventory.Unknown0;
+                gamFile.PartyInventories.Add(gamInventory);
             }
 
             foreach (var variable in variables)

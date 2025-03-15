@@ -9,6 +9,7 @@ namespace ii.InfinityEngine.Files
         public List<GamNpcStruct> PartyMembers = [];
         public List<GamNpcStruct> NonPartyMembers = [];
         public List<GamVariable> Variables = [];
+        public List<GamPartyInventory> PartyInventories = [];
         public List<GamJournal> JournalEntries = [];
         public List<GamStoredLocation> StoredLocations = [];
         public List<GamStoredLocation> PocketPlaneLocations = [];
@@ -362,5 +363,11 @@ namespace ii.InfinityEngine.Files
         public Int32 ValueInt { get; set; }
         public double ValueDouble { get; set; }
         public array32 ScriptName { get; set; }
+    }
+
+    [Serializable]
+    public class GamPartyInventory
+    {
+        public array20 Unknown0;
     }
 }
