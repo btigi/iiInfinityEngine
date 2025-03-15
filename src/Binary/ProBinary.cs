@@ -75,7 +75,7 @@ namespace ii.InfinityEngine.Binary
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     struct ProExtendedHeaderBinary
     {
-        public Int32 AreaProjectileFlags;
+        public Int16 AreaProjectileFlags;
         public Int16 RayCount;
         public Int16 TriggerRadius;// (divide by approx 8.5 to receive radius in feet)
         public Int16 AreaOfEffect;// (divide by approx 8.5 to receive radius in feet)

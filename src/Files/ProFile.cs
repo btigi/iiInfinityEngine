@@ -369,21 +369,5 @@ namespace ii.InfinityEngine.Files
         public bool DelayedExplosion { get; set; } //  (req. bit 0) 
         public bool SkipFirstCondition { get; set; }
         public bool SingleTarget { get; set; }
-        public bool Bit16 { get; set; }
-        public bool Bit17 { get; set; }
-        public bool Bit18 { get; set; }
-        public bool Bit19 { get; set; }
-        public bool Bit20 { get; set; }
-        public bool Bit21 { get; set; }
-        public bool Bit22 { get; set; }
-        public bool Bit23 { get; set; }
-        public bool Bit24 { get; set; }
-        public bool Bit25 { get; set; }
-        public bool Bit26 { get; set; }
-        public bool Bit27 { get; set; }
-        public bool Bit28 { get; set; }
-        public bool Bit29 { get; set; }
-        public bool Bit30 { get; set; }
-        public bool Bit31 { get; set; }
     }
 }
