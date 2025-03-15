@@ -278,7 +278,7 @@ namespace ii.InfinityEngine.Readers
             gamFile.GuiFlags.Bit29 = (header.GuiFlags & Common.Bit29) != 0;
             gamFile.GuiFlags.Bit30 = (header.GuiFlags & Common.Bit30) != 0;
             gamFile.GuiFlags.Bit31 = (header.GuiFlags & Common.Bit31) != 0;
-            gamFile.LoadingProgress = header.LoadingProgress;
+            gamFile.LoadingProgress = (LoadingProgress)header.LoadingProgress;
             gamFile.GameTimeReal = header.GameTimeReal;
             gamFile.ZoomPercentage = header.ZoomPercentage;
             gamFile.RandomEncounterArea = header.RandomEncounterArea;

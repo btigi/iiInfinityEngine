@@ -366,7 +366,7 @@ namespace ii.InfinityEngine.Writers
             headerBinary.GuiFlags = (Int16)(gamFile.GuiFlags.Bit29 ? headerBinary.GuiFlags | Common.Bit29 : headerBinary.GuiFlags);
             headerBinary.GuiFlags = (Int16)(gamFile.GuiFlags.Bit30 ? headerBinary.GuiFlags | Common.Bit30 : headerBinary.GuiFlags);
             headerBinary.GuiFlags = (Int16)(gamFile.GuiFlags.Bit31 ? headerBinary.GuiFlags | Common.Bit31 : headerBinary.GuiFlags);
-            headerBinary.LoadingProgress = gamFile.LoadingProgress;
+            headerBinary.LoadingProgress = (int)gamFile.LoadingProgress;
             headerBinary.FamiliarInfoOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + partyCreOffset + nonPartyCreOffset;
             headerBinary.StoredLocationOffset = HeaderSize + (binaryPartyMembers.Count * GamNpcStructSize) + (headerBinary.PartyInventoryCount * GamPartyInventorySize) + (binaryNonPartyMembers.Count * GamNpcStructSize) + (binaryVariables.Count * GamVariableSize) + (binaryJournals.Count * GamJournalEntrySize) + GamFamiliarInfoSize + partyCreOffset + nonPartyCreOffset;
             headerBinary.GameTimeReal = gamFile.GameTimeReal;

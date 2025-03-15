@@ -139,7 +139,7 @@ namespace ii.InfinityEngine.Files
         public int PartyReputation { get; set; }
         public array8 CurrentArea { get; set; }
         public GuiFlags GuiFlags { get; set; }
-        public int LoadingProgress { get; set; } //TODO:GAM
+        public LoadingProgress LoadingProgress { get; set; }
         public int GameTimeReal { get; set; }
         public int ZoomPercentage { get; set; }
         public array8 RandomEncounterArea { get; set; }
@@ -433,4 +433,15 @@ namespace ii.InfinityEngine.Files
         public bool Bit30 { get; set; }
         public bool Bit31 { get; set; }
     }
+
+    [Serializable]
+    public enum LoadingProgress
+    {
+        BG1,
+        Totsc,
+        Soa,
+        XNewAreaPending,
+        XNewAreaComplete,
+        ToB
+    }    
 }
