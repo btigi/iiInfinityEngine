@@ -15,95 +15,7 @@ namespace ii.InfinityEngine.Files
         public List<GamStoredLocation> PocketPlaneLocations = [];
         public GamFamiliarInfo FamiliarInfo = new();
 
-        public List<array8> LGLevel1Familiar = new();
-        public List<array8> LGLevel2Familiar = new();
-        public List<array8> LGLevel3Familiar = new();
-        public List<array8> LGLevel4Familiar = new();
-        public List<array8> LGLevel5Familiar = new();
-        public List<array8> LGLevel6Familiar = new();
-        public List<array8> LGLevel7Familiar = new();
-        public List<array8> LGLevel8Familiar = new();
-        public List<array8> LGLevel9Familiar = new();
-
-        public List<array8> LNLevel1Familiar = new();
-        public List<array8> LNLevel2Familiar = new();
-        public List<array8> LNLevel3Familiar = new();
-        public List<array8> LNLevel4Familiar = new();
-        public List<array8> LNLevel5Familiar = new();
-        public List<array8> LNLevel6Familiar = new();
-        public List<array8> LNLevel7Familiar = new();
-        public List<array8> LNLevel8Familiar = new();
-        public List<array8> LNLevel9Familiar = new();
-
-        public List<array8> CGLevel1Familiar = new();
-        public List<array8> CGLevel2Familiar = new();
-        public List<array8> CGLevel3Familiar = new();
-        public List<array8> CGLevel4Familiar = new();
-        public List<array8> CGLevel5Familiar = new();
-        public List<array8> CGLevel6Familiar = new();
-        public List<array8> CGLevel7Familiar = new();
-        public List<array8> CGLevel8Familiar = new();
-        public List<array8> CGLevel9Familiar = new();
-
-        public List<array8> NGLevel1Familiar = new();
-        public List<array8> NGLevel2Familiar = new();
-        public List<array8> NGLevel3Familiar = new();
-        public List<array8> NGLevel4Familiar = new();
-        public List<array8> NGLevel5Familiar = new();
-        public List<array8> NGLevel6Familiar = new();
-        public List<array8> NGLevel7Familiar = new();
-        public List<array8> NGLevel8Familiar = new();
-        public List<array8> NGLevel9Familiar = new();
-
-        public List<array8> TNLevel1Familiar = new();
-        public List<array8> TNLevel2Familiar = new();
-        public List<array8> TNLevel3Familiar = new();
-        public List<array8> TNLevel4Familiar = new();
-        public List<array8> TNLevel5Familiar = new();
-        public List<array8> TNLevel6Familiar = new();
-        public List<array8> TNLevel7Familiar = new();
-        public List<array8> TNLevel8Familiar = new();
-        public List<array8> TNLevel9Familiar = new();
-
-        public List<array8> NELevel1Familiar = new();
-        public List<array8> NELevel2Familiar = new();
-        public List<array8> NELevel3Familiar = new();
-        public List<array8> NELevel4Familiar = new();
-        public List<array8> NELevel5Familiar = new();
-        public List<array8> NELevel6Familiar = new();
-        public List<array8> NELevel7Familiar = new();
-        public List<array8> NELevel8Familiar = new();
-        public List<array8> NELevel9Familiar = new();
-
-        public List<array8> LELevel1Familiar = new();
-        public List<array8> LELevel2Familiar = new();
-        public List<array8> LELevel3Familiar = new();
-        public List<array8> LELevel4Familiar = new();
-        public List<array8> LELevel5Familiar = new();
-        public List<array8> LELevel6Familiar = new();
-        public List<array8> LELevel7Familiar = new();
-        public List<array8> LELevel8Familiar = new();
-        public List<array8> LELevel9Familiar = new();
-
-        public List<array8> CNLevel1Familiar = new();
-        public List<array8> CNLevel2Familiar = new();
-        public List<array8> CNLevel3Familiar = new();
-        public List<array8> CNLevel4Familiar = new();
-        public List<array8> CNLevel5Familiar = new();
-        public List<array8> CNLevel6Familiar = new();
-        public List<array8> CNLevel7Familiar = new();
-        public List<array8> CNLevel8Familiar = new();
-        public List<array8> CNLevel9Familiar = new();
-
-        public List<array8> CELevel1Familiar = new();
-        public List<array8> CELevel2Familiar = new();
-        public List<array8> CELevel3Familiar = new();
-        public List<array8> CELevel4Familiar = new();
-        public List<array8> CELevel5Familiar = new();
-        public List<array8> CELevel6Familiar = new();
-        public List<array8> CELevel7Familiar = new();
-        public List<array8> CELevel8Familiar = new();
-        public List<array8> CELevel9Familiar = new();
+        public FamiliarLevels FamiliarLevels = new();
 
         public GamFile()
         {
@@ -461,5 +373,99 @@ namespace ii.InfinityEngine.Files
         public bool Bit5 { get; set; }
         public bool Bit6 { get; set; }
         public bool Bit7 { get; set; }
+    }
+
+    [Serializable]
+    public class FamiliarLevels
+    {
+        public List<array8> LGLevel1Familiar = new();
+        public List<array8> LGLevel2Familiar = new();
+        public List<array8> LGLevel3Familiar = new();
+        public List<array8> LGLevel4Familiar = new();
+        public List<array8> LGLevel5Familiar = new();
+        public List<array8> LGLevel6Familiar = new();
+        public List<array8> LGLevel7Familiar = new();
+        public List<array8> LGLevel8Familiar = new();
+        public List<array8> LGLevel9Familiar = new();
+
+        public List<array8> LNLevel1Familiar = new();
+        public List<array8> LNLevel2Familiar = new();
+        public List<array8> LNLevel3Familiar = new();
+        public List<array8> LNLevel4Familiar = new();
+        public List<array8> LNLevel5Familiar = new();
+        public List<array8> LNLevel6Familiar = new();
+        public List<array8> LNLevel7Familiar = new();
+        public List<array8> LNLevel8Familiar = new();
+        public List<array8> LNLevel9Familiar = new();
+
+        public List<array8> CGLevel1Familiar = new();
+        public List<array8> CGLevel2Familiar = new();
+        public List<array8> CGLevel3Familiar = new();
+        public List<array8> CGLevel4Familiar = new();
+        public List<array8> CGLevel5Familiar = new();
+        public List<array8> CGLevel6Familiar = new();
+        public List<array8> CGLevel7Familiar = new();
+        public List<array8> CGLevel8Familiar = new();
+        public List<array8> CGLevel9Familiar = new();
+
+        public List<array8> NGLevel1Familiar = new();
+        public List<array8> NGLevel2Familiar = new();
+        public List<array8> NGLevel3Familiar = new();
+        public List<array8> NGLevel4Familiar = new();
+        public List<array8> NGLevel5Familiar = new();
+        public List<array8> NGLevel6Familiar = new();
+        public List<array8> NGLevel7Familiar = new();
+        public List<array8> NGLevel8Familiar = new();
+        public List<array8> NGLevel9Familiar = new();
+
+        public List<array8> TNLevel1Familiar = new();
+        public List<array8> TNLevel2Familiar = new();
+        public List<array8> TNLevel3Familiar = new();
+        public List<array8> TNLevel4Familiar = new();
+        public List<array8> TNLevel5Familiar = new();
+        public List<array8> TNLevel6Familiar = new();
+        public List<array8> TNLevel7Familiar = new();
+        public List<array8> TNLevel8Familiar = new();
+        public List<array8> TNLevel9Familiar = new();
+
+        public List<array8> NELevel1Familiar = new();
+        public List<array8> NELevel2Familiar = new();
+        public List<array8> NELevel3Familiar = new();
+        public List<array8> NELevel4Familiar = new();
+        public List<array8> NELevel5Familiar = new();
+        public List<array8> NELevel6Familiar = new();
+        public List<array8> NELevel7Familiar = new();
+        public List<array8> NELevel8Familiar = new();
+        public List<array8> NELevel9Familiar = new();
+
+        public List<array8> LELevel1Familiar = new();
+        public List<array8> LELevel2Familiar = new();
+        public List<array8> LELevel3Familiar = new();
+        public List<array8> LELevel4Familiar = new();
+        public List<array8> LELevel5Familiar = new();
+        public List<array8> LELevel6Familiar = new();
+        public List<array8> LELevel7Familiar = new();
+        public List<array8> LELevel8Familiar = new();
+        public List<array8> LELevel9Familiar = new();
+
+        public List<array8> CNLevel1Familiar = new();
+        public List<array8> CNLevel2Familiar = new();
+        public List<array8> CNLevel3Familiar = new();
+        public List<array8> CNLevel4Familiar = new();
+        public List<array8> CNLevel5Familiar = new();
+        public List<array8> CNLevel6Familiar = new();
+        public List<array8> CNLevel7Familiar = new();
+        public List<array8> CNLevel8Familiar = new();
+        public List<array8> CNLevel9Familiar = new();
+
+        public List<array8> CELevel1Familiar = new();
+        public List<array8> CELevel2Familiar = new();
+        public List<array8> CELevel3Familiar = new();
+        public List<array8> CELevel4Familiar = new();
+        public List<array8> CELevel5Familiar = new();
+        public List<array8> CELevel6Familiar = new();
+        public List<array8> CELevel7Familiar = new();
+        public List<array8> CELevel8Familiar = new();
+        public List<array8> CELevel9Familiar = new();
     }
 }
