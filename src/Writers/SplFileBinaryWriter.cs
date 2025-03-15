@@ -10,7 +10,7 @@ namespace ii.InfinityEngine.Writers
     public class SplFileBinaryWriter : ISplFileWriter
     {
         const int HeaderSize = 114;
-        const int ExtendedHeaderSize = 56;
+        const int ExtendedHeaderSize = 40;
         const int FeatureBlockSize = 48;
 
         public TlkFile TlkFile { get; set; }
