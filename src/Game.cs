@@ -48,6 +48,7 @@ namespace ii.InfinityEngine
         public List<MenuFile> Menus = [];
         public List<LuaFile> Luas = [];
         public List<VefFile> Vefs = [];
+        public List<WmpFile> Worldmaps = [];
 
         public TlkFile Tlk { get; private set; }
 
@@ -195,6 +196,7 @@ namespace ii.InfinityEngine
                     VisualEffects.AddRange(bifFile.vvcs);
                     Vefs.AddRange(bifFile.vefs);
                     Wfxs.AddRange(bifFile.wfx);
+                    Worldmaps.AddRange(bifFile.worldmaps);
                     Tilesets.AddRange(bifFile.tilesets);
                 }
                 bifIndex++;

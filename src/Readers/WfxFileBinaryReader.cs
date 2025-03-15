@@ -31,11 +31,11 @@ namespace ii.InfinityEngine.Readers
             var wfxFile = new WfxFile();
 
             wfxFile.SrCurveRadius = header.SrCurveRadius;
-            wfxFile.Flags.CustomSRCurveRadiusEnabled = (header.Flags & Common.Bit0) != 0;
-            wfxFile.Flags.CutsceneVolumeEnabled = (header.Flags & Common.Bit1) != 0;
-            wfxFile.Flags.EnvironmentalAudioEnabled = (header.Flags & Common.Bit2) != 0;
-            wfxFile.Flags.RandomFrequencyVariationEnabled = (header.Flags & Common.Bit3) != 0;
-            wfxFile.Flags.RandomVolumeVariationEnabled = (header.Flags & Common.Bit4) != 0;
+            wfxFile.Flags.CutsceneVolumeEnabled = (header.Flags & Common.Bit0) != 0;
+            wfxFile.Flags.CustomSRCurveRadiusEnabled = (header.Flags & Common.Bit1) != 0;
+            wfxFile.Flags.RandomFrequencyVariationEnabled = (header.Flags & Common.Bit2) != 0;
+            wfxFile.Flags.RandomVolumeVariationEnabled = (header.Flags & Common.Bit3) != 0;
+            wfxFile.Flags.EnvironmentalAudioEnabled = (header.Flags & Common.Bit4) != 0;
             wfxFile.Flags.Bit5 = (header.Flags & Common.Bit5) != 0;
             wfxFile.Flags.Bit6 = (header.Flags & Common.Bit6) != 0;
             wfxFile.Flags.Bit7 = (header.Flags & Common.Bit7) != 0;

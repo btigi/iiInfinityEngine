@@ -25,7 +25,7 @@ namespace ii.InfinityEngine.Writers
             header.Flags = wfxFile.Flags.CutsceneVolumeEnabled ? header.Flags | Common.Bit0 : header.Flags;
             header.Flags = wfxFile.Flags.CustomSRCurveRadiusEnabled ? header.Flags | Common.Bit1 : header.Flags;
             header.Flags = wfxFile.Flags.RandomFrequencyVariationEnabled ? header.Flags | Common.Bit2 : header.Flags;
-            header.Flags = wfxFile.Flags.CutsceneVolumeEnabled ? header.Flags | Common.Bit3 : header.Flags;
+            header.Flags = wfxFile.Flags.RandomVolumeVariationEnabled ? header.Flags | Common.Bit3 : header.Flags;
             header.Flags = wfxFile.Flags.EnvironmentalAudioEnabled ? header.Flags | Common.Bit4 : header.Flags;
             header.Flags = wfxFile.Flags.Bit5 ? header.Flags | Common.Bit5 : header.Flags;
             header.Flags = wfxFile.Flags.Bit6 ? header.Flags | Common.Bit6 : header.Flags;
