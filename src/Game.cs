@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection.PortableExecutable;
+using System.Text.RegularExpressions;
 using ii.InfinityEngine.Files;
 using ii.InfinityEngine.Readers;
 using ii.InfinityEngine.Writers;
@@ -71,7 +71,7 @@ namespace ii.InfinityEngine
             key = keyReader.Read(chitinLocation);
         }
 
-        public void LoadResources(List<IEFileType> resourceTypes)
+        public void LoadResources(List<IEFileType> resourceTypes, Regex regex = null)
         {
             #region Parallel
             /*
@@ -116,7 +116,7 @@ namespace ii.InfinityEngine
             #endregion
 
             var bifList = new List<(KeyBifEntry2 entry, int index)>();
-            var relevantResources = key.Resources.Where(a => resourceTypes.Contains(a.ResourceType)).ToList();
+            var relevantResources = key.Resources.Where(a => resourceTypes.Contains(a.ResourceType) && (regex?.IsMatch(a.Filename) ?? true)).ToList();
             foreach (var c in relevantResources)
             {
                 bifList.Add(key.BifFiles[c.BifIndex]);
@@ -124,7 +124,7 @@ namespace ii.InfinityEngine
             bifList = bifList.Distinct().ToList();
 
             LoadResourcesFromBifs(gameDirectory, bifList, relevantResources, resourceTypes);
-            LoadDirectory(Path.Combine(gameDirectory, "override"), resourceTypes);
+            LoadDirectory(Path.Combine(gameDirectory, "override"), resourceTypes, regex);
         }
 
         public void LoadAllResources()
@@ -198,7 +198,7 @@ namespace ii.InfinityEngine
             }
         }
 
-        public void LoadDirectory(string directory, List<IEFileType> resourceTypes)
+        public void LoadDirectory(string directory, List<IEFileType> resourceTypes, Regex regex = null)
         {
             var dimensionalArrayReader = new DimensionalArrayFileReader();
             var areReader = new AreFileBinaryReader();
@@ -227,7 +227,7 @@ namespace ii.InfinityEngine
             foreach (var file in Directory.GetFiles(directory))
             {
                 var extension = Path.GetExtension(file.ToLower());
-                if (!fileExtensions.Contains(extension))
+                if (!fileExtensions.Contains(extension) || (regex != null && !regex.IsMatch(file)))
                     continue;
 
                 switch (extension)

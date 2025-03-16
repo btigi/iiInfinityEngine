@@ -114,10 +114,15 @@ namespace ii.InfinityEngine.Readers
                 {
                     if (fileTypes.Contains((IEFileType)f.resourceType))
                     {
+                        var resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
+                        if (resource == null)
+                        {
+                            continue;
+                        }
+
                         br.BaseStream.Seek(f.resourceOffset, SeekOrigin.Begin);
                         var file = br.ReadBytes(f.resourceSize);
-                        using var ms = new MemoryStream(file);
-                        KeyBifResource2 resource;
+                        using var ms = new MemoryStream(file);                        
                         switch ((IEFileType)f.resourceType)
                         {
                             case IEFileType.Are:
@@ -493,11 +498,22 @@ namespace ii.InfinityEngine.Readers
                 {
                     foreach (var ts in tileStructs)
                     {
+                        var resource = resources.Where(a => a.TileSetIndex == ((ts.resourceLocator & 0x000FC000) >> 14)).SingleOrDefault();
+                        if (resource == null)
+                        {
+                            continue;
+                        }
+
                         br.BaseStream.Seek(ts.resourceOffset, SeekOrigin.Begin);
                         var byteCount = ts.tileSize * ts.tileCount;
+                        if (ts.tileSize== 12)
+                        {
+                            // PVRZ TIS files are currently unsupported
+                            continue;
+                        }
+
                         var file = br.ReadBytes(byteCount);
                         using var ms = new MemoryStream(file);
-                        KeyBifResource2 resource;
                         switch ((IEFileType)ts.resourceType)
                         {
                             case IEFileType.Tis:
