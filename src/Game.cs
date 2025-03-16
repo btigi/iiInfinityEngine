@@ -52,15 +52,10 @@ namespace ii.InfinityEngine
 
         public TlkFile Tlk { get; private set; }
 
-        public Game()
+        public Game(string keyPath, string tlkPath)
         {
-            LoadEssentialResources("chitin.key", "dialog.tlk");
-        }
-
-        public Game(string gameDirectory)
-        {
-            var key = Path.Combine(gameDirectory, "chitin.key");
-            var tlk = Path.Combine(gameDirectory, "dialog.tlk");
+            var key = Path.Combine(Path.IsPathRooted(keyPath) ? keyPath : Path.Combine(Directory.GetCurrentDirectory(), keyPath), "chitin.key");
+            var tlk = Path.Combine(Path.IsPathRooted(tlkPath) ? tlkPath : Path.Combine(Directory.GetCurrentDirectory(), tlkPath), "dialog.tlk");
             LoadEssentialResources(key, tlk);
         }
 
@@ -129,7 +124,7 @@ namespace ii.InfinityEngine
             bifList = bifList.Distinct().ToList();
 
             LoadResourcesFromBifs(gameDirectory, bifList, relevantResources, resourceTypes);
-            LoadOverride(gameDirectory, resourceTypes);
+            LoadDirectory(Path.Combine(gameDirectory, "override"), resourceTypes);
         }
 
         public void LoadAllResources()
@@ -158,7 +153,7 @@ namespace ii.InfinityEngine
                                                      IEFileType.Vef};
 
             LoadResourcesFromBifs(gameDirectory, key.BifFiles, key.Resources, fileTypes);
-            LoadOverride(gameDirectory, fileTypes);
+            LoadDirectory(Path.Combine(gameDirectory, "override"), fileTypes);
         }
 
         private void LoadResourcesFromBifs(string directory, List<(KeyBifEntry2 entry, int index)> files, List<KeyBifResource2> resources, List<IEFileType> fileTypes)
@@ -203,7 +198,7 @@ namespace ii.InfinityEngine
             }
         }
 
-        private void LoadOverride(string directory, List<IEFileType> resourceTypes)
+        public void LoadDirectory(string directory, List<IEFileType> resourceTypes)
         {
             var dimensionalArrayReader = new DimensionalArrayFileReader();
             var areReader = new AreFileBinaryReader();
