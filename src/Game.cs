@@ -224,7 +224,7 @@ namespace ii.InfinityEngine
             var wfxReader = new WfxFileBinaryReader();
             var tisReader = new TisFileBinaryReader();
             var fileExtensions = resourceTypes.Select(s => $".{s.ToString().Replace("DimensionalArray", "2da").ToLower()}");
-            foreach (var file in Directory.GetFiles(Path.Combine(directory, "override")))
+            foreach (var file in Directory.GetFiles(directory))
             {
                 var extension = Path.GetExtension(file.ToLower());
                 if (!fileExtensions.Contains(extension))
