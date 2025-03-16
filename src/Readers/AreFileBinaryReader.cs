@@ -966,9 +966,9 @@ namespace ii.InfinityEngine.Readers
                 door2.SecretDoorDetectionDifficulty = door.SecretDoorDetectionDifficulty;
                 door2.TrapDetected = door.TrapDetected;
                 door2.TrapDetectionDifficulty = door.TrapDetectionDifficulty;
-                door2.TrapDetected = door.TrapLaunchXCoordinate;
-                door2.TrapLaunchXCoordinate = door.TrapLaunchYCoordinate;
-                door2.TrapLaunchYCoordinate = door.TrapRemovalDifficulty;
+                door2.TrapLaunchXCoordinate = door.TrapLaunchXCoordinate;
+                door2.TrapLaunchYCoordinate = door.TrapLaunchYCoordinate;
+                door2.TrapRemovalDifficulty = door.TrapRemovalDifficulty;
                 door2.TravelTriggerName = door.TravelTriggerName;
                 door2.Unknownc0 = door.Unknownc0;
                 door2.Hitpoints = door.Hitpoints;
