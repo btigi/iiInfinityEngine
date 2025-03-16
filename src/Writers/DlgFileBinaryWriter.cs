@@ -3,6 +3,7 @@ using ii.InfinityEngine.Files;
 using ii.InfinityEngine.Writers.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 using System.Text;
 
@@ -56,7 +57,7 @@ namespace ii.InfinityEngine.Writers
                             offset += actionText[i].Length;
                         }
                         actionTextAssociatedData.Add(offset);
-                         
+
                         ActionTableBinary action = new ActionTableBinary();
                         action.ActionTableStringLength = transition.Action.Length;
                         action.ActionTableStringOffset = 0;
@@ -92,9 +93,15 @@ namespace ii.InfinityEngine.Writers
                     transitionBinary.Flags = transition.RemoveQuestJournalEntry ? transitionBinary.Flags | Common.Bit6 : transitionBinary.Flags;
                     transitionBinary.Flags = transition.AddQuestCompleteJournalEntry ? transitionBinary.Flags | Common.Bit7 : transitionBinary.Flags;
                     //TODO: bits 8 through 31
-                    transitionBinary.JournalText = Common.WriteString(transition.JournalText, TlkFile);
+                    if (transition.HasJouranl)
+                    {
+                        transitionBinary.JournalText = Common.WriteString(transition.JournalText, TlkFile);
+                    }
                     transitionBinary.NextState = transition.NextState;
-                    transitionBinary.TransitionText = Common.WriteString(transition.TransitionText, TlkFile);
+                    if (transition.TransitionText != null)
+                    {
+                        transitionBinary.TransitionText = Common.WriteString(transition.TransitionText, TlkFile);
+                    }
                     transitionBinary.TransitionTrigger = transition.HasTrigger ? transitionTriggers.Count - 1 : -1;
                     transitions.Add(transitionBinary);
                 }
@@ -198,7 +205,7 @@ namespace ii.InfinityEngine.Writers
             for (int i = 0; i < transitionTriggers.Count; i++)
             {
                 var transitionTrigger = transitionTriggers[i];
-                transitionTrigger.TransitionTriggerStringOffset = header.ActionTableOffset + (actions.Count * ActionSize) + (stateTriggers.Count * StateTriggerSize) + transitionTriggerTextAssociatedData[i];
+                transitionTrigger.TransitionTriggerStringOffset = header.ActionTableOffset + (actions.Count * ActionSize) + stateTriggerText.Sum(s => s.Length) + transitionTriggerText.Take(i).Sum(s => s.Length);
                 var transitionTriggerAsBytes = Common.WriteStruct(transitionTrigger);
                 bw.Write(transitionTriggerAsBytes);
             }
@@ -206,7 +213,7 @@ namespace ii.InfinityEngine.Writers
             for (int i = 0; i < actions.Count; i++)
             {
                 var action = actions[i];
-                action.ActionTableStringOffset = header.ActionTableOffset + (actions.Count * ActionSize) + (stateTriggers.Count * StateTriggerSize) + (transitionTriggers.Count * TransitionTriggerSize) + actionTextAssociatedData[i];
+                action.ActionTableStringOffset = header.ActionTableOffset + (actions.Count * ActionSize) + stateTriggerText.Sum(s => s.Length) + transitionTriggerText.Sum(s => s.Length) + actionText.Take(i).Sum(s => s.Length);
                 var actionAsBytes = Common.WriteStruct(action);
                 bw.Write(actionAsBytes);
             }

@@ -419,6 +419,7 @@ namespace ii.InfinityEngine
                     break;
                 case IEFileType.Dlg:
                     writer = new DlgFileBinaryWriter();
+                    (writer as DlgFileBinaryWriter).TlkFile = Tlk;
                     break;
                 case IEFileType.DimensionalArray:
                     writer = new DimensionalArrayFileWriter();
