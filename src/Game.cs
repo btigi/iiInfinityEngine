@@ -200,6 +200,11 @@ namespace ii.InfinityEngine
 
         public void LoadDirectory(string directory, List<IEFileType> resourceTypes, Regex regex = null)
         {
+            if (!Directory.Exists(directory))
+            {
+                return;
+            }
+
             var dimensionalArrayReader = new DimensionalArrayFileReader();
             var areReader = new AreFileBinaryReader();
             var creReader = new CreFileBinaryReader();
