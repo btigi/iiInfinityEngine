@@ -192,14 +192,14 @@ namespace ii.InfinityEngine
                 var numBlocks = rowCount * columnCount;
                 var blockPixelsList = new List<List<Color>>(numBlocks);
                 var blockPalettes = new List<Dictionary<uint, int>>(numBlocks);
-                var blockColorLists = new List<List<RGBA>>(numBlocks);
+                var blockColourLists = new List<List<RGBA>>(numBlocks);
                 var blockIndices = new List<List<byte>>(numBlocks);
 
                 for (var i = 0; i < numBlocks; i++)
                 {
                     blockPixelsList.Add(new List<Color>());
                     blockPalettes.Add(new Dictionary<uint, int>());
-                    blockColorLists.Add(new List<RGBA>());
+                    blockColourLists.Add(new List<RGBA>());
                     blockIndices.Add(new List<byte>());
                 }
 
@@ -244,21 +244,21 @@ namespace ii.InfinityEngine
                                 var red = bitmapBytes[offset + 2];
                                 var alpha = bitmapBytes[offset + 3];
 
-                                var color = Color.FromArgb(alpha, red, green, blue);
-                                var colorKey = (uint)((alpha << 24) | (red << 16) | (green << 8) | blue);
+                                var colour = Color.FromArgb(alpha, red, green, blue);
+                                var colourKey = (uint)((alpha << 24) | (red << 16) | (green << 8) | blue);
 
                                 // Add to block's pixel list
-                                blockPixelsList[blockIndex].Add(color);
+                                blockPixelsList[blockIndex].Add(colour);
 
                                 // Build palette for this block
-                                if (!blockPalettes[blockIndex].ContainsKey(colorKey))
+                                if (!blockPalettes[blockIndex].ContainsKey(colourKey))
                                 {
                                     // Enforce palette restrictions
-                                    if (blockColorLists[blockIndex].Count < 256)
+                                    if (blockColourLists[blockIndex].Count < 256)
                                     {
-                                        var paletteIndex = blockColorLists[blockIndex].Count;
-                                        blockPalettes[blockIndex][colorKey] = paletteIndex;
-                                        blockColorLists[blockIndex].Add(new RGBA
+                                        var paletteIndex = blockColourLists[blockIndex].Count;
+                                        blockPalettes[blockIndex][colourKey] = paletteIndex;
+                                        blockColourLists[blockIndex].Add(new RGBA
                                         {
                                             Red = red,
                                             Green = green,
@@ -269,15 +269,15 @@ namespace ii.InfinityEngine
                                     }
                                     else
                                     {
-                                        // Find nearest color
-                                        var nearestIndex = FindNearestColorIndex(color, blockColorLists[blockIndex]);
-                                        blockPalettes[blockIndex][colorKey] = nearestIndex;
+                                        // Find nearest colour
+                                        var nearestIndex = FindNearestColourIndex(colour, blockColourLists[blockIndex]);
+                                        blockPalettes[blockIndex][colourKey] = nearestIndex;
                                         blockIndices[blockIndex].Add((byte)nearestIndex);
                                     }
                                 }
                                 else
                                 {
-                                    blockIndices[blockIndex].Add((byte)blockPalettes[blockIndex][colorKey]);
+                                    blockIndices[blockIndex].Add((byte)blockPalettes[blockIndex][colourKey]);
                                 }
                             }
                         }
@@ -286,12 +286,12 @@ namespace ii.InfinityEngine
                     for (var i = 0; i < numBlocks; i++)
                     {
                         // Pad palette if required
-                        while (blockColorLists[i].Count < 256)
+                        while (blockColourLists[i].Count < 256)
                         {
-                            blockColorLists[i].Add(new RGBA { Red = 0, Green = 0, Blue = 0, Alpha = 0 });
+                            blockColourLists[i].Add(new RGBA { Red = 0, Green = 0, Blue = 0, Alpha = 0 });
                         }
 
-                        palettes.Add(blockColorLists[i].ToArray());
+                        palettes.Add(blockColourLists[i].ToArray());
                         blockDatas.Add(blockIndices[i].ToArray());
                     }
                 }
@@ -323,12 +323,12 @@ namespace ii.InfinityEngine
                 // Write palettes (at paletteOffset, right after header)
                 foreach (var palette in palettes)
                 {
-                    foreach (var color in palette)
+                    foreach (var colour in palette)
                     {
-                        bw.Write(color.Blue);
-                        bw.Write(color.Green);
-                        bw.Write(color.Red);
-                        bw.Write(color.Alpha);
+                        bw.Write(colour.Blue);
+                        bw.Write(colour.Green);
+                        bw.Write(colour.Red);
+                        bw.Write(colour.Alpha);
                     }
                 }
 
@@ -362,15 +362,15 @@ namespace ii.InfinityEngine
             }
         }
 
-        private int FindNearestColorIndex(Color color, List<RGBA> palette)
+        private int FindNearestColourIndex(Color colour, List<RGBA> palette)
         {
             var bestIndex = 0;
             double bestDistance = double.MaxValue;
 
             for (var i = 0; i < palette.Count; i++)
             {
-                var paletteColor = palette[i];
-                var distance = ColorDistance(color, paletteColor);
+                var paletteColour = palette[i];
+                var distance = ColourDistance(colour, paletteColour);
                 if (distance < bestDistance)
                 {
                     bestDistance = distance;
@@ -381,7 +381,7 @@ namespace ii.InfinityEngine
             return bestIndex;
         }
 
-        private double ColorDistance(Color c1, RGBA c2)
+        private double ColourDistance(Color c1, RGBA c2)
         {
             var dr = c1.R - c2.Red;
             var dg = c1.G - c2.Green;
