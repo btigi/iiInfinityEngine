@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Buffers;
+using System.Collections.Concurrent;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using ii.InfinityEngine.Binary;
 using ii.InfinityEngine.Files;
@@ -11,6 +14,9 @@ namespace ii.InfinityEngine
     public static class Common
     {
         public const int NewString = -1;
+
+        // Keyed by TlkFile identity so the cache is GC'd with the TlkFile.
+        private static readonly ConditionalWeakTable<TlkFile, ConcurrentDictionary<int, IEString>> _stringCache = new();
 
         public const Int32 Bit0 = 1;
         public const Int32 Bit1 = 2 << 0;
@@ -47,11 +53,29 @@ namespace ii.InfinityEngine
 
         public static Object ReadStruct(BinaryReader br, Type t)
         {
-            var buff = br.ReadBytes(Marshal.SizeOf(t));
-            var handle = GCHandle.Alloc(buff, GCHandleType.Pinned);
-            var s = (Object)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), t);
-            handle.Free();
-            return s;
+            var size = Marshal.SizeOf(t);
+            var buff = ArrayPool<byte>.Shared.Rent(size);
+            try
+            {
+                br.Read(buff, 0, size);
+                var handle = GCHandle.Alloc(buff, GCHandleType.Pinned);
+                var s = (Object)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), t);
+                handle.Free();
+                return s;
+            }
+            finally
+            {
+                ArrayPool<byte>.Shared.Return(buff);
+            }
+        }
+
+        // Only use with blittable structs (no char fields) where Marshal.SizeOf == Unsafe.SizeOf.
+        // For structs containing char fields (e.g. array4) use ReadStruct(BinaryReader, Type)
+        public static T ReadStruct<T>(BinaryReader br) where T : struct
+        {
+            Span<byte> buffer = stackalloc byte[Marshal.SizeOf<T>()];
+            br.Read(buffer);
+            return MemoryMarshal.Read<T>(buffer);
         }
 
         public static byte[] WriteStruct(object anything)
@@ -76,21 +100,24 @@ namespace ii.InfinityEngine
 
         public static IEString ReadString(Int32 strref, TlkFile tlkFile)
         {
-            var stringInfo = new IEString();
-            stringInfo.Strref = strref;
+            if (tlkFile == null)
+                return new IEString { Strref = strref };
 
-            if (tlkFile != null)
+            var cache = _stringCache.GetOrCreateValue(tlkFile);
+            return cache.GetOrAdd(strref, static (s, tlk) =>
             {
-                if ((strref <= tlkFile.Strings.Count) && (strref > -1))
+                var info = new IEString { Strref = s };
+                if (s >= 0 && s < tlk.Strings.Count)
                 {
-                    stringInfo.Flags = tlkFile.Strings[strref].Flags;
-                    stringInfo.PitchVariance = tlkFile.Strings[strref].PitchVariance;
-                    stringInfo.Sound = tlkFile.Strings[strref].Sound;
-                    stringInfo.Text = tlkFile.Strings[strref].Text;
-                    stringInfo.VolumeVariance = tlkFile.Strings[strref].VolumeVariance;
+                    var entry = tlk.Strings[s];
+                    info.Flags = entry.Flags;
+                    info.PitchVariance = entry.PitchVariance;
+                    info.Sound = entry.Sound;
+                    info.Text = entry.Text;
+                    info.VolumeVariance = entry.VolumeVariance;
                 }
-            }
-            return stringInfo;
+                return info;
+            }, tlkFile);
         }
 
         public static int WriteString(IEString stringInfo, TlkFile tlkFile)
@@ -281,6 +308,18 @@ namespace ii.InfinityEngine
             character6 = (value ?? String.Empty).Length >= 6 ? value[5] : '\0';
             character7 = (value ?? String.Empty).Length >= 7 ? value[6] : '\0';
             character8 = (value ?? String.Empty).Length >= 8 ? value[7] : '\0';
+        }
+
+        public array8(ReadOnlySpan<byte> bytes)
+        {
+            character1 = (char)bytes[0];
+            character2 = (char)bytes[1];
+            character3 = (char)bytes[2];
+            character4 = (char)bytes[3];
+            character5 = (char)bytes[4];
+            character6 = (char)bytes[5];
+            character7 = (char)bytes[6];
+            character8 = (char)bytes[7];
         }
 
         public char character1;

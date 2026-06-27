@@ -99,23 +99,25 @@ namespace ii.InfinityEngine.Readers
                 br.BaseStream.Seek(header.FileOffset, SeekOrigin.Begin);
                 for (int i = 0; i < header.FileCount; i++)
                 {
-                    var resource = (BifFileEntryBinary)Common.ReadStruct(br, typeof(BifFileEntryBinary));
+                    var resource = Common.ReadStruct<BifFileEntryBinary>(br);
                     fileStructs.Add(resource);
                 }
 
                 for (int i = 0; i < header.TilesetCount; i++)
                 {
-                    var resource = (BifTilesetEntryBinary)Common.ReadStruct(br, typeof(BifTilesetEntryBinary));
+                    var resource = Common.ReadStruct<BifTilesetEntryBinary>(br);
                     tileStructs.Add(resource);
                 }
 
-                int ix = 0;
+                var fileTypeSet = new HashSet<IEFileType>(fileTypes);
+                var resourceLookup = resources.GroupBy(a => (int)a.NonTileSetIndex)
+                                              .ToDictionary(g => g.Key, g => g.First());
+                fileStructs.Sort((a, b) => a.resourceOffset.CompareTo(b.resourceOffset));
                 foreach (var f in fileStructs)
                 {
-                    if (fileTypes.Contains((IEFileType)f.resourceType))
+                    if (fileTypeSet.Contains((IEFileType)f.resourceType))
                     {
-                        var resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
-                        if (resource == null)
+                        if (!resourceLookup.TryGetValue(f.resourceLocator & 0xFFF, out var resource))
                         {
                             continue;
                         }
@@ -131,7 +133,6 @@ namespace ii.InfinityEngine.Readers
                                     var are = new AreFileBinaryReader();
                                     are.TlkFile = TlkFile;
                                     var area = (AreFile)are.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         area.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -146,7 +147,6 @@ namespace ii.InfinityEngine.Readers
                                 {
                                     var mus = new MusFileReader();
                                     var playlist = (MusFile)mus.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         playlist.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -187,7 +187,6 @@ namespace ii.InfinityEngine.Readers
                                     var pro = new ProFileBinaryReader();
                                     pro.TlkFile = TlkFile;
                                     var projectile = (ProFile)pro.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         projectile.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -202,7 +201,6 @@ namespace ii.InfinityEngine.Readers
                                 {
                                     var ids = new IdsFileReader();
                                     var identifier = (IdsFile)ids.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         identifier.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -217,7 +215,6 @@ namespace ii.InfinityEngine.Readers
                                 {
                                     var twoDeeAy = new DimensionalArrayFileReader();
                                     var dimensionalArray = (DimensionalArrayFile)twoDeeAy.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         // We special case this filename, as we can't set the FileType identifier to start with a number
@@ -234,7 +231,6 @@ namespace ii.InfinityEngine.Readers
                                     var cre = new CreFileBinaryReader();
                                     cre.TlkFile = TlkFile;
                                     var creature = (CreFile)cre.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         creature.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -250,7 +246,6 @@ namespace ii.InfinityEngine.Readers
                                     var dlg = new DlgFileBinaryReader();
                                     dlg.TlkFile = TlkFile;
                                     var dialog = (DlgFile)dlg.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         dialog.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -265,7 +260,6 @@ namespace ii.InfinityEngine.Readers
                                 {
                                     var eff = new EffFileBinaryReader();
                                     var effect = (EffFile)eff.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         effect.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -281,7 +275,6 @@ namespace ii.InfinityEngine.Readers
                                     var gam = new GamFileBinaryReader();
                                     gam.TlkFile = TlkFile;
                                     var gamfile = (GamFile)gam.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         gamfile.Filename = resource.ResourceName + ".gam";
@@ -296,7 +289,6 @@ namespace ii.InfinityEngine.Readers
                                 {
                                     var glsl = new GlslFileReader();
                                     var shader = (GlslFile)glsl.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         shader.Filename = resource.ResourceName + ".glsl";
@@ -311,7 +303,6 @@ namespace ii.InfinityEngine.Readers
                                 {
                                     var gui = new GuiFileReader();
                                     var guifile = (GuiFile)gui.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         guifile.Filename = resource.ResourceName + ".gui";
@@ -327,7 +318,6 @@ namespace ii.InfinityEngine.Readers
                                     var itm = new ItmFileBinaryReader();
                                     itm.TlkFile = TlkFile;
                                     var item = (ItmFile)itm.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         item.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -342,7 +332,6 @@ namespace ii.InfinityEngine.Readers
                                 {
                                     var lua = new LuaFileReader();
                                     var luaFile = (LuaFile)lua.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         luaFile.Filename = resource.ResourceName + ".lua";
@@ -357,7 +346,6 @@ namespace ii.InfinityEngine.Readers
                                 {
                                     var menu = new MenuFileReader();
                                     var menufile = (MenuFile)menu.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         menufile.Filename = resource.ResourceName + ".menu";
@@ -372,7 +360,6 @@ namespace ii.InfinityEngine.Readers
                                 {
                                     var mos = new MosFileBinaryReader();
                                     var mosFile = (MosFile)mos.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         mosFile.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -388,7 +375,6 @@ namespace ii.InfinityEngine.Readers
                                     var spl = new SplFileBinaryReader();
                                     spl.TlkFile = TlkFile;
                                     var spell = (SplFile)spl.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         spell.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -403,7 +389,6 @@ namespace ii.InfinityEngine.Readers
                                 {
                                     var sql = new SqlFileReader();
                                     var script = (SqlFile)sql.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         script.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -419,7 +404,6 @@ namespace ii.InfinityEngine.Readers
                                     var sto = new StoFileBinaryReader();
                                     sto.TlkFile = TlkFile;
                                     var store = (StoFile)sto.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         store.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -434,7 +418,6 @@ namespace ii.InfinityEngine.Readers
                                 {
                                     var vvc = new VvcFileBinaryReader();
                                     var vvcFile = (VvcFile)vvc.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         vvcFile.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -449,7 +432,6 @@ namespace ii.InfinityEngine.Readers
                                 {
                                     var vef = new VefFileBinaryReader();
                                     var vefFile = (VefFile)vef.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         vefFile.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -464,7 +446,6 @@ namespace ii.InfinityEngine.Readers
                                 {
                                     var wfx = new WfxFileBinaryReader();
                                     var wfxfile = (WfxFile)wfx.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         wfxfile.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -480,7 +461,6 @@ namespace ii.InfinityEngine.Readers
                                     var wmp = new WmpFileBinaryReader();
                                     wmp.TlkFile = TlkFile;
                                     var worldmap = (WmpFile)wmp.Read(ms);
-                                    resource = resources.Where(a => a.NonTileSetIndex == (f.resourceLocator & 0xFFF)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         worldmap.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -491,15 +471,15 @@ namespace ii.InfinityEngine.Readers
                                 break;
                         }
                     }
-                    ix++;
                 }
 
-                if (fileTypes.Contains(IEFileType.Tis))
+                if (fileTypeSet.Contains(IEFileType.Tis))
                 {
+                    var tileResourceLookup = resources.GroupBy(a => (int)a.TileSetIndex)
+                                                      .ToDictionary(g => g.Key, g => g.First());
                     foreach (var ts in tileStructs)
                     {
-                        var resource = resources.Where(a => a.TileSetIndex == ((ts.resourceLocator & 0x000FC000) >> 14)).SingleOrDefault();
-                        if (resource == null)
+                        if (!tileResourceLookup.TryGetValue((ts.resourceLocator & 0x000FC000) >> 14, out var resource))
                         {
                             continue;
                         }
@@ -522,7 +502,6 @@ namespace ii.InfinityEngine.Readers
                                     var tis = new TisFileBinaryReader();
                                     tis.FromBiff = true;
                                     var tisfile = (TisFile)tis.Read(ms, true, ts.tileCount, ts.tileSize, 64);
-                                    resource = resources.Where(a => a.TileSetIndex == ((ts.resourceLocator & 0x000FC000) >> 14)).SingleOrDefault();
                                     if (resource != null)
                                     {
                                         tisfile.Filename = resource.ResourceName + "." + resource.ResourceType;
@@ -622,13 +601,13 @@ namespace ii.InfinityEngine.Readers
                 br.BaseStream.Seek(header.FileOffset, SeekOrigin.Begin);
                 for (int i = 0; i < header.FileCount; i++)
                 {
-                    var resource = (BifFileEntryBinary)Common.ReadStruct(br, typeof(BifFileEntryBinary));
+                    var resource = Common.ReadStruct<BifFileEntryBinary>(br);
                     fileStructs.Add(resource);
                 }
 
                 for (int i = 0; i < header.TilesetCount; i++)
                 {
-                    var resource = (BifTilesetEntryBinary)Common.ReadStruct(br, typeof(BifTilesetEntryBinary));
+                    var resource = Common.ReadStruct<BifTilesetEntryBinary>(br);
                     tileStructs.Add(resource);
                 }
 

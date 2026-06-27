@@ -23,10 +23,7 @@ namespace ii.InfinityEngine.Readers
         public MosFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var mosFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            mosFile.OriginalFile = ParseFile(br);
-            return mosFile;
+            return ParseFile(br);
         }
 
         private MosFile ParseFile(BinaryReader br)

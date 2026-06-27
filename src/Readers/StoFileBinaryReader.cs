@@ -21,10 +21,7 @@ namespace ii.InfinityEngine.Readers
         public StoFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var stoFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            stoFile.OriginalFile = ParseFile(br);
-            return stoFile;
+            return ParseFile(br);
         }
 
         private StoFile ParseFile(BinaryReader br)

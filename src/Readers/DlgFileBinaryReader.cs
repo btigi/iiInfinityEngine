@@ -22,10 +22,7 @@ namespace ii.InfinityEngine.Readers
         public DlgFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var dlgFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            dlgFile.OriginalFile = ParseFile(br);
-            return dlgFile;
+            return ParseFile(br);
         }
 
         private DlgFile ParseFile(BinaryReader br)

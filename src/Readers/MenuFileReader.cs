@@ -17,10 +17,7 @@ namespace ii.InfinityEngine.Readers
         public MenuFile Read(Stream s)
         {
             using var rdr = new StreamReader(s);
-            var file = Parse(rdr);
-            rdr.BaseStream.Seek(0, SeekOrigin.Begin);
-            file.OriginalFile = Parse(rdr);
-            return file;
+            return Parse(rdr);
         }
 
         private MenuFile Parse(StreamReader rdr)

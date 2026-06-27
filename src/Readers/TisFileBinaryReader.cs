@@ -24,10 +24,7 @@ namespace ii.InfinityEngine.Readers
         public TisFile Read(Stream s, bool fromBiff, int tileCount, int tileLength, int tileDimension)
         {
             using var br = new BinaryReader(s);
-            var tisFile = ParseFile(br, fromBiff, tileCount, tileLength, tileDimension);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            tisFile.OriginalFile = ParseFile(br, fromBiff, tileCount, tileLength, tileDimension);
-            return tisFile;
+            return ParseFile(br, fromBiff, tileCount, tileLength, tileDimension);
         }
 
         private TisFile ParseFile(BinaryReader br, bool fromBiff, int tileCount, int tileLength, int tileDimension)

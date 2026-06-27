@@ -20,10 +20,7 @@ namespace ii.InfinityEngine.Readers
         public ItmFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var itmFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            itmFile.OriginalFile = ParseFile(br);
-            return itmFile;
+            return ParseFile(br);
         }
 
         private ItmFile ParseFile(BinaryReader br)

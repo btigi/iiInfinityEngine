@@ -24,10 +24,7 @@ namespace ii.InfinityEngine.Readers
         public WmpFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var wmpFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            wmpFile.OriginalFile = ParseFile(br);
-            return wmpFile;
+            return ParseFile(br);
         }
 
         private WmpFile ParseFile(BinaryReader br)

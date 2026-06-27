@@ -23,10 +23,7 @@ namespace ii.InfinityEngine.Readers
         public AreFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var areFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            areFile.OriginalFile = ParseFile(br);
-            return areFile;
+            return ParseFile(br);
         }
 
         private AreFile ParseFile(BinaryReader br)

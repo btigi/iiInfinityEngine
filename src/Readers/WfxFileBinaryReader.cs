@@ -18,10 +18,7 @@ namespace ii.InfinityEngine.Readers
         public WfxFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var wfxFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            wfxFile.OriginalFile = ParseFile(br);
-            return wfxFile;
+            return ParseFile(br);
         }
 
         private WfxFile ParseFile(BinaryReader br)

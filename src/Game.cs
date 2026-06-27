@@ -150,7 +150,8 @@ namespace ii.InfinityEngine
                                                      IEFileType.Tis,
                                                      IEFileType.Menu,
                                                      IEFileType.Lua,
-                                                     IEFileType.Vef};
+                                                     IEFileType.Vef,
+                                                     IEFileType.Dlg};
 
             LoadResourcesFromBifs(gameDirectory, key.BifFiles, key.Resources, fileTypes);
             LoadDirectory(Path.Combine(gameDirectory, "override"), fileTypes);
@@ -158,43 +159,55 @@ namespace ii.InfinityEngine
 
         private void LoadResourcesFromBifs(string directory, List<(KeyBifEntry2 entry, int index)> files, List<KeyBifResource2> resources, List<IEFileType> fileTypes)
         {
-            int bifIndex = 0;
-            foreach (var bif in files)
-            {
-                var cdDir = GetDirectoryLocation(bif.entry);
-                var bifName = Path.Combine(directory, cdDir, bif.entry.Filename);
-                if (File.Exists(bifName))
+            var resourcesByBif = resources.GroupBy(r => r.BifIndex)
+                                          .ToDictionary(g => g.Key, g => g.ToList());
+
+            var bifResults = files
+                .AsParallel()
+                .AsUnordered()
+                .Select(bif =>
                 {
-                    var bbr = new BifFileBinaryReader();
-                    using var bifFileStream = new FileStream(bifName, FileMode.Open, FileAccess.Read);
-                    bbr.TlkFile = Tlk;
-                    var bifFile = bbr.Read(bifFileStream, resources.Where(a => a.BifIndex == bif.index).ToList(), fileTypes);
-                    Areas.AddRange(bifFile.areas);
-                    Creatures.AddRange(bifFile.creatures);
-                    Dialogs.AddRange(bifFile.dialogs);
-                    DimensionalArrays.AddRange(bifFile.dimensionalArrays);
-                    Effects.AddRange(bifFile.effects);
-                    Games.AddRange(bifFile.games);
-                    Guis.AddRange(bifFile.guis);
-                    Identifiers.AddRange(bifFile.identifiers);
-                    Items.AddRange(bifFile.items);
-                    Luas.AddRange(bifFile.luas);
-                    Menus.AddRange(bifFile.menus);
-                    Mosaics.AddRange(bifFile.mosaics);
-                    Paperdolls.AddRange(bifFile.paperdolls);
-                    Playlists.AddRange(bifFile.playlists);
-                    Projectiles.AddRange(bifFile.projectiles);
-                    Shaders.AddRange(bifFile.shaders);
-                    Spells.AddRange(bifFile.spells);
-                    Sqls.AddRange(bifFile.sqls);
-                    Stores.AddRange(bifFile.stores);
-                    VisualEffects.AddRange(bifFile.vvcs);
-                    Vefs.AddRange(bifFile.vefs);
-                    Wfxs.AddRange(bifFile.wfx);
-                    Worldmaps.AddRange(bifFile.worldmaps);
-                    Tilesets.AddRange(bifFile.tilesets);
-                }
-                bifIndex++;
+                    if (!resourcesByBif.TryGetValue(bif.index, out var bifResources))
+                        return null;
+
+                    var cdDir = GetDirectoryLocation(bif.entry);
+                    var bifName = Path.Combine(directory, cdDir, bif.entry.Filename);
+                    if (!File.Exists(bifName))
+                        return null;
+
+                    var bbr = new BifFileBinaryReader { TlkFile = Tlk };
+                    using var bifFileStream = new FileStream(bifName, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1 << 16, FileOptions.SequentialScan);
+                    return bbr.Read(bifFileStream, bifResources, fileTypes);
+                })
+                .Where(r => r != null)
+                .ToList();
+
+            foreach (var bifFile in bifResults)
+            {
+                Areas.AddRange(bifFile.areas);
+                Creatures.AddRange(bifFile.creatures);
+                Dialogs.AddRange(bifFile.dialogs);
+                DimensionalArrays.AddRange(bifFile.dimensionalArrays);
+                Effects.AddRange(bifFile.effects);
+                Games.AddRange(bifFile.games);
+                Guis.AddRange(bifFile.guis);
+                Identifiers.AddRange(bifFile.identifiers);
+                Items.AddRange(bifFile.items);
+                Luas.AddRange(bifFile.luas);
+                Menus.AddRange(bifFile.menus);
+                Mosaics.AddRange(bifFile.mosaics);
+                Paperdolls.AddRange(bifFile.paperdolls);
+                Playlists.AddRange(bifFile.playlists);
+                Projectiles.AddRange(bifFile.projectiles);
+                Shaders.AddRange(bifFile.shaders);
+                Spells.AddRange(bifFile.spells);
+                Sqls.AddRange(bifFile.sqls);
+                Stores.AddRange(bifFile.stores);
+                VisualEffects.AddRange(bifFile.vvcs);
+                Vefs.AddRange(bifFile.vefs);
+                Wfxs.AddRange(bifFile.wfx);
+                Worldmaps.AddRange(bifFile.worldmaps);
+                Tilesets.AddRange(bifFile.tilesets);
             }
         }
 
@@ -485,7 +498,7 @@ namespace ii.InfinityEngine
             if (File.Exists(bifName))
             {
                 var bbr = new BifFileBinaryReader();
-                using var bifFileStream = new FileStream(bifName, FileMode.Open, FileAccess.Read);
+                using var bifFileStream = new FileStream(bifName, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1 << 16, FileOptions.SequentialScan);
                 bbr.TlkFile = Tlk;
                 return bbr.ReadRaw(bifFileStream, new List<KeyBifResource2>() { relevantResources });
             }

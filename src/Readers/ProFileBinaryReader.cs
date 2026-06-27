@@ -19,10 +19,7 @@ namespace ii.InfinityEngine.Readers
         public ProFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var proFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            proFile.OriginalFile = ParseFile(br);
-            return proFile;
+            return ParseFile(br);
         }
 
         private ProFile ParseFile(BinaryReader br)

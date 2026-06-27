@@ -18,10 +18,7 @@ namespace ii.InfinityEngine.Readers
         public EffFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var effFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            effFile.OriginalFile = ParseFile(br);
-            return effFile;
+            return ParseFile(br);
         }
 
         private EffFile ParseFile(BinaryReader br)

@@ -22,10 +22,7 @@ namespace ii.InfinityEngine.Readers
         public GamFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var gamFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            gamFile.OriginalFile = ParseFile(br);
-            return gamFile;
+            return ParseFile(br);
         }
 
         private GamFile ParseFile(BinaryReader br)

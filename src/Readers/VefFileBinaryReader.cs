@@ -18,10 +18,7 @@ namespace ii.InfinityEngine.Readers
         public VefFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var vefFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            vefFile.OriginalFile = ParseFile(br);
-            return vefFile;
+            return ParseFile(br);
         }
 
         private VefFile ParseFile(BinaryReader br)

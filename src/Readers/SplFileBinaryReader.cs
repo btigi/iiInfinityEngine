@@ -21,10 +21,7 @@ namespace ii.InfinityEngine.Readers
         public SplFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var splFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            splFile.OriginalFile = ParseFile(br);
-            return splFile;
+            return ParseFile(br);
         }
 
         private SplFile ParseFile(BinaryReader br)

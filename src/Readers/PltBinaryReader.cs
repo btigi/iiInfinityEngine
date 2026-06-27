@@ -37,10 +37,7 @@ namespace ii.InfinityEngine.Readers
             }
 
             using var br = new BinaryReader(s);
-            var pltFile = ParseFile(br, palette);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            pltFile.OriginalFile = ParseFile(br, palette);
-            return pltFile;
+            return ParseFile(br, palette);
         }
 
         private PltFile ParseFile(BinaryReader br, Bitmap palette)

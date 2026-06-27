@@ -1,5 +1,7 @@
 ﻿using ii.InfinityEngine.Binary;
 using ii.InfinityEngine.Files;
+using System;
+using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.IO;
 
@@ -20,10 +22,7 @@ namespace ii.InfinityEngine.Readers
         public CreFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var creFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            creFile.OriginalFile = ParseFile(br);
-            return creFile;
+            return ParseFile(br);
         }
 
         private CreFile ParseFile(BinaryReader br)
@@ -39,57 +38,79 @@ namespace ii.InfinityEngine.Readers
             List<Eff1BinaryBinary> creEffects1 = [];
             List<EmbeddedEffBinary> creEffects2 = new List<EmbeddedEffBinary>();
             List<CreItemBinary> creItems = [];
-            List<short> creItemSlots = [];
 
-            br.BaseStream.Seek(header.KnownSpellsoffset, SeekOrigin.Begin);
-            for (int i = 0; i < header.KnownSpellsCount; i++)
+            const int knownSpellSize = 12;
+            if (header.KnownSpellsCount > 0)
             {
-                var knowSpell = (CreKnownSpellBinary)Common.ReadStruct(br, typeof(CreKnownSpellBinary));
-                creKnownSpells.Add(knowSpell);
+                br.BaseStream.Seek(header.KnownSpellsoffset, SeekOrigin.Begin);
+                var block = br.ReadBytes(header.KnownSpellsCount * knownSpellSize);
+                for (int i = 0; i < header.KnownSpellsCount; i++)
+                {
+                    int o = i * knownSpellSize;
+                    creKnownSpells.Add(new CreKnownSpellBinary
+                    {
+                        Filename = new array8(block.AsSpan(o, 8)),
+                        SpellLevel = BinaryPrimitives.ReadInt16LittleEndian(block.AsSpan(o + 8)),
+                        SpellType = BinaryPrimitives.ReadInt16LittleEndian(block.AsSpan(o + 10)),
+                    });
+                }
             }
 
             br.BaseStream.Seek(header.SpellMemorizationOffset, SeekOrigin.Begin);
             for (int i = 0; i < header.SpellMemorizationCount; i++)
-            {
-                var creSpellMemorisation = (CreSpellMemorisationInfoBinary)Common.ReadStruct(br, typeof(CreSpellMemorisationInfoBinary));
-                creSpellMemorisations.Add(creSpellMemorisation);
-            }
+                creSpellMemorisations.Add(Common.ReadStruct<CreSpellMemorisationInfoBinary>(br));
 
-            br.BaseStream.Seek(header.MemorizedSpellsOffset, SeekOrigin.Begin);
-            for (int i = 0; i < header.MemorizedSpellsCount; i++)
+            const int memorisedSpellSize = 12;
+            if (header.MemorizedSpellsCount > 0)
             {
-                var creMemorisedSpell = (CreMemorisedSpellBinary)Common.ReadStruct(br, typeof(CreMemorisedSpellBinary));
-                creMemorisedSpells.Add(creMemorisedSpell);
+                br.BaseStream.Seek(header.MemorizedSpellsOffset, SeekOrigin.Begin);
+                var block = br.ReadBytes(header.MemorizedSpellsCount * memorisedSpellSize);
+                for (int i = 0; i < header.MemorizedSpellsCount; i++)
+                {
+                    int o = i * memorisedSpellSize;
+                    creMemorisedSpells.Add(new CreMemorisedSpellBinary
+                    {
+                        Filename = new array8(block.AsSpan(o, 8)),
+                        Memorised = BinaryPrimitives.ReadInt32LittleEndian(block.AsSpan(o + 8)),
+                    });
+                }
             }
 
             br.BaseStream.Seek(header.EffectOffset, SeekOrigin.Begin);
             for (int i = 0; i < header.EffectCount; i++)
             {
                 if (header.EffVersion == 0)
-                {
-                    var creEffect = (Eff1BinaryBinary)Common.ReadStruct(br, typeof(Eff1BinaryBinary));
-                    creEffects1.Add(creEffect);
-                }
+                    creEffects1.Add((Eff1BinaryBinary)Common.ReadStruct(br, typeof(Eff1BinaryBinary)));
                 else
-                {
-                    var creEffect = (EmbeddedEffBinary)Common.ReadStruct(br, typeof(EmbeddedEffBinary));
-                    creEffects2.Add(creEffect);
-                }
+                    creEffects2.Add((EmbeddedEffBinary)Common.ReadStruct(br, typeof(EmbeddedEffBinary)));
             }
 
-            br.BaseStream.Seek(header.ItemOffset, SeekOrigin.Begin);
-            for (int i = 0; i < header.ItemCount; i++)
+            const int itemSize = 20;
+            if (header.ItemCount > 0)
             {
-                var creItem = (CreItemBinary)Common.ReadStruct(br, typeof(CreItemBinary));
-                creItems.Add(creItem);
+                br.BaseStream.Seek(header.ItemOffset, SeekOrigin.Begin);
+                var block = br.ReadBytes(header.ItemCount * itemSize);
+                for (int i = 0; i < header.ItemCount; i++)
+                {
+                    int o = i * itemSize;
+                    creItems.Add(new CreItemBinary
+                    {
+                        Filename   = new array8(block.AsSpan(o, 8)),
+                        ExpiryHour = block[o + 8],
+                        ExpiryValue = block[o + 9],
+                        Charges1   = BinaryPrimitives.ReadInt16LittleEndian(block.AsSpan(o + 10)),
+                        Charges2   = BinaryPrimitives.ReadInt16LittleEndian(block.AsSpan(o + 12)),
+                        Charges3   = BinaryPrimitives.ReadInt16LittleEndian(block.AsSpan(o + 14)),
+                        Flags      = BinaryPrimitives.ReadInt32LittleEndian(block.AsSpan(o + 16)),
+                    });
+                }
             }
 
             br.BaseStream.Seek(header.ItemSlotOffset, SeekOrigin.Begin);
+            var slotsBlock = br.ReadBytes(80);
+            var creItemSlots = new short[40];
             for (int i = 0; i < 40; i++)
-            {
-                var creItemSlot = (short)Common.ReadStruct(br, typeof(short));
-                creItemSlots.Add(creItemSlot);
-            }
+                creItemSlots[i] = BinaryPrimitives.ReadInt16LittleEndian(slotsBlock.AsSpan(i * 2));
 
             var creFile = new CreFile();
             creFile.Flags.ShowLongname = (header.Flags & Common.Bit0) != 0;
@@ -444,65 +465,7 @@ namespace ii.InfinityEngine.Readers
                 creFile.Effects1.Add(creEffect2);
             }
 
-            foreach (var creEffect in creEffects2)
-            {
-                var creEffect2 = new EmbeddedEffBinary();
-                creEffect2.CasterLevel = creEffect.CasterLevel;
-                creEffect2.CasterXCoordinate = creEffect.CasterXCoordinate;
-                creEffect2.CasterYCoordinate = creEffect.CasterYCoordinate;
-                creEffect2.DiceSides = creEffect.DiceSides;
-                creEffect2.DiceThrown = creEffect.DiceThrown;
-                creEffect2.Duration = creEffect.Duration;
-                creEffect2.HighestAffectedLevelFromParent = creEffect.HighestAffectedLevelFromParent;
-                creEffect2.LowestAffectedLevelFromParent = creEffect.LowestAffectedLevelFromParent;
-                creEffect2.Opcode = creEffect.Opcode;
-                creEffect2.Parameter1 = creEffect.Parameter1;
-                creEffect2.Parameter2 = creEffect.Parameter2;
-                creEffect2.Parameter3 = creEffect.Parameter3;
-                creEffect2.Parameter4 = creEffect.Parameter4;
-                creEffect2.ParentResource = creEffect.ParentResource;
-                creEffect2.ParentResourceSlot = creEffect.ParentResourceSlot;
-                creEffect2.Power = creEffect.Power;
-                creEffect2.PrimaryType = creEffect.PrimaryType;
-                creEffect2.Probability1 = creEffect.Probability1;
-                creEffect2.Probability2 = creEffect.Probability2;
-                creEffect2.Projectile = creEffect.Projectile;
-                creEffect2.Resistance = creEffect.Resistance;
-                creEffect2.Resource = creEffect.Resource;
-                creEffect2.Resource2 = creEffect.Resource2;
-                creEffect2.Resource3 = creEffect.Resource3;
-                creEffect2.ResourceTypeFromParent = creEffect.ResourceTypeFromParent;
-                creEffect2.SavingThrowBonus = creEffect.SavingThrowBonus;
-                creEffect2.SavingThrowType = creEffect.SavingThrowType;
-                creEffect2.SecondaryType = creEffect.SecondaryType;
-                creEffect2.SetLocalVariableIfNonExistant = creEffect.SetLocalVariableIfNonExistant;
-                creEffect2.TargetType = creEffect.TargetType;
-                creEffect2.TargetXCoordinate = creEffect.TargetXCoordinate;
-                creEffect2.TargetYCoordinate = creEffect.TargetYCoordinate;
-                creEffect2.TimingMode = creEffect.TimingMode;
-                creEffect2.Unknown = creEffect.Unknown;
-                creEffect2.Unknown2 = creEffect.Unknown2;
-                creEffect2.Unknown3 = creEffect.Unknown3;
-                creEffect2.Unknown4 = creEffect.Unknown4;
-                creEffect2.Unknown5 = creEffect.Unknown5;
-                creEffect2.Unknownd4_1 = creEffect.Unknownd4_1;
-                creEffect2.Unknownd4_2 = creEffect.Unknownd4_2;
-                creEffect2.Unknownd4_3 = creEffect.Unknownd4_3;
-                creEffect2.Unknownd4_4 = creEffect.Unknownd4_4;
-                creEffect2.Unknownd4_5 = creEffect.Unknownd4_5;
-                creEffect2.Unknownd4_6 = creEffect.Unknownd4_6;
-                creEffect2.Unknownd4_7 = creEffect.Unknownd4_7;
-                creEffect2.Unknownd4_8 = creEffect.Unknownd4_8;
-                creEffect2.Unknownd4_9 = creEffect.Unknownd4_9;
-                creEffect2.Unknownd4_10 = creEffect.Unknownd4_10;
-                creEffect2.Unknownd4_11 = creEffect.Unknownd4_11;
-                creEffect2.Unknownd4_12 = creEffect.Unknownd4_12;
-                creEffect2.Unknownd4_13 = creEffect.Unknownd4_13;
-                creEffect2.Unknownd4_14 = creEffect.Unknownd4_14;
-                creEffect2.Unknownd4_15 = creEffect.Unknownd4_15;
-                creEffect2.Variable = creEffect.Variable;
-                creFile.Effects2.Add(creEffect2);
-            }
+            creFile.Effects2.AddRange(creEffects2);
 
 
             foreach (var info in creSpellMemorisations)

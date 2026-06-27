@@ -17,10 +17,7 @@ namespace ii.InfinityEngine.Readers
         public IdsFile Read(Stream s)
         {
             using var rdr = new StreamReader(s);
-            var file = Parse(rdr);
-            s.Seek(0, SeekOrigin.Begin);
-            file.OriginalFile = Parse(rdr);
-            return file;
+            return Parse(rdr);
         }
 
         private IdsFile Parse(StreamReader rdr)

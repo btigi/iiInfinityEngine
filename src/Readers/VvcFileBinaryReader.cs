@@ -18,10 +18,7 @@ namespace ii.InfinityEngine.Readers
         public VvcFile Read(Stream s)
         {
             using var br = new BinaryReader(s);
-            var vvcFile = ParseFile(br);
-            br.BaseStream.Seek(0, SeekOrigin.Begin);
-            vvcFile.OriginalFile = ParseFile(br);
-            return vvcFile;
+            return ParseFile(br);
         }
 
         private VvcFile ParseFile(BinaryReader br)
