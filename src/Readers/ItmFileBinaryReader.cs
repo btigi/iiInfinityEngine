@@ -137,7 +137,7 @@ namespace ii.InfinityEngine.Readers
             itmFile.KitUsability2.JesterBard = (header.KitUsability2 & Common.Bit6) != 0;
             itmFile.KitUsability2.SkaldBard = (header.KitUsability2 & Common.Bit7) != 0;
             itmFile.KitUsability3.Diviner = (header.KitUsability3 & Common.Bit0) != 0;
-            itmFile.KitUsability3.Enchanter = (header.KitUsability4 & Common.Bit1) != 0;
+            itmFile.KitUsability3.Enchanter = (header.KitUsability3 & Common.Bit1) != 0;
             itmFile.KitUsability3.Illusionist = (header.KitUsability3 & Common.Bit2) != 0;
             itmFile.KitUsability3.Invoker = (header.KitUsability3 & Common.Bit3) != 0;
             itmFile.KitUsability3.Necromancer = (header.KitUsability3 & Common.Bit4) != 0;
@@ -190,7 +190,7 @@ namespace ii.InfinityEngine.Readers
                 extendedHeader2.FeatureBlockCount = extendedHeader.FeatureBlockCount;
                 extendedHeader2.FeatureBlockOffset = extendedHeader.FeatureBlockOffset;
                 extendedHeader2.Flags.AddStengthBonus = (extendedHeader.Flags & Common.Bit0) != 0;
-                extendedHeader2.Flags.BreaksSantuaryInvisibility = (extendedHeader.Flags & Common.Bit1) != 0;
+                extendedHeader2.Flags.Breakable = (extendedHeader.Flags & Common.Bit1) != 0;
                 extendedHeader2.Flags.DamageStrengthBonus = (extendedHeader.Flags & Common.Bit2) != 0;
                 extendedHeader2.Flags.Thac0StrengthBonus = (extendedHeader.Flags & Common.Bit3) != 0;
                 extendedHeader2.Flags.Bit4 = (extendedHeader.Flags & Common.Bit4) != 0;
@@ -247,7 +247,7 @@ namespace ii.InfinityEngine.Readers
                 extendedHeader2.Thac0Bonus = extendedHeader.Thac0Bonus;
                 extendedHeader2.UseIcon = extendedHeader.UseIcon;
 
-                br.BaseStream.Seek(header.FeatureBlockOffset + (header.FeatureBlockEquippingCount * 48), SeekOrigin.Begin);
+                br.BaseStream.Seek(header.FeatureBlockOffset + (extendedHeader.FeatureBlockOffset * 48), SeekOrigin.Begin);
                 for (int i = 0; i < extendedHeader.FeatureBlockCount; i++)
                 {
                     var itmFeatureBlock = (ItmFeatureBlockBinary)Common.ReadStruct(br, typeof(ItmFeatureBlockBinary));

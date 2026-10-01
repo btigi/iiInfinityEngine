@@ -300,42 +300,48 @@ namespace ii.InfinityEngine
             {
                 throw new ArgumentException(value);
             }
-            character1 = (value ?? String.Empty).Length >= 1 ? value[0] : '\0';
-            character2 = (value ?? String.Empty).Length >= 2 ? value[1] : '\0';
-            character3 = (value ?? String.Empty).Length >= 3 ? value[2] : '\0';
-            character4 = (value ?? String.Empty).Length >= 4 ? value[3] : '\0';
-            character5 = (value ?? String.Empty).Length >= 5 ? value[4] : '\0';
-            character6 = (value ?? String.Empty).Length >= 6 ? value[5] : '\0';
-            character7 = (value ?? String.Empty).Length >= 7 ? value[6] : '\0';
-            character8 = (value ?? String.Empty).Length >= 8 ? value[7] : '\0';
+            var text = value ?? String.Empty;
+            character1 = text.Length >= 1 ? (byte)text[0] : (byte)0;
+            character2 = text.Length >= 2 ? (byte)text[1] : (byte)0;
+            character3 = text.Length >= 3 ? (byte)text[2] : (byte)0;
+            character4 = text.Length >= 4 ? (byte)text[3] : (byte)0;
+            character5 = text.Length >= 5 ? (byte)text[4] : (byte)0;
+            character6 = text.Length >= 6 ? (byte)text[5] : (byte)0;
+            character7 = text.Length >= 7 ? (byte)text[6] : (byte)0;
+            character8 = text.Length >= 8 ? (byte)text[7] : (byte)0;
         }
 
         public array8(ReadOnlySpan<byte> bytes)
         {
-            character1 = (char)bytes[0];
-            character2 = (char)bytes[1];
-            character3 = (char)bytes[2];
-            character4 = (char)bytes[3];
-            character5 = (char)bytes[4];
-            character6 = (char)bytes[5];
-            character7 = (char)bytes[6];
-            character8 = (char)bytes[7];
+            character1 = bytes[0];
+            character2 = bytes[1];
+            character3 = bytes[2];
+            character4 = bytes[3];
+            character5 = bytes[4];
+            character6 = bytes[5];
+            character7 = bytes[6];
+            character8 = bytes[7];
         }
 
-        public char character1;
-        public char character2;
-        public char character3;
-        public char character4;
-        public char character5;
-        public char character6;
-        public char character7;
-        public char character8;
+        public byte character1;
+        public byte character2;
+        public byte character3;
+        public byte character4;
+        public byte character5;
+        public byte character6;
+        public byte character7;
+        public byte character8;
 
         public override string ToString()
         {
-            var x = String.Format("{0}{1}{2}{3}{4}{5}{6}{7}", character1, character2, character3, character4, character5, character6, character7, character8);
-            x = x.Substring(0, x.IndexOf('\0') >= 0 ? x.IndexOf('\0') : x.Length);
-            return x;
+            var chars = new[]
+            {
+                (char)character1, (char)character2, (char)character3, (char)character4,
+                (char)character5, (char)character6, (char)character7, (char)character8
+            };
+            var x = new string(chars);
+            int end = x.IndexOf('\0');
+            return end >= 0 ? x.Substring(0, end) : x;
         }
 
         public static bool IsNullOrEmpty(array8? value)

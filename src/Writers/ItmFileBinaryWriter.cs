@@ -54,7 +54,7 @@ namespace ii.InfinityEngine.Writers
                 featureBlockBinary.SavingThrowType = featureBlock.SavingThrowType.Spells ? featureBlockBinary.SavingThrowType | Common.Bit0 : featureBlockBinary.SavingThrowType;
                 featureBlockBinary.SavingThrowType = featureBlock.SavingThrowType.Breath ? featureBlockBinary.SavingThrowType | Common.Bit1 : featureBlockBinary.SavingThrowType;
                 featureBlockBinary.SavingThrowType = featureBlock.SavingThrowType.ParalyzePoisonDeath ? featureBlockBinary.SavingThrowType | Common.Bit2 : featureBlockBinary.SavingThrowType;
-                featureBlockBinary.SavingThrowType = featureBlock.SavingThrowType.Wands ? featureBlockBinary.SavingThrowType | Common.Bit0 : featureBlockBinary.SavingThrowType;
+                featureBlockBinary.SavingThrowType = featureBlock.SavingThrowType.Wands ? featureBlockBinary.SavingThrowType | Common.Bit3 : featureBlockBinary.SavingThrowType;
                 featureBlockBinary.SavingThrowType = featureBlock.SavingThrowType.PetrifyPolymorph ? featureBlockBinary.SavingThrowType | Common.Bit4 : featureBlockBinary.SavingThrowType;
                 featureBlockBinary.SavingThrowType = featureBlock.SavingThrowType.Bit5 ? featureBlockBinary.SavingThrowType | Common.Bit5 : featureBlockBinary.SavingThrowType;
                 featureBlockBinary.SavingThrowType = featureBlock.SavingThrowType.Bit6 ? featureBlockBinary.SavingThrowType | Common.Bit6 : featureBlockBinary.SavingThrowType;
@@ -105,7 +105,7 @@ namespace ii.InfinityEngine.Writers
                 extendedHeaderBinary.Flags = extendedHeader.Flags.AddStengthBonus ? extendedHeaderBinary.Flags | Common.Bit0 : extendedHeaderBinary.Flags;
                 extendedHeaderBinary.Flags = extendedHeader.Flags.Breakable ? extendedHeaderBinary.Flags | Common.Bit1 : extendedHeaderBinary.Flags;
                 extendedHeaderBinary.Flags = extendedHeader.Flags.DamageStrengthBonus ? extendedHeaderBinary.Flags | Common.Bit2 : extendedHeaderBinary.Flags;
-                extendedHeaderBinary.Flags = extendedHeader.Flags.Thac0StrengthBonus ? extendedHeaderBinary.Flags | Common.Bit0 : extendedHeaderBinary.Flags;
+                extendedHeaderBinary.Flags = extendedHeader.Flags.Thac0StrengthBonus ? extendedHeaderBinary.Flags | Common.Bit3 : extendedHeaderBinary.Flags;
                 extendedHeaderBinary.Flags = extendedHeader.Flags.Bit4 ? extendedHeaderBinary.Flags | Common.Bit4 : extendedHeaderBinary.Flags;
                 extendedHeaderBinary.Flags = extendedHeader.Flags.Bit5 ? extendedHeaderBinary.Flags | Common.Bit5 : extendedHeaderBinary.Flags;
                 extendedHeaderBinary.Flags = extendedHeader.Flags.Bit6 ? extendedHeaderBinary.Flags | Common.Bit6 : extendedHeaderBinary.Flags;
@@ -137,7 +137,7 @@ namespace ii.InfinityEngine.Writers
                 extendedHeaderBinary.IdentificationRequirement = (byte)(extendedHeader.IdentificationRequirement.IdRequired ? extendedHeaderBinary.IdentificationRequirement | Common.Bit0 : extendedHeaderBinary.IdentificationRequirement);
                 extendedHeaderBinary.IdentificationRequirement = (byte)(extendedHeader.IdentificationRequirement.NonIdRequired ? extendedHeaderBinary.IdentificationRequirement | Common.Bit1 : extendedHeaderBinary.IdentificationRequirement);
                 extendedHeaderBinary.IdentificationRequirement = (byte)(extendedHeader.IdentificationRequirement.Bit2 ? extendedHeaderBinary.IdentificationRequirement | Common.Bit2 : extendedHeaderBinary.IdentificationRequirement);
-                extendedHeaderBinary.IdentificationRequirement = (byte)(extendedHeader.IdentificationRequirement.Bit3 ? extendedHeaderBinary.IdentificationRequirement | Common.Bit0 : extendedHeaderBinary.IdentificationRequirement);
+                extendedHeaderBinary.IdentificationRequirement = (byte)(extendedHeader.IdentificationRequirement.Bit3 ? extendedHeaderBinary.IdentificationRequirement | Common.Bit3 : extendedHeaderBinary.IdentificationRequirement);
                 extendedHeaderBinary.IdentificationRequirement = (byte)(extendedHeader.IdentificationRequirement.Bit4 ? extendedHeaderBinary.IdentificationRequirement | Common.Bit4 : extendedHeaderBinary.IdentificationRequirement);
                 extendedHeaderBinary.IdentificationRequirement = (byte)(extendedHeader.IdentificationRequirement.Bit5 ? extendedHeaderBinary.IdentificationRequirement | Common.Bit5 : extendedHeaderBinary.IdentificationRequirement);
                 extendedHeaderBinary.IdentificationRequirement = (byte)(extendedHeader.IdentificationRequirement.Bit6 ? extendedHeaderBinary.IdentificationRequirement | Common.Bit6 : extendedHeaderBinary.IdentificationRequirement);
@@ -159,8 +159,8 @@ namespace ii.InfinityEngine.Writers
                 extendedHeaderBinary.TargetType = (byte)extendedHeader.TargetType;
                 extendedHeaderBinary.Thac0Bonus = extendedHeader.Thac0Bonus;
                 extendedHeaderBinary.UseIcon = extendedHeader.UseIcon;
-                extendedHeaderBinary.FeatureBlockCount = extendedHeader.FeatureBlockCount;
-                extendedHeaderBinary.FeatureBlockOffset = Convert.ToInt16(extendedHeader.itmFeatureBlocks.Count);
+                extendedHeaderBinary.FeatureBlockCount = Convert.ToInt16(extendedHeader.itmFeatureBlocks.Count);
+                extendedHeaderBinary.FeatureBlockOffset = Convert.ToInt16(itmFeatureBlocks.Count);
 
                 foreach (var featureBlock in extendedHeader.itmFeatureBlocks)
                 {

@@ -625,13 +625,13 @@ namespace ii.InfinityEngine.Readers
                 var resref = br.ReadChars(8);
                 list.Add(new array8()
                 {
-                    character1 = resref[0],
-                    character2 = resref[1],
-                    character3 = resref[2],
-                    character4 = resref[3],
-                    character5 = resref[4],
-                    character6 = resref[5],
-                    character7 = resref[6],
+                    character1 = (byte)resref[0],
+                    character2 = (byte)resref[1],
+                    character3 = (byte)resref[2],
+                    character4 = (byte)resref[3],
+                    character5 = (byte)resref[4],
+                    character6 = (byte)resref[5],
+                    character7 = (byte)resref[6],
                 });
             }
         }
